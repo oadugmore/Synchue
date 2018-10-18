@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour {
 
-	bool lastMsg = false;
 
 	// Use this for initialization
 	void Start () 
@@ -12,14 +11,22 @@ public class PlayerMover : MonoBehaviour {
 		Debug.Log("Player starting");
 	}
 	
+	bool lastBlueMsg = false;
+	bool lastOrangeMsg = false;
 	// Update is called once per frame
 	void Update () 
 	{
-		if (Controller.screenIsPressed() != lastMsg)
+		if (Controller.GetBlueButtonDown() != lastBlueMsg)
 		{
-			string msg = lastMsg ? "PointerUp" : "PointerDown";
+			string msg = lastBlueMsg ? "blue up" : "blue down";
 			Debug.Log(msg);
-			lastMsg = !lastMsg;
+			lastBlueMsg = !lastBlueMsg;
+		}
+		if (Controller.GetOrangeButtonDown() != lastOrangeMsg)
+		{
+			string msg = lastOrangeMsg ? "orange up" : "orange down";
+			Debug.Log(msg);
+			lastOrangeMsg = !lastOrangeMsg;
 		}
 	}
 }

@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Controller : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class Controller : MonoBehaviour
 {
 
     private static Controller current = null;
-    private bool pressed = false;
-    private int pointerId = -1;
+
+    public ColorButton blueButton;
+    public ColorButton orangeButton;
 
 
     // Use this for initialization
@@ -29,21 +30,31 @@ public class Controller : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     }
 
-    public static bool screenIsPressed()
+    // private void SetButtonDown(int buttonId)
+    // {
+    //     if (buttonId == 1)
+    //         blueButtonPressed = true;
+    //     else if (buttonId == 2)
+    //         orangeButtonPressed = true;
+    // }
+
+    // private void SetButtonUp(int buttonId)
+    // {
+    //     if (buttonId == 1)
+    //         blueButtonPressed = false;
+    //     else if (buttonId == 2)
+    //         orangeButtonPressed = false;
+    // }
+
+    public static bool GetBlueButtonDown()
     {
-        return current.pressed;
+        return current.blueButton.IsPressed();
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public static bool GetOrangeButtonDown()
     {
-        if (pressed) return;
-        pointerId = eventData.pointerId;
-        pressed = true;
+        return current.orangeButton.IsPressed();
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (eventData.pointerId == pointerId)
-            pressed = false;
-    }
+    
 }
