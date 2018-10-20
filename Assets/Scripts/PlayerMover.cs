@@ -15,6 +15,7 @@ public class PlayerMover : MonoBehaviour
     private Rigidbody playerRigidbody;
 	private SphereCollider sphereCollider;
 	private BoxCollider boxCollider;
+	private float speedZero = 0.01f;
 	private bool moving = false;
 
     // Use this for initialization
@@ -58,9 +59,9 @@ public class PlayerMover : MonoBehaviour
 		//boxCollider.isTrigger = true;
 		if (playerRigidbody.velocity.x < maxSpeed)
 		{
-		playerRigidbody.AddForce(Vector3.right * speedIncrement);
+		playerRigidbody.AddForce(Vector3.right * speedIncrement, ForceMode.Acceleration);
 
-		Debug.Log("Added force.");
+		//Debug.Log("Added force.");
 		}
 	}
 
@@ -73,14 +74,14 @@ public class PlayerMover : MonoBehaviour
 		//
 		if (playerRigidbody.velocity.x > minSpeed)
 		{
-			playerRigidbody.AddForce(Vector3.left * speedIncrement);
-			Debug.Log("Stopping...");
+			playerRigidbody.AddForce(Vector3.left * speedIncrement, ForceMode.Acceleration);
+			//Debug.Log("Stopping...");
 		}
-		else if (playerRigidbody.velocity.x != 0)
+		else if (playerRigidbody.velocity.x > speedZero)
 		{
 			playerRigidbody.velocity = Vector3.zero;
 			
-			Debug.Log("Stopped.");
+			//Debug.Log("Stopped.");
 		}
 		
 	}
