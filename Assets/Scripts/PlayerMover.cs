@@ -12,7 +12,7 @@ public class PlayerMover : MonoBehaviour
 	//public PhysicMaterial stoppedMaterial;
 
     private InteractColor playerColor;
-    private Rigidbody playerRigidbody;
+    private Rigidbody rigidbody;
 	private SphereCollider sphereCollider;
 	private BoxCollider boxCollider;
 	private float speedZero = 0.01f;
@@ -21,8 +21,7 @@ public class PlayerMover : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Debug.Log("Player starting");
-        playerRigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
 		sphereCollider = GetComponentInChildren<SphereCollider>();
 		boxCollider = GetComponent<BoxCollider>();
 		playerColor = InteractColor.Blue;
@@ -37,13 +36,19 @@ public class PlayerMover : MonoBehaviour
 
     }
 
+	float nextVelUpdate = 0f;
     void FixedUpdate()
     {
+		if (Time.fixedTime > nextVelUpdate)
+		{
+            //Debug.Log("Player velocity: " + rigidbody.velocity);
+			nextVelUpdate += 0.5f;
+		}
         if (playerColor == InteractColor.Blue && Controller.GetBlueButtonDown()
 		|| playerColor == InteractColor.Orange && Controller.GetOrangeButtonDown())
         {
 			//if (!moving)
-				Move();
+			Move();
         }
         else //if (moving)
         {
@@ -57,14 +62,19 @@ public class PlayerMover : MonoBehaviour
 		//playerCollider.material = movingMaterial;
 		//sphereCollider.isTrigger = false;
 		//boxCollider.isTrigger = true;
-		if (playerRigidbody.velocity.x < maxSpeed)
+		if (rigidbody.velocity.x < maxSpeed)
 		{
-		playerRigidbody.AddForce(Vector3.right * speedIncrement, ForceMode.Acceleration);
-
-		//Debug.Log("Added force.");
+			iterations++;
+			rigidbody.AddForce(Vector3.right * speedIncrement, ForceMode.Acceleration);
+			//Debug.Log("Added force.");
+		}
+		else //max speed
+		{
+			Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
 		}
 	}
 
+	int iterations = 0;
 	private void Stop()
 	{
 		moving = false;
@@ -72,16 +82,18 @@ public class PlayerMover : MonoBehaviour
 		//sphereCollider.isTrigger = true;
 		//boxCollider.isTrigger = false;
 		//
-		if (playerRigidbody.velocity.x > minSpeed)
+		if (rigidbody.velocity.x > minSpeed)
 		{
-			playerRigidbody.AddForce(Vector3.left * speedIncrement, ForceMode.Acceleration);
+			rigidbody.AddForce(Vector3.left * speedIncrement, ForceMode.Acceleration);
+			//iterations++;
 			//Debug.Log("Stopping...");
 		}
-		else if (playerRigidbody.velocity.x > speedZero)
+		else if (rigidbody.velocity.x > speedZero)
 		{
-			playerRigidbody.velocity = Vector3.zero;
+			rigidbody.velocity = Vector3.zero;
 			
-			//Debug.Log("Stopped.");
+			//Debug.Log("Player stopped. Took " + iterations + " iterations.");
+			//iterations = 0;
 		}
 		
 	}

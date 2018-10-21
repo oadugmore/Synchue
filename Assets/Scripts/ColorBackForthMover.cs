@@ -9,26 +9,26 @@ public class ColorBackForthMover : MonoBehaviour
     public Direction movementDirection = Direction.UpDown;
     public float maxSpeed = 5f;
     public float movementDistance = 4f;
-	//public float maxSpeed = 5f;
-	public float speedIncrement = 10f;
-	public float minSpeed = 0.5f;
+    //public float maxSpeed = 5f;
+    public float speedIncrement = 10f;
+    public float minSpeed = 0.5f;
     //public static Material blueMaterial;
     //public static Material orangeMaterial;
     public InteractColor color = InteractColor.Blue;
 
     private bool movingForward;
-    private Rigidbody m_rigidbody;
+    private Rigidbody rigidbody;
     private Transform cameraTransform;
     private Vector3 forwardDirection;
     private Vector3 backwardDirection;
     private Vector3 initialPosition;
-	private float speedZero = 0.01f;
+    private float speedZero = 0.01f;
 
     // Use this for initialization
     void Start()
     {
         movingForward = true;
-        m_rigidbody = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         //m_rigidbody.isKinematic = true;
         cameraTransform = Camera.main.transform;
         initialPosition = transform.position;
@@ -66,8 +66,14 @@ public class ColorBackForthMover : MonoBehaviour
 
     }
 
+    //float nextVelUpdate = 0f;
     void FixedUpdate()
     {
+        // if (Time.fixedTime > nextVelUpdate)
+        // {
+        //     Debug.Log("ColorMover velocity: " + rigidbody.velocity);
+        // 	nextVelUpdate += 0.5f;
+        // }
         if (color == InteractColor.Blue && Controller.GetBlueButtonDown()
         || color == InteractColor.Orange && Controller.GetOrangeButtonDown())
         {
@@ -76,8 +82,8 @@ public class ColorBackForthMover : MonoBehaviour
                 Move();
             }
         }
-		else
-			Stop();
+        else
+            Stop();
     }
 
     void Move()
@@ -86,18 +92,25 @@ public class ColorBackForthMover : MonoBehaviour
         {
             Debug.Log("Switched direction!");
             movingForward = !movingForward;
-            m_rigidbody.velocity = Vector3.zero;
+            rigidbody.velocity = Vector3.zero;
         }
-        else if (m_rigidbody.velocity.magnitude < maxSpeed)
+        else if (rigidbody.velocity.magnitude < maxSpeed)
         {
-            Debug.Log("Added force");
+            iterations++;
+            //Debug.Log("Added force");
             if (movingForward)
-                m_rigidbody.AddForce(forwardDirection * maxSpeed, ForceMode.Acceleration);
+                rigidbody.AddForce(forwardDirection * speedIncrement, ForceMode.Acceleration);
             else
-                m_rigidbody.AddForce(backwardDirection * maxSpeed, ForceMode.Acceleration);
+                rigidbody.AddForce(backwardDirection * speedIncrement, ForceMode.Acceleration);
+        }
+        else //max speed
+        {
+            Debug.Log("ColorMover is at max speed. Took " + iterations + " iterations.");
+            //iterations = 0;
         }
     }
 
+    int iterations = 0;
     private void Stop()
     {
 
@@ -105,35 +118,20 @@ public class ColorBackForthMover : MonoBehaviour
         //sphereCollider.material = stoppedMaterial;
         //sphereCollider.isTrigger = true;
         //boxCollider.isTrigger = false;
-        //
 
-		// switch (movementDirection)
-		// {
-
-		// 	case Direction.DownUp:
-                
-        //     case Direction.UpDown:
-        //         return (movingForward && difference.y < -movementDistance) || (!movingForward && difference.y > 0);
-        //     case Direction.LeftRight:
-        //         return (movingForward && difference.x > movementDistance) || (!movingForward && difference.x < 0);
-        //     case Direction.RightLeft:
-        //         return (movingForward && difference.x < -movementDistance) || (!movingForward && difference.x > 0);
-        //     default:
-        //         throw new System.NotImplementedException();
-		// }
-        if (m_rigidbody.velocity.magnitude > minSpeed)
+        if (rigidbody.velocity.magnitude > minSpeed)
         {
-			Debug.Log("Stopping");
-            m_rigidbody.AddForce((movingForward ? backwardDirection : forwardDirection) * speedIncrement, ForceMode.Acceleration);
+            //Debug.Log("Stopping");
+            //iterations++;
+            rigidbody.AddForce((movingForward ? backwardDirection : forwardDirection) * speedIncrement, ForceMode.Acceleration);
             //m_rigidbody.AddTorque(m_rigidbody.ResetInertiaTensor)
-			//Debug.Log("Stopping...");
+            //Debug.Log("Stopping...");
         }
-        else if (m_rigidbody.velocity.magnitude > speedZero)
+        else if (rigidbody.velocity.magnitude > speedZero)
         {
-			Debug.Log("Stopped");
-            m_rigidbody.velocity = Vector3.zero;
-
-            //Debug.Log("Stopped.");
+            //Debug.Log("ColorMover stopped. Took " + iterations + " iterations.");
+            //iterations = 0;
+            rigidbody.velocity = Vector3.zero;
         }
 
     }
