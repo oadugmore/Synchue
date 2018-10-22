@@ -91,7 +91,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     {
         if (ShouldSwitchDirection())
         {
-            Debug.Log("Switched direction!");
+            //Debug.Log("Switched direction!");
             movingForward = !movingForward;
             rigidbody.velocity = -rigidbody.velocity;
         }
@@ -106,7 +106,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         }
         else //max speed
         {
-            Debug.Log("ColorMover is at max speed. Took " + iterations + " iterations.");
+            //Debug.Log("ColorMover is at max speed. Took " + iterations + " iterations.");
             //iterations = 0;
         }
     }

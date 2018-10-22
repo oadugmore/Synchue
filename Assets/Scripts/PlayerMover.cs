@@ -36,6 +36,15 @@ public class PlayerMover : MonoBehaviour, Pushable
 
     }
 
+	private void OnCollisionEnter(Collision other) 
+	{
+		//Debug.Log("Collided with " + other.gameObject);
+		if (other.gameObject.CompareTag("Spike"))
+		{
+			Die();
+		}
+	}
+
 	float nextVelUpdate = 0f;
     void FixedUpdate()
     {
@@ -56,6 +65,11 @@ public class PlayerMover : MonoBehaviour, Pushable
         }
     }
 
+	private void Die()
+	{
+		FindObjectOfType<ResetScene>().Reset();
+	}
+
 	public void Move()
 	{
 		moving = true;
@@ -70,7 +84,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 		}
 		else //max speed
 		{
-			Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
+			//Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
 		}
 	}
 
