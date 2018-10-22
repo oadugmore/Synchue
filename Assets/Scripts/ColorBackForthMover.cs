@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorBackForthMover : MonoBehaviour
+public class ColorBackForthMover : MonoBehaviour, Pushable
 {
 
     public float controlDistance = 15f;
@@ -74,6 +74,7 @@ public class ColorBackForthMover : MonoBehaviour
         //     Debug.Log("ColorMover velocity: " + rigidbody.velocity);
         // 	nextVelUpdate += 0.5f;
         // }
+
         if (color == InteractColor.Blue && Controller.GetBlueButtonDown()
         || color == InteractColor.Orange && Controller.GetOrangeButtonDown())
         {
@@ -86,13 +87,13 @@ public class ColorBackForthMover : MonoBehaviour
             Stop();
     }
 
-    void Move()
+    public void Move()
     {
         if (ShouldSwitchDirection())
         {
             Debug.Log("Switched direction!");
             movingForward = !movingForward;
-            rigidbody.velocity = Vector3.zero;
+            rigidbody.velocity = -rigidbody.velocity;
         }
         else if (rigidbody.velocity.magnitude < maxSpeed)
         {
@@ -111,7 +112,7 @@ public class ColorBackForthMover : MonoBehaviour
     }
 
     int iterations = 0;
-    private void Stop()
+    public void Stop()
     {
 
         //moving = false;

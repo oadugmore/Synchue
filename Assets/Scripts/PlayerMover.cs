@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMover : MonoBehaviour
+public class PlayerMover : MonoBehaviour, Pushable
 {
 
 	public float maxSpeed = 5f;
@@ -23,7 +23,7 @@ public class PlayerMover : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
 		sphereCollider = GetComponentInChildren<SphereCollider>();
-		boxCollider = GetComponent<BoxCollider>();
+		//boxCollider = GetComponent<BoxCollider>();
 		playerColor = InteractColor.Blue;
     }
 
@@ -56,7 +56,7 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
-	private void Move()
+	public void Move()
 	{
 		moving = true;
 		//playerCollider.material = movingMaterial;
@@ -75,7 +75,7 @@ public class PlayerMover : MonoBehaviour
 	}
 
 	int iterations = 0;
-	private void Stop()
+	public void Stop()
 	{
 		moving = false;
 		//sphereCollider.material = stoppedMaterial;
