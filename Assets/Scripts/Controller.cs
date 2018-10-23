@@ -11,6 +11,10 @@ public class Controller : MonoBehaviour
 
     public ColorButton blueButton;
     public ColorButton orangeButton;
+    public float increment = 0.1f;
+
+    private float blueAxis = 0f;
+    private float orangeAxis = 0f;
 
 
     // Use this for initialization
@@ -27,7 +31,18 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (current.blueButton.IsPressed())
+            blueAxis += increment;
+        else
+            blueAxis -= increment;
 
+        if (current.orangeButton.IsPressed())
+            orangeAxis += increment;
+        else
+            orangeAxis -= increment;
+            
+        blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
+        orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
     }
 
     // private void SetButtonDown(int buttonId)
@@ -46,15 +61,25 @@ public class Controller : MonoBehaviour
     //         orangeButtonPressed = false;
     // }
 
-    public static bool GetBlueButtonDown()
+    // public static bool GetBlueButtonDown()
+    // {
+    //     return current.blueButton.IsPressed();
+    // }
+
+    // public static bool GetOrangeButtonDown()
+    // {
+    //     return current.orangeButton.IsPressed();
+    // }
+
+    public static float GetBlueAxis()
     {
-        return current.blueButton.IsPressed();
+        return current.blueAxis;
     }
 
-    public static bool GetOrangeButtonDown()
+    public static float GetOrangeAxis()
     {
-        return current.orangeButton.IsPressed();
+        return current.orangeAxis;
     }
 
-    
+
 }

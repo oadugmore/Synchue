@@ -17,6 +17,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 	private BoxCollider boxCollider;
 	private float speedZero = 0.01f;
 	private bool moving = false;
+	private float lastScale = 0f;
 
     // Use this for initialization
     void Start()
@@ -53,21 +54,42 @@ public class PlayerMover : MonoBehaviour, Pushable
             //Debug.Log("Player velocity: " + rigidbody.velocity);
 			nextVelUpdate += 0.5f;
 		}
-        if (playerColor == InteractColor.Blue && Controller.GetBlueButtonDown()
-		|| playerColor == InteractColor.Orange && Controller.GetOrangeButtonDown())
-        {
-			//if (!moving)
-			Move();
-        }
-        else //if (moving)
-        {
-            Stop();
-        }
+        // if (playerColor == InteractColor.Blue && Controller.GetBlueButtonDown()
+		// || playerColor == InteractColor.Orange && Controller.GetOrangeButtonDown())
+        // {
+		// 	//if (!moving)
+		// 	Move();
+        // }
+        // else //if (moving)
+        // {
+        //     Stop();
+        // }
+		UpdateVelocity();
     }
 
 	private void Die()
 	{
 		FindObjectOfType<ResetScene>().Reset();
+	}
+
+	void UpdateVelocity()
+	{
+		float scale = 0f;
+        if (playerColor == InteractColor.Blue)
+            scale = Controller.GetBlueAxis();
+        else
+            scale = Controller.GetOrangeAxis();
+		
+		float desiredSpeed = maxSpeed * scale;
+        
+        if (rigidbody.velocity.magnitude != desiredSpeed)
+        {
+            Vector3 newVelocity;
+            newVelocity = Vector3.right * desiredSpeed;
+            rigidbody.velocity = newVelocity;
+        }
+
+        //lastScale = scale;
 	}
 
 	public void Move()
@@ -78,17 +100,25 @@ public class PlayerMover : MonoBehaviour, Pushable
 		//boxCollider.isTrigger = true;
 		if (rigidbody.velocity.x < maxSpeed)
 		{
+			hasPrinted = false;
 			iterations++;
 			rigidbody.AddForce(Vector3.right * speedIncrement, ForceMode.Acceleration);
 			//Debug.Log("Added force.");
 		}
 		else //max speed
 		{
-			//Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
+			if (!hasPrinted)
+			{
+				Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
+				hasPrinted = true;
+				iterations = 0;
+			}
+
 		}
 	}
 
 	int iterations = 0;
+	bool hasPrinted = false;
 	public void Stop()
 	{
 		moving = false;

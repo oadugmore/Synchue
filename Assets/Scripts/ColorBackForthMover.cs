@@ -23,6 +23,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     private Vector3 backwardDirection;
     private Vector3 initialPosition;
     private float speedZero = 0.01f;
+    private float lastScale = 0f;
 
     // Use this for initialization
     void Start()
@@ -75,27 +76,58 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         // 	nextVelUpdate += 0.5f;
         // }
 
-        if (color == InteractColor.Blue && Controller.GetBlueButtonDown()
-        || color == InteractColor.Orange && Controller.GetOrangeButtonDown())
-        {
-            if (Vector3.Distance(cameraTransform.position, transform.position) < controlDistance)
-            {
-                Move();
-            }
-        }
-        else
-            Stop();
+        // if (color == InteractColor.Blue && Controller.GetBlueButtonDown()
+        // || color == InteractColor.Orange && Controller.GetOrangeButtonDown())
+        // {
+        //     if (Vector3.Distance(cameraTransform.position, transform.position) < controlDistance)
+        //     {
+        //         Move();
+        //     }
+        // }
+        // else
+        //     Stop();
+        UpdateVelocity();
     }
 
-    public void Move()
+    void UpdateVelocity()
     {
-        if (ShouldSwitchDirection())
+        float scale = 0f;
+        if (color == InteractColor.Blue)
+            scale = Controller.GetBlueAxis();
+        else
+            scale = Controller.GetOrangeAxis();
+        float desiredSpeed = scale * maxSpeed;
+        
+        if (scale > 0f && ShouldSwitchDirection())
         {
             //Debug.Log("Switched direction!");
             movingForward = !movingForward;
             rigidbody.velocity = -rigidbody.velocity;
         }
-        else if (rigidbody.velocity.magnitude < maxSpeed)
+        else if (rigidbody.velocity.magnitude != desiredSpeed)
+        {
+            Vector3 newVelocity;
+            if (movingForward)
+                newVelocity = forwardDirection * desiredSpeed;
+            else
+                newVelocity = backwardDirection * desiredSpeed;
+
+            rigidbody.velocity = newVelocity;
+        }
+
+        //lastScale = scale;
+    }
+
+    public void Move()
+    {
+        throw new System.NotImplementedException();
+        // if (ShouldSwitchDirection())
+        // {
+        //     //Debug.Log("Switched direction!");
+        //     movingForward = !movingForward;
+        //     rigidbody.velocity = -rigidbody.velocity;
+        // }
+        /* else */ if (rigidbody.velocity.magnitude < maxSpeed)
         {
             iterations++;
             //Debug.Log("Added force");
@@ -114,7 +146,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     int iterations = 0;
     public void Stop()
     {
-
+        throw new System.NotImplementedException();
         //moving = false;
         //sphereCollider.material = stoppedMaterial;
         //sphereCollider.isTrigger = true;

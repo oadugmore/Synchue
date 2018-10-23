@@ -10,6 +10,7 @@ public class ObjectPusher : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		throw new System.NotImplementedException();
 		Debug.Log("Starting ObjectPusher");
 		blueObjects = new List<Pushable>();
 		var ss = FindObjectsOfType<MonoBehaviour>().OfType<Pushable>();
@@ -27,19 +28,19 @@ public class ObjectPusher : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if (Controller.GetBlueButtonDown())
-		{
-			foreach (Pushable p in blueObjects)
-			{
-				p.Move();
-			}
-		}
-		else
-		{
-			foreach (Pushable p in blueObjects)
-			{
-				p.Stop();
-			}
-		}
+		// if (Controller.GetBlueButtonDown())
+		// {
+		// 	foreach (Pushable p in blueObjects)
+		// 	{
+		// 		p.Move();
+		// 	}
+		// }
+		// else
+		// {
+		// 	foreach (Pushable p in blueObjects)
+		// 	{
+		// 		p.Stop();
+		// 	}
+		// }
 	}
 }

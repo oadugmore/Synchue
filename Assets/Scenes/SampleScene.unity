@@ -1121,7 +1121,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1234535180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14, y: 5.6, z: 0}
+  m_LocalPosition: {x: 10, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1698204563}
@@ -1158,8 +1158,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlDistance: 30
   movementDirection: 1
-  maxSpeed: 5
-  movementDistance: 4.5
+  maxSpeed: 4
+  movementDistance: 2.9
   speedIncrement: 15
   minSpeed: 0.5
   color: 0
@@ -1368,6 +1368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blueButton: {fileID: 1001057796}
   orangeButton: {fileID: 1496672352}
+  increment: 0.1
 --- !u!222 &1817333804
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1471,7 +1472,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1961104666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8, y: 4, z: 0}
+  m_LocalPosition: {x: 4.25, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1968729587}
@@ -1544,7 +1545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlDistance: 30
   movementDirection: 1
-  maxSpeed: 5
+  maxSpeed: 3
   movementDistance: 2.9
   speedIncrement: 10
   minSpeed: 0.5
