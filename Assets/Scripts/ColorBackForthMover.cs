@@ -24,12 +24,14 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     private Vector3 initialPosition;
     private float speedZero = 0.01f;
     private float lastScale = 0f;
+    private RigidbodyConstraints defaultConstraints;
 
     // Use this for initialization
     void Start()
     {
         movingForward = true;
         rigidbody = GetComponent<Rigidbody>();
+        defaultConstraints = rigidbody.constraints; //RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         //m_rigidbody.isKinematic = true;
         cameraTransform = Camera.main.transform;
         initialPosition = transform.position;
@@ -113,9 +115,12 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
                 newVelocity = backwardDirection * desiredSpeed;
 
             rigidbody.velocity = newVelocity;
-        }
 
-        //lastScale = scale;
+            if (scale < speedZero)
+                rigidbody.constraints = defaultConstraints | RigidbodyConstraints.FreezePositionY;
+            else
+                rigidbody.constraints = defaultConstraints;
+        }
     }
 
     public void Move()
