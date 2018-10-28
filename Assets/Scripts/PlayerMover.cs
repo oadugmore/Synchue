@@ -85,7 +85,7 @@ public class PlayerMover : MonoBehaviour, Pushable
         if (rigidbody.velocity.magnitude != desiredSpeed)
         {
             Vector3 newVelocity;
-            newVelocity = Vector3.right * desiredSpeed;
+            newVelocity = new Vector3(desiredSpeed, rigidbody.velocity.y, 0);
             rigidbody.velocity = newVelocity;
         }
 
@@ -102,7 +102,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 		{
 			hasPrinted = false;
 			iterations++;
-			rigidbody.AddForce(Vector3.right * speedIncrement, ForceMode.Acceleration);
+			rigidbody.AddForce(new Vector3(speedIncrement, rigidbody.velocity.y, 0), ForceMode.Acceleration);
 			//Debug.Log("Added force.");
 		}
 		else //max speed
