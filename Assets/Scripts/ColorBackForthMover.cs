@@ -6,6 +6,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
 {
 
     public float controlDistance = 15f;
+    public Transform controlPoint;
     public Direction movementDirection = Direction.UpDown;
     public float maxSpeed = 5f;
     public float movementDistance = 4f;
@@ -34,6 +35,8 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         defaultConstraints = rigidbody.constraints; //RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         //m_rigidbody.isKinematic = true;
         cameraTransform = Camera.main.transform;
+        if (controlPoint == null) 
+            controlPoint = transform;
         initialPosition = transform.position;
         SetMovementDirectionVectors();
     }
@@ -88,7 +91,9 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         // }
         // else
         //     Stop();
-        UpdateVelocity();
+
+        if (Vector3.Distance(cameraTransform.position, controlPoint.position) < controlDistance)
+            UpdateVelocity();
     }
 
     void UpdateVelocity()
@@ -123,6 +128,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         }
     }
 
+[System.Obsolete]
     public void Move()
     {
         throw new System.NotImplementedException();
@@ -149,6 +155,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     }
 
     int iterations = 0;
+    [System.Obsolete]
     public void Stop()
     {
         throw new System.NotImplementedException();
