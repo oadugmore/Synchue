@@ -33,6 +33,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         movingForward = true;
         rigidbody = GetComponent<Rigidbody>();
         defaultConstraints = rigidbody.constraints; //RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        rigidbody.constraints = RigidbodyConstraints.None; //temporary - set this in editor
         //m_rigidbody.isKinematic = true;
         cameraTransform = Camera.main.transform;
         if (controlPoint == null) 
@@ -121,10 +122,12 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
 
             rigidbody.velocity = newVelocity;
 
-            if (scale < speedZero)
-                rigidbody.constraints = defaultConstraints | RigidbodyConstraints.FreezePositionY;
-            else
-                rigidbody.constraints = defaultConstraints;
+            // if (scale < speedZero)
+            //     rigidbody.constraints = defaultConstraints | RigidbodyConstraints.FreezePositionY;
+            // else
+            //     rigidbody.constraints = defaultConstraints;
+
+            //Debug.Log(this + " velocity: " + rigidbody.velocity);
         }
     }
 
