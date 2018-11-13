@@ -33,7 +33,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
         movingForward = true;
         rigidbody = GetComponent<Rigidbody>();
         defaultConstraints = rigidbody.constraints; //RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-        rigidbody.constraints = RigidbodyConstraints.None; //temporary - set this in editor
+        //rigidbody.constraints = RigidbodyConstraints.None; //temporary - set this in editor
         //m_rigidbody.isKinematic = true;
         cameraTransform = Camera.main.transform;
         if (controlPoint == null) 
@@ -97,22 +97,27 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
             UpdateVelocity();
     }
 
+    public bool switched = false;
+    public float scale = 0f; // moved out and made public for debugging
     void UpdateVelocity()
     {
-        float scale = 0f;
+        
         if (color == InteractColor.Blue)
             scale = Controller.GetBlueAxis();
         else
             scale = Controller.GetOrangeAxis();
         float desiredSpeed = scale * maxSpeed;
         
+        switched = false;
         if (scale > 0f && ShouldSwitchDirection())
         {
+            switched = true;
             //Debug.Log("Switched direction!");
             movingForward = !movingForward;
-            rigidbody.velocity = -rigidbody.velocity;
+            //rigidbody.velocity = -rigidbody.velocity;
+            rigidbody.velocity = Vector3.zero;
         }
-        else if (rigidbody.velocity.magnitude != desiredSpeed)
+        if (rigidbody.velocity.magnitude != desiredSpeed) // was else if
         {
             Vector3 newVelocity;
             if (movingForward)

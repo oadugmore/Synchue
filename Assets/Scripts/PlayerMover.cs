@@ -46,6 +46,12 @@ public class PlayerMover : MonoBehaviour, Pushable
 		}
 	}
 
+	private void OnTriggerEnter(Collider other) 
+	{
+		if (other.gameObject.CompareTag("Crusher"))
+			Die();
+	}
+
 	float nextVelUpdate = 0f;
     void FixedUpdate()
     {

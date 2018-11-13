@@ -31,6 +31,12 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+    }
+
+    // put this logic in FixedUpdate to synchronize with physics
+    private void FixedUpdate() 
+    {
         if (current.blueButton.IsPressed())
             blueAxis += increment;
         else
