@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -31,11 +32,11 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // put this logic in FixedUpdate to synchronize with physics
-    private void FixedUpdate() 
+    private void FixedUpdate()
     {
         if (current.blueButton.IsPressed())
             blueAxis += increment;
@@ -46,7 +47,7 @@ public class Controller : MonoBehaviour
             orangeAxis += increment;
         else
             orangeAxis -= increment;
-            
+
         blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
         orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
     }
@@ -77,11 +78,26 @@ public class Controller : MonoBehaviour
     //     return current.orangeButton.IsPressed();
     // }
 
+    public static float GetAxis(InteractColor color)
+    {
+        switch (color)
+        {
+            case InteractColor.Blue:
+                return current.blueAxis;
+            case InteractColor.Orange:
+                return current.orangeAxis;
+            default:
+                throw new NotImplementedException("Update controller to support " + color + ".");
+        }
+    }
+
+    [System.Obsolete]
     public static float GetBlueAxis()
     {
         return current.blueAxis;
     }
 
+    [System.Obsolete]
     public static float GetOrangeAxis()
     {
         return current.orangeAxis;

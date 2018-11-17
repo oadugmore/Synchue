@@ -55,11 +55,11 @@ public class PlayerMover : MonoBehaviour, Pushable
 	float nextVelUpdate = 0f;
     void FixedUpdate()
     {
-		if (Time.fixedTime > nextVelUpdate)
-		{
-            //Debug.Log("Player velocity: " + rigidbody.velocity);
-			nextVelUpdate += 0.5f;
-		}
+		// if (Time.fixedTime > nextVelUpdate)
+		// {
+        //     //Debug.Log("Player velocity: " + rigidbody.velocity);
+		// 	nextVelUpdate += 0.5f;
+		// }
         // if (playerColor == InteractColor.Blue && Controller.GetBlueButtonDown()
 		// || playerColor == InteractColor.Orange && Controller.GetOrangeButtonDown())
         // {
@@ -70,6 +70,7 @@ public class PlayerMover : MonoBehaviour, Pushable
         // {
         //     Stop();
         // }
+		
 		UpdateVelocity();
     }
 
@@ -78,14 +79,10 @@ public class PlayerMover : MonoBehaviour, Pushable
 		FindObjectOfType<ResetScene>().Reset();
 	}
 
+	bool controlFinishedStopping = false;
 	void UpdateVelocity()
 	{
-		float scale = 0f;
-        if (playerColor == InteractColor.Blue)
-            scale = Controller.GetBlueAxis();
-        else
-            scale = Controller.GetOrangeAxis();
-		
+        float scale = Controller.GetAxis(playerColor);
 		float desiredSpeed = maxSpeed * scale;
         
         if (rigidbody.velocity.magnitude != desiredSpeed)
@@ -95,9 +92,18 @@ public class PlayerMover : MonoBehaviour, Pushable
             rigidbody.velocity = newVelocity;
         }
 
+		// if (scale == 0f && !controlFinishedStopping)
+		// {
+		// 	controlFinishedStopping = true;
+		// }
+
+		// else if (scale != 0f)
+		// 	controlFinishedStopping = false;
+
         //lastScale = scale;
 	}
 
+	[System.Obsolete]
 	public void Move()
 	{
 		moving = true;
@@ -106,8 +112,8 @@ public class PlayerMover : MonoBehaviour, Pushable
 		//boxCollider.isTrigger = true;
 		if (rigidbody.velocity.x < maxSpeed)
 		{
-			hasPrinted = false;
-			iterations++;
+			//hasPrinted = false;
+			//iterations++;
 			rigidbody.AddForce(new Vector3(speedIncrement, rigidbody.velocity.y, 0), ForceMode.Acceleration);
 			//Debug.Log("Added force.");
 		}
@@ -125,6 +131,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 
 	int iterations = 0;
 	bool hasPrinted = false;
+	[System.Obsolete]
 	public void Stop()
 	{
 		moving = false;

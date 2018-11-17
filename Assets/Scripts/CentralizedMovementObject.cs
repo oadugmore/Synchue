@@ -41,7 +41,7 @@ public class CentralizedMovementObject : MonoBehaviour
 		Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
 		movementObject.MovePosition(newPosition);
 
-		Debug.Log(fraction);
+		//Debug.Log(fraction);
 	}
 
 	int NextNode(float cyclePos)

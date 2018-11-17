@@ -102,10 +102,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     void UpdateVelocity()
     {
         
-        if (color == InteractColor.Blue)
-            scale = Controller.GetBlueAxis();
-        else
-            scale = Controller.GetOrangeAxis();
+        scale = Controller.GetAxis(color);
         float desiredSpeed = scale * maxSpeed;
         
         switched = false;
@@ -139,7 +136,6 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
 [System.Obsolete]
     public void Move()
     {
-        throw new System.NotImplementedException();
         // if (ShouldSwitchDirection())
         // {
         //     //Debug.Log("Switched direction!");
@@ -166,7 +162,6 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     [System.Obsolete]
     public void Stop()
     {
-        throw new System.NotImplementedException();
         //moving = false;
         //sphereCollider.material = stoppedMaterial;
         //sphereCollider.isTrigger = true;

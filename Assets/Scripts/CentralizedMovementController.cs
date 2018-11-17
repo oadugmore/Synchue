@@ -31,7 +31,7 @@ public class CentralizedMovementController : MonoBehaviour
     {
         if (Vector3.Distance(cameraTransform.position, transform.position) < controlDistance)
         {
-            float input = color == InteractColor.Blue ? Controller.GetBlueAxis() : Controller.GetOrangeAxis();
+            float input = Controller.GetAxis(color);
             cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
             while (cyclePosition > 1)
                 cyclePosition--;
