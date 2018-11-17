@@ -10,20 +10,21 @@ public class CentralizedMovementController : MonoBehaviour
     InteractColor color;
     [SerializeField]
     float controlDistance = 30f;
-	[SerializeField]
+    [SerializeField]
     [Range(0f, 1f)]
     float cyclePosition = 0f;
-    
+
     List<CentralizedMovementObject> movementObjects;
     Transform cameraTransform;
+    float previousCyclePosition = 0f;
 
 
     // Use this for initialization
     void Start()
     {
         cameraTransform = Camera.main.transform;
-		movementObjects = new List<CentralizedMovementObject>();
-		GetComponentsInChildren<CentralizedMovementObject>(movementObjects);
+        movementObjects = new List<CentralizedMovementObject>();
+        GetComponentsInChildren<CentralizedMovementObject>(movementObjects);
     }
 
     private void FixedUpdate()
@@ -35,12 +36,15 @@ public class CentralizedMovementController : MonoBehaviour
             while (cyclePosition > 1)
                 cyclePosition--;
 
-            foreach (CentralizedMovementObject o in movementObjects)
+            if (previousCyclePosition != cyclePosition)
             {
-                o.UpdatePosition(cyclePosition);
+				previousCyclePosition = cyclePosition;
+                foreach (CentralizedMovementObject o in movementObjects)
+                {
+                    o.UpdatePosition(cyclePosition);
+                }
             }
         }
-
     }
 
     // Update is called once per frame
