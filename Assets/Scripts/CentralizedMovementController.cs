@@ -9,7 +9,9 @@ public class CentralizedMovementController : MonoBehaviour
     [SerializeField]
     InteractColor color;
     [SerializeField]
-    float controlDistance = 30f;
+    float leftControlBound = 15f;
+    [SerializeField]
+    float rightControlBound = 30f;
     [SerializeField]
     [Range(0f, 1f)]
     float cyclePosition = 0f;
@@ -29,7 +31,7 @@ public class CentralizedMovementController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Vector3.Distance(cameraTransform.position, transform.position) < controlDistance)
+        if ((cameraTransform.position.x + leftControlBound) > transform.position.x && (cameraTransform.position.x - rightControlBound) < transform.position.x)
         {
             float input = Controller.GetAxis(color);
             cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
