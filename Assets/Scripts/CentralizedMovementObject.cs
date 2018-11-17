@@ -32,7 +32,11 @@ public class CentralizedMovementObject : MonoBehaviour
 
 		CentralizedMovementNode next = nodes[nextIndex];
 		CentralizedMovementNode previous = nodes[previousIndex];
-		float fraction = (cyclePos - previous.TargetCyclePosition()) / Mathf.Abs(next.TargetCyclePosition() - previous.TargetCyclePosition());
+		
+		float nextCyclePos = next.TargetCyclePosition();
+		if (nextCyclePos == 0f) nextCyclePos = 1f;
+
+		float fraction = (cyclePos - previous.TargetCyclePosition()) / Mathf.Abs(previous.TargetCyclePosition() - nextCyclePos);
 
 		Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
 		movementObject.MovePosition(newPosition);
