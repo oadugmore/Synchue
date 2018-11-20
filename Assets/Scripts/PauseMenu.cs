@@ -11,7 +11,7 @@ public class PauseMenu : MonoBehaviour
 	const string menuSceneName = "Menu";
 
 	// Use this for initialization
-	void Start () 
+	void Start()
 	{
 		menuAnim = GetComponentInChildren<Animator>();
 	}

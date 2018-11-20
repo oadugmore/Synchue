@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class CentralizedMovementObject : MonoBehaviour 
+public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformationObject
 {
 	List<CentralizedMovementNode> nodes;
 	Rigidbody movementObject;
@@ -21,7 +21,7 @@ public class CentralizedMovementObject : MonoBehaviour
 			Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
 	}
 
-	public void UpdatePosition(float cyclePos)
+	public void UpdateCyclePosition(float cyclePos)
 	{
 		int nextIndex = NextNode(cyclePos);
 		int previousIndex = 0;

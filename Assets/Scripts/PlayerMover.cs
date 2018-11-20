@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMover : MonoBehaviour, Pushable
 {
@@ -76,7 +77,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 
 	private void Die()
 	{
-		FindObjectOfType<ResetScene>().Reset();
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
 	bool controlFinishedStopping = false;

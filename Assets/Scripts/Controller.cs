@@ -52,32 +52,6 @@ public class Controller : MonoBehaviour
         orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
     }
 
-    // private void SetButtonDown(int buttonId)
-    // {
-    //     if (buttonId == 1)
-    //         blueButtonPressed = true;
-    //     else if (buttonId == 2)
-    //         orangeButtonPressed = true;
-    // }
-
-    // private void SetButtonUp(int buttonId)
-    // {
-    //     if (buttonId == 1)
-    //         blueButtonPressed = false;
-    //     else if (buttonId == 2)
-    //         orangeButtonPressed = false;
-    // }
-
-    // public static bool GetBlueButtonDown()
-    // {
-    //     return current.blueButton.IsPressed();
-    // }
-
-    // public static bool GetOrangeButtonDown()
-    // {
-    //     return current.orangeButton.IsPressed();
-    // }
-
     public static float GetAxis(InteractColor color)
     {
         switch (color)
@@ -90,18 +64,5 @@ public class Controller : MonoBehaviour
                 throw new NotImplementedException("Update controller to support " + color + ".");
         }
     }
-
-    [System.Obsolete]
-    public static float GetBlueAxis()
-    {
-        return current.blueAxis;
-    }
-
-    [System.Obsolete]
-    public static float GetOrangeAxis()
-    {
-        return current.orangeAxis;
-    }
-
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CentralizedMovementController : MonoBehaviour
+public class CentralizedTransformationController : MonoBehaviour
 {
     [SerializeField]
     float cycleTime;
@@ -16,7 +16,7 @@ public class CentralizedMovementController : MonoBehaviour
     [Range(0f, 1f)]
     float cyclePosition = 0f;
 
-    List<CentralizedMovementObject> movementObjects;
+    List<CentralizedTransformationObject> transformObjects;
     Transform cameraTransform;
     float previousCyclePosition = 0f;
 
@@ -25,8 +25,7 @@ public class CentralizedMovementController : MonoBehaviour
     void Start()
     {
         cameraTransform = Camera.main.transform;
-        movementObjects = new List<CentralizedMovementObject>();
-        GetComponentsInChildren<CentralizedMovementObject>(movementObjects);
+        transformObjects = new List<CentralizedTransformationObject>(GetComponentsInChildren<CentralizedTransformationObject>());
     }
 
     private void FixedUpdate()
@@ -41,9 +40,9 @@ public class CentralizedMovementController : MonoBehaviour
             if (previousCyclePosition != cyclePosition)
             {
 				previousCyclePosition = cyclePosition;
-                foreach (CentralizedMovementObject o in movementObjects)
+                foreach (CentralizedTransformationObject o in transformObjects)
                 {
-                    o.UpdatePosition(cyclePosition);
+                    o.UpdateCyclePosition(cyclePosition);
                 }
             }
         }
