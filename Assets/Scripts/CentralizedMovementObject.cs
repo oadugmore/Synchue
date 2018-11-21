@@ -9,7 +9,7 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 	Rigidbody movementObject;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
 		movementObject = GetComponentInChildren<Rigidbody>();
 		nodes = new List<CentralizedMovementNode>();
@@ -37,22 +37,13 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 		if (nextCyclePos == 0f) nextCyclePos = 1f;
 
 		float fraction = (cyclePos - previous.TargetCyclePosition()) / Mathf.Abs(previous.TargetCyclePosition() - nextCyclePos);
-
 		Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
 		movementObject.MovePosition(newPosition);
-
-		//Debug.Log(fraction);
 	}
 
 	int NextNode(float cyclePos)
 	{
-		//bool found = false;
-		//int previous = 0;
 		int nextNode = 0;
-		// while (index < nodes.Count && !found)
-		// {
-		// 	if (nodes[index].TargetCyclePosition() > cyclePos)
-		// }
 
 		for (int i = 0; i < nodes.Count; i++)
 		{
@@ -66,13 +57,4 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 		return nextNode;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	void FixedUpdate()
-	{
-		
-	}
 }
