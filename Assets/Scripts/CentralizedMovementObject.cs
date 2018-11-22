@@ -17,8 +17,8 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 
 		if (nodes.Count < 2)
 			Debug.LogError(this + " has less than 2 nodes.");
-		else if (nodes[0].TargetCyclePosition() != 0f)
-			Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
+		// else if (nodes[0].TargetCyclePosition() != 0f)
+		// 	Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
 	}
 
 	public void UpdateCyclePosition(float cyclePos)
@@ -34,11 +34,20 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 		CentralizedMovementNode previous = nodes[previousIndex];
 		
 		float nextCyclePos = next.TargetCyclePosition();
-		if (nextCyclePos == 0f) nextCyclePos = 1f;
+		//if (nextCyclePos == 0f) nextCyclePos = 1f;
+		if (nextIndex == 0)
+		{
+			if (cyclePos < nextCyclePos)
+				cyclePos += 1f;
+			nextCyclePos += 1f;
+			//cyclePos += 1f;
 
-		float fraction = (cyclePos - previous.TargetCyclePosition()) / Mathf.Abs(previous.TargetCyclePosition() - nextCyclePos);
+		}
+
+		float fraction = Mathf.Abs(cyclePos - previous.TargetCyclePosition()) / (nextCyclePos - previous.TargetCyclePosition());
 		Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
 		movementObject.MovePosition(newPosition);
+		Debug.Log(fraction);
 	}
 
 	int NextNode(float cyclePos)
