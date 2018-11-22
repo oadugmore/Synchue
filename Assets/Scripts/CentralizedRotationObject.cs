@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CentralizedRotationObject : MonoBehaviour, CentralizedTransformationObject 
+public class CentralizedRotationObject : MonoBehaviour, CentralizedTransformationObject
 {
     List<CentralizedRotationNode> nodes;
 	Rigidbody rotationObject;
