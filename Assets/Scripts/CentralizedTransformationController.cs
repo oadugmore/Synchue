@@ -26,6 +26,7 @@ public class CentralizedTransformationController : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
         transformObjects = new List<CentralizedTransformationObject>(GetComponentsInChildren<CentralizedTransformationObject>());
+        UpdateObjectPositions();
     }
 
     private void FixedUpdate()
@@ -40,12 +41,17 @@ public class CentralizedTransformationController : MonoBehaviour
             if (previousCyclePosition != cyclePosition)
             {
 				previousCyclePosition = cyclePosition;
-                foreach (CentralizedTransformationObject o in transformObjects)
+                UpdateObjectPositions();
+            }
+        }
+    }
+
+    void UpdateObjectPositions()
+    {
+        foreach (CentralizedTransformationObject o in transformObjects)
                 {
                     o.UpdateCyclePosition(cyclePosition);
                 }
-            }
-        }
     }
 
     // Update is called once per frame
