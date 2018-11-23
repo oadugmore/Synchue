@@ -61,18 +61,17 @@ public class PlayerMover : MonoBehaviour, Pushable
         //     //Debug.Log("Player velocity: " + rigidbody.velocity);
 		// 	nextVelUpdate += 0.5f;
 		// }
-        // if (playerColor == InteractColor.Blue && Controller.GetBlueButtonDown()
-		// || playerColor == InteractColor.Orange && Controller.GetOrangeButtonDown())
-        // {
-		// 	//if (!moving)
-		// 	Move();
-        // }
+        if (Controller.GetAxis(playerColor) > 0f)
+        {
+			//if (!moving)
+			Move();
+        }
         // else //if (moving)
         // {
         //     Stop();
         // }
 		
-		UpdateVelocity();
+		//UpdateVelocity();
     }
 
 	private void Die()
@@ -104,7 +103,6 @@ public class PlayerMover : MonoBehaviour, Pushable
         //lastScale = scale;
 	}
 
-	[System.Obsolete]
 	public void Move()
 	{
 		moving = true;
@@ -115,7 +113,8 @@ public class PlayerMover : MonoBehaviour, Pushable
 		{
 			//hasPrinted = false;
 			//iterations++;
-			rigidbody.AddForce(new Vector3(speedIncrement, rigidbody.velocity.y, 0), ForceMode.Acceleration);
+			rigidbody.AddForce(new Vector3(speedIncrement * Controller.GetAxis(playerColor), 0, 0), ForceMode.Impulse);
+			//rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement));
 			//Debug.Log("Added force.");
 		}
 		else //max speed
@@ -131,7 +130,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 	}
 
 	int iterations = 0;
-	bool hasPrinted = false;
+	bool hasPrinted = true;
 	[System.Obsolete]
 	public void Stop()
 	{
