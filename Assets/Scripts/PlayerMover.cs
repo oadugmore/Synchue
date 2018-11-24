@@ -19,6 +19,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 	private float speedZero = 0.01f;
 	private bool moving = false;
 	private float lastScale = 0f;
+	//RigidbodyConstraints 
 
     // Use this for initialization
     void Start()
@@ -27,15 +28,6 @@ public class PlayerMover : MonoBehaviour, Pushable
 		sphereCollider = GetComponentInChildren<SphereCollider>();
 		//boxCollider = GetComponent<BoxCollider>();
 		playerColor = InteractColor.Blue;
-    }
-
-    // bool lastBlueMsg = false;
-    // bool lastOrangeMsg = false;
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
 	private void OnCollisionEnter(Collision other) 
@@ -61,15 +53,15 @@ public class PlayerMover : MonoBehaviour, Pushable
         //     //Debug.Log("Player velocity: " + rigidbody.velocity);
 		// 	nextVelUpdate += 0.5f;
 		// }
-        if (Controller.GetAxis(playerColor) > 0f)
-        {
+        // if (Controller.GetAxis(playerColor) > 0f)
+        // {
 			//if (!moving)
 			Move();
+        //}
+        if (moving)
+        {
+            Stop();
         }
-        // else //if (moving)
-        // {
-        //     Stop();
-        // }
 		
 		//UpdateVelocity();
     }
@@ -103,55 +95,75 @@ public class PlayerMover : MonoBehaviour, Pushable
         //lastScale = scale;
 	}
 
+	float lastControl = 0f;
 	public void Move()
 	{
-		moving = true;
+		if (!moving)
+		{
+			rigidbody.constraints = RigidbodyConstraints.None;
+			moving = true;
+		}
+		float control = Controller.GetAxis(playerColor);
 		//playerCollider.material = movingMaterial;
 		//sphereCollider.isTrigger = false;
 		//boxCollider.isTrigger = true;
-		if (rigidbody.velocity.x < maxSpeed)
+		if (rigidbody.angularVelocity.z < maxSpeed && lastControl <= control)
 		{
 			//hasPrinted = false;
 			//iterations++;
-			rigidbody.AddForce(new Vector3(speedIncrement * Controller.GetAxis(playerColor), 0, 0), ForceMode.Impulse);
-			//rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement));
+			//rigidbody.AddForce(new Vector3(speedIncrement * control, 0, 0));
+			rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement * control));
+
 			//Debug.Log("Added force.");
 		}
-		else //max speed
+		else if (rigidbody.angularVelocity.z > speedZero && lastControl > control)
 		{
-			if (!hasPrinted)
-			{
-				Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
-				hasPrinted = true;
-				iterations = 0;
-			}
+			rigidbody.AddTorque(new Vector3(0, 0, (1f - control) * speedIncrement));
+
+
+			// if (!hasPrinted)
+			// {
+			// 	Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
+			// 	hasPrinted = true;
+			// 	iterations = 0;
+			// }
 
 		}
 	}
 
 	int iterations = 0;
 	bool hasPrinted = true;
-	[System.Obsolete]
 	public void Stop()
 	{
 		moving = false;
+
+		if (rigidbody.velocity.x < 0f)
+		{
+			Debug.Log("Player started to move backwards in Stop()!");
+			rigidbody.AddForce(-rigidbody.velocity.x, 0, 0);
+		}
+
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
+
 		//sphereCollider.material = stoppedMaterial;
 		//sphereCollider.isTrigger = true;
 		//boxCollider.isTrigger = false;
 		//
-		if (rigidbody.velocity.x > minSpeed)
-		{
-			rigidbody.AddForce(Vector3.left * speedIncrement, ForceMode.Acceleration);
-			//iterations++;
-			//Debug.Log("Stopping...");
-		}
-		else if (rigidbody.velocity.x > speedZero)
-		{
-			rigidbody.velocity = Vector3.zero;
+
+
+		// if (rigidbody.velocity.x > minSpeed)
+		// {
+		// 	rigidbody.AddForce(Vector3.left * speedIncrement, ForceMode.Acceleration);
+		// 	//iterations++;
+		// 	//Debug.Log("Stopping...");
+		// }
+		// else if (rigidbody.velocity.x > speedZero)
+		// {
+		// 	rigidbody.velocity = Vector3.zero;
 			
-			//Debug.Log("Player stopped. Took " + iterations + " iterations.");
-			//iterations = 0;
-		}
+		// 	//Debug.Log("Player stopped. Took " + iterations + " iterations.");
+		// 	//iterations = 0;
+		// }
 		
 	}
 
