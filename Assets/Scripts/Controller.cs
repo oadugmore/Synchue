@@ -17,6 +17,7 @@ public class Controller : MonoBehaviour
 
     private float blueAxis = 0f;
     private float orangeAxis = 0f;
+    private const float whiteAxis = 1f; // constant input
 
 
     // Use this for initialization
@@ -87,9 +88,16 @@ public class Controller : MonoBehaviour
                 return current.blueAxis;
             case InteractColor.Orange:
                 return current.orangeAxis;
+            case InteractColor.White:
+                return whiteAxis;
             default:
                 throw new NotImplementedException("Update controller to support " + color + ".");
         }
     }
 
+}
+
+public enum InteractColor
+{
+    Blue, Orange, White
 }

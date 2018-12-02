@@ -20,6 +20,8 @@ public class PauseMenu : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.R))
 			RestartButtonPressed();
+		else if (Input.GetKeyDown(KeyCode.Escape))
+			PauseButtonPressed();
 	}
 
 	public void PauseButtonPressed()
