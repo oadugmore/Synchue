@@ -16,6 +16,12 @@ public class PauseMenu : MonoBehaviour
 		menuAnim = GetComponentInChildren<Animator>();
 	}
 
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.R))
+			RestartButtonPressed();
+	}
+
 	public void PauseButtonPressed()
 	{
 		paused = !paused;

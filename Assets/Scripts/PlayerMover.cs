@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class PlayerMover : MonoBehaviour, Pushable
 {
 
+	public float speed = 10f;
+	public float horizontalDrag = 1f;
 	public float maxSpeed = 5f;
-	public float speedIncrement = 10f;
 	public float minSpeed = 0.5f;
 	//public PhysicMaterial movingMaterial;
 	//public PhysicMaterial stoppedMaterial;
@@ -58,10 +59,10 @@ public class PlayerMover : MonoBehaviour, Pushable
 			//if (!moving)
 			Move();
         //}
-        if (moving)
-        {
-            Stop();
-        }
+        // if (moving)
+        // {
+        //     Stop();
+        // }
 		
 		//UpdateVelocity();
     }
@@ -98,27 +99,31 @@ public class PlayerMover : MonoBehaviour, Pushable
 	float lastControl = 0f;
 	public void Move()
 	{
-		if (!moving)
-		{
-			rigidbody.constraints = RigidbodyConstraints.None;
-			moving = true;
-		}
+		// if (!moving)
+		// {
+		// 	rigidbody.constraints = RigidbodyConstraints.None;
+		// 	moving = true;
+		// }
 		float control = Controller.GetAxis(playerColor);
-		//playerCollider.material = movingMaterial;
-		//sphereCollider.isTrigger = false;
-		//boxCollider.isTrigger = true;
-		if (rigidbody.angularVelocity.z < maxSpeed && lastControl <= control)
-		{
+		
+		//Debug.Log("Velocity: " + rigidbody.velocity);
+		//Vector3 velocity = rigidbody.velocity;
+		float dragX = -horizontalDrag * rigidbody.velocity.x;
+		float forceX = dragX + speed * control;
+		//rigidbody.AddForce(dragX, 0, 0);
+
+		//if (rigidbody.angularVelocity.z < maxSpeed && lastControl <= control)
+		//{
 			//hasPrinted = false;
 			//iterations++;
-			//rigidbody.AddForce(new Vector3(speedIncrement * control, 0, 0));
-			rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement * control));
+			rigidbody.AddForce(forceX, 0, 0);
+			//rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement * control));
 
 			//Debug.Log("Added force.");
-		}
-		else if (rigidbody.angularVelocity.z > speedZero && lastControl > control)
-		{
-			rigidbody.AddTorque(new Vector3(0, 0, (1f - control) * speedIncrement));
+		//}
+		//else if (rigidbody.angularVelocity.z > speedZero && lastControl > control)
+		//{
+			//rigidbody.AddTorque(new Vector3(0, 0, (1f - control) * speedIncrement));
 
 
 			// if (!hasPrinted)
@@ -128,7 +133,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 			// 	iterations = 0;
 			// }
 
-		}
+		//}
 	}
 
 	int iterations = 0;

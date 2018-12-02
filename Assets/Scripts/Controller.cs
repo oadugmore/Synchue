@@ -13,6 +13,7 @@ public class Controller : MonoBehaviour
     public ColorButton blueButton;
     public ColorButton orangeButton;
     public float increment = 0.1f;
+    public bool keyboardInput = false;
 
     private float blueAxis = 0f;
     private float orangeAxis = 0f;
@@ -27,6 +28,12 @@ public class Controller : MonoBehaviour
         {
             Debug.LogError("Only one instance of Controller is allowed.");
         }
+
+        if (!Input.touchSupported)
+        {
+            keyboardInput = true;
+            Debug.Log("No touch screen detected. Enabling keyboard input.");
+        }
     }
 
     // Update is called once per frame
@@ -38,6 +45,28 @@ public class Controller : MonoBehaviour
     // put this logic in FixedUpdate to synchronize with physics
     private void FixedUpdate()
     {
+        if (keyboardInput) GetKeyboardInput();
+        else GetTouchInput();
+
+        blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
+        orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
+    }
+
+    private void GetKeyboardInput()
+    {
+        if (Input.GetKey(KeyCode.J))
+            blueAxis += increment;
+        else
+            blueAxis -= increment;
+
+        if (Input.GetKey(KeyCode.F))
+            orangeAxis += increment;
+        else
+            orangeAxis -= increment;
+    }
+
+    private void GetTouchInput()
+    {
         if (current.blueButton.IsPressed())
             blueAxis += increment;
         else
@@ -47,10 +76,8 @@ public class Controller : MonoBehaviour
             orangeAxis += increment;
         else
             orangeAxis -= increment;
-
-        blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
-        orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
     }
+
 
     public static float GetAxis(InteractColor color)
     {
