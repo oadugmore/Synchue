@@ -18,7 +18,7 @@ public class ColorBackForthMover : MonoBehaviour, Pushable
     public InteractColor color = InteractColor.Blue;
 
     private bool movingForward;
-    private Rigidbody rigidbody;
+    new private Rigidbody rigidbody;
     private Transform cameraTransform;
     private Vector3 forwardDirection;
     private Vector3 backwardDirection;

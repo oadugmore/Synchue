@@ -8,13 +8,13 @@ public class PlayerMover : MonoBehaviour, Pushable
 
 	public float speed = 10f;
 	public float horizontalDrag = 1f;
-	public float maxSpeed = 5f;
-	public float minSpeed = 0.5f;
+	//public float maxSpeed = 5f;
+	//public float minSpeed = 0.5f;
 	//public PhysicMaterial movingMaterial;
 	//public PhysicMaterial stoppedMaterial;
 
     private InteractColor playerColor;
-    private Rigidbody rigidbody;
+    new private Rigidbody rigidbody;
 	private SphereCollider sphereCollider;
 	private BoxCollider boxCollider;
 	private float speedZero = 0.01f;
@@ -49,22 +49,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 	float nextVelUpdate = 0f;
     void FixedUpdate()
     {
-		// if (Time.fixedTime > nextVelUpdate)
-		// {
-        //     //Debug.Log("Player velocity: " + rigidbody.velocity);
-		// 	nextVelUpdate += 0.5f;
-		// }
-        // if (Controller.GetAxis(playerColor) > 0f)
-        // {
-			//if (!moving)
-			Move();
-        //}
-        // if (moving)
-        // {
-        //     Stop();
-        // }
-		
-		//UpdateVelocity();
+		Move();
     }
 
 	private void Die()
@@ -72,11 +57,21 @@ public class PlayerMover : MonoBehaviour, Pushable
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
 
+	public void Move()
+	{
+		float control = Controller.GetAxis(playerColor);
+		float dragX = -horizontalDrag * rigidbody.velocity.x; // only care about drag in x
+		float forceX = dragX + speed * control;
+		rigidbody.AddForce(forceX, 0, 0);
+	}
+
 	bool controlFinishedStopping = false;
+	[System.Obsolete]
 	void UpdateVelocity()
 	{
         float scale = Controller.GetAxis(playerColor);
-		float desiredSpeed = maxSpeed * scale;
+		float desiredSpeed = 0f;
+		//float desiredSpeed = maxSpeed * scale;
         
         if (rigidbody.velocity.magnitude != desiredSpeed)
         {
@@ -95,49 +90,10 @@ public class PlayerMover : MonoBehaviour, Pushable
 
         //lastScale = scale;
 	}
-
-	float lastControl = 0f;
-	public void Move()
-	{
-		// if (!moving)
-		// {
-		// 	rigidbody.constraints = RigidbodyConstraints.None;
-		// 	moving = true;
-		// }
-		float control = Controller.GetAxis(playerColor);
-		
-		//Debug.Log("Velocity: " + rigidbody.velocity);
-		//Vector3 velocity = rigidbody.velocity;
-		float dragX = -horizontalDrag * rigidbody.velocity.x;
-		float forceX = dragX + speed * control;
-		//rigidbody.AddForce(dragX, 0, 0);
-
-		//if (rigidbody.angularVelocity.z < maxSpeed && lastControl <= control)
-		//{
-			//hasPrinted = false;
-			//iterations++;
-			rigidbody.AddForce(forceX, 0, 0);
-			//rigidbody.AddTorque(new Vector3(0, 0, -speedIncrement * control));
-
-			//Debug.Log("Added force.");
-		//}
-		//else if (rigidbody.angularVelocity.z > speedZero && lastControl > control)
-		//{
-			//rigidbody.AddTorque(new Vector3(0, 0, (1f - control) * speedIncrement));
-
-
-			// if (!hasPrinted)
-			// {
-			// 	Debug.Log("Player is at max speed. Took " + iterations + " iterations.");
-			// 	hasPrinted = true;
-			// 	iterations = 0;
-			// }
-
-		//}
-	}
-
+	
 	int iterations = 0;
 	bool hasPrinted = true;
+	[System.Obsolete]
 	public void Stop()
 	{
 		moving = false;
