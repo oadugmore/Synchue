@@ -26,9 +26,11 @@ public class PlayerMover : MonoBehaviour, Pushable
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+		rigidbody.maxAngularVelocity = 50f;
 		sphereCollider = GetComponentInChildren<SphereCollider>();
 		//boxCollider = GetComponent<BoxCollider>();
 		playerColor = InteractColor.Blue;
+		//Debug.Log(Physics.);
     }
 
 	private void OnCollisionEnter(Collision other) 
@@ -61,8 +63,13 @@ public class PlayerMover : MonoBehaviour, Pushable
 	{
 		float control = Controller.GetAxis(playerColor);
 		float dragX = -horizontalDrag * rigidbody.velocity.x; // only care about drag in x
-		float forceX = dragX + speed * control;
-		rigidbody.AddForce(forceX, 0, 0);
+		float angularDragX = -horizontalDrag * rigidbody.angularVelocity.z;
+		//if (rigidbody.velocity.x < 0) dragX = 0f;
+		//float forceX = dragX + speed * control;
+		//rigidbody.AddForce(forceX, 0, 0);
+		float torqueX = -speed * control;
+		Debug.Log(rigidbody.angularVelocity.z);
+		rigidbody.AddTorque(0, 0, torqueX);
 	}
 
 	bool controlFinishedStopping = false;

@@ -95,12 +95,12 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 30
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &114894567262814912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,10 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801742a34e5d01441ab76a74e45a373c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
+  speed: 70
   horizontalDrag: 20
-  maxSpeed: 5
-  minSpeed: 0.5
 --- !u!135 &135045376956211834
 SphereCollider:
   m_ObjectHideFlags: 1
