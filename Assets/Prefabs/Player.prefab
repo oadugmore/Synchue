@@ -112,8 +112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 801742a34e5d01441ab76a74e45a373c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 70
-  horizontalDrag: 20
+  speed: 20
+  maxVelocityX: 5
+  restingAngularDrag: 30
+  horizontalDrag: 30
 --- !u!135 &135045376956211834
 SphereCollider:
   m_ObjectHideFlags: 1

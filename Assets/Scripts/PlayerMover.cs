@@ -7,6 +7,8 @@ public class PlayerMover : MonoBehaviour, Pushable
 {
 
 	public float speed = 10f;
+	public float maxVelocityX = 10f;
+	public float restingAngularDrag = 30f;
 	public float horizontalDrag = 1f;
 	//public float maxSpeed = 5f;
 	//public float minSpeed = 0.5f;
@@ -30,6 +32,7 @@ public class PlayerMover : MonoBehaviour, Pushable
 		sphereCollider = GetComponentInChildren<SphereCollider>();
 		//boxCollider = GetComponent<BoxCollider>();
 		playerColor = InteractColor.Blue;
+		rigidbody.maxAngularVelocity = maxVelocityX;
 		//Debug.Log(Physics.);
     }
 
@@ -64,12 +67,15 @@ public class PlayerMover : MonoBehaviour, Pushable
 		float control = Controller.GetAxis(playerColor);
 		float dragX = -horizontalDrag * rigidbody.velocity.x; // only care about drag in x
 		float angularDragX = -horizontalDrag * rigidbody.angularVelocity.z;
+		rigidbody.angularDrag = (1 - control) * restingAngularDrag;
 		//if (rigidbody.velocity.x < 0) dragX = 0f;
-		//float forceX = dragX + speed * control;
-		//rigidbody.AddForce(forceX, 0, 0);
+		// float forceX = dragX + speed * control;
+		float forceX = speed * control;
+		if (rigidbody.velocity.x < maxVelocityX)
+			rigidbody.AddForce(forceX, 0, 0);
 		float torqueX = -speed * control;
-		Debug.Log(rigidbody.angularVelocity.z);
-		rigidbody.AddTorque(0, 0, torqueX);
+		Debug.Log(rigidbody.velocity.x);
+		//rigidbody.AddTorque(0, 0, -dragX);
 	}
 
 	bool controlFinishedStopping = false;
