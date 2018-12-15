@@ -113,10 +113,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocityDisplay: {x: 0, y: 0, z: 0}
-  speed: 50
-  horizontalDragFactor: 10
+  speed: 100
+  horizontalDragFactor: 15
   maxSpeed: 7
-  maxDrag: 20
+  maxDrag: 100
+  platformForceScale: 15
 --- !u!135 &135045376956211834
 SphereCollider:
   m_ObjectHideFlags: 1

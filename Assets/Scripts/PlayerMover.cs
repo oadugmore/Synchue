@@ -80,22 +80,23 @@ public class PlayerMover : MonoBehaviour, Pushable
 		float beforeVelocitySign = Mathf.Sign(rigidbody.velocity.x);
         dragX = Mathf.Clamp(dragX, -maxDrag, maxDrag);
         float forwardForceX = speed * control;
-        if (rigidbody.velocity.x > maxSpeed) 
-        {
-            forwardForceX = 0f;
-            if (!dbg_MaxPrinted) Debug.Log("Max speed: " + rigidbody.velocity.x);
-            dbg_MaxPrinted = true;
-        }
-        else dbg_MaxPrinted = false;
+        // if (rigidbody.velocity.x > maxSpeed) 
+        // {
+        //     forwardForceX = 0f;
+        //     if (!dbg_MaxPrinted) Debug.Log("Max speed: " + rigidbody.velocity.x);
+        //     dbg_MaxPrinted = true;
+        // }
+        //else dbg_MaxPrinted = false;
         float forceX = forwardForceX + dragX; //-beforeVelocitySign * horizontalDrag;
         //forceX = Mathf.Clamp(forceX, -maxForce, maxForce);
         //if (rigidbody.velocity.x < maxVelocityX)
         rigidbody.AddForce(forceX, 0, 0);
-		if (Mathf.Sign(rigidbody.velocity.x) != beforeVelocitySign)
-			rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
+		// if (Mathf.Sign(rigidbody.velocity.x) != beforeVelocitySign)
+		// 	rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
     }
 
     bool onPlatform = false;
+    public float platformForceScale = 1f;
     private void CheckPlatform()
     {
         // if (Physics.Linecast(transform.position, transform.position - new Vector3(0, -0.8f, 0), LayerMask.NameToLayer("CarryPlayer")))
@@ -110,7 +111,9 @@ public class PlayerMover : MonoBehaviour, Pushable
                 Debug.Log("Player moved onto platform.");
                 onPlatform = true;
             }
-			rigidbody.velocity = new Vector3(rigidbody.velocity.x + hit.rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
+            
+			//rigidbody.velocity = new Vector3(rigidbody.velocity.x + hit.rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
+            rigidbody.AddForce(hit.rigidbody.velocity.x * platformForceScale, 0, 0, ForceMode.Acceleration);
         }
         else
         {
