@@ -10,7 +10,7 @@ public class PlayerMover : MonoBehaviour, Pushable
     public float speed = 10f;
     //public float max = 10f;
     //public float restingAngularDrag = 30f;
-    public float horizontalDragFactor = 1f;
+    public float horizontalDragFactor = 15f;
     
     //public float maxSpeed = 5f;
     //public float minSpeed = 0.5f;
@@ -25,6 +25,7 @@ public class PlayerMover : MonoBehaviour, Pushable
     private bool moving = false;
     private float lastScale = 0f;
     private RigidbodyConstraints normalConstraints = RigidbodyConstraints.None;
+    //private bool ignoreDrag = false;
     //private RigidbodyConstraints 
 
     // Use this for initialization
@@ -51,6 +52,19 @@ public class PlayerMover : MonoBehaviour, Pushable
     {
         if (other.gameObject.CompareTag("Crusher"))
             Die();
+        DragKiller drag;
+        if (drag = other.gameObject.GetComponent<DragKiller>())
+        {
+            StartCoroutine(ignoreDrag(drag.dragIgnoreTime));
+        }
+    }
+
+    IEnumerator ignoreDrag(float seconds)
+    {
+        float originalDrag = horizontalDragFactor;
+        horizontalDragFactor = 0f;
+        yield return new WaitForSeconds(seconds);
+        horizontalDragFactor = originalDrag;
     }
 
     float nextVelUpdate = 0f;
@@ -66,19 +80,19 @@ public class PlayerMover : MonoBehaviour, Pushable
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public float maxSpeed = 5f;
-    public float maxDrag = 5f;
-    bool dbg_MaxPrinted = false;
+    //public float maxSpeed = 5f;
+    //public float maxDrag = 5f;
+    //bool dbg_MaxPrinted = false;
     public void Move()
     {
         float control = Controller.GetAxis(playerColor);
         float dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
-        float angularDragX = -horizontalDragFactor * rigidbody.angularVelocity.z;
+        //float angularDragX = -horizontalDragFactor * rigidbody.angularVelocity.z;
         //rigidbody.angularDrag = (1 - control) * restingAngularDrag;
         //if (rigidbody.velocity.x < 0) dragX = 0f;
         // float forceX = dragX + speed * control;
-		float beforeVelocitySign = Mathf.Sign(rigidbody.velocity.x);
-        dragX = Mathf.Clamp(dragX, -maxDrag, maxDrag);
+		//float beforeVelocitySign = Mathf.Sign(rigidbody.velocity.x);
+        //dragX = Mathf.Clamp(dragX, -maxDrag, maxDrag);
         float forwardForceX = speed * control;
         // if (rigidbody.velocity.x > maxSpeed) 
         // {
@@ -96,13 +110,9 @@ public class PlayerMover : MonoBehaviour, Pushable
     }
 
     bool onPlatform = false;
-    public float platformForceScale = 1f;
+    //public float platformForceScale = 1f;
     private void CheckPlatform()
     {
-        // if (Physics.Linecast(transform.position, transform.position - new Vector3(0, -0.8f, 0), LayerMask.NameToLayer("CarryPlayer")))
-        // {
-
-        // }
 		RaycastHit hit;
         if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
@@ -113,7 +123,7 @@ public class PlayerMover : MonoBehaviour, Pushable
             }
             
 			//rigidbody.velocity = new Vector3(rigidbody.velocity.x + hit.rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
-            rigidbody.AddForce(hit.rigidbody.velocity.x * platformForceScale, 0, 0, ForceMode.Acceleration);
+            rigidbody.AddForce(hit.rigidbody.velocity.x * horizontalDragFactor, 0, 0, ForceMode.Acceleration);
         }
         else
         {
