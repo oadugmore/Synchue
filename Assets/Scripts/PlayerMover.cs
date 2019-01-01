@@ -36,7 +36,7 @@ public class PlayerMover : MonoBehaviour, Pushable
         sphereCollider = GetComponentInChildren<SphereCollider>();
         playerColor = InteractColor.Blue;
         rigidbody.maxAngularVelocity = Mathf.Infinity;
-		Debug.Log(sphereCollider.bounds.extents);
+		//Debug.Log(sphereCollider.bounds.extents);
     }
 
     private void OnCollisionEnter(Collision other)
