@@ -123,7 +123,7 @@ public class PlayerMover : MonoBehaviour, Pushable
             }
             
 			//rigidbody.velocity = new Vector3(rigidbody.velocity.x + hit.rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
-            rigidbody.AddForce(hit.rigidbody.velocity.x * horizontalDragFactor, 0, 0, ForceMode.Acceleration);
+            rigidbody.AddForce(hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor, 0, 0, ForceMode.Acceleration);
         }
         else
         {

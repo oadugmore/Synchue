@@ -21,11 +21,11 @@ public class Conveyor : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log("stay");
+        //Debug.Log("stay");
         Rigidbody r;
         if (r=other.gameObject.GetComponentInChildren<Rigidbody>())
         {
-            Debug.Log("force");
+            //Debug.Log("force");
             r.AddForce(force);
         }
     }
