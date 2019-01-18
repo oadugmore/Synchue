@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ColorBackForthMover : MonoBehaviour, Pushable
+[System.Obsolete]
+public class ColorBackForthMover : MonoBehaviour
 {
 
     public float controlDistance = 15f;

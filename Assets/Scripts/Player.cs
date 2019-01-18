@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerMover : MonoBehaviour, Pushable
+public class Player : MonoBehaviour
 {
 
     public Vector3 velocityDisplay;
