@@ -5,20 +5,16 @@ using UnityEngine;
 public class RotationLocker : MonoBehaviour
 {
     Quaternion originalRotation;
+    Rigidbody r;
 
     // Start is called before the first frame update
     void Start()
     {
+        r = GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void LateUpdate()
+    void FixedUpdate()
     {
         transform.rotation = originalRotation;
     }

@@ -67,9 +67,11 @@ public class Player : MonoBehaviour
         horizontalDragFactor = originalDrag;
     }
 
+    Vector3 resultForce;
     float nextVelUpdate = 0f;
     void FixedUpdate()
     {
+        resultForce = Vector3.zero;
         velocityDisplay = rigidbody.velocity;
         CheckPlatform();
         Move();
@@ -102,9 +104,11 @@ public class Player : MonoBehaviour
         // }
         //else dbg_MaxPrinted = false;
         float forceX = forwardForceX + dragX; //-beforeVelocitySign * horizontalDrag;
+
+        resultForce.x += forceX;
         //forceX = Mathf.Clamp(forceX, -maxForce, maxForce);
         //if (rigidbody.velocity.x < maxVelocityX)
-        rigidbody.AddForce(forceX, 0, 0);
+        rigidbody.AddForce(resultForce);
 		// if (Mathf.Sign(rigidbody.velocity.x) != beforeVelocitySign)
 		// 	rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, rigidbody.velocity.z);
     }
@@ -122,8 +126,8 @@ public class Player : MonoBehaviour
                 onPlatform = true;
             }
             
-			//rigidbody.velocity = new Vector3(rigidbody.velocity.x + hit.rigidbody.velocity.x, rigidbody.velocity.y, rigidbody.velocity.z);
-            rigidbody.AddForce(hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor, 0, 0, ForceMode.Acceleration);
+            resultForce.x += hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor;
+            //rigidbody.AddForce(hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor, 0, 0);
         }
         else
         {

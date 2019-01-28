@@ -5,11 +5,11 @@ using UnityEngine;
 public class MovingPlatform : MonoBehaviour
 {
     public Vector3 velocity;
+    public bool useRigidbodyVelocity = true;
 
     Vector3 previousPosition;
     Rigidbody r;
 
-    // Start is called before the first frame update
     void Start()
     {
         r = GetComponent<Rigidbody>();
@@ -19,7 +19,15 @@ public class MovingPlatform : MonoBehaviour
 
     void FixedUpdate()
     {
-        velocity = (r.position - previousPosition) / Time.fixedDeltaTime;
-        previousPosition = r.position;
+        if (useRigidbodyVelocity)
+        {
+            velocity = r.velocity;
+        }
+        else
+        {
+            velocity = (r.position - previousPosition) / Time.fixedDeltaTime;
+            previousPosition = r.position;
+        }
+
     }
 }
