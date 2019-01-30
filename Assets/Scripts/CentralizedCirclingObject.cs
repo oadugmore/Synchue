@@ -12,6 +12,7 @@ public class CentralizedCirclingObject : MonoBehaviour, CentralizedTransformatio
 
     Rigidbody movementObject;
     private float radius;
+    private const float pi2 = 2 * Mathf.PI;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class CentralizedCirclingObject : MonoBehaviour, CentralizedTransformatio
     {
         cyclePos += cycleOffset;
         if (cyclePos >= 1f) cyclePos -= 1f;
-        float input = Mathf.PI * 2 * cyclePos;
+        float input = pi2 * cyclePos;
         if (rotateClockwise) input *= -1f;
         float h = Mathf.Cos(input) * radius;
         float v = Mathf.Sin(input) * radius;
