@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
-    public Vector3 velocity;
     public bool useRigidbodyVelocity = true;
 
-    Vector3 previousPosition;
-    Rigidbody r;
+    private Vector3 velocity;
+    private Vector3 previousPosition;
+    private Rigidbody r;
 
     void Start()
     {
@@ -28,6 +28,10 @@ public class MovingPlatform : MonoBehaviour
             velocity = (r.position - previousPosition) / Time.fixedDeltaTime;
             previousPosition = r.position;
         }
+    }
 
+    public Vector3 getVelocity()
+    {
+        return velocity;
     }
 }

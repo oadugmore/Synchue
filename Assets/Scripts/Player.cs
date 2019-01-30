@@ -126,7 +126,7 @@ public class Player : MonoBehaviour
                 onPlatform = true;
             }
             
-            resultForce.x += hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor;
+            resultForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
             //rigidbody.AddForce(hit.rigidbody.GetComponent<MovingPlatform>().velocity.x * horizontalDragFactor, 0, 0);
         }
         else
