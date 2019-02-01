@@ -9,6 +9,7 @@ public class CLinearMovementObject : CCyclePathingObject
 
 	protected override void Start()
 	{
+		base.Start();
 		movementObject = GetComponentInChildren<Rigidbody>();
 
 		if (nodes.Count < 2)

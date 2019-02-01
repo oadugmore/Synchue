@@ -14,12 +14,14 @@ public class CSinusoidalMovementObject : CCyclePathingObject
 
     protected override void Start()
     {
+        base.Start();
         movementObject = GetComponentInChildren<Rigidbody>();
         radius = Vector3.Distance(transform.position, movementObject.position);
     }
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        // TODO: Make this work with nodes
         cyclePos += cycleOffset;
         if (cyclePos >= 1f) cyclePos -= 1f;
         float input = pi2 * cyclePos;
