@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CRotationObject : MonoBehaviour, CCycleObject
+public class CRotationObject : CCyclePathingObject
 {
-    List<CRotationNode> nodes;
+    //List<CRotationNode> nodes;
 	Rigidbody rotationObject;
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
 		rotationObject = GetComponentInChildren<Rigidbody>();
-		nodes = new List<CRotationNode>();
-		GetComponentsInChildren<CRotationNode>(nodes);
 
 		if (nodes.Count < 2)
 			Debug.LogError(this + " has less than 2 nodes.");
-		else if (nodes[0].TargetCyclePosition() != 0f)
-			Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
+        else if (nodes[0].TargetCyclePosition() != 0f)
+            Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
 	}
 
-    public void UpdateCyclePosition(float cyclePos)
+    public override void UpdateCyclePosition(float cyclePos)
     {
         int nextIndex = NextNode(cyclePos);
 		int previousIndex = 0;
@@ -29,8 +28,8 @@ public class CRotationObject : MonoBehaviour, CCycleObject
 		else
 			previousIndex = nextIndex - 1;
 
-        CRotationNode next = nodes[nextIndex];
-		CRotationNode previous = nodes[previousIndex];
+        CRotationNode next = (CRotationNode)nodes[nextIndex];
+		CRotationNode previous = (CRotationNode)nodes[previousIndex];
 		
 		float nextCyclePos = next.TargetCyclePosition();
 		if (nextCyclePos == 0f) nextCyclePos = 1f;
@@ -65,21 +64,5 @@ public class CRotationObject : MonoBehaviour, CCycleObject
 		Quaternion newRotation = Quaternion.Euler(Vector3.Lerp(previousEuler, nextEuler, fraction));
 		rotationObject.MoveRotation(newRotation);
     }
-	
-	int NextNode(float cyclePos)
-	{
-		int nextNode = 0;
-
-		for (int i = 0; i < nodes.Count; i++)
-		{
-			if (nodes[i].TargetCyclePosition() > cyclePos)
-			{
-				nextNode = i;
-				break;
-			}
-		}
-
-		return nextNode;
-	}
 
 }
