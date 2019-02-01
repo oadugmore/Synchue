@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CentralizedMovementNode : MonoBehaviour 
+public class CLinearMovementNode : MonoBehaviour 
 {
 	[SerializeField][Range(0f, 1f)]
 	float targetCyclePosition;

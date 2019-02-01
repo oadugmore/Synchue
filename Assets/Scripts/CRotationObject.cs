@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CentralizedRotationObject : MonoBehaviour, CentralizedTransformationObject
+public class CRotationObject : MonoBehaviour, CCycleObject
 {
-    List<CentralizedRotationNode> nodes;
+    List<CRotationNode> nodes;
 	Rigidbody rotationObject;
 
     // Use this for initialization
     void Start()
     {
 		rotationObject = GetComponentInChildren<Rigidbody>();
-		nodes = new List<CentralizedRotationNode>();
-		GetComponentsInChildren<CentralizedRotationNode>(nodes);
+		nodes = new List<CRotationNode>();
+		GetComponentsInChildren<CRotationNode>(nodes);
 
 		if (nodes.Count < 2)
 			Debug.LogError(this + " has less than 2 nodes.");
@@ -29,8 +29,8 @@ public class CentralizedRotationObject : MonoBehaviour, CentralizedTransformatio
 		else
 			previousIndex = nextIndex - 1;
 
-        CentralizedRotationNode next = nodes[nextIndex];
-		CentralizedRotationNode previous = nodes[previousIndex];
+        CRotationNode next = nodes[nextIndex];
+		CRotationNode previous = nodes[previousIndex];
 		
 		float nextCyclePos = next.TargetCyclePosition();
 		if (nextCyclePos == 0f) nextCyclePos = 1f;

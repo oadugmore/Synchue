@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformationObject
+public class CLinearMovementObject : MonoBehaviour, CCycleObject
 {
-	List<CentralizedMovementNode> nodes;
+	List<CLinearMovementNode> nodes;
 	Rigidbody movementObject;
 
 	// Use this for initialization
 	void Start ()
 	{
 		movementObject = GetComponentInChildren<Rigidbody>();
-		nodes = new List<CentralizedMovementNode>();
-		GetComponentsInChildren<CentralizedMovementNode>(nodes);
+		nodes = new List<CLinearMovementNode>();
+		GetComponentsInChildren<CLinearMovementNode>(nodes);
 
 		if (nodes.Count < 2)
 			Debug.LogError(this + " has less than 2 nodes.");
@@ -30,8 +30,8 @@ public class CentralizedMovementObject : MonoBehaviour, CentralizedTransformatio
 		else
 			previousIndex = nextIndex - 1;
 
-		CentralizedMovementNode next = nodes[nextIndex];
-		CentralizedMovementNode previous = nodes[previousIndex];
+		CLinearMovementNode next = nodes[nextIndex];
+		CLinearMovementNode previous = nodes[previousIndex];
 		
 		float nextCyclePos = next.TargetCyclePosition();
 		//if (nextCyclePos == 0f) nextCyclePos = 1f;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CentralizedCirclingObject : MonoBehaviour, CentralizedTransformationObject
+public class CSinusoidalMovementObject : MonoBehaviour, CCycleObject
 {
     public bool rotateClockwise = false;
     [SerializeField][Range(0f, 1f)]
@@ -12,7 +12,6 @@ public class CentralizedCirclingObject : MonoBehaviour, CentralizedTransformatio
     private float radius;
     private const float pi2 = 2 * Mathf.PI;
 
-    // Start is called before the first frame update
     void Start()
     {
         movementObject = GetComponentInChildren<Rigidbody>();
@@ -27,7 +26,7 @@ public class CentralizedCirclingObject : MonoBehaviour, CentralizedTransformatio
         if (rotateClockwise) input *= -1f;
         float h = Mathf.Cos(input) * radius;
         float v = Mathf.Sin(input) * radius;
-        Vector3 destination = transform.TransformPoint(h, v, 0); //Vector3.zero;
+        Vector3 destination = transform.TransformPoint(h, v, 0);
         movementObject.MovePosition(destination);
     }
 

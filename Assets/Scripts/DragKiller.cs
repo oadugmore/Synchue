@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragKiller : MonoBehaviour, CentralizedTransformationObject {
+public class DragKiller : MonoBehaviour, CCycleObject {
 
 	public float dragIgnoreTime = 1f; // time in seconds to ignore drag
 	public float startActive = 0f;
