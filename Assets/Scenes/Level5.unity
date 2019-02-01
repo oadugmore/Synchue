@@ -308,7 +308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &311227140
 Rigidbody:
@@ -591,7 +590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &467994879
 Rigidbody:
@@ -871,6 +869,10 @@ PrefabInstance:
     - target: {fileID: 1703031361872156, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1703031361872156, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4813337044415364, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1177,7 +1179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &786894436
 Rigidbody:
@@ -1390,7 +1391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &994925423
 Rigidbody:
@@ -1700,7 +1700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1182081015
 Rigidbody:
@@ -2081,7 +2080,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1362583016
 Rigidbody:
@@ -2300,7 +2298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1407814389
 Rigidbody:
@@ -2423,7 +2420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1454306703
 Rigidbody:
@@ -2765,7 +2761,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1758853578
 Rigidbody:
@@ -2940,7 +2935,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1852493181
 Rigidbody:
@@ -3063,7 +3057,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &1932677014
 Rigidbody:
@@ -3234,7 +3227,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 0}
   useRigidbodyVelocity: 1
 --- !u!54 &2029534736
 Rigidbody:

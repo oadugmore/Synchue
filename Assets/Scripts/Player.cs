@@ -122,7 +122,7 @@ public class Player : MonoBehaviour
         {
             if (!onPlatform)
             {
-                Debug.Log("Player moved onto platform.");
+                //Debug.Log("Player moved onto platform.");
                 onPlatform = true;
             }
             
@@ -133,7 +133,7 @@ public class Player : MonoBehaviour
         {
             if (onPlatform)
             {
-                Debug.Log("Player moved off platform.");
+                //Debug.Log("Player moved off platform.");
                 onPlatform = false;
             }
         }
