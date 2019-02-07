@@ -4,12 +4,14 @@ public class CSinusoidalMovementNode : CCycleNode
 {
     [SerializeField]
     float radius = 1f;
+    [SerializeField][Range(0, 360)]
+    float angle = 0f;
     [SerializeField]
     bool rotateClockwise = false;
 
-    public Quaternion Angle()
+    public float Angle()
     {
-        return this.transform.rotation;
+        return angle;
     }
 
     public float Radius()

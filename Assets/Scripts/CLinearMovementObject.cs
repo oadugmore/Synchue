@@ -19,25 +19,22 @@ public class CLinearMovementObject : CCyclePathingObject
 	public override void UpdateCyclePosition(float cyclePos)
 	{
 		int nextIndex = NextNode(cyclePos);
-		int previousIndex = 0;
-		if (nextIndex == 0)
-			previousIndex = nodes.Count - 1;
-		else
-			previousIndex = nextIndex - 1;
+		int previousIndex = PreviousNode(nextIndex);
 
 		CLinearMovementNode next = (CLinearMovementNode)nodes[nextIndex];
 		CLinearMovementNode previous = (CLinearMovementNode)nodes[previousIndex];
 		
 		float nextCyclePos = next.TargetCyclePosition();
+		float previousCyclePos = previous.TargetCyclePosition();
 		//if (nextCyclePos == 0f) nextCyclePos = 1f;
 		if (nextIndex == 0)
 		{
-			if (cyclePos < nextCyclePos)
+			if (cyclePos < nextCyclePos) // only happens when the first node has a nonzero Target Cycle Position
 				cyclePos += 1f;
 			nextCyclePos += 1f;
 		}
 
-		float fraction = Mathf.Abs(cyclePos - previous.TargetCyclePosition()) / (nextCyclePos - previous.TargetCyclePosition());
+		float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
 		Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
 		movementObject.MovePosition(newPosition);
 	}

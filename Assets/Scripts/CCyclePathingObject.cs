@@ -29,4 +29,14 @@ public abstract class CCyclePathingObject : MonoBehaviour, CCycleObject
         return nextNode;
     }
 
+    protected int PreviousNode(int nextIndex)
+    {
+        int previousIndex = 0;
+        if (nextIndex == 0)
+            previousIndex = nodes.Count - 1;
+        else
+            previousIndex = nextIndex - 1;
+        return previousIndex;
+    }
+
 }
