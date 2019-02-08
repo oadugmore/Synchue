@@ -8,6 +8,9 @@ public class CSinusoidalMovementObject : CCyclePathingObject
     // [SerializeField][Range(0f, 1f)]
     // private float cycleOffset = 0f;
 
+    public float angle = 0;
+    public float nextFraction = 0f;
+
     Rigidbody movementObject;
     //private float radius;
     private const float pi2 = 2 * Mathf.PI;
@@ -31,8 +34,15 @@ public class CSinusoidalMovementObject : CCyclePathingObject
 
         float nextCyclePos = next.TargetCyclePosition();
         float previousCyclePos = previous.TargetCyclePosition();
+        float nextAngle = next.Angle();
+        float previousAngle = previous.Angle();
+        while (nextAngle < previousAngle) nextAngle += 360f;
+        while (nextCyclePos < previousCyclePos) nextCyclePos++;
+
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        float newAngle = Mathf.Lerp(previous.Angle(), next.Angle(), fraction);
+        float newAngle = Mathf.Lerp(previousAngle, nextAngle, fraction);
+        angle = newAngle;
+        nextFraction = fraction;
         float newRadius = Mathf.Lerp(previous.Radius(), next.Radius(), fraction);
 
         //float input = pi2 * localCyclePos;

@@ -10,6 +10,8 @@ public abstract class CCyclePathingObject : MonoBehaviour, CCycleObject
     {
         nodes = new List<CCycleNode>();
         GetComponentsInChildren<CCycleNode>(nodes);
+        if (nodes.Count < 1)
+            Debug.LogError(this + " needs at least one node.");
     }
 
     public abstract void UpdateCyclePosition(float cyclePos);
