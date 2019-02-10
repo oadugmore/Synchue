@@ -13,7 +13,6 @@ public class CSinusoidalMovementObject : CCyclePathingObject
 
     Rigidbody movementObject;
     //private float radius;
-    private const float pi2 = 2 * Mathf.PI;
 
     protected override void Start()
     {
@@ -36,7 +35,8 @@ public class CSinusoidalMovementObject : CCyclePathingObject
         float previousCyclePos = previous.TargetCyclePosition();
         float nextAngle = next.Angle();
         float previousAngle = previous.Angle();
-        while (nextAngle < previousAngle) nextAngle += 360f;
+        if (nextAngle < 0f && previousAngle > 0f) nextAngle += 360f;
+        if (nextAngle > 0f && previousAngle < 0f) previousAngle += 360f;
         while (nextCyclePos < previousCyclePos) nextCyclePos++;
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
@@ -47,7 +47,7 @@ public class CSinusoidalMovementObject : CCyclePathingObject
 
         //float input = pi2 * localCyclePos;
         float angleRadians = Mathf.PI * newAngle / 180f;
-        if (next.RotateClockwise()) angleRadians *= -1f;
+        if (!next.RotateClockwise()) angleRadians *= -1f;
         float h = Mathf.Cos(angleRadians) * newRadius;
         float v = Mathf.Sin(angleRadians) * newRadius;
         Vector3 destination = transform.TransformPoint(h, v, 0);
