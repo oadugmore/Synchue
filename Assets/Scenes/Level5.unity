@@ -5872,10 +5872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &576228028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,9 +6489,9 @@ Transform:
   m_Children:
   - {fileID: 1494462009}
   - {fileID: 64503363}
-  - {fileID: 999784067}
-  - {fileID: 1249973933}
   - {fileID: 1953887683}
+  - {fileID: 1249973933}
+  - {fileID: 999784067}
   m_Father: {fileID: 1027127165}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6511,10 +6507,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &761819692
 GameObject:
   m_ObjectHideFlags: 0
@@ -6746,7 +6738,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1249619891}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823092093
 MonoBehaviour:
@@ -6760,7 +6752,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.75
+  targetCyclePosition: 0.25
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -6953,10 +6945,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &897539952
 GameObject:
   m_ObjectHideFlags: 0
@@ -7068,7 +7056,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515907990}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &938765778
 MonoBehaviour:
@@ -7082,7 +7070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.25
+  targetCyclePosition: 0.75
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -7215,7 +7203,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 700627747}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &999784068
 MonoBehaviour:
@@ -7229,7 +7217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.25
+  targetCyclePosition: 0.75
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -7333,10 +7321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1156749372
 GameObject:
   m_ObjectHideFlags: 0
@@ -7385,10 +7369,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1177806027
 GameObject:
   m_ObjectHideFlags: 0
@@ -7772,7 +7752,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1249619891}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1198008779
 MonoBehaviour:
@@ -7786,7 +7766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.25
+  targetCyclePosition: 0.75
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -7820,9 +7800,9 @@ Transform:
   m_Children:
   - {fileID: 2035768129}
   - {fileID: 1187381007}
-  - {fileID: 1198008778}
-  - {fileID: 866977140}
   - {fileID: 823092092}
+  - {fileID: 866977140}
+  - {fileID: 1198008778}
   m_Father: {fileID: 1027127165}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7838,10 +7818,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1249973932
 GameObject:
   m_ObjectHideFlags: 0
@@ -7937,10 +7913,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1282561154
 GameObject:
   m_ObjectHideFlags: 0
@@ -8179,7 +8151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1515907990}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1318923771
 MonoBehaviour:
@@ -8193,7 +8165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.75
+  targetCyclePosition: 0.25
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -8339,10 +8311,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1399299138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8911,9 +8879,9 @@ Transform:
   m_Children:
   - {fileID: 642841846}
   - {fileID: 690149208}
-  - {fileID: 938765777}
-  - {fileID: 45241341}
   - {fileID: 1318923770}
+  - {fileID: 45241341}
+  - {fileID: 938765777}
   m_Father: {fileID: 1027127165}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8929,10 +8897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1534299104
 GameObject:
   m_ObjectHideFlags: 0
@@ -9075,10 +9039,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1632343256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9108,7 +9068,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1712916658}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1632343258
 MonoBehaviour:
@@ -9122,7 +9082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.75
+  targetCyclePosition: 0.25
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -9294,9 +9254,9 @@ Transform:
   m_Children:
   - {fileID: 2123718321}
   - {fileID: 1182765759}
-  - {fileID: 1938762970}
-  - {fileID: 1761523816}
   - {fileID: 1632343257}
+  - {fileID: 1761523816}
+  - {fileID: 1938762970}
   m_Father: {fileID: 1027127165}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9312,10 +9272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &1751694389
 GameObject:
   m_ObjectHideFlags: 0
@@ -9948,7 +9904,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1712916658}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1938762971
 MonoBehaviour:
@@ -9962,7 +9918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.25
+  targetCyclePosition: 0.75
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -10042,7 +9998,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 700627747}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1953887684
 MonoBehaviour:
@@ -10056,7 +10012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14debf963ff82b94899c13326bc9f3ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.75
+  targetCyclePosition: 0.25
   rotateClockwise: 0
   radius: 1
   angle: 0
@@ -10465,10 +10421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayPreviousAngle: 0
-  displayNextAngle: 0
-  displayNewAngle: 0
-  displayNextFraction: 0
 --- !u!1 &2123718320
 GameObject:
   m_ObjectHideFlags: 0
