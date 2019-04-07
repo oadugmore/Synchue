@@ -383,7 +383,7 @@ Transform:
 --- !u!199 &90376005
 ParticleSystemRenderer:
   serializedVersion: 6
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 2
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -419,7 +419,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 1
+  m_RenderMode: 2
   m_SortMode: 0
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
@@ -5872,8 +5872,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &576228028
 GameObject:
   m_ObjectHideFlags: 0
@@ -6509,8 +6511,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &761819692
 GameObject:
   m_ObjectHideFlags: 0
@@ -6949,8 +6953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &897539952
 GameObject:
   m_ObjectHideFlags: 0
@@ -7327,8 +7333,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1156749372
 GameObject:
   m_ObjectHideFlags: 0
@@ -7377,8 +7385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1177806027
 GameObject:
   m_ObjectHideFlags: 0
@@ -7828,8 +7838,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1249973932
 GameObject:
   m_ObjectHideFlags: 0
@@ -7925,8 +7937,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1282561154
 GameObject:
   m_ObjectHideFlags: 0
@@ -8325,8 +8339,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1399299138
 GameObject:
   m_ObjectHideFlags: 0
@@ -8913,8 +8929,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1534299104
 GameObject:
   m_ObjectHideFlags: 0
@@ -9057,8 +9075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1632343256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9292,8 +9312,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &1751694389
 GameObject:
   m_ObjectHideFlags: 0
@@ -10443,8 +10465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  angle: 0
-  nextFraction: 0
+  displayPreviousAngle: 0
+  displayNextAngle: 0
+  displayNewAngle: 0
+  displayNextFraction: 0
 --- !u!1 &2123718320
 GameObject:
   m_ObjectHideFlags: 0
