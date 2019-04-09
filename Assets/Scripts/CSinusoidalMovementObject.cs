@@ -32,8 +32,8 @@ public class CSinusoidalMovementObject : CCyclePathingObject
         float previousCyclePos = previous.TargetCyclePosition();
         float nextAngle = next.Angle();
         float previousAngle = previous.Angle();
-        if (nextAngle < 0f && previousAngle > 0f && !next.RotateClockwise()) nextAngle += 360f;
-        if (nextAngle > 0f && previousAngle < 0f && next.RotateClockwise()) previousAngle += 360f;
+        if (nextAngle < previousAngle && !next.RotateClockwise()) nextAngle += 360f;
+        if (nextAngle > previousAngle && next.RotateClockwise()) previousAngle += 360f;
         while (nextCyclePos < previousCyclePos) nextCyclePos++;
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
