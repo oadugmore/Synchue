@@ -15,6 +15,11 @@ public class LevelLoader : MonoBehaviour {
 		string sceneName = "Level" + levelNumber;
 		SceneManager.LoadScene(sceneName);
 	}
+
+    public void InputTest()
+    {
+        SceneManager.LoadScene("InputTest");
+    }
 	
 	// Update is called once per frame
 	void Update () {
