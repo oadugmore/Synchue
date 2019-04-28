@@ -1,4 +1,4 @@
-public interface CCycleObject
+public interface ICCycleObject
 {
     void UpdateCyclePosition(float cyclePos);
 }

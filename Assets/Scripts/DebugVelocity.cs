@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class DebugVelocity : MonoBehaviour
 {
@@ -12,12 +10,11 @@ public class DebugVelocity : MonoBehaviour
     private Vector3 velocityDisplay;
     [SerializeField]
     private Vector3 platformVelocityDisplay;
-
-    Rigidbody r;
-    MovingPlatform p;
+    private Rigidbody r;
+    private MovingPlatform p;
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         r = GetComponent<Rigidbody>();
         p = GetComponent<MovingPlatform>();
@@ -37,7 +34,9 @@ public class DebugVelocity : MonoBehaviour
         {
             platformVelocityDisplay = p.getVelocity();
             if (printInfo)
+            {
                 Debug.Log("Platform velocity: " + platformVelocityDisplay);
+            }
         }
 
         velocityDisplay = r.velocity;

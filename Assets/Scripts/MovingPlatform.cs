@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
 {
@@ -10,14 +8,14 @@ public class MovingPlatform : MonoBehaviour
     private Vector3 previousPosition;
     private Rigidbody r;
 
-    void Start()
+    private void Start()
     {
         r = GetComponent<Rigidbody>();
         velocity = Vector3.zero;
         previousPosition = r.position;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (useRigidbodyVelocity)
         {

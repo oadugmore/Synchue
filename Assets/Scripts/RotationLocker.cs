@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotationLocker : MonoBehaviour
 {
-    Quaternion originalRotation;
-    Rigidbody r;
+    private Quaternion originalRotation;
+    private Rigidbody r;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         r = GetComponent<Rigidbody>();
         originalRotation = transform.rotation;
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         transform.rotation = originalRotation;
     }

@@ -3,8 +3,8 @@
 public class CSinusoidalMovementNode : CCycleNode
 {
     [SerializeField]
-    bool rotateClockwise = false;
-    
+    private bool rotateClockwise = false;
+
     public float radius = 1f;
     public float angle = 0f;
 

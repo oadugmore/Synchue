@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CCyclePathingObject : MonoBehaviour, CCycleObject
+public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
     protected List<CCycleNode> nodes;
 

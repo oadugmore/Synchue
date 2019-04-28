@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -21,10 +17,12 @@ public class Controller : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         if (current == null)
+        {
             current = this;
+        }
         else
         {
             Debug.LogError("Only one instance of Controller is allowed.");
@@ -37,17 +35,17 @@ public class Controller : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     // put this logic in FixedUpdate to synchronize with physics
     private void FixedUpdate()
     {
-        if (keyboardInput) GetKeyboardInput();
-        else GetTouchInput();
+        if (keyboardInput)
+        {
+            GetKeyboardInput();
+        }
+        else
+        {
+            GetTouchInput();
+        }
 
         blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
         orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
@@ -56,27 +54,43 @@ public class Controller : MonoBehaviour
     private void GetKeyboardInput()
     {
         if (Input.GetKey(KeyCode.J))
+        {
             blueAxis += increment;
+        }
         else
+        {
             blueAxis -= increment;
+        }
 
         if (Input.GetKey(KeyCode.F))
+        {
             orangeAxis += increment;
+        }
         else
+        {
             orangeAxis -= increment;
+        }
     }
 
     private void GetTouchInput()
     {
         if (current.blueButton.IsPressed())
+        {
             blueAxis += increment;
+        }
         else
+        {
             blueAxis -= increment;
+        }
 
         if (current.orangeButton.IsPressed())
+        {
             orangeAxis += increment;
+        }
         else
+        {
             orangeAxis -= increment;
+        }
     }
 
 

@@ -1,31 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class CCycleController : MonoBehaviour
 {
     [SerializeField]
-    float cycleTime;
+    private float cycleTime;
     [SerializeField]
-    InteractColor color;
+    private InteractColor color;
     [SerializeField]
-    float leftControlBound = 15f;
+    private float leftControlBound = 15f;
     [SerializeField]
-    float rightControlBound = 30f;
+    private float rightControlBound = 30f;
     [SerializeField]
     [Range(0f, 1f)]
-    float cyclePosition = 0f;
-
-    List<CCycleObject> transformObjects;
-    Transform cameraTransform;
-    float previousCyclePosition = 0f;
+    private float cyclePosition = 0f;
+    private List<ICCycleObject> transformObjects;
+    private Transform cameraTransform;
+    private float previousCyclePosition = 0f;
 
 
     // Use this for initialization
-    void Start()
+    private void Start()
     {
         cameraTransform = Camera.main.transform;
-        transformObjects = new List<CCycleObject>(GetComponentsInChildren<CCycleObject>());
+        transformObjects = new List<ICCycleObject>(GetComponentsInChildren<ICCycleObject>());
         UpdateObjectPositions();
     }
 
@@ -36,27 +34,24 @@ public class CCycleController : MonoBehaviour
             float input = Controller.GetAxis(color);
             cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
             while (cyclePosition > 1)
+            {
                 cyclePosition--;
+            }
 
             if (previousCyclePosition != cyclePosition)
             {
-				previousCyclePosition = cyclePosition;
+                previousCyclePosition = cyclePosition;
                 UpdateObjectPositions();
             }
         }
     }
 
-    void UpdateObjectPositions()
+    private void UpdateObjectPositions()
     {
-        foreach (CCycleObject o in transformObjects)
-                {
-                    o.UpdateCyclePosition(cyclePosition);
-                }
+        foreach (ICCycleObject o in transformObjects)
+        {
+            o.UpdateCyclePosition(cyclePosition);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

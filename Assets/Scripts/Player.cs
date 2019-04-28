@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,16 +17,17 @@ public class Player : MonoBehaviour
     //public PhysicMaterial stoppedMaterial;
 
     private InteractColor playerColor;
-    new private Rigidbody rigidbody;
+    private new Rigidbody rigidbody;
     private SphereCollider sphereCollider;
-    private BoxCollider boxCollider;
-    //private float speedZero = 0.01f;
-    private bool moving;
-    private float lastScale = 0f;
     private bool onPlatform = false;
+    private Vector3 resultForce;
 
-    // Use this for initialization
-    void Start()
+    //private BoxCollider boxCollider;
+    //private float speedZero = 0.01f;
+    //private bool moving;
+    //private float lastScale = 0f;
+
+    private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         sphereCollider = GetComponentInChildren<SphereCollider>();
@@ -38,13 +38,18 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Spike"))
+        {
             Die();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Crusher"))
+        {
             Die();
+        }
+
         DragKiller drag;
         if (drag = other.gameObject.GetComponent<DragKiller>())
         {
@@ -56,7 +61,7 @@ public class Player : MonoBehaviour
     /// Causes the player to ignore the forces of drag for a specified duration.
     /// </summary>
     /// <param name="seconds">The duration in seconds to ignore drag.</param>
-    IEnumerator IgnoreDrag(float seconds)
+    private IEnumerator IgnoreDrag(float seconds)
     {
         float originalDrag = horizontalDragFactor;
         horizontalDragFactor = 0f;
@@ -64,9 +69,7 @@ public class Player : MonoBehaviour
         horizontalDragFactor = originalDrag;
     }
 
-    Vector3 resultForce;
-    float nextVelUpdate = 0f;
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         resultForce = Vector3.zero;
         velocityDisplay = rigidbody.velocity;
@@ -97,17 +100,21 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckPlatform()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
+        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out RaycastHit hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
             if (!onPlatform)
+            {
                 onPlatform = true;
+            }
+
             resultForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
         }
         else
         {
             if (onPlatform)
+            {
                 onPlatform = false;
+            }
         }
     }
 

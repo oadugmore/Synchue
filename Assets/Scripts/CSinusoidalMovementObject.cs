@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CSinusoidalMovementObject : CCyclePathingObject
 {
@@ -8,7 +7,7 @@ public class CSinusoidalMovementObject : CCyclePathingObject
     // [SerializeField][Range(0f, 1f)]
     // private float cycleOffset = 0f;
 
-    Rigidbody movementObject;
+    private Rigidbody movementObject;
     //private float radius;
 
     protected override void Start()
@@ -20,6 +19,7 @@ public class CSinusoidalMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        Assert.AreNotEqual(cyclePos, double.NaN);
         // float localCyclePos = cyclePos + cycleOffset;
         // localCyclePos += cycleOffset;
         // if (localCyclePos >= 1f) localCyclePos -= 1f;
@@ -32,9 +32,20 @@ public class CSinusoidalMovementObject : CCyclePathingObject
         float previousCyclePos = previous.TargetCyclePosition();
         float nextAngle = next.Angle();
         float previousAngle = previous.Angle();
-        while (nextAngle < previousAngle && !next.RotateClockwise()) nextAngle += 360f;
-        while (nextAngle > previousAngle && next.RotateClockwise()) previousAngle += 360f;
-        while (nextCyclePos < previousCyclePos) nextCyclePos++;
+        while (nextAngle < previousAngle && !next.RotateClockwise())
+        {
+            nextAngle += 360f;
+        }
+
+        while (nextAngle > previousAngle && next.RotateClockwise())
+        {
+            previousAngle += 360f;
+        }
+
+        while (nextCyclePos < previousCyclePos)
+        {
+            nextCyclePos++;
+        }
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
         float newAngle = Mathf.Lerp(previousAngle, nextAngle, fraction);
