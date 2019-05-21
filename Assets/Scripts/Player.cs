@@ -63,7 +63,7 @@ public class Player : MonoBehaviour
     /// <param name="seconds">The duration in seconds to ignore drag.</param>
     private IEnumerator IgnoreDrag(float seconds)
     {
-        float originalDrag = horizontalDragFactor;
+        var originalDrag = horizontalDragFactor;
         horizontalDragFactor = 0f;
         yield return new WaitForSeconds(seconds);
         horizontalDragFactor = originalDrag;
@@ -87,10 +87,10 @@ public class Player : MonoBehaviour
     /// </summary>
     public void Move()
     {
-        float control = Controller.GetAxis(playerColor);
-        float dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
-        float forwardForceX = speed * control;
-        float forceX = forwardForceX + dragX;
+        var control = Controller.GetAxis(playerColor);
+        var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
+        var forwardForceX = speed * control;
+        var forceX = forwardForceX + dragX;
         resultForce.x += forceX;
         rigidbody.AddForce(resultForce);
     }
@@ -100,7 +100,7 @@ public class Player : MonoBehaviour
     /// </summary>
     private void CheckPlatform()
     {
-        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out RaycastHit hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
+        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out var hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
             if (!onPlatform)
             {
