@@ -14,7 +14,7 @@ public class BuildJobs
         switch (target)
         {
             case BuildTarget.Android:
-                buildName += "PlatformerAndroid";
+                buildName += "PlatformerAndroid.apk";
                 break;
             case BuildTarget.iOS:
                 buildName += "PlatformeriOS";
