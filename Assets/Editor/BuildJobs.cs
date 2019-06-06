@@ -35,7 +35,7 @@ public class BuildJobs
 
 
     [MenuItem("Jenkins/Build Android")]
-    static int PerformAndroidBuild()
+    public static int PerformAndroidBuild()
     {
         var options = CreatePlayerOptions(BuildTarget.Android);
         var report = BuildPipeline.BuildPlayer(options);
