@@ -5,11 +5,12 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-public class BuildJobs
+public class BuildJobs : ScriptableObject
 {
 
     private static BuildPlayerOptions CreatePlayerOptions(BuildTarget target)
     {
+        // Set app path
         string buildName = "Builds/";
         switch (target)
         {
@@ -23,6 +24,12 @@ public class BuildJobs
                 buildName += "Platformer";
                 break;
         }
+
+        // Set app secrets
+        PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
+        PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
+
+        // Create Build Player Options
         var options = new BuildPlayerOptions
         {
             scenes = FindEnabledEditorScenes(),
