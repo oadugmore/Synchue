@@ -17,8 +17,6 @@ public class BuildJobs : ScriptableObject
             case BuildTarget.Android:
                 {
                     buildName += "PlatformerAndroid.apk";
-                    PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
-                    PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
                     break;
                 }
             case BuildTarget.iOS:
@@ -45,30 +43,36 @@ public class BuildJobs : ScriptableObject
     }
 
     /// <summary>
-    /// Called by Jenkins. Increments the Android bundle version code and performs a build.
+    /// Called by Jenkins. Increments the Android bundle version code and performs build for ARM64.
     /// </summary>
     [MenuItem("CI/Build New Android Version")]
     public static int BuildNewAndroidVersion()
     {
         IncrementAndroidBundleVersionCode();
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
         var buildResult = PerformAndroidBuild();
         return buildResult;
     }
 
     /// <summary>
-    /// Called by Jenkins.
+    /// Called by Jenkins. Increments the Android bundle version code and performs a build for all architectures.
     /// </summary>
-    [MenuItem("CI/Build Android")]
-    public static int PerformAndroidBuild()
+    [MenuItem("CI/Build New Android Version All Architectures")]
+    public static int BuildNewAndroidVersionFull()
     {
-        var options = CreatePlayerOptions(BuildTarget.Android);
-        var report = BuildPipeline.BuildPlayer(options);
-        var summary = report.summary;
-        if (summary.result == BuildResult.Failed)
-        {
-            return 1;
-        }
-        return 0;
+        IncrementAndroidBundleVersionCode();
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.All;
+        var buildResult = PerformAndroidBuild();
+        return buildResult;
+    }
+
+    private static int PerformAndroidBuild()
+    {
+        PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
+        PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
+        var buildOptions = CreatePlayerOptions(BuildTarget.Android);
+        var buildReport = BuildPipeline.BuildPlayer(buildOptions);
+        return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
     }
 
     public static void IncrementAndroidBundleVersionCode()
