@@ -15,19 +15,23 @@ public class BuildJobs : ScriptableObject
         switch (target)
         {
             case BuildTarget.Android:
-                buildName += "PlatformerAndroid.apk";
-                break;
+                {
+                    buildName += "PlatformerAndroid.apk";
+                    PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
+                    PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
+                    break;
+                }
             case BuildTarget.iOS:
-                buildName += "PlatformeriOS";
-                break;
+                {
+                    buildName += "PlatformeriOS";
+                    break;
+                }
             default:
-                buildName += "Platformer";
-                break;
+                {
+                    buildName += "Platformer";
+                    break;
+                }
         }
-
-        // Set app secrets
-        PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
-        PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
 
         // Create Build Player Options
         var options = new BuildPlayerOptions
@@ -40,8 +44,21 @@ public class BuildJobs : ScriptableObject
         return options;
     }
 
+    /// <summary>
+    /// Called by Jenkins. Increments the Android bundle version code and performs a build.
+    /// </summary>
+    [MenuItem("CI/Build New Android Version")]
+    public static int BuildNewAndroidVersion()
+    {
+        IncrementAndroidBundleVersionCode();
+        var buildResult = PerformAndroidBuild();
+        return buildResult;
+    }
 
-    [MenuItem("Jenkins/Build Android")]
+    /// <summary>
+    /// Called by Jenkins.
+    /// </summary>
+    [MenuItem("CI/Build Android")]
     public static int PerformAndroidBuild()
     {
         var options = CreatePlayerOptions(BuildTarget.Android);
@@ -54,6 +71,10 @@ public class BuildJobs : ScriptableObject
         return 0;
     }
 
+    public static void IncrementAndroidBundleVersionCode()
+    {
+        PlayerSettings.Android.bundleVersionCode++;
+    }
 
     private static string[] FindEnabledEditorScenes()
     {
