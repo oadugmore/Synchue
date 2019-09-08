@@ -16,21 +16,18 @@ public class Player : MonoBehaviour
     //public PhysicMaterial movingMaterial;
     //public PhysicMaterial stoppedMaterial;
 
-    private InteractColor playerColor;
-    private new Rigidbody rigidbody;
-    private SphereCollider sphereCollider;
-    private bool onPlatform = false;
-    private Vector3 resultForce;
+    protected InteractColor playerColor;
+    protected new Rigidbody rigidbody;
+    protected Vector3 movementForce;
 
     //private BoxCollider boxCollider;
     //private float speedZero = 0.01f;
     //private bool moving;
     //private float lastScale = 0f;
 
-    private void Start()
+    public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        sphereCollider = GetComponentInChildren<SphereCollider>();
         playerColor = InteractColor.Blue;
         rigidbody.maxAngularVelocity = Mathf.Infinity;
     }
@@ -69,14 +66,6 @@ public class Player : MonoBehaviour
         horizontalDragFactor = originalDrag;
     }
 
-    private void FixedUpdate()
-    {
-        resultForce = Vector3.zero;
-        velocityDisplay = rigidbody.velocity;
-        CheckPlatform();
-        Move();
-    }
-
     private void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -85,37 +74,10 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Calculates movement force from controller, subtracts drag, and applies it to the rigidbody.
     /// </summary>
-    public void Move()
+    public virtual void Move()
     {
-        var control = Controller.GetAxis(playerColor);
-        var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
-        var forwardForceX = speed * control;
-        var forceX = forwardForceX + dragX;
-        resultForce.x += forceX;
-        rigidbody.AddForce(resultForce);
-    }
-
-    /// <summary>
-    /// Adds any relevant moving platform forces to resultForce.
-    /// </summary>
-    private void CheckPlatform()
-    {
-        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out var hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
-        {
-            if (!onPlatform)
-            {
-                onPlatform = true;
-            }
-
-            resultForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
-        }
-        else
-        {
-            if (onPlatform)
-            {
-                onPlatform = false;
-            }
-        }
+        rigidbody.AddForce(movementForce);
+        velocityDisplay = rigidbody.velocity;
     }
 
     /// <summary>
