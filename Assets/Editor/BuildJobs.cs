@@ -48,7 +48,7 @@ public class BuildJobs : ScriptableObject
     [MenuItem("CI/Build New Android Version")]
     public static int BuildNewAndroidVersion()
     {
-        IncrementAndroidBundleVersionCode();
+        //IncrementAndroidBundleVersionCode();
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
         var buildResult = PerformAndroidBuild();
         return buildResult;
@@ -60,7 +60,7 @@ public class BuildJobs : ScriptableObject
     [MenuItem("CI/Build New Android Version All Architectures")]
     public static int BuildNewAndroidVersionFull()
     {
-        IncrementAndroidBundleVersionCode();
+        //IncrementAndroidBundleVersionCode();
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.All;
         var buildResult = PerformAndroidBuild();
         return buildResult;
@@ -77,9 +77,11 @@ public class BuildJobs : ScriptableObject
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
     }
 
-    public static void IncrementAndroidBundleVersionCode()
+    [MenuItem("CI/Increment Android Bundle Version Code")]
+    public static int IncrementAndroidBundleVersionCode()
     {
         PlayerSettings.Android.bundleVersionCode++;
+        return 0;
     }
 
     private static string[] FindEnabledEditorScenes()
