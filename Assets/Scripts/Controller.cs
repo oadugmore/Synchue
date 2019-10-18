@@ -9,8 +9,9 @@ public class Controller : MonoBehaviour
     public ColorButton blueButton;
     public ColorButton orangeButton;
     public float increment = 0.1f;
-    public bool keyboardInput = false;
+    public bool forceTouchInput = false;
 
+    private bool keyboardInput = false;
     private float blueAxis = 0f;
     private float orangeAxis = 0f;
     private const float whiteAxis = 1f; // constant input
@@ -28,11 +29,17 @@ public class Controller : MonoBehaviour
             Debug.LogError("Only one instance of Controller is allowed.");
         }
 
-        if (!Input.touchSupported)
+        #if UNITY_EDITOR
+        if (!forceTouchInput)
         {
             keyboardInput = true;
-            Debug.Log("No touch screen detected. Enabling keyboard input.");
+            Debug.Log("Running in the Unity Editor. Enabling keyboard input.");
         }
+        else
+        {
+            Debug.Log("Running in the Unity Editor with touch input enabled.");
+        }
+        #endif
     }
 
     // put this logic in FixedUpdate to synchronize with physics
