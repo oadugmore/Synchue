@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -8,16 +9,14 @@ public class Controller : MonoBehaviour
 
     public ColorButton blueButton;
     public ColorButton orangeButton;
-    public float increment = 0.1f;
-    public bool forceTouchInput = false;
+    public float buttonSpeed = 7f;
+    public bool useTouchInputInEditor = false;
 
     private bool keyboardInput = false;
     private float blueAxis = 0f;
     private float orangeAxis = 0f;
     private const float whiteAxis = 1f; // constant input
 
-
-    // Use this for initialization
     private void Start()
     {
         if (current == null)
@@ -30,7 +29,7 @@ public class Controller : MonoBehaviour
         }
 
         #if UNITY_EDITOR
-        if (!forceTouchInput)
+        if (!useTouchInputInEditor)
         {
             keyboardInput = true;
             Debug.Log("Running in the Unity Editor. Enabling keyboard input.");
@@ -42,8 +41,7 @@ public class Controller : MonoBehaviour
         #endif
     }
 
-    // put this logic in FixedUpdate to synchronize with physics
-    private void FixedUpdate()
+    private void Update()
     {
         if (keyboardInput)
         {
@@ -60,46 +58,47 @@ public class Controller : MonoBehaviour
 
     private void GetKeyboardInput()
     {
+        var change = buttonSpeed * Time.deltaTime;
         if (Input.GetKey(KeyCode.J))
         {
-            blueAxis += increment;
+            blueAxis += change;
         }
         else
         {
-            blueAxis -= increment;
+            blueAxis -= change;
         }
 
         if (Input.GetKey(KeyCode.F))
         {
-            orangeAxis += increment;
+            orangeAxis += change;
         }
         else
         {
-            orangeAxis -= increment;
+            orangeAxis -= change;
         }
     }
 
     private void GetTouchInput()
     {
+        var change = buttonSpeed * Time.deltaTime;
         if (current.blueButton.IsPressed())
         {
-            blueAxis += increment;
+            blueAxis += change;
         }
         else
         {
-            blueAxis -= increment;
+            blueAxis -= change;
         }
 
         if (current.orangeButton.IsPressed())
         {
-            orangeAxis += increment;
+            orangeAxis += change;
         }
         else
         {
-            orangeAxis -= increment;
+            orangeAxis -= change;
         }
     }
-
 
     public static float GetAxis(InteractColor color)
     {
