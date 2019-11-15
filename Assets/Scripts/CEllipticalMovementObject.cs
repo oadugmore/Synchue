@@ -2,7 +2,6 @@
 
 public class CEllipticalMovementObject : CCyclePathingObject
 {
-
     private Rigidbody movementObject;
 
     protected override void Start()
@@ -13,13 +12,8 @@ public class CEllipticalMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
-        // float localCyclePos = cyclePos + cycleOffset;
-        // localCyclePos += cycleOffset;
-        // if (localCyclePos >= 1f) localCyclePos -= 1f;
-        var nextIndex = NextNode(cyclePos);
-        var previousIndex = PreviousNode(nextIndex);
-        var previous = (CEllipticalMovementNode)nodes[previousIndex];
-        var next = (CEllipticalMovementNode)nodes[nextIndex];
+        var next = (CEllipticalMovementNode)NextNode(cyclePos);
+        var previous = (CEllipticalMovementNode)next.Previous();
 
         var nextCyclePos = next.TargetCyclePosition();
         var previousCyclePos = previous.TargetCyclePosition();
@@ -41,12 +35,11 @@ public class CEllipticalMovementObject : CCyclePathingObject
         }
 
         var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        var newAngle = Mathf.Lerp(previousAngle, nextAngle, fraction);
-        
+        var newAngle = Mathf.Deg2Rad * Mathf.Lerp(previousAngle, nextAngle, fraction);
         var horizontalAxis = previous.Radius();
         var verticalAxis = next.Radius();
-        
         var previousAngleNormalized = Mathf.Abs(previous.Angle());
+        
         if (previousAngleNormalized < 135 && previousAngleNormalized > 45)
         {
             var temp = horizontalAxis;
@@ -54,9 +47,8 @@ public class CEllipticalMovementObject : CCyclePathingObject
             verticalAxis = temp;
         }
 
-        var angleRadians = Mathf.Deg2Rad * newAngle;
-        var h = horizontalAxis * Mathf.Cos(angleRadians);
-        var v = verticalAxis * Mathf.Sin(angleRadians);
+        var h = horizontalAxis * Mathf.Cos(newAngle);
+        var v = verticalAxis * Mathf.Sin(newAngle);
         var destination = transform.TransformPoint(h, v, 0);
         movementObject.MovePosition(destination);
     }

@@ -17,22 +17,13 @@ public class CLinearMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
-        int nextIndex = NextNode(cyclePos);
-        int previousIndex = PreviousNode(nextIndex);
-
-        CLinearMovementNode next = (CLinearMovementNode)nodes[nextIndex];
-        CLinearMovementNode previous = (CLinearMovementNode)nodes[previousIndex];
-
+        var next = (CLinearMovementNode)NextNode(cyclePos);
+        var previous = (CLinearMovementNode)next.Previous();
         float nextCyclePos = next.TargetCyclePosition();
         float previousCyclePos = previous.TargetCyclePosition();
-        //if (nextCyclePos == 0f) nextCyclePos = 1f;
-        if (nextIndex == 0)
-        {
-            if (cyclePos < nextCyclePos) // only happens when the first node has a nonzero Target Cycle Position
-            {
-                cyclePos += 1f;
-            }
 
+        if (cyclePos > nextCyclePos)
+        {
             nextCyclePos += 1f;
         }
 

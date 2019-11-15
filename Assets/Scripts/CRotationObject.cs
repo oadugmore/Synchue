@@ -2,10 +2,8 @@
 
 public class CRotationObject : CCyclePathingObject
 {
-    //List<CRotationNode> nodes;
     private Rigidbody rotationObject;
 
-    // Use this for initialization
     protected override void Start()
     {
         base.Start();
@@ -23,19 +21,8 @@ public class CRotationObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
-        int nextIndex = NextNode(cyclePos);
-        int previousIndex = 0;
-        if (nextIndex == 0)
-        {
-            previousIndex = nodes.Count - 1;
-        }
-        else
-        {
-            previousIndex = nextIndex - 1;
-        }
-
-        CRotationNode next = (CRotationNode)nodes[nextIndex];
-        CRotationNode previous = (CRotationNode)nodes[previousIndex];
+        var next = (CRotationNode)NextNode(cyclePos);
+        var previous = (CRotationNode)next.Previous();
 
         float nextCyclePos = next.TargetCyclePosition();
         if (nextCyclePos == 0f)

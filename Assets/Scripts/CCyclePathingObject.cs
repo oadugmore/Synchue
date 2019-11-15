@@ -11,12 +11,21 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
         nodes = new List<CCycleNode>();
         GetComponentsInChildren<CCycleNode>(nodes);
         if (nodes.Count < 1)
+        {
             Debug.LogError(this + " needs at least one node.");
+            return;
+        }
+
+        nodes[0].SetPrevious(nodes[nodes.Count - 1]);
+        for (int i = 1; i < nodes.Count; i++)
+        {
+            nodes[i].SetPrevious(nodes[i - 1]);
+        }
     }
 
     public abstract void UpdateCyclePosition(float cyclePos);
 
-    protected int NextNode(float cyclePos)
+    protected CCycleNode NextNode(float cyclePos)
     {
         int nextNode = 0;
 
@@ -28,17 +37,7 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
                 break;
             }
         }
-        return nextNode;
-    }
-
-    protected int PreviousNode(int nextIndex)
-    {
-        int previousIndex = 0;
-        if (nextIndex == 0)
-            previousIndex = nodes.Count - 1;
-        else
-            previousIndex = nextIndex - 1;
-        return previousIndex;
+        return nodes[nextNode];
     }
 
 }

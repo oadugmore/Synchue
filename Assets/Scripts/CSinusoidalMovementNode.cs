@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Obsolete("Use CEllipticalMovementNode instead.")]
 public class CSinusoidalMovementNode : CCycleNode
 {
     [SerializeField]
