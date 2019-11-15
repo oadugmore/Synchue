@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class CCycleController : MonoBehaviour
 {
@@ -16,7 +17,6 @@ public class CCycleController : MonoBehaviour
     private float cyclePosition = 0f;
     private List<ICCycleObject> transformObjects;
     private Transform cameraTransform;
-    private float previousCyclePosition = 0f;
 
 
     // Use this for initialization
@@ -24,31 +24,27 @@ public class CCycleController : MonoBehaviour
     {
         cameraTransform = Camera.main.transform;
         transformObjects = new List<ICCycleObject>(GetComponentsInChildren<ICCycleObject>());
+        Assert.AreNotEqual(cycleTime, 0f);
         UpdateObjectPositions();
     }
 
     private void FixedUpdate()
     {
-        if ((cameraTransform.position.x + leftControlBound) > transform.position.x && (cameraTransform.position.x - rightControlBound) < transform.position.x)
+        var input = Controller.GetAxis(color);
+        if (input != 0 && (cameraTransform.position.x + leftControlBound) > transform.position.x && (cameraTransform.position.x - rightControlBound) < transform.position.x)
         {
-            float input = Controller.GetAxis(color);
             cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
             while (cyclePosition > 1)
             {
                 cyclePosition--;
             }
-
-            if (previousCyclePosition != cyclePosition)
-            {
-                previousCyclePosition = cyclePosition;
-                UpdateObjectPositions();
-            }
+            UpdateObjectPositions();
         }
     }
 
     private void UpdateObjectPositions()
     {
-        foreach (ICCycleObject o in transformObjects)
+        foreach (var o in transformObjects)
         {
             o.UpdateCyclePosition(cyclePosition);
         }
