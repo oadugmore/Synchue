@@ -10,7 +10,7 @@ public class CEllipticalMovementNode : CCycleNode
 
     private void Start()
     {
-        Transform parent = GetComponentsInParent<Transform>()[1];
+        var parent = GetComponentsInParent<Transform>()[1];
         radius = Vector3.Distance(parent.position, transform.position);
         angle = Vector3.SignedAngle(Vector3.right, transform.localPosition, Vector3.forward);
     }
@@ -28,6 +28,11 @@ public class CEllipticalMovementNode : CCycleNode
     public bool RotateClockwise()
     {
         return rotateClockwise;
+    }
+
+    public void SetTargetCyclePosition(float t)
+    {
+        targetCyclePosition = t;
     }
 
 }
