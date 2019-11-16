@@ -15,8 +15,10 @@ public class CCycleController : MonoBehaviour
     [SerializeField]
     [Range(0f, 1f)]
     private float cyclePosition = 0f;
+
     private List<ICCycleObject> transformObjects;
     private Transform cameraTransform;
+    private float previousCyclePos = 0f;
 
 
     // Use this for initialization
@@ -31,13 +33,11 @@ public class CCycleController : MonoBehaviour
     private void FixedUpdate()
     {
         var input = Controller.GetAxis(color);
-        if (input != 0 && (cameraTransform.position.x + leftControlBound) > transform.position.x && (cameraTransform.position.x - rightControlBound) < transform.position.x)
+        cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
+        if (cyclePosition != previousCyclePos && (cameraTransform.position.x + leftControlBound) > transform.position.x && (cameraTransform.position.x - rightControlBound) < transform.position.x)
         {
-            cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
-            while (cyclePosition > 1)
-            {
-                cyclePosition--;
-            }
+            previousCyclePos = cyclePosition;
+            cyclePosition = Mathf.Repeat(cyclePosition, 1);
             UpdateObjectPositions();
         }
     }

@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using MyBox;
 using UnityEngine;
 
 public class CEllipticalMovementObject : CCyclePathingObject
 {
     public bool automaticCycleTime = false;
+    [ConditionalField("automaticCycleTime")]
+    public int numTrapezoids = 20;
 
     private Rigidbody movementObject;
-    private const int numTrapezoids = 10;
 
     protected override void Start()
     {
@@ -18,53 +20,79 @@ public class CEllipticalMovementObject : CCyclePathingObject
     private void CalculateCyclePositions()
     {
         var totalDistance = 0f;
-        var distances = new List<float>(nodes.Count - 1);
+        var distances = new List<float>(nodes.Count);
         //var i = 0;
-        for (int i = 1; i < nodes.Count; ++i)
+        for (int i = 0; i < nodes.Count; ++i)
         {
             var node = nodes[i] as CEllipticalMovementNode;
             var previous = node.Previous() as CEllipticalMovementNode;
             //var previous = node.Previous() as CEllipticalMovementNode;
-            var angle = Mathf.DeltaAngle(node.Angle(), previous.Angle());
-            var a = node.Radius();
-            var b = previous.Radius();
-            var fi = Mathf.Atan(a / b * Mathf.Tan(angle));
-            var k = 1 - Mathf.Pow(a / b, 2);
-            var distance = b * TrapezoidEstimation_Ellipse(fi, k);
+            //var angle = Mathf.Deg2Rad * Mathf.DeltaAngle(node.Angle(), previous.Angle());
+            var a = previous.Radius();
+            var b = node.Radius();
+            if (a < b)
+            {
+                var temp = a;
+                a = b;
+                b = temp;
+            }
+
+            var theta1 = Mathf.Deg2Rad * previous.Angle();
+            var theta2 = Mathf.Deg2Rad * node.Angle();
+            while (theta2 < theta1 && !node.RotateClockwise())
+            {
+                theta2 += 2 * Mathf.PI;
+            }
+            while (theta2 > theta1 && node.RotateClockwise())
+            {
+                theta1 += 2 * Mathf.PI;
+            }
+
+            //var fi = Mathf.Atan(a / b * Mathf.Tan(angle));
+            var k = 1 - Mathf.Pow(b / a, 2);
+            // partial integrals
+            //var distance = a * Mathf.Abs(TrapezoidEstimation_Ellipse(theta2, k) - TrapezoidEstimation_Ellipse(theta1, k));
+            var distance = a * Mathf.Abs(TrapezoidEstimation_Ellipse(theta1, theta2, k));
             totalDistance += distance;
             distances.Add(totalDistance);
+            //distances[i] = (totalDistance - distances[0]);
+            //distances[i] -= distances[0];
         }
+        // var node = nodes[0] as CEllipticalMovementNode;
+        // var previous = node.Previous() as CEllipticalMovementNode;
+        // totalDistance += 
         // foreach (CEllipticalMovementNode node in nodes)
         // {
         //     //var node = nodeBase as CEllipticalMovementNode;
         //     Debug.Log("Node count: " + nodes.Count);
-            
+
         //     //Debug.Log($"Distance: {distances[i]}");
         //     //totalDistance += distances[i];
         // }
 
-        for (int i = 1; i < nodes.Count; ++i)
+        for (int i = 0; i < nodes.Count; ++i)
         {
-            (nodes[i] as CEllipticalMovementNode).SetTargetCyclePosition(distances[i - 1] / totalDistance);
+            (nodes[i] as CEllipticalMovementNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
         }
 
     }
 
     // Computes the elliptic integral using numeric integration
-    private float TrapezoidEstimation_Ellipse(float fi, float k)
+    private float TrapezoidEstimation_Ellipse(float theta1, float theta2, float k)
     {
-        float deltaX = fi / numTrapezoids;
-        float xi = 0f;
+        //float deltaX = fi / numTrapezoids;
+        float deltaX = (theta2 - theta1) / numTrapezoids;
+        float xi = theta1;
         // first one will be 0 because xi = 0f
         float sum = EllipticIntegral(xi, k) / 2;
         xi += deltaX;
-        for (int i = 0; i < numTrapezoids; ++i)
+        for (int i = 1; i < numTrapezoids; ++i)
         {
             sum += EllipticIntegral(xi, k);
             xi += deltaX;
         }
         sum += EllipticIntegral(xi, k) / 2;
-        return sum * deltaX;
+        return sum * Mathf.Abs(deltaX);
     }
 
     private float EllipticIntegral(float theta, float k)
@@ -101,7 +129,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
         var horizontalAxis = previous.Radius();
         var verticalAxis = next.Radius();
         var previousAngleNormalized = Mathf.Abs(previous.Angle());
-        
+
         if (previousAngleNormalized < 135 && previousAngleNormalized > 45)
         {
             var temp = horizontalAxis;
