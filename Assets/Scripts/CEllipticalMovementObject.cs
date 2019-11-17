@@ -14,7 +14,20 @@ public class CEllipticalMovementObject : CCyclePathingObject
     {
         base.Start();
         if (automaticCycleTime) CalculateCyclePositions();
+        DrawEllipse();
         movementObject = GetComponentInChildren<Rigidbody>();
+    }
+
+    private void DrawEllipse()
+    {
+        var previousPoint = CalculatePosition(0f);
+        for (float pos = 0f; pos <= 1.0f; pos += 0.05f)
+        {
+            var newPoint = CalculatePosition(pos);
+            Debug.DrawLine(previousPoint, newPoint, Color.green, Mathf.Infinity);
+            //Debug.Log("Drew a line from " + previousPoint + " to " + newPoint);
+            previousPoint = newPoint;
+        }
     }
 
     private void CalculateCyclePositions()
@@ -102,6 +115,12 @@ public class CEllipticalMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        var destination = CalculatePosition(cyclePos);
+        movementObject.MovePosition(destination);
+    }
+
+    private Vector3 CalculatePosition(float cyclePos)
+    {
         var next = (CEllipticalMovementNode)NextNode(cyclePos);
         var previous = (CEllipticalMovementNode)next.Previous();
 
@@ -139,8 +158,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
 
         var h = horizontalAxis * Mathf.Cos(newAngle);
         var v = verticalAxis * Mathf.Sin(newAngle);
-        var destination = transform.TransformPoint(h, v, 0);
-        movementObject.MovePosition(destination);
+        return transform.TransformPoint(h, v, 0);
     }
 
 }
