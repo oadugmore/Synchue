@@ -12,7 +12,7 @@ public class CEllipticalMovementNode : CCycleNode
     {
         var parent = GetComponentsInParent<Transform>()[1];
         radius = Vector3.Distance(parent.position, transform.position);
-        angle = Vector3.SignedAngle(Vector3.right, transform.localPosition, Vector3.forward);
+        angle = Mathf.Deg2Rad * Vector3.SignedAngle(Vector3.right, transform.localPosition, Vector3.forward);
     }
 
     public float Angle()

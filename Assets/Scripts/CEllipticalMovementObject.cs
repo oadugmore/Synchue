@@ -44,8 +44,8 @@ public class CEllipticalMovementObject : CCyclePathingObject
                 b = temp;
             }
 
-            var theta1 = Mathf.Deg2Rad * previous.Angle();
-            var theta2 = Mathf.Deg2Rad * node.Angle();
+            var theta1 = previous.Angle();
+            var theta2 = node.Angle();
             while (theta2 < theta1 && !node.RotateClockwise())
             {
                 theta2 += 2 * Mathf.PI;
@@ -106,12 +106,12 @@ public class CEllipticalMovementObject : CCyclePathingObject
         var previousAngle = previous.Angle();
         while (nextAngle < previousAngle && !next.RotateClockwise())
         {
-            nextAngle += 360f;
+            nextAngle += 2 * Mathf.PI;
         }
 
         while (nextAngle > previousAngle && next.RotateClockwise())
         {
-            previousAngle += 360f;
+            previousAngle += 2 * Mathf.PI;
         }
 
         while (nextCyclePos < previousCyclePos)
@@ -120,12 +120,12 @@ public class CEllipticalMovementObject : CCyclePathingObject
         }
 
         var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        var newAngle = Mathf.Deg2Rad * Mathf.Lerp(previousAngle, nextAngle, fraction);
+        var newAngle = Mathf.Lerp(previousAngle, nextAngle, fraction);
         var horizontalAxis = previous.Radius();
         var verticalAxis = next.Radius();
         var previousAngleNormalized = Mathf.Abs(previous.Angle());
 
-        if (previousAngleNormalized < 135 && previousAngleNormalized > 45)
+        if (previousAngleNormalized < 0.75 * Mathf.PI && previousAngleNormalized > 0.25 * Mathf.PI)
         {
             var temp = horizontalAxis;
             horizontalAxis = verticalAxis;
