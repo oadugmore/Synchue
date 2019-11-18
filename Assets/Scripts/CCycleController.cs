@@ -12,16 +12,13 @@ public class CCycleController : MonoBehaviour
     private float leftControlBound = 15f;
     [SerializeField]
     private float rightControlBound = 30f;
-    [SerializeField]
-    [Range(0f, 1f)]
+    [SerializeField] [Range(0f, 1f)]
     private float cyclePosition = 0f;
 
     private List<ICCycleObject> transformObjects;
     private Transform cameraTransform;
     private float previousCyclePos = 0f;
 
-
-    // Use this for initialization
     private void Start()
     {
         cameraTransform = Camera.main.transform;
@@ -49,5 +46,4 @@ public class CCycleController : MonoBehaviour
             o.UpdateCyclePosition(cyclePosition);
         }
     }
-
 }

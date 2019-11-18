@@ -23,7 +23,6 @@ public class CEllipticalMovementObject : CCyclePathingObject
         {
             var newPoint = CalculatePosition(pos);
             Debug.DrawLine(previousPoint, newPoint, Color.green, Mathf.Infinity);
-            //Debug.Log("Drew a line from " + previousPoint + " to " + newPoint);
             previousPoint = newPoint;
         }
     }
@@ -32,13 +31,10 @@ public class CEllipticalMovementObject : CCyclePathingObject
     {
         var totalDistance = 0f;
         var distances = new List<float>(nodes.Count);
-        //var i = 0;
         for (int i = 0; i < nodes.Count; ++i)
         {
             var node = nodes[i] as CEllipticalMovementNode;
             var previous = node.Previous() as CEllipticalMovementNode;
-            //var previous = node.Previous() as CEllipticalMovementNode;
-            //var angle = Mathf.Deg2Rad * Mathf.DeltaAngle(node.Angle(), previous.Angle());
             var a = previous.Radius();
             var b = node.Radius();
             if (a < b)
@@ -59,42 +55,23 @@ public class CEllipticalMovementObject : CCyclePathingObject
                 theta1 += 2 * Mathf.PI;
             }
 
-            //var fi = Mathf.Atan(a / b * Mathf.Tan(angle));
             var k = 1 - Mathf.Pow(b / a, 2);
-            // partial integrals
-            //var distance = a * Mathf.Abs(TrapezoidEstimation_Ellipse(theta2, k) - TrapezoidEstimation_Ellipse(theta1, k));
             var distance = a * Mathf.Abs(TrapezoidEstimation_Ellipse(theta1, theta2, k));
             totalDistance += distance;
             distances.Add(totalDistance);
-            //distances[i] = (totalDistance - distances[0]);
-            //distances[i] -= distances[0];
         }
-        // var node = nodes[0] as CEllipticalMovementNode;
-        // var previous = node.Previous() as CEllipticalMovementNode;
-        // totalDistance += 
-        // foreach (CEllipticalMovementNode node in nodes)
-        // {
-        //     //var node = nodeBase as CEllipticalMovementNode;
-        //     Debug.Log("Node count: " + nodes.Count);
-
-        //     //Debug.Log($"Distance: {distances[i]}");
-        //     //totalDistance += distances[i];
-        // }
 
         for (int i = 0; i < nodes.Count; ++i)
         {
             (nodes[i] as CEllipticalMovementNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
         }
-
     }
 
-    // Computes the elliptic integral using numeric integration
+    // Estimates the elliptic integral using numeric integration
     private float TrapezoidEstimation_Ellipse(float theta1, float theta2, float k)
     {
-        //float deltaX = fi / numTrapezoids;
         float deltaX = (theta2 - theta1) / numTrapezoids;
         float xi = theta1;
-        // first one will be 0 because xi = 0f
         float sum = EllipticIntegral(xi, k) / 2;
         xi += deltaX;
         for (int i = 1; i < numTrapezoids; ++i)
@@ -106,6 +83,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
         return sum * Mathf.Abs(deltaX);
     }
 
+    // the incomplete elliptic integral of the second kind
     private float EllipticIntegral(float theta, float k)
     {
         return Mathf.Sqrt(1 - Mathf.Pow(k, 2) * Mathf.Pow(Mathf.Sin(theta), 2));
