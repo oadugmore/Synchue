@@ -29,10 +29,4 @@ public class CEllipticalMovementNode : CCycleNode
     {
         return rotateClockwise;
     }
-
-    public void SetTargetCyclePosition(float t)
-    {
-        targetCyclePosition = t;
-    }
-
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CLinearMovementObject : CCyclePathingObject
 {
@@ -32,4 +33,22 @@ public class CLinearMovementObject : CCyclePathingObject
         movementObject.MovePosition(newPosition);
     }
 
+    protected override void CalculateCyclePositions()
+    {
+        var totalDistance = 0f;
+        var distances = new List<float>(nodes.Count);
+        foreach (CLinearMovementNode node in nodes)
+        {
+            var previous = node.Previous() as CLinearMovementNode;
+            var distance = Vector3.Distance(node.Position(), previous.Position());
+            totalDistance += distance;
+            //Debug.Log("Distance: " + distance);
+            distances.Add(totalDistance);
+        }
+
+        for (int i = 0; i < nodes.Count; ++i)
+        {
+            (nodes[i] as CLinearMovementNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
+        }
+    }
 }

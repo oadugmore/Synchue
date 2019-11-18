@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CEllipticalMovementObject : CCyclePathingObject
 {
-    public bool automaticCycleTime = false;
     [ConditionalField("automaticCycleTime")]
     public int numTrapezoids = 20;
 
@@ -13,7 +12,6 @@ public class CEllipticalMovementObject : CCyclePathingObject
     protected override void Start()
     {
         base.Start();
-        if (automaticCycleTime) CalculateCyclePositions();
         DrawEllipse();
         movementObject = GetComponentInChildren<Rigidbody>();
     }
@@ -30,7 +28,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
         }
     }
 
-    private void CalculateCyclePositions()
+    protected override void CalculateCyclePositions()
     {
         var totalDistance = 0f;
         var distances = new List<float>(nodes.Count);
@@ -160,5 +158,4 @@ public class CEllipticalMovementObject : CCyclePathingObject
         var v = verticalAxis * Mathf.Sin(newAngle);
         return transform.TransformPoint(h, v, 0);
     }
-
 }

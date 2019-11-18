@@ -22,4 +22,9 @@ public abstract class CCycleNode : MonoBehaviour
     {
         return previous;
     }
+
+    public void SetTargetCyclePosition(float t)
+    {
+        targetCyclePosition = t;
+    }
 }

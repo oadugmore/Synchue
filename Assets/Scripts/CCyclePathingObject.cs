@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
+    [SerializeField]
+    protected bool automaticCycleTime = false;
     protected List<CCycleNode> nodes;
 
     protected virtual void Start()
@@ -21,9 +23,15 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
         {
             nodes[i].SetPrevious(nodes[i - 1]);
         }
+        if (automaticCycleTime)
+        {
+            CalculateCyclePositions();
+        }
     }
 
     public abstract void UpdateCyclePosition(float cyclePos);
+
+    protected abstract void CalculateCyclePositions();
 
     protected CCycleNode NextNode(float cyclePos)
     {

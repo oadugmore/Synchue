@@ -48,4 +48,8 @@ public class CSinusoidalMovementObject : CCyclePathingObject
         movementObject.MovePosition(destination);
     }
 
+    protected override void CalculateCyclePositions()
+    {
+        throw new System.NotImplementedException();
+    }
 }

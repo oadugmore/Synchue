@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4514004, g: 0.5008933, b: 0.5723167, a: 1}
+  m_IndirectSpecularColor: {r: 0.45139998, g: 0.5008927, b: 0.5723157, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,6 +217,16 @@ PrefabInstance:
       propertyPath: m_Interpolate
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &50524468 stripped
@@ -275,6 +285,16 @@ PrefabInstance:
     - target: {fileID: 54598682311827318, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -471,6 +491,16 @@ PrefabInstance:
     - target: {fileID: 54598682311827318, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -928,6 +958,16 @@ PrefabInstance:
     - target: {fileID: 54598682311827318, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1502,6 +1542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1001 &849145035
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1814,6 +1855,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: maxDrag
+      value: Infinity
+      objectReference: {fileID: 0}
     - target: {fileID: 4813337044415364, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1845,10 +1890,6 @@ PrefabInstance:
     - target: {fileID: 4813337044415364, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: maxDrag
-      value: Infinity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
@@ -3490,6 +3531,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1593530742}
     - target: {fileID: 5056153190526293174, guid: 328982a664b1d6b47b612d49075dac8d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3545,11 +3591,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1593530742}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
 --- !u!1 &2132072057
