@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using UnityEngine.Assertions;
 
-[System.Obsolete("Use CEllipticalMovementObject instead.")]
+[System.Obsolete("Use CEllipticalMovementObject instead.", true)]
 public class CSinusoidalMovementObject : CCyclePathingObject
 {
 
