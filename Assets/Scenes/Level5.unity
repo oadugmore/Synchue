@@ -5575,8 +5575,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleTime: 4
   color: 1
-  leftControlBound: 15
-  rightControlBound: 30
+  leftControlBound: 20
+  rightControlBound: 15
   cyclePosition: 0
 --- !u!1 &503059324
 GameObject:
@@ -5625,8 +5625,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleTime: 4
   color: 2
-  leftControlBound: 15
-  rightControlBound: 30
+  leftControlBound: 20
+  rightControlBound: 15
   cyclePosition: 0
 --- !u!1 &526297850
 GameObject:
@@ -5866,11 +5866,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1703031361872156, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1703031361872156, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
+      value: SpherePlayer
       objectReference: {fileID: 0}
     - target: {fileID: 4813337044415364, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5965,6 +5961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1001 &625389954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6858,6 +6855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1 &934523506
 GameObject:
   m_ObjectHideFlags: 0
@@ -7104,7 +7102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027127164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.64, y: 8.97, z: -0.1}
+  m_LocalPosition: {x: 10.64, y: 9, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1515907990}
@@ -7128,8 +7126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleTime: 4
   color: 1
-  leftControlBound: 15
-  rightControlBound: 30
+  leftControlBound: 20
+  rightControlBound: 15
   cyclePosition: 0
 --- !u!1 &1049528585
 GameObject:
@@ -7227,6 +7225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d90049622f300f48a1bc97d71805d73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1 &1177806027
 GameObject:
   m_ObjectHideFlags: 0
@@ -9174,8 +9173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cycleTime: 5
   color: 0
-  leftControlBound: 12
-  rightControlBound: 30
+  leftControlBound: 15
+  rightControlBound: 15
   cyclePosition: 0
 --- !u!1 &1758853575
 GameObject:
