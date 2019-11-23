@@ -2,14 +2,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public abstract class Player : MonoBehaviour
 {
 
     public Vector3 velocityDisplay;
     public float speed = 10f;
     //public float max = 10f;
     //public float restingAngularDrag = 30f;
-    public float horizontalDragFactor = 15f;
 
     //public float maxSpeed = 5f;
     //public float minSpeed = 0.5f;
@@ -29,7 +28,6 @@ public class Player : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
         playerColor = InteractColor.Blue;
-        rigidbody.maxAngularVelocity = Mathf.Infinity;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -40,30 +38,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Crusher"))
         {
             Die();
         }
-
-        DragKiller drag;
-        if (drag = other.gameObject.GetComponent<DragKiller>())
-        {
-            StartCoroutine(IgnoreDrag(drag.dragIgnoreTime));
-        }
-    }
-
-    /// <summary>
-    /// Causes the player to ignore the forces of drag for a specified duration.
-    /// </summary>
-    /// <param name="seconds">The duration in seconds to ignore drag.</param>
-    private IEnumerator IgnoreDrag(float seconds)
-    {
-        var originalDrag = horizontalDragFactor;
-        horizontalDragFactor = 0f;
-        yield return new WaitForSeconds(seconds);
-        horizontalDragFactor = originalDrag;
     }
 
     private void Die()
@@ -71,14 +51,7 @@ public class Player : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    /// <summary>
-    /// Calculates movement force from controller, subtracts drag, and applies it to the rigidbody.
-    /// </summary>
-    public virtual void Move()
-    {
-        rigidbody.AddForce(movementForce);
-        velocityDisplay = rigidbody.velocity;
-    }
+    public abstract void Move();
 
     /// <summary>
     /// Changes the player's InteractColor.

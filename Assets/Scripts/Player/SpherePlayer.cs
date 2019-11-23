@@ -4,6 +4,8 @@ public class SpherePlayer : Player
 {
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
+    private float lastControl = 0f;
+    private bool stopping = false;
 
     // Start is called before the first frame update
     public override void Start()
@@ -21,12 +23,42 @@ public class SpherePlayer : Player
 
     public override void Move()
     {
+        var slowDown = 1f;
         var control = Controller.GetAxis(playerColor);
-        var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
-        var forwardForceX = speed * control;
-        var forceX = forwardForceX + dragX;
+        if (control < lastControl)
+        {
+            if (control == 0f)
+            {
+                stopping = true;
+                Debug.Log("Stopping");
+            }
+            slowDown *= -1 * rigidbody.velocity.x;
+        }
+        else if (control > lastControl)
+        {
+            stopping = false;
+            Debug.Log("Done stopping");
+        }
+        //var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
+        float forceX;
+        if (stopping)
+        {
+            forceX = -rigidbody.velocity.x;
+            if (rigidbody.velocity.x < 0.1f)
+            {
+                stopping = false;
+                Debug.Log("Done stopping");
+            }
+        }
+        else
+        {
+            forceX = speed * control * slowDown;
+        }
+
+        //var forceX = forwardForceX + dragX;
         movementForce.x += forceX;
-        base.Move();
+        rigidbody.AddForce(movementForce);
+        lastControl = control;
     }
 
     /// <summary>
@@ -41,7 +73,7 @@ public class SpherePlayer : Player
                 onPlatform = true;
             }
 
-            movementForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
+            movementForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x;
         }
         else
         {
