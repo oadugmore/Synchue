@@ -5,9 +5,9 @@ public class SpherePlayer : Player
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
     private float lastControl = 0f;
-    private bool stopping = false;
+    //private bool stopping = false;
+    private MovementMode movementMode = MovementMode.Stopped;
 
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
@@ -23,39 +23,49 @@ public class SpherePlayer : Player
 
     public override void Move()
     {
-        var slowDown = 1f;
+        //var slowDown = 1f;
         var control = Controller.GetAxis(playerColor);
         if (control < lastControl)
         {
             if (control == 0f)
             {
-                stopping = true;
+                movementMode = MovementMode.Stopping;
                 Debug.Log("Stopping");
             }
-            slowDown *= -1 * rigidbody.velocity.x;
+            else
+            {
+                movementMode = MovementMode.Slowing;
+            }
+            //slowDown *= -1 * rigidbody.velocity.x;
         }
         else if (control > lastControl)
         {
-            stopping = false;
-            Debug.Log("Done stopping");
-        }
-        //var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
-        float forceX;
-        if (stopping)
-        {
-            forceX = -rigidbody.velocity.x;
-            if (rigidbody.velocity.x < 0.1f)
-            {
-                stopping = false;
-                Debug.Log("Done stopping");
-            }
-        }
-        else
-        {
-            forceX = speed * control * slowDown;
+            movementMode = MovementMode.Accelerating;
+            Debug.Log("Accelerating");
         }
 
-        //var forceX = forwardForceX + dragX;
+        float forceX;
+        switch (movementMode)
+        {
+            case MovementMode.Stopped:
+            case MovementMode.Accelerating:
+                forceX = speed * control;
+                break;
+            case MovementMode.Slowing:
+                forceX = -speed * control * rigidbody.velocity.x;
+                break;
+            case MovementMode.Stopping:
+                if (rigidbody.velocity.x < 0.1f)
+                {
+                    movementMode = MovementMode.Stopped;
+                    Debug.Log("Stopped.");
+                }
+                forceX = -rigidbody.velocity.x;
+                break;
+            default:
+                throw new System.NotImplementedException("Movement mode " + movementMode + " not supported.");
+        }
+
         movementForce.x += forceX;
         rigidbody.AddForce(movementForce);
         lastControl = control;
@@ -83,10 +93,9 @@ public class SpherePlayer : Player
             }
         }
     }
+}
 
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
+enum MovementMode
+{
+    Accelerating, Slowing, Stopping, Stopped
 }

@@ -9,7 +9,6 @@ public class DefaultPlayer : Player
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
 
-    // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
