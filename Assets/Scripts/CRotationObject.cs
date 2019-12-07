@@ -24,19 +24,8 @@ public class CRotationObject : CCyclePathingObject
     {
         var next = (CRotationNode)NextNode(cyclePos);
         var previous = (CRotationNode)next.Previous();
-
         var nextCyclePos = next.TargetCyclePosition();
         var previousCyclePos = previous.TargetCyclePosition();
-        // if (nextCyclePos == 0f)
-        // {
-        //     nextCyclePos = 1f;
-        // }
-        // if (nextCyclePos < previous.TargetCyclePosition())
-        // {
-        //     nextCyclePos += 1f;
-        // }
-
-
 
         if (cyclePos > nextCyclePos)
         {
@@ -55,20 +44,11 @@ public class CRotationObject : CCyclePathingObject
         // and decided it would be easier to use euler angles
         var previousEuler = previous.Rotation().eulerAngles;
         var nextEuler = next.Rotation().eulerAngles;
-        //Debug.Log(previousEuler + ", " + nextEuler);
         OffsetNextAngle(previousEuler, ref nextEuler, next.RotateClockwise());
-
         var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
-        //Debug.Log(fraction);
         var newVector = Vector3.Slerp(previousEuler, nextEuler, fraction);
         var newRotation = Quaternion.Euler(newVector);
-
         rotationObject.MoveRotation(newRotation);
-        if (Input.GetKey(KeyCode.K))
-        {
-            Debug.Log("Fraction: " + fraction + "\npreviousEuler: " + previousEuler + "\nnextEuler: " + nextEuler +
-            "\nnewVector: " + newVector);
-        }
     }
 
     private void OffsetNextAngle(Vector3 previousEuler, ref Vector3 nextEuler, bool rotateClockwise)
@@ -116,8 +96,8 @@ public class CRotationObject : CCyclePathingObject
         foreach (CRotationNode node in nodes)
         {
             var previous = node.Previous() as CRotationNode;
-            Vector3 previousEuler = previous.Rotation().eulerAngles;
-            Vector3 nextEuler = node.Rotation().eulerAngles;
+            var previousEuler = previous.Rotation().eulerAngles;
+            var nextEuler = node.Rotation().eulerAngles;
             OffsetNextAngle(previousEuler, ref nextEuler, node.RotateClockwise());
             var distance = Vector3.Distance(previousEuler, nextEuler);
             totalDistance += distance;
