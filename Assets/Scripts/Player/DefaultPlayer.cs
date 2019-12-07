@@ -6,14 +6,14 @@ public class DefaultPlayer : Player
     [SerializeField]
     private float horizontalDragFactor = 15f;
     
-    private SphereCollider sphereCollider;
+    new private Collider collider;
     private bool onPlatform = false;
 
     public override void Start()
     {
         base.Start();
-        sphereCollider = GetComponentInChildren<SphereCollider>();
-        rigidbody.maxAngularVelocity = Mathf.Infinity; // remove?
+        collider = GetComponentInChildren<Collider>();
+        //rigidbody.maxAngularVelocity = Mathf.Infinity; // remove?
     }
 
     private void FixedUpdate()
@@ -41,7 +41,7 @@ public class DefaultPlayer : Player
     /// </summary>
     private void CheckPlatform()
     {
-        if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out var hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
+        if (Physics.Raycast(collider.bounds.center, Vector3.down, out var hit, collider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
             if (!onPlatform)
             {
@@ -79,11 +79,5 @@ public class DefaultPlayer : Player
         horizontalDragFactor = 0f;
         yield return new WaitForSeconds(seconds);
         horizontalDragFactor = originalDrag;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
     }
 }
