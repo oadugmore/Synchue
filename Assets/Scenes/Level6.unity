@@ -612,7 +612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 548374609}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.2, z: 0}
+  m_LocalPosition: {x: 0, y: 12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2085586809}
@@ -633,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1 &1043048731
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +845,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityDisplay: {x: 0, y: 0, z: 0}
   speed: 40
-  horizontalDragFactor: 15
 --- !u!1001 &1149369044
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1421,6 +1421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1 &1523444686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1467,6 +1468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automaticCycleTime: 0
 --- !u!1001 &1537096462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2254,6 +2256,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1163568857}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: doZoom
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: doRotate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: rotateSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: xPos
+      value: -3
+      objectReference: {fileID: 0}
     - target: {fileID: 5056153190526293174, guid: 328982a664b1d6b47b612d49075dac8d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2308,36 +2340,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1163568857}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: doZoom
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: doRotate
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: rotateSpeed
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: height
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: xPos
-      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
