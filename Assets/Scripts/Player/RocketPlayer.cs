@@ -18,7 +18,6 @@ public class RocketPlayer : Player
         var control = Controller.GetAxis(playerColor);
         var upwardForceY = speed * control;
         movementForce.y += upwardForceY;
-        base.Move();
     }
 
     // Update is called once per frame

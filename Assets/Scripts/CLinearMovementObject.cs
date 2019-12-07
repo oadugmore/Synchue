@@ -28,6 +28,11 @@ public class CLinearMovementObject : CCyclePathingObject
             nextCyclePos += 1f;
         }
 
+        if (cyclePos < previousCyclePos)
+        {
+            previousCyclePos -= 1f;
+        }
+
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
         Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
         movementObject.MovePosition(newPosition);
@@ -42,7 +47,6 @@ public class CLinearMovementObject : CCyclePathingObject
             var previous = node.Previous() as CLinearMovementNode;
             var distance = Vector3.Distance(node.Position(), previous.Position());
             totalDistance += distance;
-            //Debug.Log("Distance: " + distance);
             distances.Add(totalDistance);
         }
 
