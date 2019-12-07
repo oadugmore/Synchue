@@ -22,10 +22,16 @@ public class CLinearMovementObject : CCyclePathingObject
         var previous = (CLinearMovementNode)next.Previous();
         float nextCyclePos = next.TargetCyclePosition();
         float previousCyclePos = previous.TargetCyclePosition();
+        Debug.Log(next + ", " + previous);
 
         if (cyclePos > nextCyclePos)
         {
             nextCyclePos += 1f;
+        }
+
+        if (cyclePos < previousCyclePos)
+        {
+            previousCyclePos -= 1f;
         }
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);

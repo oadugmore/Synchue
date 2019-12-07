@@ -30,7 +30,7 @@ public class SpherePlayer : Player
             if (control == 0f)
             {
                 movementMode = MovementMode.Stopping;
-                Debug.Log("Stopping");
+                //Debug.Log("Stopping");
             }
             else
             {
@@ -41,7 +41,7 @@ public class SpherePlayer : Player
         else if (control > lastControl)
         {
             movementMode = MovementMode.Accelerating;
-            Debug.Log("Accelerating");
+            //Debug.Log("Accelerating");
         }
 
         float forceX;
@@ -58,7 +58,7 @@ public class SpherePlayer : Player
                 if (rigidbody.velocity.x < 0.1f)
                 {
                     movementMode = MovementMode.Stopped;
-                    Debug.Log("Stopped.");
+                    //Debug.Log("Stopped.");
                 }
                 forceX = -rigidbody.velocity.x;
                 break;
