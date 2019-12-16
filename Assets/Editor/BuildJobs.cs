@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -70,6 +71,7 @@ public class BuildJobs : ScriptableObject
     {
         PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
         PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
+        PlayerSettings.Android.keystoreName = Path.GetFullPath(PlayerSettings.Android.keystoreName);
         // Ensure we're using IL2CPP (required by ARM64)
         PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.IL2CPP); // this is redundant - already using IL2CPP in project settings
         var buildOptions = CreatePlayerOptions(BuildTarget.Android);

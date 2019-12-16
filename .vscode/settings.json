@@ -14,7 +14,10 @@
         "**/*.cubemap": true,
         "**/*.prefab": true,
         "**/Library": true,
-        "**/ProjectSettings": true,
+        "**/*.csproj": true,
+        "**/*.sln": true,
+        "**/Builds": true,
+        "**/obj": true,
         "**/Temp": true
     }
 }
