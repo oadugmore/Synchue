@@ -62,7 +62,7 @@ public class BuildJobs : ScriptableObject
     public static int BuildNewAndroidVersionFull()
     {
         //IncrementAndroidBundleVersionCode();
-        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.All;
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
         var buildResult = PerformAndroidBuild();
         return buildResult;
     }
