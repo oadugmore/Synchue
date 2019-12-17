@@ -1,23 +1,31 @@
 {
     // Configure glob patterns for excluding files and folders.
     "files.exclude": {
-        "**/.git": true,
         "**/.DS_Store": true,
-        "**/*.meta": true,
+        "**/.git": true,
         "**/*.*.meta": true,
-        "**/*.unity": true,
-        "**/*.unityproj": true,
-        "**/*.mat": true,
+        "**/*.csproj": true,
+        "**/*.cubemap": true,
         "**/*.fbx": true,
         "**/*.FBX": true,
-        "**/*.tga": true,
-        "**/*.cubemap": true,
+        "**/*.jks": true,
+        "**/*.meta": true,
+        "**/*.png": true,
         "**/*.prefab": true,
-        "**/Library": true,
-        "**/*.csproj": true,
         "**/*.sln": true,
-        "**/Builds": true,
+        "**/*.tga": true,
+        "**/*.unity": true,
+        "**/*.unityproj": true,
         "**/obj": true,
-        "**/Temp": true
+        "Assets/Animation": true,
+        "Assets/Materials": true,
+        "Assets/Models": true,
+        "Assets/Physic Materials": true,
+        "Assets/Prefabs": true,
+        "Assets/ProBuilder Data": true,
+        "Assets/Scenes": true,
+        "Builds": true,
+        "Library": true,
+        "Temp": true
     }
 }
