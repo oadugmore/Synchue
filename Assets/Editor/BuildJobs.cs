@@ -71,9 +71,7 @@ public class BuildJobs : ScriptableObject
     {
         PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
         PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
-        PlayerSettings.Android.keystoreName = Path.GetFullPath(PlayerSettings.Android.keystoreName);
-        // Ensure we're using IL2CPP (required by ARM64)
-        PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, ScriptingImplementation.IL2CPP); // this is redundant - already using IL2CPP in project settings
+        //PlayerSettings.Android.keystoreName = Path.GetFullPath(PlayerSettings.Android.keystoreName);
         var buildOptions = CreatePlayerOptions(BuildTarget.Android);
         var buildReport = BuildPipeline.BuildPlayer(buildOptions);
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
