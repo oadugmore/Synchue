@@ -67,6 +67,7 @@ public class SpherePlayer : Player
         }
 
         movementForce.x += forceX;
+        Debug.Log("Force: " + movementForce);
         rigidbody.AddForce(movementForce);
         lastControl = control;
     }
