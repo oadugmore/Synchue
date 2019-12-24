@@ -7,7 +7,6 @@ public class StayCentered : MonoBehaviour
     public float threshold = 0.1f;
     public float effortMultiplier = 2;
     public float maxEffort = 10;
-    public float currentCorrectionalForce = 0f;
 
     private new Rigidbody rigidbody;
     private float centerZ;
@@ -24,7 +23,6 @@ public class StayCentered : MonoBehaviour
         if (Mathf.Abs(offset) > threshold)
         {
             offset = Mathf.Clamp(offset * effortMultiplier, -maxEffort, maxEffort);
-            currentCorrectionalForce = Mathf.Abs(offset);
             rigidbody.AddForce(0, 0, -offset);
         }
     }
