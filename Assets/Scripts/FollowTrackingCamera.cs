@@ -5,6 +5,10 @@ public class FollowTrackingCamera : MonoBehaviour
     // Camera target to look at.
     public Transform target;
 
+    // Restrict movement
+    public bool lockVerticalMovement;
+    public bool lockHorizontalMovement;
+
     // Exposed vars for the camera position from the target.
     public float height = 20f;
     public float distance = 20f;
@@ -84,9 +88,12 @@ public class FollowTrackingCamera : MonoBehaviour
 
         // Set the camera position reference.
         targetAdjustedPosition = rotationResult * zoomResult;
-        transform.position = target.position + targetAdjustedPosition;
+        transform.position = targetAdjustedPosition + new Vector3(
+            lockHorizontalMovement ? 0 : target.position.x,
+            lockVerticalMovement ? 0 : target.position.y,
+            target.position.z);
 
         // Face the desired position.
-        transform.LookAt(target);
+        //transform.LookAt(target);
     }
 }
