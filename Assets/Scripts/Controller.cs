@@ -14,8 +14,11 @@ public class Controller : MonoBehaviour
 
     private bool keyboardInput = false;
     private float blueAxis = 0f;
+    private bool blueOn = false;
     private float orangeAxis = 0f;
+    private bool orangeOn = false;
     private const float whiteAxis = 1f; // constant input
+    private const bool whiteOn = true;
 
     private void Start()
     {
@@ -62,19 +65,23 @@ public class Controller : MonoBehaviour
         if (Input.GetKey(KeyCode.J))
         {
             blueAxis += change;
+            blueOn = true;
         }
         else
         {
             blueAxis -= change;
+            blueOn = false;
         }
 
         if (Input.GetKey(KeyCode.F))
         {
             orangeAxis += change;
+            orangeOn = true;
         }
         else
         {
             orangeAxis -= change;
+            orangeOn = false;
         }
     }
 
@@ -84,19 +91,23 @@ public class Controller : MonoBehaviour
         if (current.blueButton.IsPressed())
         {
             blueAxis += change;
+            blueOn = true;
         }
         else
         {
             blueAxis -= change;
+            blueOn = false;
         }
 
         if (current.orangeButton.IsPressed())
         {
             orangeAxis += change;
+            orangeOn = true;
         }
         else
         {
             orangeAxis -= change;
+            orangeOn = false;
         }
     }
 
@@ -110,6 +121,21 @@ public class Controller : MonoBehaviour
                 return current.orangeAxis;
             case InteractColor.White:
                 return whiteAxis;
+            default:
+                throw new NotImplementedException("Update controller to support " + color + ".");
+        }
+    }
+
+    public static bool GetButton(InteractColor color)
+    {
+        switch (color)
+        {
+            case InteractColor.Blue:
+                return current.blueOn;
+            case InteractColor.Orange:
+                return current.orangeOn;
+            case InteractColor.White:
+                return whiteOn;
             default:
                 throw new NotImplementedException("Update controller to support " + color + ".");
         }

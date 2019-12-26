@@ -2,6 +2,8 @@
 
 public class RocketPlayer : Player
 {
+    public float reverseGravityMultiplier = 2f;
+
     public override void Start()
     {
         base.Start();
@@ -9,7 +11,6 @@ public class RocketPlayer : Player
 
     private void FixedUpdate()
     {
-        movementForce = Vector3.zero;
         Move();
     }
 
@@ -17,7 +18,15 @@ public class RocketPlayer : Player
     {
         var control = Controller.GetAxis(playerColor);
         var upwardForceY = speed * control;
-        movementForce.y += upwardForceY;
+        rigidbody.AddForce(0, upwardForceY, 0);
+        if (rigidbody.velocity.y > 0 && control == 0f)
+        {
+            rigidbody.velocity += Physics.gravity * reverseGravityMultiplier * Time.fixedDeltaTime;
+        }
+        else if (rigidbody.velocity.y < 0 && control > 0f)
+        {
+            rigidbody.velocity += Physics.gravity * -reverseGravityMultiplier * Time.fixedDeltaTime;
+        }
     }
 
     // Update is called once per frame
