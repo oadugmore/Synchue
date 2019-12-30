@@ -16,7 +16,6 @@ public class SpherePlayer : Player
 
     private void FixedUpdate()
     {
-        movementForce = Vector3.zero;
         CheckPlatform();
         Move();
     }
@@ -66,9 +65,7 @@ public class SpherePlayer : Player
                 throw new System.NotImplementedException("Movement mode " + movementMode + " not supported.");
         }
 
-        movementForce.x += forceX;
-        Debug.Log("Force: " + movementForce);
-        rigidbody.AddForce(movementForce);
+        rigidbody.AddForce(forceX, 0f, 0f);
         lastControl = control;
     }
 
@@ -79,20 +76,10 @@ public class SpherePlayer : Player
     {
         if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out var hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
-            if (!onPlatform)
-            {
-                onPlatform = true;
-            }
+            var platformForce = hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x;
+            rigidbody.AddForce(platformForce, 0f, 0f);
+        }
 
-            movementForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x;
-        }
-        else
-        {
-            if (onPlatform)
-            {
-                onPlatform = false;
-            }
-        }
     }
 }
 

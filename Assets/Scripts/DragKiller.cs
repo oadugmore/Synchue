@@ -10,6 +10,7 @@ public class DragKiller : MonoBehaviour, ICCycleObject
     private BoxCollider trigger;
 
     // Use this for initialization
+    [System.Obsolete]
     private void Start()
     {
         trigger = GetComponent<BoxCollider>();

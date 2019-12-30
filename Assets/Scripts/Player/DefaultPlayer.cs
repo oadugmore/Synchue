@@ -7,18 +7,17 @@ public class DefaultPlayer : Player
     private float horizontalDragFactor = 15f;
     
     new private Collider collider;
-    private bool onPlatform = false;
+    private int carryPlayerMask;
 
     public override void Start()
     {
         base.Start();
         collider = GetComponentInChildren<Collider>();
-        //rigidbody.maxAngularVelocity = Mathf.Infinity; // remove?
+        carryPlayerMask = LayerMask.GetMask("CarryPlayer");
     }
 
     private void FixedUpdate()
     {
-        movementForce = Vector3.zero;
         CheckPlatform();
         Move();
     }
@@ -32,8 +31,7 @@ public class DefaultPlayer : Player
         var dragX = -horizontalDragFactor * rigidbody.velocity.x; // only care about drag in x
         var forwardForceX = speed * control;
         var forceX = forwardForceX + dragX;
-        movementForce.x += forceX;
-        rigidbody.AddForce(movementForce);
+        rigidbody.AddForce(forceX, 0f, 0f);
     }
 
     /// <summary>
@@ -43,19 +41,8 @@ public class DefaultPlayer : Player
     {
         if (Physics.Raycast(collider.bounds.center, Vector3.down, out var hit, collider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
-            if (!onPlatform)
-            {
-                onPlatform = true;
-            }
-
-            movementForce.x += hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
-        }
-        else
-        {
-            if (onPlatform)
-            {
-                onPlatform = false;
-            }
+            var platformForce = hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
+            rigidbody.AddForce(platformForce, 0f, 0f);
         }
     }
 
