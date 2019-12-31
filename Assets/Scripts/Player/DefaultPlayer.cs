@@ -39,7 +39,7 @@ public class DefaultPlayer : Player
     /// </summary>
     private void CheckPlatform()
     {
-        if (Physics.Raycast(collider.bounds.center, Vector3.down, out var hit, collider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
+        if (Physics.Raycast(collider.bounds.center, Vector3.down, out var hit, collider.bounds.extents.y + 0.1f, carryPlayerMask))
         {
             var platformForce = hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x * horizontalDragFactor;
             rigidbody.AddForce(platformForce, 0f, 0f);

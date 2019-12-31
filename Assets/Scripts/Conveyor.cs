@@ -15,7 +15,7 @@ public class Conveyor : MonoBehaviour, ICToggleObject
     {
         if (!on) return;
         Rigidbody r;
-        if (r = other.gameObject.GetComponentInChildren<Rigidbody>())
+        if (r = other.gameObject.GetComponentInParent<Rigidbody>())
         {
             r.AddForce(force);
         }
