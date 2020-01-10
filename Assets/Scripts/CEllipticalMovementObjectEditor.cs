@@ -1,18 +1,18 @@
-//C# Example (LookAtPointEditor.cs)
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(CEllipticalMovementObject))]
-[CanEditMultipleObjects]
+[CustomEditor(typeof(CEllipticalMovementObject)), CanEditMultipleObjects]
 public class CEllipticalMovementObjectEditor : Editor
 {
     SerializedProperty horizontalAxis;
     SerializedProperty verticalAxis;
+    SerializedProperty offsetAngle;
 
     void OnEnable()
     {
         horizontalAxis = serializedObject.FindProperty("horizontalAxis");
         verticalAxis = serializedObject.FindProperty("verticalAxis");
+        offsetAngle = serializedObject.FindProperty("offsetAngleDegrees");
     }
 
     public override void OnInspectorGUI()
@@ -20,6 +20,10 @@ public class CEllipticalMovementObjectEditor : Editor
         serializedObject.Update();
         EditorGUILayout.PropertyField(horizontalAxis);
         EditorGUILayout.PropertyField(verticalAxis);
+        //EditorGUILayout.PropertyField(offsetAngle, new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."));
+        offsetAngle.floatValue = EditorGUILayout.FloatField(new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."),
+            offsetAngle.floatValue);
+
         // if (lookAtPoint.vector3Value.y > (target as LookAtPoint).transform.position.y)
         // {
         //     EditorGUILayout.LabelField("(Above this object)");
@@ -28,8 +32,8 @@ public class CEllipticalMovementObjectEditor : Editor
         // {
         //     EditorGUILayout.LabelField("(Below this object)");
         // }
-        
-            
+
+
         serializedObject.ApplyModifiedProperties();
     }
 

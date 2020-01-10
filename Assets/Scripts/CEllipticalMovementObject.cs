@@ -8,7 +8,9 @@ public class CEllipticalMovementObject : CCyclePathingObject
     public int numTrapezoids = 20;
     public float horizontalAxis;
     public float verticalAxis;
+    public float offsetAngleDegrees;
 
+    private float offsetAngle;
     private Rigidbody movementObject;
 
     protected override void Start()
@@ -16,6 +18,11 @@ public class CEllipticalMovementObject : CCyclePathingObject
         base.Start();
         DrawEllipse();
         movementObject = GetComponentInChildren<Rigidbody>();
+    }
+
+    private void OnValidate()
+    {
+        offsetAngle = offsetAngleDegrees * Mathf.Deg2Rad;
     }
 
     private void DrawEllipse()
@@ -122,7 +129,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
         // }
 
         var fraction = cyclePos;
-        var newAngle = fraction * 2 * Mathf.PI;
+        var newAngle = fraction * 2 * Mathf.PI + offsetAngle;
         //var horizontalAxis = previous.Radius();
         //var verticalAxis = next.Radius();
         //var previousAngleNormalized = Mathf.Abs(previous.Angle());
