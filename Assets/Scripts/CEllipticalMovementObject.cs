@@ -6,6 +6,8 @@ public class CEllipticalMovementObject : CCyclePathingObject
 {
     [ConditionalField("automaticCycleTime")]
     public int numTrapezoids = 20;
+    public float horizontalAxis;
+    public float verticalAxis;
 
     private Rigidbody movementObject;
 
@@ -97,40 +99,40 @@ public class CEllipticalMovementObject : CCyclePathingObject
 
     private Vector3 CalculatePosition(float cyclePos)
     {
-        var next = (CEllipticalMovementNode)NextNode(cyclePos);
-        var previous = (CEllipticalMovementNode)next.Previous();
+        // var next = (CEllipticalMovementNode)NextNode(cyclePos);
+        // var previous = (CEllipticalMovementNode)next.Previous();
 
-        var nextCyclePos = next.TargetCyclePosition();
-        var previousCyclePos = previous.TargetCyclePosition();
-        var nextAngle = next.Angle();
-        var previousAngle = previous.Angle();
-        while (nextAngle < previousAngle && !next.RotateClockwise())
-        {
-            nextAngle += 2 * Mathf.PI;
-        }
+        // var nextCyclePos = next.TargetCyclePosition();
+        // var previousCyclePos = previous.TargetCyclePosition();
+        // var nextAngle = next.Angle();
+        // var previousAngle = previous.Angle();
+        // while (nextAngle < previousAngle && !next.RotateClockwise())
+        // {
+        //     nextAngle += 2 * Mathf.PI;
+        // }
 
-        while (nextAngle > previousAngle && next.RotateClockwise())
-        {
-            previousAngle += 2 * Mathf.PI;
-        }
+        // while (nextAngle > previousAngle && next.RotateClockwise())
+        // {
+        //     previousAngle += 2 * Mathf.PI;
+        // }
 
-        while (nextCyclePos < previousCyclePos)
-        {
-            nextCyclePos++;
-        }
+        // while (nextCyclePos < previousCyclePos)
+        // {
+        //     nextCyclePos++;
+        // }
 
-        var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        var newAngle = Mathf.Lerp(previousAngle, nextAngle, fraction);
-        var horizontalAxis = previous.Radius();
-        var verticalAxis = next.Radius();
-        var previousAngleNormalized = Mathf.Abs(previous.Angle());
+        var fraction = cyclePos;
+        var newAngle = fraction * 2 * Mathf.PI;
+        //var horizontalAxis = previous.Radius();
+        //var verticalAxis = next.Radius();
+        //var previousAngleNormalized = Mathf.Abs(previous.Angle());
 
-        if (previousAngleNormalized < 0.75 * Mathf.PI && previousAngleNormalized > 0.25 * Mathf.PI)
-        {
-            var temp = horizontalAxis;
-            horizontalAxis = verticalAxis;
-            verticalAxis = temp;
-        }
+        // if (previousAngleNormalized < 0.75 * Mathf.PI && previousAngleNormalized > 0.25 * Mathf.PI)
+        // {
+        //     var temp = horizontalAxis;
+        //     horizontalAxis = verticalAxis;
+        //     verticalAxis = temp;
+        // }
 
         var h = horizontalAxis * Mathf.Cos(newAngle);
         var v = verticalAxis * Mathf.Sin(newAngle);
