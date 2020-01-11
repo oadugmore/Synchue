@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEditor;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(CEllipticalMovementObject)), CanEditMultipleObjects]
 public class CEllipticalMovementObjectEditor : Editor
@@ -7,9 +8,13 @@ public class CEllipticalMovementObjectEditor : Editor
     SerializedProperty horizontalAxis;
     SerializedProperty verticalAxis;
     SerializedProperty offsetAngle;
+    
+    float previewCyclePos;
+    Vector3[] ellipsePoints;
 
     void OnEnable()
     {
+        CalculateEllipsePoints();
         horizontalAxis = serializedObject.FindProperty("horizontalAxis");
         verticalAxis = serializedObject.FindProperty("verticalAxis");
         offsetAngle = serializedObject.FindProperty("offsetAngleDegrees");
@@ -23,6 +28,8 @@ public class CEllipticalMovementObjectEditor : Editor
         //EditorGUILayout.PropertyField(offsetAngle, new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."));
         offsetAngle.floatValue = EditorGUILayout.FloatField(new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."),
             offsetAngle.floatValue);
+        previewCyclePos = EditorGUILayout.Slider("Preview Cycle Pos", previewCyclePos, 0f, 1f);
+
 
         // if (lookAtPoint.vector3Value.y > (target as LookAtPoint).transform.position.y)
         // {
@@ -39,6 +46,7 @@ public class CEllipticalMovementObjectEditor : Editor
 
     public void OnSceneGUI()
     {
+        Physics.autoSimulation = false;
         var t = (target as CEllipticalMovementObject);
 
         //EditorGUI.BeginChangeCheck();
@@ -47,6 +55,9 @@ public class CEllipticalMovementObjectEditor : Editor
         Handles.DrawSolidDisc(t.transform.position + Vector3.left * t.horizontalAxis, Vector3.back, 0.25f);
         Handles.DrawSolidDisc(t.transform.position + Vector3.up * t.verticalAxis, Vector3.back, 0.25f);
         Handles.DrawSolidDisc(t.transform.position + Vector3.down * t.verticalAxis, Vector3.back, 0.25f);
+        t.UpdateCyclePosition(previewCyclePos);
+        Physics.Simulate(Time.fixedDeltaTime);
+        Handles.DrawPolyLine(ellipsePoints);
         // if (EditorGUI.EndChangeCheck())
         // {
         //     Undo.RecordObject(target, "Move point");
@@ -54,5 +65,28 @@ public class CEllipticalMovementObjectEditor : Editor
         //     t.lookAtPoint = pos;
         //     t.Update();
         // }
+        Physics.autoSimulation = true;
+    }
+
+    private void DrawEllipse()
+    {
+        
+        //Debug.DrawLine(previousPoint, originalPoint, Color.green, Mathf.Infinity);
+    }
+
+    void CalculateEllipsePoints()
+    {
+        ellipsePoints = new Vector3[21];
+        var t = (target as CEllipticalMovementObject);
+
+        //var originalPoint = t.CalculatePosition(0f);
+        //var previousPoint = originalPoint;
+        var i = 0;
+        for (float pos = 0f; pos <= 1.0f; pos += 0.05f)
+        {
+            ellipsePoints[i] = t.CalculatePosition(pos);
+            //Debug.DrawLine(previousPoint, newPoint, Color.green, Mathf.Infinity);
+            //previousPoint = newPoint;
+        }
     }
 }

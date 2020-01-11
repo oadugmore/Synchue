@@ -2,6 +2,7 @@
 using MyBox;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class CEllipticalMovementObject : CCyclePathingObject
 {
     [ConditionalField("automaticCycleTime")]
@@ -16,24 +17,13 @@ public class CEllipticalMovementObject : CCyclePathingObject
     protected override void Start()
     {
         base.Start();
-        DrawEllipse();
+        //DrawEllipse();
         movementObject = GetComponentInChildren<Rigidbody>();
     }
 
     private void OnValidate()
     {
         offsetAngle = offsetAngleDegrees * Mathf.Deg2Rad;
-    }
-
-    private void DrawEllipse()
-    {
-        var previousPoint = CalculatePosition(0f);
-        for (float pos = 0f; pos <= 1.0f; pos += 0.05f)
-        {
-            var newPoint = CalculatePosition(pos);
-            Debug.DrawLine(previousPoint, newPoint, Color.green, Mathf.Infinity);
-            previousPoint = newPoint;
-        }
     }
 
     protected override void CalculateCyclePositions()
@@ -104,7 +94,7 @@ public class CEllipticalMovementObject : CCyclePathingObject
         movementObject.MovePosition(destination);
     }
 
-    private Vector3 CalculatePosition(float cyclePos)
+    public Vector3 CalculatePosition(float cyclePos)
     {
         // var next = (CEllipticalMovementNode)NextNode(cyclePos);
         // var previous = (CEllipticalMovementNode)next.Previous();
