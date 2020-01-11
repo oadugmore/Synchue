@@ -2,71 +2,51 @@
 using MyBox;
 using UnityEngine;
 
-[ExecuteInEditMode]
-public class CEllipticalMovementObject : CCyclePathingObject
+[ExecuteInEditMode, SelectionBase]
+public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
 {
     [ConditionalField("automaticCycleTime")]
     public int numTrapezoids = 20;
     public float horizontalAxis;
     public float verticalAxis;
     public float offsetAngleDegrees;
+    public bool rotateClockwise;
 
     private float offsetAngle;
     private Rigidbody movementObject;
 
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-        //DrawEllipse();
         movementObject = GetComponentInChildren<Rigidbody>();
+    }
+
+    public void UpdateCyclePosition(float cyclePos)
+    {
+        var destination = CalculatePosition(cyclePos);
+        movementObject.MovePosition(destination);
+    }
+
+    public Vector3 CalculatePosition(float cyclePos)
+    {
+        var fraction = cyclePos;
+        var newAngle = fraction * 2 * Mathf.PI + offsetAngle;
+        if (rotateClockwise)
+        {
+            newAngle = -newAngle;
+        }
+
+        var h = horizontalAxis * Mathf.Cos(newAngle);
+        var v = verticalAxis * Mathf.Sin(newAngle);
+        return transform.TransformPoint(h, v, 0);
     }
 
     private void OnValidate()
     {
         offsetAngle = offsetAngleDegrees * Mathf.Deg2Rad;
     }
-
-    protected override void CalculateCyclePositions()
-    {
-        var totalDistance = 0f;
-        var distances = new List<float>(nodes.Count);
-        for (int i = 0; i < nodes.Count; ++i)
-        {
-            var node = nodes[i] as CEllipticalMovementNode;
-            var previous = node.Previous() as CEllipticalMovementNode;
-            var a = previous.Radius();
-            var b = node.Radius();
-            if (a < b)
-            {
-                var temp = a;
-                a = b;
-                b = temp;
-            }
-
-            var theta1 = previous.Angle();
-            var theta2 = node.Angle();
-            while (theta2 < theta1 && !node.RotateClockwise())
-            {
-                theta2 += 2 * Mathf.PI;
-            }
-            while (theta2 > theta1 && node.RotateClockwise())
-            {
-                theta1 += 2 * Mathf.PI;
-            }
-
-            var k = 1 - Mathf.Pow(b / a, 2);
-            var distance = a * Mathf.Abs(TrapezoidEstimation_Ellipse(theta1, theta2, k));
-            totalDistance += distance;
-            distances.Add(totalDistance);
-        }
-
-        for (int i = 0; i < nodes.Count; ++i)
-        {
-            (nodes[i] as CEllipticalMovementNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
-        }
-    }
-
+    
     // Estimates the elliptic integral using numeric integration
+    [System.Obsolete]
     private float TrapezoidEstimation_Ellipse(float theta1, float theta2, float k)
     {
         float deltaX = (theta2 - theta1) / numTrapezoids;
@@ -83,56 +63,9 @@ public class CEllipticalMovementObject : CCyclePathingObject
     }
 
     // the incomplete elliptic integral of the second kind
+    [System.Obsolete]
     private float EllipticIntegral(float theta, float k)
     {
         return Mathf.Sqrt(1 - Mathf.Pow(k, 2) * Mathf.Pow(Mathf.Sin(theta), 2));
-    }
-
-    public override void UpdateCyclePosition(float cyclePos)
-    {
-        var destination = CalculatePosition(cyclePos);
-        movementObject.MovePosition(destination);
-    }
-
-    public Vector3 CalculatePosition(float cyclePos)
-    {
-        // var next = (CEllipticalMovementNode)NextNode(cyclePos);
-        // var previous = (CEllipticalMovementNode)next.Previous();
-
-        // var nextCyclePos = next.TargetCyclePosition();
-        // var previousCyclePos = previous.TargetCyclePosition();
-        // var nextAngle = next.Angle();
-        // var previousAngle = previous.Angle();
-        // while (nextAngle < previousAngle && !next.RotateClockwise())
-        // {
-        //     nextAngle += 2 * Mathf.PI;
-        // }
-
-        // while (nextAngle > previousAngle && next.RotateClockwise())
-        // {
-        //     previousAngle += 2 * Mathf.PI;
-        // }
-
-        // while (nextCyclePos < previousCyclePos)
-        // {
-        //     nextCyclePos++;
-        // }
-
-        var fraction = cyclePos;
-        var newAngle = fraction * 2 * Mathf.PI + offsetAngle;
-        //var horizontalAxis = previous.Radius();
-        //var verticalAxis = next.Radius();
-        //var previousAngleNormalized = Mathf.Abs(previous.Angle());
-
-        // if (previousAngleNormalized < 0.75 * Mathf.PI && previousAngleNormalized > 0.25 * Mathf.PI)
-        // {
-        //     var temp = horizontalAxis;
-        //     horizontalAxis = verticalAxis;
-        //     verticalAxis = temp;
-        // }
-
-        var h = horizontalAxis * Mathf.Cos(newAngle);
-        var v = verticalAxis * Mathf.Sin(newAngle);
-        return transform.TransformPoint(h, v, 0);
     }
 }

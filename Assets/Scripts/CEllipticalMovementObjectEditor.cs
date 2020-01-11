@@ -8,6 +8,7 @@ public class CEllipticalMovementObjectEditor : Editor
     SerializedProperty horizontalAxis;
     SerializedProperty verticalAxis;
     SerializedProperty offsetAngle;
+    SerializedProperty rotateClockwise;
     
     float previewCyclePos;
     Vector3[] ellipsePoints;
@@ -22,6 +23,7 @@ public class CEllipticalMovementObjectEditor : Editor
         horizontalAxis = serializedObject.FindProperty("horizontalAxis");
         verticalAxis = serializedObject.FindProperty("verticalAxis");
         offsetAngle = serializedObject.FindProperty("offsetAngleDegrees");
+        rotateClockwise = serializedObject.FindProperty("rotateClockwise");
     }
 
     public override void OnInspectorGUI()
@@ -30,9 +32,10 @@ public class CEllipticalMovementObjectEditor : Editor
         var t = (target as CEllipticalMovementObject);
         EditorGUILayout.PropertyField(horizontalAxis);
         EditorGUILayout.PropertyField(verticalAxis);
-        //EditorGUILayout.PropertyField(offsetAngle, new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."));
-        offsetAngle.floatValue = EditorGUILayout.FloatField(new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."),
-            offsetAngle.floatValue);
+        EditorGUILayout.PropertyField(offsetAngle, new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."));
+        //offsetAngle.floatValue = EditorGUILayout.FloatField(new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."),
+        //    offsetAngle.floatValue);
+        EditorGUILayout.PropertyField(rotateClockwise);
         
         previewCyclePos = EditorGUILayout.Slider("Preview Cycle Pos", previewCyclePos, 0f, 1f);
         if (serializedObject.hasModifiedProperties || previousPosition != t.transform.position)
