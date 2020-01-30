@@ -24,7 +24,7 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 3
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
-  m_Sun: {fileID: 261400250}
+  m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0.4514004, g: 0.5008933, b: 0.5723167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
@@ -169,11 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7fb1ba94f1fd64e917b04803cfaca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 1
   numTrapezoids: 34
   horizontalAxis: 2
   verticalAxis: 5
   offsetAngleDegrees: 0
+  rotateClockwise: 0
 --- !u!1 &237340206
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,12 +335,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 45b4336f06b5da14e80220a5762fc88f, type: 3}
---- !u!108 &261400250 stripped
-Light:
-  m_CorrespondingSourceObject: {fileID: 9175640890789511349, guid: 45b4336f06b5da14e80220a5762fc88f,
-    type: 3}
-  m_PrefabInstance: {fileID: 261400249}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &341669339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,10 +351,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1010781820924202, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
-      propertyPath: m_Name
-      value: Main Camera
       objectReference: {fileID: 0}
     - target: {fileID: 4581590145321410, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -410,6 +400,10 @@ PrefabInstance:
         type: 3}
       propertyPath: target
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1010781820924202, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
+      propertyPath: m_Name
+      value: Main Camera
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
@@ -674,11 +668,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7fb1ba94f1fd64e917b04803cfaca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
   numTrapezoids: 15
   horizontalAxis: 3
   verticalAxis: 5
   offsetAngleDegrees: 180
+  rotateClockwise: 0
 --- !u!1 &717350818
 GameObject:
   m_ObjectHideFlags: 0
