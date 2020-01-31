@@ -46,69 +46,36 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        if (keyboardInput)
+        GetInput();
+    }
+
+    private void GetInput()
+    {
+        var change = buttonSpeed * Time.deltaTime;
+        if (!keyboardInput && blueButton.IsPressed() || keyboardInput && Input.GetKey(KeyCode.J))
         {
-            GetKeyboardInput();
+            blueAxis += change;
+            blueOn = true;
         }
         else
         {
-            GetTouchInput();
+            blueAxis -= change;
+            blueOn = false;
+        }
+
+        if (!keyboardInput && orangeButton.IsPressed() || keyboardInput && Input.GetKey(KeyCode.F))
+        {
+            orangeAxis += change;
+            orangeOn = true;
+        }
+        else
+        {
+            orangeAxis -= change;
+            orangeOn = false;
         }
 
         blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
         orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
-    }
-
-    private void GetKeyboardInput()
-    {
-        var change = buttonSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.J))
-        {
-            blueAxis += change;
-            blueOn = true;
-        }
-        else
-        {
-            blueAxis -= change;
-            blueOn = false;
-        }
-
-        if (Input.GetKey(KeyCode.F))
-        {
-            orangeAxis += change;
-            orangeOn = true;
-        }
-        else
-        {
-            orangeAxis -= change;
-            orangeOn = false;
-        }
-    }
-
-    private void GetTouchInput()
-    {
-        var change = buttonSpeed * Time.deltaTime;
-        if (current.blueButton.IsPressed())
-        {
-            blueAxis += change;
-            blueOn = true;
-        }
-        else
-        {
-            blueAxis -= change;
-            blueOn = false;
-        }
-
-        if (current.orangeButton.IsPressed())
-        {
-            orangeAxis += change;
-            orangeOn = true;
-        }
-        else
-        {
-            orangeAxis -= change;
-            orangeOn = false;
-        }
     }
 
     public static float GetAxis(InteractColor color)
