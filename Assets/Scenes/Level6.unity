@@ -1757,7 +1757,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 233151702}
-  - component: {fileID: 233151703}
   m_Layer: 0
   m_Name: SpikeRow
   m_TagString: Spike
@@ -1783,22 +1782,6 @@ Transform:
   m_Father: {fileID: 1371593379}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &233151703
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 233151701}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &237340206
 GameObject:
   m_ObjectHideFlags: 0
@@ -6956,7 +6939,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 829819246}
-  - component: {fileID: 829819247}
   m_Layer: 0
   m_Name: SpikeRow (2)
   m_TagString: Spike
@@ -6986,22 +6968,6 @@ Transform:
   m_Father: {fileID: 1371593379}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &829819247
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 829819245}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &837735027
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7671,7 +7637,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 934440621}
-  - component: {fileID: 934440622}
   m_Layer: 0
   m_Name: SpikeRow (1)
   m_TagString: Spike
@@ -7701,22 +7666,6 @@ Transform:
   m_Father: {fileID: 1371593379}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &934440622
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 934440620}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &948274763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11585,7 +11534,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1439994697}
-  - component: {fileID: 1439994698}
   m_Layer: 0
   m_Name: SpikeRow (3)
   m_TagString: Spike
@@ -11621,22 +11569,6 @@ Transform:
   m_Father: {fileID: 1371593379}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1439994698
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1439994696}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1442036380 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 3b7bac97456fc794c9e098a9d426c6d5,
@@ -12554,7 +12486,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1505596939}
-  - component: {fileID: 1505596940}
   m_Layer: 0
   m_Name: SpikeRow (4)
   m_TagString: Spike
@@ -12586,22 +12517,6 @@ Transform:
   m_Father: {fileID: 1371593379}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!54 &1505596940
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505596938}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &1506302332
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13803,7 +13718,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &1627245771
@@ -14957,7 +14872,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &1722225727
@@ -18268,7 +18183,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &2100747816
