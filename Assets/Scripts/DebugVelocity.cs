@@ -32,7 +32,7 @@ public class DebugVelocity : MonoBehaviour
 
         if (p)
         {
-            platformVelocityDisplay = p.getVelocity();
+            platformVelocityDisplay = p.velocity;
             if (printInfo)
             {
                 Debug.Log("Platform velocity: " + platformVelocityDisplay);
