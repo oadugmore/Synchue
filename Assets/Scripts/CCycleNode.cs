@@ -2,29 +2,10 @@
 
 public abstract class CCycleNode : MonoBehaviour
 {
-    [SerializeField]
-    [Range(0f, 1f)]
-    protected float targetCyclePosition;
+    [SerializeField, Range(0f, 1f)]
+    protected float m_targetCyclePosition;
+    public float targetCyclePosition { get => m_targetCyclePosition; set => m_targetCyclePosition = Mathf.Clamp(value, 0f, 1f); }
 
-    private CCycleNode previous;
+    public CCycleNode previous { get; set; }
 
-    public float TargetCyclePosition()
-    {
-        return targetCyclePosition;
-    }
-
-    public void SetPrevious(CCycleNode previous)
-    {
-        this.previous = previous;
-    }
-
-    public CCycleNode Previous()
-    {
-        return previous;
-    }
-
-    public void SetTargetCyclePosition(float t)
-    {
-        targetCyclePosition = t;
-    }
 }

@@ -52,7 +52,7 @@ public class Controller : MonoBehaviour
     private void GetInput()
     {
         var change = buttonSpeed * Time.deltaTime;
-        if (!keyboardInput && blueButton.IsPressed() || keyboardInput && Input.GetKey(KeyCode.J))
+        if (!keyboardInput && blueButton.isPressed || keyboardInput && Input.GetKey(KeyCode.J))
         {
             blueAxis += change;
             blueOn = true;
@@ -63,7 +63,7 @@ public class Controller : MonoBehaviour
             blueOn = false;
         }
 
-        if (!keyboardInput && orangeButton.IsPressed() || keyboardInput && Input.GetKey(KeyCode.F))
+        if (!keyboardInput && orangeButton.isPressed || keyboardInput && Input.GetKey(KeyCode.F))
         {
             orangeAxis += change;
             orangeOn = true;

@@ -14,7 +14,7 @@ public class CRotationObject : CCyclePathingObject
         {
             Debug.LogError(this + " has less than 2 nodes.");
         }
-        else if (nodes[0].TargetCyclePosition() != 0f)
+        else if (nodes[0].targetCyclePosition != 0f)
         {
             Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
         }
@@ -23,9 +23,9 @@ public class CRotationObject : CCyclePathingObject
     public override void UpdateCyclePosition(float cyclePos)
     {
         var next = (CRotationNode)NextNode(cyclePos);
-        var previous = (CRotationNode)next.Previous();
-        var nextCyclePos = next.TargetCyclePosition();
-        var previousCyclePos = previous.TargetCyclePosition();
+        var previous = (CRotationNode)next.previous;
+        var nextCyclePos = next.targetCyclePosition;
+        var previousCyclePos = previous.targetCyclePosition;
 
         if (cyclePos > nextCyclePos)
         {
@@ -42,9 +42,9 @@ public class CRotationObject : CCyclePathingObject
 
         // do calculations in euler angles because I spent a few hours watching videos on quaternions
         // and decided it would be easier to use euler angles
-        var previousEuler = previous.Rotation().eulerAngles;
-        var nextEuler = next.Rotation().eulerAngles;
-        OffsetNextAngle(previousEuler, ref nextEuler, next.RotateClockwise());
+        var previousEuler = previous.rotation.eulerAngles;
+        var nextEuler = next.rotation.eulerAngles;
+        OffsetNextAngle(previousEuler, ref nextEuler, next.rotateClockwise);
         var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
         var newVector = Vector3.Slerp(previousEuler, nextEuler, fraction);
         var newRotation = Quaternion.Euler(newVector);
@@ -95,10 +95,10 @@ public class CRotationObject : CCyclePathingObject
         var distances = new List<float>(nodes.Count);
         foreach (CRotationNode node in nodes)
         {
-            var previous = node.Previous() as CRotationNode;
-            var previousEuler = previous.Rotation().eulerAngles;
-            var nextEuler = node.Rotation().eulerAngles;
-            OffsetNextAngle(previousEuler, ref nextEuler, node.RotateClockwise());
+            var previous = node.previous as CRotationNode;
+            var previousEuler = previous.rotation.eulerAngles;
+            var nextEuler = node.rotation.eulerAngles;
+            OffsetNextAngle(previousEuler, ref nextEuler, node.rotateClockwise);
             var distance = Vector3.Distance(previousEuler, nextEuler);
             totalDistance += distance;
             distances.Add(totalDistance);
@@ -106,7 +106,7 @@ public class CRotationObject : CCyclePathingObject
 
         for (int i = 0; i < nodes.Count; ++i)
         {
-            (nodes[i] as CRotationNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
+            (nodes[i] as CRotationNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
         }
     }
 }

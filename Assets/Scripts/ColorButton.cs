@@ -4,32 +4,25 @@ using UnityEngine.EventSystems;
 public class ColorButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 
-    private bool pressed = false;
+    public bool isPressed { get; private set; }
     private int pointerId = -1;
-
-    // Use this for initialization
-
-    public bool IsPressed()
-    {
-        return pressed;
-    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (pressed)
+        if (isPressed)
         {
             return;
         }
 
         pointerId = eventData.pointerId;
-        pressed = true;
+        isPressed = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         if (eventData.pointerId == pointerId)
         {
-            pressed = false;
+            isPressed = false;
         }
     }
 

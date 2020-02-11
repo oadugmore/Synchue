@@ -2,8 +2,8 @@
 
 public class Conveyor : MonoBehaviour, ICToggleObject
 {
-    public Vector3 force;
-
+    [SerializeField]
+    private Vector3 force;
     private bool on = false;
 
     public void Toggle(bool on)

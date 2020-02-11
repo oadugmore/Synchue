@@ -5,7 +5,6 @@ public class SpherePlayer : Player
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
     private float lastControl = 0f;
-    //private bool stopping = false;
     private MovementMode movementMode = MovementMode.Stopped;
 
     public override void Start()

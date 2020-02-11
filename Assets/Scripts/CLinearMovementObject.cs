@@ -19,9 +19,9 @@ public class CLinearMovementObject : CCyclePathingObject
     public override void UpdateCyclePosition(float cyclePos)
     {
         var next = (CLinearMovementNode)NextNode(cyclePos);
-        var previous = (CLinearMovementNode)next.Previous();
-        float nextCyclePos = next.TargetCyclePosition();
-        float previousCyclePos = previous.TargetCyclePosition();
+        var previous = (CLinearMovementNode)next.previous;
+        float nextCyclePos = next.targetCyclePosition;
+        float previousCyclePos = previous.targetCyclePosition;
 
         if (cyclePos > nextCyclePos)
         {
@@ -34,7 +34,7 @@ public class CLinearMovementObject : CCyclePathingObject
         }
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
+        Vector3 newPosition = Vector3.Lerp(previous.position, next.position, fraction);
         movementObject.MovePosition(newPosition);
     }
 
@@ -44,15 +44,15 @@ public class CLinearMovementObject : CCyclePathingObject
         var distances = new List<float>(nodes.Count);
         foreach (CLinearMovementNode node in nodes)
         {
-            var previous = node.Previous() as CLinearMovementNode;
-            var distance = Vector3.Distance(node.Position(), previous.Position());
+            var previous = node.previous as CLinearMovementNode;
+            var distance = Vector3.Distance(node.position, previous.position);
             totalDistance += distance;
             distances.Add(totalDistance);
         }
 
         for (int i = 0; i < nodes.Count; ++i)
         {
-            (nodes[i] as CLinearMovementNode).SetTargetCyclePosition((distances[i] - distances[0]) / totalDistance);
+            (nodes[i] as CLinearMovementNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
         }
     }
 }
