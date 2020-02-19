@@ -5,7 +5,6 @@ public class SpherePlayer : Player
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
     private float lastControl = 0f;
-    //private bool stopping = false;
     private MovementMode movementMode = MovementMode.Stopped;
 
     public override void Start()
@@ -76,7 +75,7 @@ public class SpherePlayer : Player
     {
         if (Physics.Raycast(sphereCollider.bounds.center, Vector3.down, out var hit, sphereCollider.bounds.extents.y + 0.1f, LayerMask.GetMask("CarryPlayer")))
         {
-            var platformForce = hit.rigidbody.GetComponent<MovingPlatform>().getVelocity().x;
+            var platformForce = hit.rigidbody.GetComponent<MovingPlatform>().velocity.x;
             rigidbody.AddForce(platformForce, 0f, 0f);
         }
 

@@ -2,7 +2,8 @@
 
 public class RocketPlayer : Player
 {
-    public float reverseGravityMultiplier = 2f;
+    [SerializeField]
+    private float reverseGravityMultiplier = 2f;
 
     public override void Start()
     {
@@ -29,9 +30,4 @@ public class RocketPlayer : Player
         }
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
 }

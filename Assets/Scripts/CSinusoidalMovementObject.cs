@@ -15,10 +15,10 @@ public class CSinusoidalMovementObject : CCyclePathingObject
     public override void UpdateCyclePosition(float cyclePos)
     {
         var next = (CSinusoidalMovementNode)NextNode(cyclePos);
-        var previous = (CSinusoidalMovementNode)next.Previous();
+        var previous = (CSinusoidalMovementNode)next.previous;
 
-        var nextCyclePos = next.TargetCyclePosition();
-        var previousCyclePos = previous.TargetCyclePosition();
+        var nextCyclePos = next.targetCyclePosition;
+        var previousCyclePos = previous.targetCyclePosition;
         var nextAngle = next.Angle();
         var previousAngle = previous.Angle();
         while (nextAngle < previousAngle && !next.RotateClockwise())

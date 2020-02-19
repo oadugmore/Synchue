@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Obsolete("Elliptical Movement Objects no longer use nodes.")]
 public class CEllipticalMovementNode : CCycleNode
 {
     [SerializeField]

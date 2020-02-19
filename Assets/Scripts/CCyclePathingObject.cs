@@ -19,10 +19,10 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
             return;
         }
 
-        nodes[0].SetPrevious(nodes[nodes.Count - 1]);
+        nodes[0].previous = nodes[nodes.Count - 1];
         for (int i = 1; i < nodes.Count; i++)
         {
-            nodes[i].SetPrevious(nodes[i - 1]);
+            nodes[i].previous = nodes[i - 1];
         }
         if (automaticCycleTime)
         {
@@ -40,7 +40,7 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 
         for (int i = 0; i < nodes.Count; i++)
         {
-            if (nodes[i].TargetCyclePosition() > cyclePos)
+            if (nodes[i].targetCyclePosition > cyclePos)
             {
                 nextNode = i;
                 break;

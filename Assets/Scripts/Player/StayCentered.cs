@@ -2,7 +2,8 @@
 
 public class StayCentered : MonoBehaviour
 {
-    public float effort = 3;
+    [SerializeField]
+    private float effort = 3;
 
     private new Rigidbody rigidbody;
     private float centerZ;

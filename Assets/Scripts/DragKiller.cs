@@ -17,12 +17,6 @@ public class DragKiller : MonoBehaviour, ICCycleObject
         trigger.enabled = false;
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-
-    }
-
     public void UpdateCyclePosition(float cyclePos)
     {
         //Debug.Log("cycle pos: " + cyclePos);

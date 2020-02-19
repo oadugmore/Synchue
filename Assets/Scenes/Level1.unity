@@ -8538,7 +8538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
+  automaticCycleTime: 1
 --- !u!1 &835836819
 GameObject:
   m_ObjectHideFlags: 0
@@ -10171,7 +10171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0
+  m_targetCyclePosition: 0
 --- !u!1 &1045871483
 GameObject:
   m_ObjectHideFlags: 0
@@ -12155,6 +12155,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &1336605710 stripped
@@ -12206,7 +12211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.5
+  m_targetCyclePosition: 0.5
 --- !u!1 &1348152839
 GameObject:
   m_ObjectHideFlags: 0
@@ -19345,7 +19350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.5
+  m_targetCyclePosition: 0.5
 --- !u!114 &114069133134230437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19358,7 +19363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.5
+  m_targetCyclePosition: 0.5
 --- !u!114 &114069133888577571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19371,7 +19376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.5
+  m_targetCyclePosition: 0.5
 --- !u!114 &114069134354414316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19384,7 +19389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0.5
+  m_targetCyclePosition: 0.5
 --- !u!114 &114755953722062001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19397,7 +19402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0
+  m_targetCyclePosition: 0
 --- !u!114 &114755954321583742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19410,7 +19415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0
+  m_targetCyclePosition: 0
 --- !u!114 &114755954930457540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19423,7 +19428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0
+  m_targetCyclePosition: 0
 --- !u!114 &114755955517318967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19436,7 +19441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f26477429012504a9ed5c35970b29fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCyclePosition: 0
+  m_targetCyclePosition: 0
 --- !u!114 &114854634652438516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19449,7 +19454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
+  automaticCycleTime: 1
 --- !u!114 &114854635251963195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19462,7 +19467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
+  automaticCycleTime: 1
 --- !u!114 &114854635840112317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19475,7 +19480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
+  automaticCycleTime: 1
 --- !u!114 &114854636460669518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19488,7 +19493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170d6ebd308dd9742a1b17c44adfbee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticCycleTime: 0
+  automaticCycleTime: 1
 --- !u!1001 &2206778528298965985
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19504,32 +19509,32 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.000000044703484
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.90002406
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.000000044703484
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.000040078576
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.00000011014506
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.000020073736
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}

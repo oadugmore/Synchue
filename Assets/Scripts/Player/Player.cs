@@ -4,12 +4,11 @@ using UnityEngine.SceneManagement;
 
 public abstract class Player : MonoBehaviour
 {
-    public float speed = 10f;
-
-    protected InteractColor playerColor;
+    [SerializeField]
+    protected float speed = 10f;
     protected new Rigidbody rigidbody;
-    [System.Obsolete]
-    protected Vector3 movementForce;
+
+    public InteractColor playerColor { get; set; }
 
     public virtual void Start()
     {
