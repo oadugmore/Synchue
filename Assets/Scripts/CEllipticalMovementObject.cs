@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using MyBox;
 using UnityEngine;
 
 [ExecuteInEditMode, SelectionBase]
 public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
 {
-    [ConditionalField("automaticCycleTime")]
-    public int numTrapezoids = 20;
     public float horizontalAxis;
     public float verticalAxis;
     public float offsetAngleDegrees;
@@ -49,6 +46,7 @@ public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
     [System.Obsolete]
     private float TrapezoidEstimation_Ellipse(float theta1, float theta2, float k)
     {
+        var numTrapezoids = 20;
         float deltaX = (theta2 - theta1) / numTrapezoids;
         float xi = theta1;
         float sum = EllipticIntegral(xi, k) / 2;
