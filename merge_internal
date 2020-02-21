@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 target=$(git branch | sed -n -e 's/^\* \(.*\)/\1/p')
 
