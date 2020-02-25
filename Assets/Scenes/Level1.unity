@@ -96,6 +96,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 4943fcc6b2d172e4bb48fa2d3d121aae,
     type: 2}
   m_UseShadowmask: 1
@@ -128,11 +129,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -203,6 +199,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &7292979 stripped
@@ -260,6 +261,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -349,11 +351,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -424,6 +421,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &42053707 stripped
@@ -439,11 +441,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (33)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -498,6 +495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (33)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -563,10 +565,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 313376824}
     m_Modifications:
-    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4426227584228408, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -599,21 +597,25 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: automaticCycleTime
+    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: targetCyclePosition
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23763373067992910, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d9c09b76605ea4696e45cba62037ce, type: 2}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &50524468 stripped
@@ -671,6 +673,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -715,10 +718,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CentralizedMovementObject (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 4426227584228408, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9
@@ -751,21 +750,25 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: automaticCycleTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: targetCyclePosition
-      value: 0
+    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 23763373067992910, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d9c09b76605ea4696e45cba62037ce, type: 2}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &62719574 stripped
@@ -1004,6 +1007,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1089,11 +1093,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1164,6 +1163,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &112928084 stripped
@@ -1179,11 +1183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (23)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1238,6 +1237,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (23)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -1303,11 +1307,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (16)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1362,6 +1361,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (16)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -1501,6 +1505,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1583,6 +1588,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1665,6 +1671,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1811,6 +1818,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1925,6 +1933,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1965,11 +1974,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (21)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2024,6 +2028,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (21)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -2089,11 +2098,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b1354d07c999fcf4f8f9cc2ad2578a97,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_closed
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b1354d07c999fcf4f8f9cc2ad2578a97,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2164,6 +2168,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b1354d07c999fcf4f8f9cc2ad2578a97,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_closed
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1354d07c999fcf4f8f9cc2ad2578a97, type: 3}
 --- !u!1001 &205213047
@@ -2173,11 +2182,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2248,6 +2252,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &205213048 stripped
@@ -2305,6 +2314,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2345,11 +2355,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2420,6 +2425,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &235271598 stripped
@@ -2477,6 +2487,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2597,6 +2608,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2641,10 +2653,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CentralizedMovementObject (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4426227584228408, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -2677,21 +2685,25 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: automaticCycleTime
+    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: targetCyclePosition
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 23763373067992910, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d9c09b76605ea4696e45cba62037ce, type: 2}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &274810844 stripped
@@ -2775,11 +2787,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (29)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2834,6 +2841,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (29)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -2899,11 +2911,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (30)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2958,6 +2965,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (30)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -3041,8 +3053,9 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 299365178}
   m_Enabled: 1
-  serializedVersion: 9
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -3156,6 +3169,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3248,11 +3262,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3323,6 +3332,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &318995641 stripped
@@ -3338,11 +3352,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (31)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3397,6 +3406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (31)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -3532,6 +3546,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 738629909}
     m_Modifications:
+    - target: {fileID: 1367985465299272, guid: b3047235cf913b94196da719f0d15114, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1384231148612058, guid: b3047235cf913b94196da719f0d15114, type: 3}
       propertyPath: m_Name
       value: Spike (1)
@@ -3589,10 +3607,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: de24293ab61ba9146aee055015956cd1, type: 2}
-    - target: {fileID: 1367985465299272, guid: b3047235cf913b94196da719f0d15114, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 54882514293794256, guid: b3047235cf913b94196da719f0d15114, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b3047235cf913b94196da719f0d15114, type: 3}
@@ -3651,6 +3665,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3765,6 +3780,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3805,11 +3821,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (5)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3864,6 +3875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (5)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -4061,11 +4077,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (4)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4120,6 +4131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (4)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -4217,11 +4233,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4292,6 +4303,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &438131580 stripped
@@ -4343,10 +4359,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CentralizedMovementObject
       objectReference: {fileID: 0}
-    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1
-      objectReference: {fileID: 0}
     - target: {fileID: 4426227584228408, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3
@@ -4379,21 +4391,25 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: automaticCycleTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
-        type: 3}
-      propertyPath: targetCyclePosition
-      value: 0
+    - target: {fileID: 4908260004210038, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 23763373067992910, guid: a3523af47aa9e1b4387c403b74b036b1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: f0d9c09b76605ea4696e45cba62037ce, type: 2}
+    - target: {fileID: 114069133971510594, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: targetCyclePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114854635008073818, guid: a3523af47aa9e1b4387c403b74b036b1,
+        type: 3}
+      propertyPath: automaticCycleTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3523af47aa9e1b4387c403b74b036b1, type: 3}
 --- !u!4 &448144652 stripped
@@ -4451,6 +4467,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4533,6 +4550,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4573,11 +4591,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4648,6 +4661,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &465407245 stripped
@@ -4663,11 +4681,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (19)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4722,6 +4735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (19)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -4915,11 +4933,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4990,6 +5003,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &515556845 stripped
@@ -5047,6 +5065,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5129,6 +5148,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5279,6 +5299,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5319,11 +5340,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (18)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5378,6 +5394,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (18)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -5475,11 +5496,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5550,6 +5566,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &548687937 stripped
@@ -5565,11 +5586,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (8)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5624,6 +5640,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (8)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -5757,11 +5778,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5816,6 +5832,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (2)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -5881,11 +5902,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5955,6 +5971,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -6203,11 +6224,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (3)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6262,6 +6278,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (3)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -6327,11 +6348,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (25)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6386,6 +6402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (25)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -6451,11 +6472,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (14)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6510,6 +6526,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (14)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -6575,11 +6596,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (22)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6634,6 +6650,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (22)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -6741,6 +6762,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6855,6 +6877,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7005,6 +7028,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7087,6 +7111,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7169,6 +7194,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7209,11 +7235,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7284,6 +7305,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &716499658 stripped
@@ -7299,11 +7325,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (13)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7358,6 +7379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (13)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -7473,11 +7499,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7548,6 +7569,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &753107113 stripped
@@ -7563,11 +7589,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7638,6 +7659,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &754761989 stripped
@@ -7695,6 +7721,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7735,11 +7762,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (26)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7794,6 +7816,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (26)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -7901,6 +7928,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -7973,11 +8001,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (11)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8032,6 +8055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (11)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -8139,6 +8167,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8221,6 +8250,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8261,11 +8291,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (12)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8320,6 +8345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (12)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -8459,6 +8489,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -8678,11 +8709,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (32)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8737,6 +8763,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (32)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -8966,11 +8997,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9040,6 +9066,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -9152,11 +9183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9227,6 +9253,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &967738491 stripped
@@ -9242,11 +9273,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9316,6 +9342,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -9447,6 +9478,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9487,11 +9519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9561,6 +9588,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -9641,11 +9673,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (20)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9700,6 +9727,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (20)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -9807,6 +9839,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9889,6 +9922,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -9971,6 +10005,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10011,11 +10046,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (9)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10070,6 +10100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (9)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -10221,6 +10256,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10335,6 +10371,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10425,11 +10462,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10500,6 +10532,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1127148977 stripped
@@ -10557,6 +10594,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10639,6 +10677,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10881,6 +10920,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -10985,11 +11025,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11060,6 +11095,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1217123260 stripped
@@ -11075,11 +11115,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11150,6 +11185,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1232334436 stripped
@@ -11207,6 +11247,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11353,6 +11394,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11435,6 +11477,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11575,11 +11618,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11650,6 +11688,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1279481150 stripped
@@ -11697,11 +11740,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (6)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11756,6 +11794,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (6)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -11863,6 +11906,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -11999,11 +12043,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (17)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12058,6 +12097,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (17)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -12261,6 +12305,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12301,11 +12346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12376,6 +12416,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1355546195 stripped
@@ -12409,7 +12454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea7fb1ba94f1fd64e917b04803cfaca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numTrapezoids: 20
   horizontalAxis: 2
   verticalAxis: 1
   offsetAngleDegrees: 0
@@ -12476,6 +12520,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12558,6 +12603,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12640,6 +12686,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -12744,11 +12791,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12803,6 +12845,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -12987,6 +13034,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13069,6 +13117,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13151,6 +13200,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13191,11 +13241,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13265,6 +13310,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -13379,11 +13429,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13454,6 +13499,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1526743286 stripped
@@ -13469,11 +13519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13544,6 +13589,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1535236594 stripped
@@ -13601,6 +13651,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13717,11 +13768,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (28)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13776,6 +13822,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (28)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -13896,6 +13947,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -13978,6 +14030,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14092,6 +14145,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14238,6 +14292,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14320,6 +14375,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14360,11 +14416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (24)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14419,6 +14470,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (24)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -14526,6 +14582,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14640,6 +14697,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14756,6 +14814,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14870,6 +14929,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -14974,11 +15034,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15049,6 +15104,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1723896373 stripped
@@ -15106,6 +15166,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15188,6 +15249,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15228,11 +15290,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (27)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15287,6 +15344,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (27)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -15500,11 +15562,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (10)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15559,6 +15616,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (10)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -15666,6 +15728,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -15759,6 +15822,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -15866,11 +15930,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15941,6 +16000,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1820225640 stripped
@@ -15988,11 +16052,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16063,6 +16122,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1830783622 stripped
@@ -16120,6 +16184,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -16260,11 +16325,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16335,6 +16395,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1917313509 stripped
@@ -16382,11 +16447,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (15)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16441,6 +16501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (15)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -16548,6 +16613,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -16923,11 +16989,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16998,6 +17059,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &1996062355 stripped
@@ -17055,6 +17121,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -17095,11 +17162,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (7)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17154,6 +17216,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (7)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -17251,11 +17318,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17326,6 +17388,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &2033148223 stripped
@@ -17341,16 +17408,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5060006574684695646, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: m_Name
-      value: Main Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 258986095}
     - target: {fileID: 5056153190526293174, guid: 328982a664b1d6b47b612d49075dac8d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17406,6 +17463,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5060006574684695646, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: m_Name
+      value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164602325765574138, guid: 328982a664b1d6b47b612d49075dac8d,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 258986095}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 328982a664b1d6b47b612d49075dac8d, type: 3}
 --- !u!1 &2058483156
@@ -17515,11 +17582,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17590,6 +17652,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &2078864363 stripped
@@ -17605,11 +17672,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17680,6 +17742,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &2082871210 stripped
@@ -17737,6 +17804,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -17777,11 +17845,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -17852,6 +17915,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
 --- !u!4 &2084125009 stripped
@@ -17909,6 +17977,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -18013,11 +18082,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 491313657}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
-        type: 3}
-      propertyPath: m_Name
-      value: platform-rails-1 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18072,6 +18136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 234123bfe0dc1494a99f704998af6c9a,
+        type: 3}
+      propertyPath: m_Name
+      value: platform-rails-1 (1)
       objectReference: {fileID: 0}
     - target: {fileID: -113181020801827196, guid: 234123bfe0dc1494a99f704998af6c9a,
         type: 3}
@@ -18249,6 +18318,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -18289,11 +18359,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2059260384}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
-        type: 3}
-      propertyPath: m_Name
-      value: platform_roperails_open (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14cd223af2371124b905099271d54b47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -18363,6 +18428,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 14cd223af2371124b905099271d54b47,
+        type: 3}
+      propertyPath: m_Name
+      value: platform_roperails_open (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14cd223af2371124b905099271d54b47, type: 3}
@@ -18977,6 +19047,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -19015,6 +19086,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -19053,6 +19125,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -19091,6 +19164,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -19129,6 +19203,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -19509,12 +19584,12 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000044703484
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.90002406
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
@@ -19561,11 +19636,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7081206704964194175, guid: cb6dac5bace50b24a86e5e31d2ac99df,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: de24293ab61ba9146aee055015956cd1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb6dac5bace50b24a86e5e31d2ac99df, type: 3}
 --- !u!4 &2751599956617481828 stripped
