@@ -69,8 +69,8 @@ public class BuildJobs : ScriptableObject
 
     private static int PerformAndroidBuild()
     {
-        PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
-        PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
+        PlayerSettings.Android.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
+        PlayerSettings.Android.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
         //PlayerSettings.Android.keystoreName = Path.GetFullPath(PlayerSettings.Android.keystoreName);
         var buildOptions = CreatePlayerOptions(BuildTarget.Android);
         var buildReport = BuildPipeline.BuildPlayer(buildOptions);
