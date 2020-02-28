@@ -5094,7 +5094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 311227138}
   - component: {fileID: 311227144}
-  - component: {fileID: 311227143}
+  - component: {fileID: 311227141}
   - component: {fileID: 311227142}
   - component: {fileID: 311227140}
   - component: {fileID: 311227139}
@@ -5148,20 +5148,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &311227142
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 311227137}
-  m_Material: {fileID: 13400000, guid: 8ac1277b6e5bd1c4c940a655e10f5717, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &311227143
+--- !u!23 &311227141
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5191,7 +5178,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -5200,6 +5187,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &311227142
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311227137}
+  m_Material: {fileID: 13400000, guid: 8ac1277b6e5bd1c4c940a655e10f5717, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &311227144
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5258,6 +5258,7 @@ MonoBehaviour:
   leftControlBound: 30
   rightControlBound: 30
   cyclePosition: 0
+  debugChildren: 0
 --- !u!1 &471738905
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,6 +5311,7 @@ MonoBehaviour:
   leftControlBound: 20
   rightControlBound: 15
   cyclePosition: 0
+  debugChildren: 1
 --- !u!1 &503059324
 GameObject:
   m_ObjectHideFlags: 0
@@ -5360,6 +5362,7 @@ MonoBehaviour:
   leftControlBound: 20
   rightControlBound: 15
   cyclePosition: 0
+  debugChildren: 0
 --- !u!1 &561471581
 GameObject:
   m_ObjectHideFlags: 0
@@ -5408,6 +5411,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 0
   rotateClockwise: 1
+  offsetAngle: 0
 --- !u!1 &582793054
 GameObject:
   m_ObjectHideFlags: 0
@@ -5685,7 +5689,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -5831,6 +5835,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 180
   rotateClockwise: 0
+  offsetAngle: 3.1415927
 --- !u!1 &722224864
 GameObject:
   m_ObjectHideFlags: 0
@@ -5879,6 +5884,7 @@ MonoBehaviour:
   verticalAxis: 2.5
   offsetAngleDegrees: 0
   rotateClockwise: 1
+  offsetAngle: 0
 --- !u!1 &766597147
 GameObject:
   m_ObjectHideFlags: 0
@@ -6082,6 +6088,7 @@ MonoBehaviour:
   leftControlBound: 20
   rightControlBound: 15
   cyclePosition: 0
+  debugChildren: 0
 --- !u!1 &1049528585
 GameObject:
   m_ObjectHideFlags: 0
@@ -6130,6 +6137,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: -90
   rotateClockwise: 1
+  offsetAngle: -1.5707964
 --- !u!1001 &1058990981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6145,7 +6153,7 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000074505785
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
@@ -6155,22 +6163,22 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.0000007785857
+      value: 0.00000093877316
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000011922966
+      value: 0.000000006324329
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.00000074505795
+      value: 0.0000006854534
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000006038527
+      value: 0.000000023875304
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
@@ -6302,7 +6310,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1182081013}
   - component: {fileID: 1182081019}
-  - component: {fileID: 1182081018}
+  - component: {fileID: 1182081016}
   - component: {fileID: 1182081017}
   - component: {fileID: 1182081015}
   - component: {fileID: 1182081014}
@@ -6356,20 +6364,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1182081017
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1182081012}
-  m_Material: {fileID: 13400000, guid: 8ac1277b6e5bd1c4c940a655e10f5717, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1182081018
+--- !u!23 &1182081016
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6399,7 +6394,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -6408,6 +6403,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1182081017
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182081012}
+  m_Material: {fileID: 13400000, guid: 8ac1277b6e5bd1c4c940a655e10f5717, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1182081019
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6464,6 +6472,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 90
   rotateClockwise: 0
+  offsetAngle: 1.5707964
 --- !u!1 &1273290162
 GameObject:
   m_ObjectHideFlags: 0
@@ -6512,6 +6521,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 180
   rotateClockwise: 1
+  offsetAngle: 3.1415927
 --- !u!1001 &1299466490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6732,6 +6742,7 @@ MonoBehaviour:
   verticalAxis: 2.5
   offsetAngleDegrees: 0
   rotateClockwise: 1
+  offsetAngle: 0
 --- !u!1 &1407814386
 GameObject:
   m_ObjectHideFlags: 0
@@ -6742,7 +6753,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1407814387}
   - component: {fileID: 1407814393}
-  - component: {fileID: 1407814392}
+  - component: {fileID: 1407814390}
   - component: {fileID: 1407814391}
   - component: {fileID: 1407814389}
   - component: {fileID: 1407814388}
@@ -6796,20 +6807,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1407814391
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1407814386}
-  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1407814392
+--- !u!23 &1407814390
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6839,7 +6837,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -6848,6 +6846,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1407814391
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407814386}
+  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1407814393
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -6866,7 +6877,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1454306701}
   - component: {fileID: 1454306707}
-  - component: {fileID: 1454306706}
+  - component: {fileID: 1454306704}
   - component: {fileID: 1454306705}
   - component: {fileID: 1454306703}
   - component: {fileID: 1454306702}
@@ -6920,20 +6931,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1454306705
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454306700}
-  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1454306706
+--- !u!23 &1454306704
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6963,7 +6961,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -6972,6 +6970,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1454306705
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454306700}
+  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1454306707
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7087,7 +7098,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -7183,6 +7194,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 0
   rotateClockwise: 0
+  offsetAngle: 0
 --- !u!1 &1594664530
 GameObject:
   m_ObjectHideFlags: 0
@@ -7231,6 +7243,7 @@ MonoBehaviour:
   verticalAxis: 2.5
   offsetAngleDegrees: 180
   rotateClockwise: 1
+  offsetAngle: 3.1415927
 --- !u!1 &1620597230
 GameObject:
   m_ObjectHideFlags: 0
@@ -7279,6 +7292,7 @@ MonoBehaviour:
   verticalAxis: 5
   offsetAngleDegrees: 187.57
   rotateClockwise: 0
+  offsetAngle: 3.273714
 --- !u!1 &1692096787
 GameObject:
   m_ObjectHideFlags: 0
@@ -7544,6 +7558,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: -90
   rotateClockwise: 0
+  offsetAngle: -1.5707964
 --- !u!1 &1751694389
 GameObject:
   m_ObjectHideFlags: 0
@@ -7593,6 +7608,7 @@ MonoBehaviour:
   leftControlBound: 15
   rightControlBound: 15
   cyclePosition: 0
+  debugChildren: 0
 --- !u!1 &1852493178
 GameObject:
   m_ObjectHideFlags: 0
@@ -7603,7 +7619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852493179}
   - component: {fileID: 1852493185}
-  - component: {fileID: 1852493184}
+  - component: {fileID: 1852493182}
   - component: {fileID: 1852493183}
   - component: {fileID: 1852493181}
   - component: {fileID: 1852493180}
@@ -7657,20 +7673,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1852493183
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1852493178}
-  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1852493184
+--- !u!23 &1852493182
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7700,7 +7703,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -7709,6 +7712,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1852493183
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852493178}
+  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1852493185
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -7851,7 +7867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1932677012}
   - component: {fileID: 1932677018}
-  - component: {fileID: 1932677017}
+  - component: {fileID: 1932677015}
   - component: {fileID: 1932677016}
   - component: {fileID: 1932677014}
   - component: {fileID: 1932677013}
@@ -7905,20 +7921,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &1932677016
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1932677011}
-  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1932677017
+--- !u!23 &1932677015
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7948,7 +7951,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -7957,6 +7960,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1932677016
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1932677011}
+  m_Material: {fileID: 13400000, guid: c1dd3d375325e2c4aabf60f8ef0bb731, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1932677018
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8187,7 +8203,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -8318,6 +8334,7 @@ MonoBehaviour:
   verticalAxis: 3
   offsetAngleDegrees: 90
   rotateClockwise: 1
+  offsetAngle: 1.5707964
 --- !u!1 &2123718320
 GameObject:
   m_ObjectHideFlags: 0
@@ -8425,7 +8442,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
+  m_StitchLightmapSeams: 1
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

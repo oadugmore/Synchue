@@ -9,6 +9,7 @@ public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
     public float offsetAngleDegrees;
     public bool rotateClockwise;
 
+    [SerializeField]
     private float offsetAngle;
     private Rigidbody movementObject;
 
