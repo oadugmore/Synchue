@@ -4,13 +4,17 @@ using UnityEngine;
 [ExecuteInEditMode, SelectionBase]
 public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
 {
-    public float horizontalAxis;
-    public float verticalAxis;
-    public float offsetAngleDegrees;
-    public bool rotateClockwise;
-
+    [SerializeField]
+    private float horizontalAxis;
+    [SerializeField]
+    private float verticalAxis;
+    [SerializeField]
+    private float offsetAngleDegrees;
+    [SerializeField]
+    private bool rotateClockwise;
     [SerializeField]
     private float offsetAngle;
+
     private Rigidbody movementObject;
 
     void Start()
