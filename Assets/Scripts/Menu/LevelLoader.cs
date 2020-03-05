@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Text sceneText;
+    public InputField sceneText;
 
     // Load any scene by its name.
     public void LoadScene()
@@ -15,7 +15,7 @@ public class LevelLoader : MonoBehaviour
     // Load a level by its number.
     public void LoadLevel(int levelNumber)
     {
-        string sceneName = "Level" + levelNumber;
-        SceneManager.LoadScene(sceneName);
+        var scene = "Level" + levelNumber;
+        sceneText.text = scene;
     }
 }
