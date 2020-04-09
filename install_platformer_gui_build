@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$1" == "-u" ]; then
+	cmd.exe /c C:\\Users\\oadug\\OneDrive\\Software_Engineering\\Scripts\\InstallAPKWithADB.bat /u com.oadugmore.platformer C:\\Users\\oadug\\source\\repos\\Platformer\\Builds\\PlatformerAndroidGUIBuild.apk
+else
+	cmd.exe /c C:\\Users\\oadug\\OneDrive\\Software_Engineering\\Scripts\\InstallAPKWithADB.bat C:\\Users\\oadug\\source\\repos\\Platformer\\Builds\\PlatformerAndroidGUIBuild.apk
+fi
