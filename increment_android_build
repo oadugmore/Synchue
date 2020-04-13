@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Increment version code if on specified branch
+branchname=`git rev-parse --abbrev-ref HEAD`
+if [ "$branchname" = "release-internal" ]; then
+        old_num=`cat ./ProjectSettings/ProjectSettings.asset | grep AndroidBundleVersionCode | cut -d ' ' -f 4`
+        new_num=$((old_num+1))
+        echo "Incrementing Android version code: $old_num > $new_num"
+        sed -i -e '/AndroidBundleVersionCode/ s/:.*/: '"$new_num"'/' ./ProjectSettings/ProjectSettings.asset
+        git add ./ProjectSettings/ProjectSettings.asset
+else
+	echo "Not incrementing version code for branch $branchname."
+fi
