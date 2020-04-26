@@ -4,21 +4,22 @@ using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
-
-    private static Controller current = null;
-
     public ColorButton blueButton;
     public ColorButton orangeButton;
     public float buttonSpeed = 7f;
-    public bool useTouchInputInEditor = false;
+    public bool useTouchInputInEditor;
 
-    private bool keyboardInput = false;
-    private float blueAxis = 0f;
-    private bool blueOn = false;
-    private float orangeAxis = 0f;
-    private bool orangeOn = false;
+    private static Controller current;
+    private bool keyboardInput;
+    private float blueAxis;
+    private bool blueOn;
+    private float orangeAxis;
+    private bool orangeOn;
     private const float whiteAxis = 1f; // constant input
     private const bool whiteOn = true;
+    private WorldColorButton[] purpleButtons;
+    private float purpleAxis;
+    private bool purpleOn;
 
     private void Start()
     {
@@ -31,7 +32,9 @@ public class Controller : MonoBehaviour
             Debug.LogError("Only one instance of Controller is allowed.");
         }
 
-        #if UNITY_EDITOR
+        purpleButtons = FindObjectsOfType<WorldColorButton>();
+
+#if UNITY_EDITOR
         if (!useTouchInputInEditor)
         {
             keyboardInput = true;
@@ -41,7 +44,7 @@ public class Controller : MonoBehaviour
         {
             Debug.Log("Running in the Unity Editor with touch input enabled.");
         }
-        #endif
+#endif
     }
 
     private void Update()
@@ -74,8 +77,32 @@ public class Controller : MonoBehaviour
             orangeOn = false;
         }
 
+        if (AnyWorldButtonPressed())
+        {
+            purpleAxis += change;
+            purpleOn = true;
+        }
+        else
+        {
+            purpleAxis -= change;
+            purpleOn = false;
+        }
+
         blueAxis = Mathf.Clamp(blueAxis, 0f, 1f);
         orangeAxis = Mathf.Clamp(orangeAxis, 0f, 1f);
+        purpleAxis = Mathf.Clamp(purpleAxis, 0f, 1f);
+    }
+
+    private bool AnyWorldButtonPressed()
+    {
+        foreach (var button in purpleButtons)
+        {
+            if (button.isPressed)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static float GetAxis(InteractColor color)
@@ -88,6 +115,8 @@ public class Controller : MonoBehaviour
                 return current.orangeAxis;
             case InteractColor.White:
                 return whiteAxis;
+            case InteractColor.Purple:
+                return current.purpleAxis;
             default:
                 throw new NotImplementedException("Update controller to support " + color + ".");
         }
@@ -103,6 +132,8 @@ public class Controller : MonoBehaviour
                 return current.orangeOn;
             case InteractColor.White:
                 return whiteOn;
+            case InteractColor.Purple:
+                return current.purpleOn;
             default:
                 throw new NotImplementedException("Update controller to support " + color + ".");
         }
@@ -112,5 +143,5 @@ public class Controller : MonoBehaviour
 
 public enum InteractColor
 {
-    Blue, Orange, White
+    Blue, Orange, White, Purple
 }
