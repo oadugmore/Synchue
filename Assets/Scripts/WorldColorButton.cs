@@ -6,7 +6,7 @@ public class WorldColorButton : MonoBehaviour
 {
     public bool isPressed { get; private set; }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
