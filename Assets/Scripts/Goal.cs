@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private WinScreen winScreen;
+
+    private RectTransform uiRoot;
+    private bool finished;
+
     void Start()
     {
-        
+        uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
     void OnCollisionEnter(Collision other) {
-        if (other.gameObject.CompareTag("Player"))
+        if (!finished && other.gameObject.CompareTag("Player"))
         {
-            
+            Instantiate(winScreen, uiRoot);
+            finished = true;
         }
     }
 }

@@ -2,19 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class WinScreen : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private Button nextLevelButton;
+
+    private string nextLevelName;
+
     void Start()
     {
-        
+        int levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
+        nextLevelName = "Level_" + (levelNumber + 1);
+        if (!Application.CanStreamedLevelBeLoaded(nextLevelName))
+        {
+            nextLevelButton.interactable = false;
+        }
     }
 
     public void NextLevel()
     {
-        
+        SceneManager.LoadScene(nextLevelName);
     }
+
+    // public void DisableNextLevel()
+    // {
+    //     nextLevelButton.interactable = false;
+    // }
 
     public void Menu()
     {
@@ -26,7 +41,6 @@ public class WinScreen : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    // Update is called once per frame
     void Update()
     {
         

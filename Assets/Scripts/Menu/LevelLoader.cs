@@ -15,7 +15,7 @@ public class LevelLoader : MonoBehaviour
     // Load a level by its number.
     public void LoadLevel(int levelNumber)
     {
-        var scene = "Level" + levelNumber;
+        var scene = "Level_" + levelNumber;
         sceneText.text = scene;
     }
 }
