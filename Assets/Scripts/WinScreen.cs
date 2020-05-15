@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,8 @@ public class WinScreen : MonoBehaviour
 {
     [SerializeField]
     private Button nextLevelButton;
+    [SerializeField]
+    private Text timeText;
 
     private string nextLevelName;
 
@@ -19,17 +22,14 @@ public class WinScreen : MonoBehaviour
         {
             nextLevelButton.interactable = false;
         }
+        var completionTime = TimeSpan.FromSeconds(FindObjectOfType<Goal>().GetCompletionTime());
+        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'fff");
     }
 
     public void NextLevel()
     {
         SceneManager.LoadScene(nextLevelName);
     }
-
-    // public void DisableNextLevel()
-    // {
-    //     nextLevelButton.interactable = false;
-    // }
 
     public void Menu()
     {
@@ -39,10 +39,5 @@ public class WinScreen : MonoBehaviour
     public void Replay()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    void Update()
-    {
-        
     }
 }

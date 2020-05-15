@@ -9,20 +9,25 @@ public class Goal : MonoBehaviour
 
     private RectTransform uiRoot;
     private bool finished;
+    private float startTime;
+    private float endTime;
 
     void Start()
     {
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+        startTime = Time.time;
     }
 
-    void Update()
+    public float GetCompletionTime()
     {
-        
+        return endTime - startTime;
     }
 
-    void OnCollisionEnter(Collision other) {
+    void OnCollisionEnter(Collision other)
+    {
         if (!finished && other.gameObject.CompareTag("Player"))
         {
+            endTime = Time.time;
             Instantiate(winScreen, uiRoot);
             finished = true;
         }
