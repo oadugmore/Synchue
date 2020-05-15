@@ -11,6 +11,8 @@ public class WinScreen : MonoBehaviour
     private Button nextLevelButton;
     [SerializeField]
     private Text timeText;
+    [SerializeField]
+    private Text levelText;
 
     private string nextLevelName;
 
@@ -24,6 +26,7 @@ public class WinScreen : MonoBehaviour
         }
         var completionTime = TimeSpan.FromSeconds(FindObjectOfType<Goal>().GetCompletionTime());
         timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'fff");
+        levelText.text = "Level " + levelNumber;
     }
 
     public void NextLevel()
