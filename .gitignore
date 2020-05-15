@@ -2,7 +2,11 @@
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
-[Bb]uilds/
+[Bb]uilds/*
+!Builds/PlatformeriOS
+Builds/PlatformeriOS/*
+!Builds/PlatformeriOS/Gemfile
+!Builds/PlatformeriOS/fastlane
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -42,7 +46,5 @@ build/
 # Blender
 *.blend1*
 
-Assets/Editor/Secrets.cs
-Assets/Editor/Secrets.cs.meta
 .DS_Store
 keystore.jks

@@ -77,7 +77,15 @@ public class BuildJobs : ScriptableObject
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
     }
 
-    [MenuItem("CI/Increment Android Bundle Version Code")]
+    [MenuItem("CI/Build New iOS Version")]
+    public static int BuildNewiOSVersion()
+    {
+        var buildOptions = CreatePlayerOptions(BuildTarget.iOS);
+        var buildReport = BuildPipeline.BuildPlayer(buildOptions);
+        return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
+    }
+
+    // [MenuItem("CI/Increment Android Bundle Version Code")]
     public static int IncrementAndroidBundleVersionCode()
     {
         PlayerSettings.Android.bundleVersionCode++;
