@@ -13,7 +13,7 @@ if [ "$branchname" = "release-internal" ]; then
         old_num_ios=`cat ./ProjectSettings/ProjectSettings.asset | head -n $ios_ver_line | tail -1 | cut -d ' ' -f 6`
         new_num_ios=$((old_num_ios+1))
         echo "Incrementing iPhone version code: $old_num_ios > $new_num_ios"
-        sed -i -e "${ios_ver_line}s/:.*/: 4/" ./ProjectSettings/ProjectSettings.asset
+        sed -i -e "${ios_ver_line}s/:.*/: $new_num_ios/" ./ProjectSettings/ProjectSettings.asset
         
         git add ./ProjectSettings/ProjectSettings.asset
 else
