@@ -22,6 +22,7 @@ platform :ios do
     changelog_from_git_commits
     upload_to_testflight(
       distribute_external: true,
+      groups: "Testers",
       demo_account_required: false,
       beta_app_review_info: {
         contact_email: "oadugmore@outlook.com",
