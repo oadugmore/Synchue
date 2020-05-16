@@ -37,7 +37,7 @@ public class BuildJobs : ScriptableObject
         {
             scenes = FindEnabledEditorScenes(),
             target = target,
-            options = BuildOptions.AcceptExternalModificationsToPlayer,
+            options = target == BuildTarget.iOS ? BuildOptions.AcceptExternalModificationsToPlayer : BuildOptions.None,
             locationPathName = buildName
         };
         return options;
