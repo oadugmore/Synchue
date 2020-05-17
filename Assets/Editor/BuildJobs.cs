@@ -37,32 +37,32 @@ public class BuildJobs : ScriptableObject
         {
             scenes = FindEnabledEditorScenes(),
             target = target,
-            options = target == BuildTarget.iOS ? BuildOptions.AcceptExternalModificationsToPlayer : BuildOptions.None,
+            options = target == BuildTarget.iOS ?
+                BuildOptions.AcceptExternalModificationsToPlayer | BuildOptions.CompressWithLz4HC :
+                BuildOptions.CompressWithLz4HC,
             locationPathName = buildName
         };
         return options;
     }
 
     /// <summary>
-    /// Called by Jenkins. Increments the Android bundle version code and performs build for ARM64.
+    /// Called by Jenkins. Performs a build for ARM64.
     /// </summary>
-    [MenuItem("CI/Build New Android Version")]
+    [MenuItem("CI/Build New Android Version ARM64")]
     public static int BuildNewAndroidVersion()
     {
-        //IncrementAndroidBundleVersionCode();
         PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
         var buildResult = PerformAndroidBuild();
         return buildResult;
     }
 
     /// <summary>
-    /// Called by Jenkins. Increments the Android bundle version code and performs a build for all architectures.
+    /// Called by Jenkins. Performs a build for all architectures.
     /// </summary>
     [MenuItem("CI/Build New Android Version All Architectures")]
     public static int BuildNewAndroidVersionFull()
     {
-        //IncrementAndroidBundleVersionCode();
-        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.All;
         var buildResult = PerformAndroidBuild();
         return buildResult;
     }
@@ -71,25 +71,21 @@ public class BuildJobs : ScriptableObject
     {
         PlayerSettings.Android.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
         PlayerSettings.Android.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
-        //PlayerSettings.Android.keystoreName = Path.GetFullPath(PlayerSettings.Android.keystoreName);
+        EditorUserBuildSettings.buildAppBundle = true;
         var buildOptions = CreatePlayerOptions(BuildTarget.Android);
         var buildReport = BuildPipeline.BuildPlayer(buildOptions);
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
     }
 
+    /// <summary>
+    /// Called by Jenkins. Performs a build for iOS.
+    /// </summary>
     [MenuItem("CI/Build New iOS Version")]
     public static int BuildNewiOSVersion()
     {
         var buildOptions = CreatePlayerOptions(BuildTarget.iOS);
         var buildReport = BuildPipeline.BuildPlayer(buildOptions);
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
-    }
-
-    // [MenuItem("CI/Increment Android Bundle Version Code")]
-    public static int IncrementAndroidBundleVersionCode()
-    {
-        PlayerSettings.Android.bundleVersionCode++;
-        return 0;
     }
 
     private static string[] FindEnabledEditorScenes()
