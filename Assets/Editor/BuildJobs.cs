@@ -17,7 +17,7 @@ public class BuildJobs : ScriptableObject
         {
             case BuildTarget.Android:
                 {
-                    buildName += "PlatformerAndroid.apk";
+                    buildName += "PlatformerAndroid.aab";
                     break;
                 }
             case BuildTarget.iOS:
@@ -72,6 +72,7 @@ public class BuildJobs : ScriptableObject
         PlayerSettings.Android.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
         PlayerSettings.Android.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
         EditorUserBuildSettings.buildAppBundle = true;
+        EditorUserBuildSettings.androidCreateSymbolsZip = false;
         var buildOptions = CreatePlayerOptions(BuildTarget.Android);
         var buildReport = BuildPipeline.BuildPlayer(buildOptions);
         return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
