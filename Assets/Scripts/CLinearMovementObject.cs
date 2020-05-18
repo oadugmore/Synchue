@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CLinearMovementObject : CCyclePathingObject
 {
@@ -17,28 +18,41 @@ public class CLinearMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
-        int nextIndex = NextNode(cyclePos);
-        int previousIndex = PreviousNode(nextIndex);
+        var next = (CLinearMovementNode)NextNode(cyclePos);
+        var previous = (CLinearMovementNode)next.previous;
+        float nextCyclePos = next.targetCyclePosition;
+        float previousCyclePos = previous.targetCyclePosition;
 
-        CLinearMovementNode next = (CLinearMovementNode)nodes[nextIndex];
-        CLinearMovementNode previous = (CLinearMovementNode)nodes[previousIndex];
-
-        float nextCyclePos = next.TargetCyclePosition();
-        float previousCyclePos = previous.TargetCyclePosition();
-        //if (nextCyclePos == 0f) nextCyclePos = 1f;
-        if (nextIndex == 0)
+        if (cyclePos > nextCyclePos)
         {
-            if (cyclePos < nextCyclePos) // only happens when the first node has a nonzero Target Cycle Position
-            {
-                cyclePos += 1f;
-            }
-
             nextCyclePos += 1f;
         }
 
+        if (cyclePos < previousCyclePos)
+        {
+            previousCyclePos -= 1f;
+        }
+
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        Vector3 newPosition = Vector3.Lerp(previous.Position(), next.Position(), fraction);
+        Vector3 newPosition = Vector3.Lerp(previous.position, next.position, fraction);
         movementObject.MovePosition(newPosition);
     }
 
+    protected override void CalculateCyclePositions()
+    {
+        var totalDistance = 0f;
+        var distances = new List<float>(nodes.Count);
+        foreach (CLinearMovementNode node in nodes)
+        {
+            var previous = node.previous as CLinearMovementNode;
+            var distance = Vector3.Distance(node.position, previous.position);
+            totalDistance += distance;
+            distances.Add(totalDistance);
+        }
+
+        for (int i = 0; i < nodes.Count; ++i)
+        {
+            (nodes[i] as CLinearMovementNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
+        }
+    }
 }

@@ -10,16 +10,11 @@ public class DragKiller : MonoBehaviour, ICCycleObject
     private BoxCollider trigger;
 
     // Use this for initialization
+    [System.Obsolete]
     private void Start()
     {
         trigger = GetComponent<BoxCollider>();
         trigger.enabled = false;
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-
     }
 
     public void UpdateCyclePosition(float cyclePos)

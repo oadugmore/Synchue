@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
+    [SerializeField]
+    protected bool automaticCycleTime = false;
     protected List<CCycleNode> nodes;
 
     protected virtual void Start()
@@ -11,34 +14,39 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
         nodes = new List<CCycleNode>();
         GetComponentsInChildren<CCycleNode>(nodes);
         if (nodes.Count < 1)
+        {
             Debug.LogError(this + " needs at least one node.");
+            return;
+        }
+
+        nodes[0].previous = nodes[nodes.Count - 1];
+        for (int i = 1; i < nodes.Count; i++)
+        {
+            nodes[i].previous = nodes[i - 1];
+        }
+        if (automaticCycleTime)
+        {
+            CalculateCyclePositions();
+        }
     }
 
     public abstract void UpdateCyclePosition(float cyclePos);
 
-    protected int NextNode(float cyclePos)
+    protected abstract void CalculateCyclePositions();
+
+    protected CCycleNode NextNode(float cyclePos)
     {
         int nextNode = 0;
 
         for (int i = 0; i < nodes.Count; i++)
         {
-            if (nodes[i].TargetCyclePosition() > cyclePos)
+            if (nodes[i].targetCyclePosition > cyclePos)
             {
                 nextNode = i;
                 break;
             }
         }
-        return nextNode;
-    }
-
-    protected int PreviousNode(int nextIndex)
-    {
-        int previousIndex = 0;
-        if (nextIndex == 0)
-            previousIndex = nodes.Count - 1;
-        else
-            previousIndex = nextIndex - 1;
-        return previousIndex;
+        return nodes[nextNode];
     }
 
 }

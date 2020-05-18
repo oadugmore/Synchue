@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -15,45 +16,78 @@ public class BuildJobs : ScriptableObject
         switch (target)
         {
             case BuildTarget.Android:
-                buildName += "PlatformerAndroid.apk";
-                break;
+                {
+                    buildName += "PlatformerAndroid.aab";
+                    break;
+                }
             case BuildTarget.iOS:
-                buildName += "PlatformeriOS";
-                break;
+                {
+                    buildName += "PlatformeriOS";
+                    break;
+                }
             default:
-                buildName += "Platformer";
-                break;
+                {
+                    buildName += "Platformer";
+                    break;
+                }
         }
-
-        // Set app secrets
-        PlayerSettings.Android.keystorePass = Secrets.GetAndroidPassword();
-        PlayerSettings.Android.keyaliasPass = Secrets.GetAndroidPassword();
 
         // Create Build Player Options
         var options = new BuildPlayerOptions
         {
             scenes = FindEnabledEditorScenes(),
             target = target,
-            options = BuildOptions.None,
+            options = target == BuildTarget.iOS ?
+                BuildOptions.AcceptExternalModificationsToPlayer | BuildOptions.CompressWithLz4HC :
+                BuildOptions.CompressWithLz4HC,
             locationPathName = buildName
         };
         return options;
     }
 
-
-    [MenuItem("Jenkins/Build Android")]
-    public static int PerformAndroidBuild()
+    /// <summary>
+    /// Called by Jenkins. Performs a build for ARM64.
+    /// </summary>
+    [MenuItem("CI/Build New Android Version ARM64")]
+    public static int BuildNewAndroidVersion()
     {
-        var options = CreatePlayerOptions(BuildTarget.Android);
-        var report = BuildPipeline.BuildPlayer(options);
-        var summary = report.summary;
-        if (summary.result == BuildResult.Failed)
-        {
-            return 1;
-        }
-        return 0;
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
+        var buildResult = PerformAndroidBuild();
+        return buildResult;
     }
 
+    /// <summary>
+    /// Called by Jenkins. Performs a build for all architectures.
+    /// </summary>
+    [MenuItem("CI/Build New Android Version All Architectures")]
+    public static int BuildNewAndroidVersionFull()
+    {
+        PlayerSettings.Android.targetArchitectures = AndroidArchitecture.All;
+        var buildResult = PerformAndroidBuild();
+        return buildResult;
+    }
+
+    private static int PerformAndroidBuild()
+    {
+        PlayerSettings.Android.keystorePass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
+        PlayerSettings.Android.keyaliasPass = Environment.GetEnvironmentVariable("ANDROID_KEY_PASSWORD");
+        EditorUserBuildSettings.buildAppBundle = true;
+        EditorUserBuildSettings.androidCreateSymbolsZip = false;
+        var buildOptions = CreatePlayerOptions(BuildTarget.Android);
+        var buildReport = BuildPipeline.BuildPlayer(buildOptions);
+        return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
+    }
+
+    /// <summary>
+    /// Called by Jenkins. Performs a build for iOS.
+    /// </summary>
+    [MenuItem("CI/Build New iOS Version")]
+    public static int BuildNewiOSVersion()
+    {
+        var buildOptions = CreatePlayerOptions(BuildTarget.iOS);
+        var buildReport = BuildPipeline.BuildPlayer(buildOptions);
+        return (buildReport.summary.result == BuildResult.Failed) ? 1 : 0;
+    }
 
     private static string[] FindEnabledEditorScenes()
     {

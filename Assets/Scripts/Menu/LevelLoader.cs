@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
+    public InputField sceneText;
 
+    // Load any scene by its name.
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(sceneText.text);
+    }
+
+    // Load a level by its number.
     public void LoadLevel(int levelNumber)
     {
-        string sceneName = "Level" + levelNumber;
-        SceneManager.LoadScene(sceneName);
+        var scene = "Level_" + levelNumber;
+        sceneText.text = scene;
     }
-
-    public void InputTest()
-    {
-        SceneManager.LoadScene("InputTest");
-    }
-
 }

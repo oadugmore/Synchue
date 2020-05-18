@@ -5,10 +5,9 @@ public class FollowTrackingCamera : MonoBehaviour
     // Camera target to look at.
     public Transform target;
 
-    // Exposed vars for the camera position from the target.
-    public float height = 20f;
-    public float distance = 20f;
-    public float xPos = 0f;
+    // Restrict movement
+    public bool lockVerticalMovement;
+    public bool lockHorizontalMovement;
 
     // Camera limits.
     public float min = 10f;
@@ -32,11 +31,17 @@ public class FollowTrackingCamera : MonoBehaviour
     private Quaternion rotationResult;
     private Vector3 targetAdjustedPosition;
 
+    // Get these from initial transform position instead
+    private float xPos;
+    private float height;
+    private float distance;
+
     private void Start()
     {
         // Initialise default zoom vals.
-        heightWanted = height;
-        distanceWanted = distance;
+        xPos = transform.position.x;
+        heightWanted = height = transform.position.y;
+        distanceWanted = distance = -transform.position.z;
 
         // Setup our default camera.  We set the zoom result to be our default position.
         zoomResult = new Vector3(xPos, height, -distance);
@@ -84,9 +89,12 @@ public class FollowTrackingCamera : MonoBehaviour
 
         // Set the camera position reference.
         targetAdjustedPosition = rotationResult * zoomResult;
-        transform.position = target.position + targetAdjustedPosition;
+        transform.position = targetAdjustedPosition + new Vector3(
+            lockHorizontalMovement ? 0 : target.position.x,
+            lockVerticalMovement ? 0 : target.position.y,
+            target.position.z);
 
         // Face the desired position.
-        transform.LookAt(target);
+        //transform.LookAt(target);
     }
 }

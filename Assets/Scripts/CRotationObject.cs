@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class CRotationObject : CCyclePathingObject
 {
-    //List<CRotationNode> nodes;
     private Rigidbody rotationObject;
 
-    // Use this for initialization
     protected override void Start()
     {
         base.Start();
@@ -15,7 +14,7 @@ public class CRotationObject : CCyclePathingObject
         {
             Debug.LogError(this + " has less than 2 nodes.");
         }
-        else if (nodes[0].TargetCyclePosition() != 0f)
+        else if (nodes[0].targetCyclePosition != 0f)
         {
             Debug.LogError(this + " is the first node and must have a targetCyclePosition of 0.");
         }
@@ -23,24 +22,19 @@ public class CRotationObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
-        int nextIndex = NextNode(cyclePos);
-        int previousIndex = 0;
-        if (nextIndex == 0)
+        var next = (CRotationNode)NextNode(cyclePos);
+        var previous = (CRotationNode)next.previous;
+        var nextCyclePos = next.targetCyclePosition;
+        var previousCyclePos = previous.targetCyclePosition;
+
+        if (cyclePos > nextCyclePos)
         {
-            previousIndex = nodes.Count - 1;
-        }
-        else
-        {
-            previousIndex = nextIndex - 1;
+            nextCyclePos += 1f;
         }
 
-        CRotationNode next = (CRotationNode)nodes[nextIndex];
-        CRotationNode previous = (CRotationNode)nodes[previousIndex];
-
-        float nextCyclePos = next.TargetCyclePosition();
-        if (nextCyclePos == 0f)
+        if (cyclePos < previousCyclePos)
         {
-            nextCyclePos = 1f;
+            previousCyclePos -= 1f;
         }
 
         // TODO: Cache nextEuler and previousEuler and only update
@@ -48,9 +42,18 @@ public class CRotationObject : CCyclePathingObject
 
         // do calculations in euler angles because I spent a few hours watching videos on quaternions
         // and decided it would be easier to use euler angles
-        Vector3 previousEuler = previous.Rotation().eulerAngles;
-        Vector3 nextEuler = next.Rotation().eulerAngles;
-        if (!next.RotateBackwards())
+        var previousEuler = previous.rotation.eulerAngles;
+        var nextEuler = next.rotation.eulerAngles;
+        OffsetNextAngle(previousEuler, ref nextEuler, next.rotateClockwise);
+        var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
+        var newVector = Vector3.Slerp(previousEuler, nextEuler, fraction);
+        var newRotation = Quaternion.Euler(newVector);
+        rotationObject.MoveRotation(newRotation);
+    }
+
+    private void OffsetNextAngle(Vector3 previousEuler, ref Vector3 nextEuler, bool rotateClockwise)
+    {
+        if (!rotateClockwise)
         {
             if (nextEuler.x < previousEuler.x)
             {
@@ -84,10 +87,26 @@ public class CRotationObject : CCyclePathingObject
                 nextEuler.z -= 360;
             }
         }
-
-        float fraction = (cyclePos - previous.TargetCyclePosition()) / Mathf.Abs(previous.TargetCyclePosition() - nextCyclePos);
-        Quaternion newRotation = Quaternion.Euler(Vector3.Lerp(previousEuler, nextEuler, fraction));
-        rotationObject.MoveRotation(newRotation);
     }
 
+    protected override void CalculateCyclePositions()
+    {
+        var totalDistance = 0f;
+        var distances = new List<float>(nodes.Count);
+        foreach (CRotationNode node in nodes)
+        {
+            var previous = node.previous as CRotationNode;
+            var previousEuler = previous.rotation.eulerAngles;
+            var nextEuler = node.rotation.eulerAngles;
+            OffsetNextAngle(previousEuler, ref nextEuler, node.rotateClockwise);
+            var distance = Vector3.Distance(previousEuler, nextEuler);
+            totalDistance += distance;
+            distances.Add(totalDistance);
+        }
+
+        for (int i = 0; i < nodes.Count; ++i)
+        {
+            (nodes[i] as CRotationNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
+        }
+    }
 }

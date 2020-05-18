@@ -2,7 +2,11 @@
 [Tt]emp/
 [Oo]bj/
 [Bb]uild/
-[Bb]uilds/
+[Bb]uilds/*
+!Builds/PlatformeriOS
+Builds/PlatformeriOS/*
+!Builds/PlatformeriOS/Gemfile
+!Builds/PlatformeriOS/fastlane
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -38,5 +42,9 @@ build/
 # Builds
 *.apk
 *.unitypackage
-/Assets/Editor/Secrets.cs
-/Assets/Editor/Secrets.cs.meta
+
+# Blender
+*.blend1*
+
+.DS_Store
+keystore.jks

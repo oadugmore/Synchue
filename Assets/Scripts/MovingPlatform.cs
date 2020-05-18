@@ -4,7 +4,10 @@ public class MovingPlatform : MonoBehaviour
 {
     public bool useRigidbodyVelocity = true;
 
-    private Vector3 velocity;
+    // giving velocity its own field allows us to
+    // implement it for different types of platform movement
+    public Vector3 velocity { get; private set; }
+    
     private Vector3 previousPosition;
     private Rigidbody r;
 
@@ -28,8 +31,4 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    public Vector3 getVelocity()
-    {
-        return velocity;
-    }
 }
