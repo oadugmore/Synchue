@@ -14,7 +14,8 @@ a:hover {
 .btn-secondary:hover,
 .btn-secondary:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none;
+  /* Prevent inheritance from `body` */
   background-color: #fff;
   border: .05rem solid #fff;
 }
@@ -27,7 +28,7 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: rgb(51, 51, 51);
 }
 
 body {
@@ -40,6 +41,32 @@ body {
   color: #fff;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
   box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.bg-image {
+  background-image: url("res/icon.jpg");
+  /* background-color: rgba(51, 51, 51, 0.4); */
+  /* color: rgba(51, 51, 51, 0.4); */
+  filter: blur(8px);
+  opacity: 40%;
+  /* -webkit-filter: blur(8px); */
+  /* height: 100%; */
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  /* position: absolute; */
+  /* z-index: 1; */
+}
+
+.above-bg-image {
+  /* background-color: rgba(51, 51, 51, 0.4); */
+  position: absolute;
+  /* top: 50%; */
+  /* left: 50%; */
+  /* width: 80%; */
+  z-index: 2;
+  text-align: center;
 }
 
 .cover-container {
@@ -71,7 +98,7 @@ body {
   border-bottom-color: rgba(255, 255, 255, .25);
 }
 
-.nav-masthead .nav-link + .nav-link {
+.nav-masthead .nav-link+.nav-link {
   margin-left: 1rem;
 }
 
@@ -84,6 +111,7 @@ body {
   .masthead-brand {
     float: left;
   }
+
   .nav-masthead {
     float: right;
   }
@@ -96,6 +124,7 @@ body {
 .cover {
   padding: 0 1.5rem;
 }
+
 .cover .btn-lg {
   padding: .75rem 1.25rem;
   font-weight: 700;
