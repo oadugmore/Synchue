@@ -7,6 +7,7 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
     [SerializeField]
     protected bool automaticCycleTime = false;
+    [SerializeField]
     protected List<CCycleNode> nodes;
 
     protected virtual void Start()

@@ -108,5 +108,6 @@ public class CEllipticalMovementObjectEditor : Editor
             ++i;
         }
         ellipsePoints[i] = ellipsePoints[0];
+        ellipseDirty = false;
     }
 }
