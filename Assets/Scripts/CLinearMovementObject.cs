@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 public class CLinearMovementObject : CCyclePathingObject
 {
+    public float offset;
+    public bool showNodesInInspector;
     private Rigidbody movementObject;
 
     protected override void Start()
