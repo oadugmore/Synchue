@@ -34,7 +34,10 @@ public abstract class Player : MonoBehaviour
 
     private void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!FindObjectOfType<Goal>().finished)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public abstract void Move();

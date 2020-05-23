@@ -6,9 +6,9 @@ public class Goal : MonoBehaviour
 {
     [SerializeField]
     private WinScreen winScreen;
+    public bool finished;
 
     private RectTransform uiRoot;
-    private bool finished;
     private float startTime;
     private float endTime;
 
