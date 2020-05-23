@@ -6,11 +6,12 @@ public class Goal : MonoBehaviour
 {
     [SerializeField]
     private WinScreen winScreen;
-    public bool finished;
 
     private RectTransform uiRoot;
     private float startTime;
     private float endTime;
+    public bool finished => _finished;
+    private bool _finished;
 
     void Start()
     {
@@ -25,11 +26,11 @@ public class Goal : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (!finished && other.gameObject.CompareTag("Player"))
+        if (!_finished && other.gameObject.CompareTag("Player"))
         {
             endTime = Time.time;
             Instantiate(winScreen, uiRoot);
-            finished = true;
+            _finished = true;
         }
     }
 }
