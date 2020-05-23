@@ -20,7 +20,7 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Spike"))
+        if (other.collider.CompareTag("Spike"))
         {
             Die();
         }
