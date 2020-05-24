@@ -82,7 +82,7 @@ public class CEllipticalMovementObjectEditor : Editor
         if (!Application.isPlaying)
         {
             t.UpdateCyclePosition(previewCyclePos);
-            ManualPhysicsStep();
+            EditorHelper.ManualPhysicsStep();
         }
         // if (EditorGUI.EndChangeCheck())
         // {
@@ -92,13 +92,6 @@ public class CEllipticalMovementObjectEditor : Editor
         //     t.Update();
         // }
 
-    }
-
-    void ManualPhysicsStep()
-    {
-        Physics.autoSimulation = false;
-        Physics.Simulate(Time.fixedDeltaTime);
-        Physics.autoSimulation = true;
     }
 
     void CalculateEllipsePoints()

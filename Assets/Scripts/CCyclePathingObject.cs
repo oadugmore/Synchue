@@ -6,13 +6,26 @@ using UnityEngine;
 public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
     [SerializeField]
-    protected bool automaticCycleTime = false;
+    protected bool automaticCycleTime;
     [SerializeField]
-    protected List<CCycleNode> nodes;
+    protected List<CCycleNode> nodes = new List<CCycleNode>();
+
+    [SerializeField]
+    private float m_offset;
+    public float offset { get => m_offset; set => m_offset = Mathf.Clamp01(value); }
 
     protected virtual void Start()
     {
-        nodes = new List<CCycleNode>();
+        UpdateNodes();
+    }
+
+    void OnValidate()
+    {
+        m_offset = Mathf.Clamp01(m_offset);
+    }
+
+    public void UpdateNodes()
+    {
         GetComponentsInChildren<CCycleNode>(nodes);
         if (nodes.Count < 1)
         {
@@ -25,6 +38,21 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
         {
             nodes[i].previous = nodes[i - 1];
         }
+
+        var totalWeight = 0f;
+        foreach (var node in nodes)
+        {
+            totalWeight += 1f / node.weight;
+        }
+        var currentWeight = 0f;
+        for (int i = 1; i < nodes.Count; i++)
+        {
+            currentWeight += 1f / nodes[i].weight / totalWeight;
+            nodes[i].targetCyclePosition = currentWeight;
+        }
+        nodes[0].targetCyclePosition = 0;
+
+        // legacy
         if (automaticCycleTime)
         {
             CalculateCyclePositions();
@@ -33,6 +61,7 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 
     public abstract void UpdateCyclePosition(float cyclePos);
 
+    [System.Obsolete("Use node weights instead.")]
     protected abstract void CalculateCyclePositions();
 
     protected CCycleNode NextNode(float cyclePos)

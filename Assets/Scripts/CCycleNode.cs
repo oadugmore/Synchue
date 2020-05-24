@@ -3,10 +3,11 @@
 public abstract class CCycleNode : MonoBehaviour
 {
     // protected float m_targetCyclePosition;
-    [Range(0f, 1f)]
+    [HideInInspector]
     public float targetCyclePosition;
+    
     [SerializeField]
-    protected float m_weight;
+    protected float m_weight = 1;
     public float weight { get => m_weight; set => m_weight = value; }
 
     public CCycleNode previous { get; set; }
