@@ -8,47 +8,70 @@ public class CLinearMovementObjectEditor : Editor
     // ReorderableList nodeList;
     // SerializedProperty nodes;
     // bool showNodes;
+    SerializedProperty offset;
     CLinearMovementObject t;
     CLinearMovementNode[] nodes;
+    List<SerializedObject> nodesSerialized = new List<SerializedObject>();
+    List<SerializedObject> nodeTransforms = new List<SerializedObject>();
+    List<SerializedProperty> nodePositions = new List<SerializedProperty>();
+    List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
+
 
     void OnEnable()
     {
         t = target as CLinearMovementObject;
+        offset = serializedObject.FindProperty("offset");
         FindNodes();
-        // // nodes = serializedObject.FindProperty("nodes");
-        // nodeList = new ReorderableList(serializedObject, serializedObject.FindProperty("nodes"), true, true, true, true);
-        // nodeList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-        // {
-        //     var element = nodeList.serializedProperty.GetArrayElementAtIndex(index);
-        //     // var node = () element.objectReferenceValue
-        //     var nodeObject = new SerializedObject(element.objectReferenceValue);
-        //     var pos = nodeObject.FindProperty("m_position");
-        //     var weight = nodeObject.FindProperty("m_weight");
-        //     Debug.Log(pos.vector3Value);
-        //     Debug.Log(weight.floatValue);
-        //     //EditorGUI.Vector3Field(new Rect(rect.x, rect.y, 100, EditorGUIUtility.singleLineHeight), "Pos", pos.vector3Value);
-        // };
-        // nodeList.onAddCallback = 
+        Undo.undoRedoPerformed += FindNodes;
+    }
+
+    void OnDisable()
+    {
+        Undo.undoRedoPerformed -= FindNodes;
     }
 
     void FindNodes()
     {
         nodes = t.GetComponentsInChildren<CLinearMovementNode>();
+        nodesSerialized.Clear();
+        nodeTransforms.Clear();
+        nodePositions.Clear();
+        nodeWeights.Clear();
+        foreach (var node in nodes)
+        {
+            var so = new SerializedObject(node);
+            var transform = new SerializedObject(node.transform);
+            nodesSerialized.Add(so);
+            nodeTransforms.Add(transform);
+            nodeWeights.Add(so.FindProperty("m_weight"));
+            nodePositions.Add(transform.FindProperty("m_LocalPosition"));
+            // Debug.Log("Node weight recorded: " + nodeWeights[nodeWeights.Count - 1].name);
+            // Debug.Log("Node position recorded: " + nodePositions[nodePositions.Count - 1].name);
+        }
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
         EditorGUIUtility.wideMode = true;
-        t.offset = EditorGUILayout.FloatField("Offset", t.offset);
-        t.showNodesInInspector = EditorGUILayout.BeginFoldoutHeaderGroup(t.showNodesInInspector, "Nodes");
+        EditorGUILayout.PropertyField(offset);
+        EditorGUI.BeginChangeCheck();
+        var showNodes = EditorGUILayout.BeginFoldoutHeaderGroup(t.showNodesInInspector, "Nodes");
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(target, "Toggle node visibility in inspector");
+            t.showNodesInInspector = showNodes;
+        }
         if (t.showNodesInInspector)
         {
             EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("+"))
             {
                 var newNode = new GameObject("Node");
+                Undo.RegisterCreatedObjectUndo(newNode, "Add node");
+                // Undo.AddComponent<CLinearMovementNode>(newNode);
                 newNode.AddComponent<CLinearMovementNode>();
+                // Undo.SetTransformParent(t.transform, )
                 newNode.transform.SetParent(t.transform, false);
                 FindNodes();
             }
@@ -56,54 +79,33 @@ public class CLinearMovementObjectEditor : Editor
             {
                 if (nodes.Length > 0)
                 {
-                    DestroyImmediate(nodes[nodes.Length - 1].gameObject);
+                    Undo.DestroyObjectImmediate(nodes[nodes.Length - 1].gameObject);
                 }
                 FindNodes();
             }
             EditorGUILayout.EndHorizontal();
-            foreach (var node in nodes)
+            for (int i = 0; i < nodesSerialized.Count; i++)
             {
+                nodesSerialized[i].Update();
+                nodeTransforms[i].Update();
                 EditorGUILayout.BeginHorizontal();
                 EditorGUIUtility.labelWidth = 30;
-                node.transform.localPosition = EditorGUILayout.Vector3Field("Pos", node.transform.localPosition);
+                EditorGUILayout.PropertyField(nodePositions[i]);
+                // node.transform.localPosition = EditorGUILayout.Vector3Field("Pos", node.transform.localPosition);
                 EditorGUIUtility.labelWidth = 50;
-                node.weight = EditorGUILayout.FloatField("Weight", node.weight, GUILayout.MaxWidth(80));
+                EditorGUILayout.PropertyField(nodeWeights[i], GUILayout.ExpandWidth(false)); //  GUILayout.MaxWidth(80)
+                // node.weight = EditorGUILayout.FloatField("Weight", node.weight, GUILayout.MaxWidth(80));
                 EditorGUILayout.EndHorizontal();
+                nodesSerialized[i].ApplyModifiedProperties();
+                nodeTransforms[i].ApplyModifiedProperties();
             }
         }
         EditorGUILayout.EndFoldoutHeaderGroup();
-        // nodeList.DoLayoutList();
-        // serializedObject.ApplyModifiedProperties();
-        // EditorUtility.SetDirty(target);
-        // DrawDefaultInspector();
-        // showNodes = EditorGUILayout.BeginFoldoutHeaderGroup(showNodes, "CustomNodes");
-        // if (showNodes)
-        // {
-        //     //SerializedProperty sp = nodes.Copy();
+        serializedObject.ApplyModifiedProperties();
+    }
 
-        //     if (nodes.isArray)
-        //     {
-        //         int size = nodes.arraySize;
-        //         var nodeValues = new List<CLinearMovementNode>();
-        //         for (int i = 0; i < size; ++i)
-        //         {
-        //             var node = (CLinearMovementNode)nodes.GetArrayElementAtIndex(i).objectReferenceValue;
-        //             nodeValues.Add(node);
-        //             var newPos = EditorGUILayout.Vector3Field("Pos", node.position);
-        //             var newWeight = EditorGUILayout.FloatField("Weight", node.weight);
-        //             node.position = newPos;
-        //             node.weight = newWeight;
-        //         }
-
-        //     if (GUILayout.Button("+"))
-        //     {
-        //         nodeValues.Add(new CLinearMovementNode());
-        //         nodes.objectReferenceValue = nodeValues;
-        //         // nodes.arraySize++;
-        //     }
-        //     }
-        // var nodes = (target as CLinearMovementObject)
-        // }
-        // this.DrawDefaultInspector();
+    void OnSceneGUI()
+    {
+        
     }
 }
