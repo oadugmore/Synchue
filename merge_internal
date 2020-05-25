@@ -6,4 +6,4 @@ git checkout release-internal
 git merge $target
 
 # Empty commit still runs pre-commit hook updating the version code
-git commit --allow-empty -m "Merge from $target: Increment APK version code"
+git commit --allow-empty -m "Merge $target into release-internal"

@@ -1,12 +1,15 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase, ExecuteInEditMode]
 public class CLinearMovementObject : CCyclePathingObject
 {
+    public bool showNodesInInspector;
     private Rigidbody movementObject;
 
     protected override void Start()
     {
+        automaticCycleTime = false; // reminder to remove automaticCycleTime
         base.Start();
         movementObject = GetComponentInChildren<Rigidbody>();
 
@@ -18,6 +21,7 @@ public class CLinearMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        cyclePos = Mathf.Repeat(cyclePos + offset, 1);
         var next = (CLinearMovementNode)NextNode(cyclePos);
         var previous = (CLinearMovementNode)next.previous;
         float nextCyclePos = next.targetCyclePosition;
@@ -34,7 +38,7 @@ public class CLinearMovementObject : CCyclePathingObject
         }
 
         float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        Vector3 newPosition = Vector3.Lerp(previous.position, next.position, fraction);
+        Vector3 newPosition = Vector3.Lerp(previous.transform.position, next.transform.position, fraction);
         movementObject.MovePosition(newPosition);
     }
 
@@ -45,7 +49,7 @@ public class CLinearMovementObject : CCyclePathingObject
         foreach (CLinearMovementNode node in nodes)
         {
             var previous = node.previous as CLinearMovementNode;
-            var distance = Vector3.Distance(node.position, previous.position);
+            var distance = Vector3.Distance(node.transform.position, previous.transform.position);
             totalDistance += distance;
             distances.Add(totalDistance);
         }
