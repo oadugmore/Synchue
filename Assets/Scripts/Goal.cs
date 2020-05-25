@@ -8,9 +8,10 @@ public class Goal : MonoBehaviour
     private WinScreen winScreen;
 
     private RectTransform uiRoot;
-    private bool finished;
     private float startTime;
     private float endTime;
+    public bool finished => _finished;
+    private bool _finished;
 
     void Start()
     {
@@ -25,11 +26,11 @@ public class Goal : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (!finished && other.gameObject.CompareTag("Player"))
+        if (!_finished && other.gameObject.CompareTag("Player"))
         {
             endTime = Time.time;
             Instantiate(winScreen, uiRoot);
-            finished = true;
+            _finished = true;
         }
     }
 }

@@ -7,18 +7,20 @@ public abstract class Player : MonoBehaviour
     [SerializeField]
     protected float speed = 10f;
     protected new Rigidbody rigidbody;
+    protected Goal goal;
 
     public InteractColor playerColor { get; set; }
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        goal = FindObjectOfType<Goal>();
         playerColor = InteractColor.Blue;
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.CompareTag("Spike"))
+        if (other.collider.CompareTag("Spike"))
         {
             Die();
         }
@@ -34,7 +36,10 @@ public abstract class Player : MonoBehaviour
 
     private void Die()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!goal.finished)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public abstract void Move();
