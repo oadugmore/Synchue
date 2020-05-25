@@ -3,7 +3,7 @@
 public abstract class CCycleNode : MonoBehaviour
 {
     // protected float m_targetCyclePosition;
-    [HideInInspector]
+    // [HideInInspector]
     public float targetCyclePosition;
     
     [SerializeField]
