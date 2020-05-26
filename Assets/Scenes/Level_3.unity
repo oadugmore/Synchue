@@ -1642,7 +1642,6 @@ GameObject:
   - component: {fileID: 426505211}
   - component: {fileID: 426505210}
   - component: {fileID: 426505209}
-  - component: {fileID: 426505208}
   m_Layer: 0
   m_Name: Object
   m_TagString: Untagged
@@ -1664,19 +1663,6 @@ Transform:
   m_Father: {fileID: 197478270}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &426505208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 426505206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useRigidbodyVelocity: 1
 --- !u!23 &426505209
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4697,6 +4683,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1063759132, guid: cb6dac5bace50b24a86e5e31d2ac99df, type: 3}
+      propertyPath: effort
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928653, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_Name
@@ -4705,7 +4695,7 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
@@ -4715,7 +4705,7 @@ PrefabInstance:
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.00000007450581
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2206778528384928654, guid: cb6dac5bace50b24a86e5e31d2ac99df,
         type: 3}
@@ -6103,7 +6093,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh92546
+  m_Name: pb_Mesh19136
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8611,7 +8601,6 @@ GameObject:
   - component: {fileID: 5651471735686560902}
   - component: {fileID: 5681916152297180524}
   - component: {fileID: 5691311908528233662}
-  - component: {fileID: 5668175158498569359}
   m_Layer: 0
   m_Name: Object
   m_TagString: Untagged
@@ -8619,19 +8608,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5668175158498569359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5668175158498569358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bab7a78a3cf48b7429d9bc773c2e796d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  useRigidbodyVelocity: 1
 --- !u!1 &5668180023845182268
 GameObject:
   m_ObjectHideFlags: 0
