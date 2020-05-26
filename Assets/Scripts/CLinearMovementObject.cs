@@ -22,10 +22,10 @@ public class CLinearMovementObject : CCyclePathingObject
     public override void UpdateCyclePosition(float cyclePos)
     {
         cyclePos = Mathf.Repeat(cyclePos + offset, 1);
-        var next = (CLinearMovementNode)NextNode(cyclePos);
-        var previous = (CLinearMovementNode)next.previous;
-        float nextCyclePos = next.targetCyclePosition;
-        float previousCyclePos = previous.targetCyclePosition;
+        var next = NextNode(cyclePos);
+        var previous = next.previous;
+        var nextCyclePos = next.targetCyclePosition;
+        var previousCyclePos = previous.targetCyclePosition;
 
         if (cyclePos > nextCyclePos)
         {
@@ -37,8 +37,8 @@ public class CLinearMovementObject : CCyclePathingObject
             previousCyclePos -= 1f;
         }
 
-        float fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
-        Vector3 newPosition = Vector3.Lerp(previous.transform.position, next.transform.position, fraction);
+        var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
+        var newPosition = Vector3.Lerp(previous.transform.position, next.transform.position, fraction);
         movementObject.MovePosition(newPosition);
     }
 
@@ -46,9 +46,9 @@ public class CLinearMovementObject : CCyclePathingObject
     {
         var totalDistance = 0f;
         var distances = new List<float>(nodes.Count);
-        foreach (CLinearMovementNode node in nodes)
+        foreach (var node in nodes)
         {
-            var previous = node.previous as CLinearMovementNode;
+            var previous = node.previous;
             var distance = Vector3.Distance(node.transform.position, previous.transform.position);
             totalDistance += distance;
             distances.Add(totalDistance);
@@ -56,7 +56,7 @@ public class CLinearMovementObject : CCyclePathingObject
 
         for (int i = 0; i < nodes.Count; ++i)
         {
-            (nodes[i] as CLinearMovementNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
+            nodes[i].targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
         }
     }
 }
