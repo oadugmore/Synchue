@@ -18,16 +18,29 @@ public class WinScreen : MonoBehaviour
 
     void Start()
     {
-        int levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
-        nextLevelName = "Level_" + (levelNumber + 1);
-        if (!Application.CanStreamedLevelBeLoaded(nextLevelName))
+        // levelText.text = "Level " + levelNumber;
+    }
+
+    public void SetCompletionTime(float seconds)
+    {
+        var completionTime = TimeSpan.FromSeconds(seconds);
+        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'fff");
+    }
+
+    public void SetLevelNames(string name, string nextSceneName)
+    {
+        levelText.text = name;
+        nextLevelName = nextSceneName;
+        if (nextSceneName == null)
         {
             nextLevelButton.interactable = false;
         }
-        var completionTime = TimeSpan.FromSeconds(FindObjectOfType<Goal>().GetCompletionTime());
-        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'fff");
-        levelText.text = "Level " + levelNumber;
     }
+
+    // public void SetNextLevelName(string sceneName)
+    // {
+        
+    // }
 
     public void NextLevel()
     {

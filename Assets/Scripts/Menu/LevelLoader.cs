@@ -5,17 +5,36 @@ using UnityEngine.UI;
 public class LevelLoader : MonoBehaviour
 {
     public InputField sceneText;
+    int currentWorld = 1;
+    Button[] levelButtons;
 
-    // Load any scene by its name.
+    private void Start() {
+        levelButtons = GetComponentsInChildren<Button>();
+
+    }
+
+    // Load the currently selected level.
     public void LoadScene()
     {
         SceneManager.LoadScene(sceneText.text);
     }
 
-    // Load a level by its number.
+    // Select a level by its number.
     public void LoadLevel(int levelNumber)
     {
-        var scene = "Level_" + levelNumber;
+        var scene = "World_" + currentWorld + "_Level_" + levelNumber;
         sceneText.text = scene;
+    }
+
+    public void NextWorld()
+    {
+        currentWorld++;
+        // move camera and update levels
+    }
+
+    public void PreviousWorld()
+    {
+        currentWorld--;
+        // move camera and update levels
     }
 }
