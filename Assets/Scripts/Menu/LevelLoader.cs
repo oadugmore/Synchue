@@ -1,16 +1,26 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
+    public float cameraTransitionTime = 1;
+    public LeanTweenType cameraTransitionType;
+    public List<Transform> cameraLocations;
     public InputField sceneText;
-    int currentWorld = 1;
+    public Button nextWorldButton;
+    public Button previousWorldButton;
+
+    int currentWorldIndex;
     Button[] levelButtons;
+    Camera mainCamera;
 
     private void Start()
     {
+        mainCamera = Camera.main;
         levelButtons = GetComponentsInChildren<Button>();
+        previousWorldButton.interactable = false;
         CheckLevels();
     }
 
@@ -18,7 +28,7 @@ public class LevelLoader : MonoBehaviour
     {
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            if (GetSceneNameFromLevel(currentWorld, i + 1) == null)
+            if (GetSceneNameFromLevel(currentWorldIndex + 1, i + 1) == null)
             {
                 levelButtons[i].interactable = false;
             }
@@ -42,7 +52,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void LoadLevel(int levelNumber)
     {
-        var scene = "World_" + currentWorld + "_Level_" + levelNumber;
+        var scene = "World_" + (currentWorldIndex + 1) + "_Level_" + levelNumber;
         sceneText.text = scene;
     }
 
@@ -51,9 +61,18 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void NextWorld()
     {
-        currentWorld++;
+        currentWorldIndex++;
         CheckLevels();
-        // move camera
+        MoveToNextCameraLocation();
+        previousWorldButton.interactable = true;
+        if (currentWorldIndex + 1 >= cameraLocations.Count)
+        {
+            nextWorldButton.interactable = false;
+        }
+        else
+        {
+            nextWorldButton.interactable = true;
+        }
     }
 
     /// <summary>
@@ -61,9 +80,24 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void PreviousWorld()
     {
-        currentWorld--;
+        currentWorldIndex--;
         CheckLevels();
-        // move camera
+        MoveToNextCameraLocation();
+        nextWorldButton.interactable = true;
+        if (currentWorldIndex <= 0)
+        {
+            previousWorldButton.interactable = false;
+        }
+        else
+        {
+            previousWorldButton.interactable = true;
+        }
+    }
+
+    private void MoveToNextCameraLocation()
+    {
+        var nextPos = cameraLocations[currentWorldIndex].position;
+        LeanTween.move(mainCamera.gameObject, nextPos, cameraTransitionTime).setEase(cameraTransitionType);
     }
 
     /// <summary>

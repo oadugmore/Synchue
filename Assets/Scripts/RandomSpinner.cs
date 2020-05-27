@@ -12,7 +12,7 @@ public class RandomSpinner : MonoBehaviour
     private ForceMode forceMode;
     [Header("When to apply the torque"), SerializeField]
     private bool inStart;
-    [Tooltip("Using this option along with randomTorque may be resource-intensive."), SerializeField]
+    [Tooltip("Using this option along with the Random Torque option may be resource-intensive."), SerializeField]
     private bool inFixedUpdate;
 
     private Rigidbody rb;
@@ -22,8 +22,7 @@ public class RandomSpinner : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         if (inStart)
         {
-            Vector3 thisTorque = randomTorque ? getRandomTorque() : torque;
-            rb.AddTorque(thisTorque, forceMode);
+            ApplyTorque(false);
         }
     }
 
@@ -31,8 +30,7 @@ public class RandomSpinner : MonoBehaviour
     {
         if (inFixedUpdate)
         {
-            Vector3 thisTorque = randomTorque ? getRandomTorque() : torque;
-            rb.AddTorque(thisTorque * Time.fixedDeltaTime, forceMode);
+            ApplyTorque(true);
         }
     }
 
@@ -43,5 +41,16 @@ public class RandomSpinner : MonoBehaviour
             Random.Range(-torque.y, torque.y),
             Random.Range(-torque.z, torque.z)
         );
+    }
+
+    /// <summary>
+    /// Applies the torque.
+    /// </summary>
+    /// <param name="continuous">If true, scales the torque by Time.fixedDeltaTime</param>
+    public void ApplyTorque(bool continuous)
+    {
+        var continuousValue = continuous ? Time.fixedDeltaTime : 1f;
+        Vector3 thisTorque = randomTorque ? getRandomTorque() : torque;
+        rb.AddTorque(thisTorque * continuousValue, forceMode);
     }
 }

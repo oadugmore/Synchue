@@ -23,7 +23,7 @@ public class Goal : MonoBehaviour
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         var worldNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
         var levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[3]);
-        levelName = string.Format("World {0} Level {1}", worldNumber, levelNumber);
+        levelName = string.Format("Phase {0}: Level {1}", worldNumber, levelNumber);
         nextSceneName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
     }
 
