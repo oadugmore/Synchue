@@ -14,21 +14,17 @@ public class Goal : MonoBehaviour
     public bool finished => _finished;
     private bool _finished;
     private string levelName;
-    private string nextLevelName;
+    private string nextSceneName;
 
     void Start()
     {
         // SceneManager.GetActiveScene().GetRootGameObjects();
         startTime = Time.time;
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
-        string worldNumber = SceneManager.GetActiveScene().name.Split('_')[1];
-        int levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[3]);
+        var worldNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
+        var levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[3]);
         levelName = string.Format("World {0} Level {1}", worldNumber, levelNumber);
-        nextLevelName = string.Format("World_{0}_Level_{1}", worldNumber, levelNumber + 1);
-        if (!Application.CanStreamedLevelBeLoaded(nextLevelName))
-        {
-            nextLevelName = null;
-        }
+        nextSceneName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
     }
 
     void OnCollisionEnter(Collision other)
@@ -38,7 +34,7 @@ public class Goal : MonoBehaviour
             endTime = Time.time;
             var ws = Instantiate(winScreen, uiRoot);
             ws.SetCompletionTime(endTime - startTime);
-            ws.SetLevelNames(levelName, nextLevelName);
+            ws.SetLevelNames(levelName, nextSceneName);
             _finished = true;
         }
     }
