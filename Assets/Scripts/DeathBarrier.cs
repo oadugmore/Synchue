@@ -6,6 +6,6 @@ public class DeathBarrier : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        other.SendMessageUpwards("Die");
+        other.SendMessageUpwards("Die", SendMessageOptions.DontRequireReceiver);
     }
 }

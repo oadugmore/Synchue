@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
+    public const string currentWorldIndexPrefsName = "CurrentWorldIndex";
+
     public float cameraTransitionTime = 1;
     public LeanTweenType cameraTransitionType;
     public List<Transform> cameraLocations;
@@ -20,7 +22,16 @@ public class LevelLoader : MonoBehaviour
     {
         mainCamera = Camera.main;
         levelButtons = GetComponentsInChildren<Button>();
-        previousWorldButton.interactable = false;
+        currentWorldIndex = PlayerPrefs.GetInt(currentWorldIndexPrefsName, 0);
+        if (currentWorldIndex == 0)
+        {
+            previousWorldButton.interactable = false;
+        }
+        else if (currentWorldIndex == cameraLocations.Count - 1)
+        {
+            nextWorldButton.interactable = false;
+        }
+        mainCamera.transform.position = cameraLocations[currentWorldIndex].position;
         CheckLevels();
     }
 
@@ -62,6 +73,7 @@ public class LevelLoader : MonoBehaviour
     public void NextWorld()
     {
         currentWorldIndex++;
+        PlayerPrefs.SetInt(currentWorldIndexPrefsName, currentWorldIndex);
         CheckLevels();
         MoveToNextCameraLocation();
         previousWorldButton.interactable = true;
@@ -81,6 +93,7 @@ public class LevelLoader : MonoBehaviour
     public void PreviousWorld()
     {
         currentWorldIndex--;
+        PlayerPrefs.SetInt(currentWorldIndexPrefsName, currentWorldIndex);
         CheckLevels();
         MoveToNextCameraLocation();
         nextWorldButton.interactable = true;
