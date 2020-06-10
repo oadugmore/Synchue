@@ -4767,6 +4767,11 @@ PrefabInstance:
       propertyPath: increment
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 114917104296695080, guid: fc415b83d72cdf44496bd92a36b98486,
+        type: 3}
+      propertyPath: buttonSpeed
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 224957781026633872, guid: fc415b83d72cdf44496bd92a36b98486,
         type: 3}
       propertyPath: m_RootOrder
@@ -7703,8 +7708,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 54237243121802620, guid: 3c147b0426030014ab2b55d9743ceb09,
         type: 3}
-      propertyPath: m_Constraints
-      value: 0
+      propertyPath: m_Drag
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 135045376956211834, guid: 3c147b0426030014ab2b55d9743ceb09,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 50cd65b6919fc7f4aa13401ce6288374,
+        type: 2}
+    - target: {fileID: 4097788808390216809, guid: 3c147b0426030014ab2b55d9743ceb09,
+        type: 3}
+      propertyPath: stoppingSpeed
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c147b0426030014ab2b55d9743ceb09, type: 3}
