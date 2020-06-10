@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  stoppingSpeed: 3
 --- !u!54 &54237243121802620
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71,7 +72,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703031361872156}
-  m_Material: {fileID: 13400000, guid: cbb37ed69f9e26043a47289f35d81aa6, type: 2}
+  m_Material: {fileID: 13400000, guid: 50cd65b6919fc7f4aa13401ce6288374, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -91,6 +92,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
