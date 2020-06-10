@@ -49,7 +49,7 @@ public class RandomSpinner : MonoBehaviour
     /// <param name="continuous">If true, scales the torque by Time.fixedDeltaTime</param>
     public void ApplyTorque(bool continuous)
     {
-        var continuousValue = continuous ? Time.fixedDeltaTime : 1f;
+        var continuousValue = continuous ? Time.deltaTime : 1f;
         Vector3 thisTorque = randomTorque ? getRandomTorque() : torque;
         rb.AddTorque(thisTorque * continuousValue, forceMode);
     }

@@ -33,7 +33,7 @@ public class CCycleController : MonoBehaviour
         if ((playerTransform.position.x + leftControlBound) > transform.position.x && (playerTransform.position.x - rightControlBound) < transform.position.x)
         {
             var input = Controller.GetAxis(color);
-            cyclePosition += (Time.fixedDeltaTime * input) / cycleTime;
+            cyclePosition += (Time.deltaTime * input) / cycleTime;
             cyclePosition = Mathf.Repeat(cyclePosition, 1);
         }
 

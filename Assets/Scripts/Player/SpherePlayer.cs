@@ -24,7 +24,6 @@ public class SpherePlayer : Player
 
     public override void Move()
     {
-        //var slowDown = 1f;
         var control = Controller.GetAxis(playerColor);
         if (control < lastControl)
         {
@@ -48,10 +47,6 @@ public class SpherePlayer : Player
             case MovementMode.Active:
                 forceX = speed;
                 break;
-            case MovementMode.Slowing:
-                throw new NotSupportedException("No longer using slowing mode");
-            // forceX = -speed * rigidbody.velocity.x;
-            // break;
             case MovementMode.PassiveBraking:
                 if (rigidbody.velocity.x < 0.01f)
                 {
@@ -84,5 +79,5 @@ public class SpherePlayer : Player
 
 enum MovementMode
 {
-    Active, Slowing, PassiveBraking, Inactive
+    Active, PassiveBraking, Inactive
 }
