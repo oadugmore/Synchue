@@ -1,14 +1,22 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase, ExecuteInEditMode]
 public class CRotationObject : CCyclePathingObject
 {
+    public bool showNodesInInspector;
+    public int nodeSelectedForEditing = -1;
+    
     private Rigidbody rotationObject;
 
     protected override void Start()
     {
         base.Start();
         rotationObject = GetComponentInChildren<Rigidbody>();
+
+        if (!rotationObject){
+            Debug.LogError("No Rigidbody found in children.");
+        }
 
         if (nodes.Count < 2)
         {
@@ -89,6 +97,7 @@ public class CRotationObject : CCyclePathingObject
         }
     }
 
+    [System.Obsolete]
     protected override void CalculateCyclePositions()
     {
         var totalDistance = 0f;

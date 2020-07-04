@@ -5,6 +5,7 @@ using UnityEngine;
 public class CLinearMovementObject : CCyclePathingObject
 {
     public bool showNodesInInspector;
+
     private Rigidbody movementObject;
 
     protected override void Start()
@@ -12,6 +13,11 @@ public class CLinearMovementObject : CCyclePathingObject
         automaticCycleTime = false; // reminder to remove automaticCycleTime
         base.Start();
         movementObject = GetComponentInChildren<Rigidbody>();
+
+        if (!movementObject)
+        {
+            Debug.LogError("No Rigidbody found in children.");
+        }
 
         if (nodes.Count < 2)
         {
@@ -42,6 +48,7 @@ public class CLinearMovementObject : CCyclePathingObject
         movementObject.MovePosition(newPosition);
     }
 
+    [System.Obsolete]
     protected override void CalculateCyclePositions()
     {
         var totalDistance = 0f;
