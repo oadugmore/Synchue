@@ -43,13 +43,13 @@ public class CRotationObjectEditor : Editor
         nodeClockwise.Clear();
         foreach (var node in nodes)
         {
-            var so = new SerializedObject(node);
-            var transform = new SerializedObject(node.transform);
-            nodesSerialized.Add(so);
-            nodeTransforms.Add(transform);
-            nodeRotations.Add(transform.FindProperty("m_LocalRotation"));
-            nodeWeights.Add(so.FindProperty("m_weight"));
-            nodeClockwise.Add(so.FindProperty("m_rotateClockwise"));
+            var nodeSO = new SerializedObject(node);
+            var transformSO = new SerializedObject(node.transform);
+            nodesSerialized.Add(nodeSO);
+            nodeTransforms.Add(transformSO);
+            nodeRotations.Add(nodeSO.FindProperty("m_localRotationHint"));
+            nodeWeights.Add(nodeSO.FindProperty("m_weight"));
+            nodeClockwise.Add(nodeSO.FindProperty("m_rotateClockwise"));
         }
         if (t.nodeSelectedForEditing >= nodes.Length)
         {
@@ -59,7 +59,12 @@ public class CRotationObjectEditor : Editor
 
     void CreateDefaultNodes()
     {
-        
+
+    }
+
+    private bool ApproximatelyEqualToClosestInt(float f)
+    {
+        return Mathf.Approximately(f, Mathf.Round(f));
     }
 
     public override void OnInspectorGUI()
@@ -100,32 +105,38 @@ public class CRotationObjectEditor : Editor
                 }
             }
             EditorGUILayout.EndHorizontal();
-            for (int i = 0; i < nodesSerialized.Count; i++)
+            for (int i = 0; i < nodes.Length; i++)
             {
                 nodesSerialized[i].Update();
                 nodeTransforms[i].Update();
+                var transform = nodes[i].transform;
 
                 EditorGUILayout.BeginHorizontal();
                 var editing = (t.nodeSelectedForEditing == i);
                 if (GUILayout.Toggle(editing, "Edit", editNodesButtonStyle))
                 {
-                    // if (editing)
-                    // {
-
-                    // }
-                    // else
-                    // {
                     t.nodeSelectedForEditing = i;
-                    // }
                 }
                 else if (editing)
                 {
                     t.nodeSelectedForEditing = -1;
                 }
                 EditorGUIUtility.labelWidth = 30;
-                var eulerRotation = nodeRotations[i].quaternionValue.eulerAngles;
-                // EditorGUILayout.PropertyField(nodeRotations[i], new GUIContent("Rot"), true);
-                nodeRotations[i].quaternionValue = Quaternion.Euler(EditorGUILayout.Vector3Field("", eulerRotation));
+                // var eulerRotation = transform.localEulerAngles;
+                // if (ApproximatelyEqualToClosestInt(eulerRotation.x))
+                // {
+                //     eulerRotation.x = Mathf.Round(eulerRotation.x);
+                // }
+                // if (ApproximatelyEqualToClosestInt(eulerRotation.y))
+                // {
+                //     eulerRotation.y = Mathf.Round(eulerRotation.y);
+                // }
+                // if (ApproximatelyEqualToClosestInt(eulerRotation.z))
+                // {
+                //     eulerRotation.z = Mathf.Round(eulerRotation.z);
+                // }
+                // nodeRotations[i].vector3Value = EditorGUILayout.Vector3Field("", eulerRotation);
+                EditorGUILayout.PropertyField(nodeRotations[i]);
                 EditorGUILayout.EndHorizontal();
                 EditorGUIUtility.labelWidth = 0;
                 EditorGUILayout.BeginHorizontal();
@@ -137,9 +148,9 @@ public class CRotationObjectEditor : Editor
                 EditorGUILayout.Space();
                 if (nodesSerialized[i].hasModifiedProperties)
                 {
+                    nodesSerialized[i].ApplyModifiedProperties();
                     t.UpdateNodes();
                 }
-                nodesSerialized[i].ApplyModifiedProperties();
                 nodeTransforms[i].ApplyModifiedProperties();
             }
         }
