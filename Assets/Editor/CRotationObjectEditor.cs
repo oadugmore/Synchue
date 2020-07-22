@@ -12,9 +12,7 @@ public class CRotationObjectEditor : Editor
     List<SerializedObject> nodeTransforms = new List<SerializedObject>();
     List<SerializedProperty> nodeRotations = new List<SerializedProperty>();
     List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
-    List<SerializedProperty> nodeClockwise = new List<SerializedProperty>();
     private float previewCyclePos;
-    // private int currentlyEditingNode = -1;
     private GUIStyle editNodesButtonStyle;
 
     void OnEnable()
@@ -23,8 +21,6 @@ public class CRotationObjectEditor : Editor
         offset = serializedObject.FindProperty("m_offset");
         FindNodes();
         Undo.undoRedoPerformed += FindNodes;
-        // editNodesButtonStyle.onNormal.background.SetPixels(new Color[] {Color.green});
-        // editNodesButtonStyle.normal.background.SetPixels(new Color[] {Color.red});
     }
 
     void OnDisable()
@@ -40,7 +36,6 @@ public class CRotationObjectEditor : Editor
         nodeTransforms.Clear();
         nodeRotations.Clear();
         nodeWeights.Clear();
-        nodeClockwise.Clear();
         foreach (var node in nodes)
         {
             var nodeSO = new SerializedObject(node);
@@ -49,7 +44,6 @@ public class CRotationObjectEditor : Editor
             nodeTransforms.Add(transformSO);
             nodeRotations.Add(nodeSO.FindProperty("m_localRotationHint"));
             nodeWeights.Add(nodeSO.FindProperty("m_weight"));
-            nodeClockwise.Add(nodeSO.FindProperty("m_rotateClockwise"));
         }
         if (t.nodeSelectedForEditing >= nodes.Length)
         {
@@ -122,28 +116,11 @@ public class CRotationObjectEditor : Editor
                     t.nodeSelectedForEditing = -1;
                 }
                 EditorGUIUtility.labelWidth = 30;
-                // var eulerRotation = transform.localEulerAngles;
-                // if (ApproximatelyEqualToClosestInt(eulerRotation.x))
-                // {
-                //     eulerRotation.x = Mathf.Round(eulerRotation.x);
-                // }
-                // if (ApproximatelyEqualToClosestInt(eulerRotation.y))
-                // {
-                //     eulerRotation.y = Mathf.Round(eulerRotation.y);
-                // }
-                // if (ApproximatelyEqualToClosestInt(eulerRotation.z))
-                // {
-                //     eulerRotation.z = Mathf.Round(eulerRotation.z);
-                // }
-                // nodeRotations[i].vector3Value = EditorGUILayout.Vector3Field("", eulerRotation);
                 EditorGUILayout.PropertyField(nodeRotations[i]);
                 EditorGUILayout.EndHorizontal();
                 EditorGUIUtility.labelWidth = 0;
                 EditorGUILayout.BeginHorizontal();
-                // EditorGUIUtility.labelWidth = 50;
                 EditorGUILayout.PropertyField(nodeWeights[i]);
-                // EditorGUIUtility.labelWidth = 30;
-                EditorGUILayout.PropertyField(nodeClockwise[i], new GUIContent("CW", "Whether to rotate clockwise."));
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.Space();
                 if (nodesSerialized[i].hasModifiedProperties)
@@ -172,12 +149,6 @@ public class CRotationObjectEditor : Editor
                 Undo.RecordObject(node.transform, "Move node");
                 node.transform.localRotation = newRot;
             }
-            // var offset = 0f;
-            // foreach (var node in nodes)
-            // {
-
-            //     offset++;
-            // }
         }
         if (!Application.isPlaying)
         {

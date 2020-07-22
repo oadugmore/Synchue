@@ -46,77 +46,22 @@ public class CRotationObject : CCyclePathingObject
             previousCyclePos -= 1f;
         }
 
+        Debug.Assert(cyclePos <= nextCyclePos);
+        Debug.Assert(cyclePos >= previousCyclePos);
+
         // TODO: Cache nextEuler and previousEuler and only update
         // when nextIndex = NextNode() is different from last UpdateCyclePosition()
 
         // do calculations in euler angles because I spent a few hours watching videos on quaternions
         // and decided it would be easier to use euler angles
-        var previousEuler = previous.rotation.eulerAngles;
-        var nextEuler = next.rotation.eulerAngles;
-        OffsetNextAngle(previousEuler, ref nextEuler, next.rotateClockwise);
         var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
-        var newVector = Vector3.Slerp(previousEuler, nextEuler, fraction);
-        var newRotation = Quaternion.Euler(newVector);
+        var newRotation = Quaternion.Lerp(previous.rotation, next.rotation, fraction);
         rotationObject.MoveRotation(newRotation);
-    }
-
-    private void OffsetNextAngle(Vector3 previousEuler, ref Vector3 nextEuler, bool rotateClockwise)
-    {
-        if (!rotateClockwise)
-        {
-            if (nextEuler.x < previousEuler.x)
-            {
-                nextEuler.x += 360;
-            }
-
-            if (nextEuler.y < previousEuler.y)
-            {
-                nextEuler.y += 360;
-            }
-
-            if (nextEuler.z < previousEuler.z)
-            {
-                nextEuler.z += 360;
-            }
-        }
-        else
-        {
-            if (nextEuler.x > previousEuler.x)
-            {
-                nextEuler.x -= 360;
-            }
-
-            if (nextEuler.y > previousEuler.y)
-            {
-                nextEuler.y -= 360;
-            }
-
-            if (nextEuler.z > previousEuler.z)
-            {
-                nextEuler.z -= 360;
-            }
-        }
     }
 
     [System.Obsolete("Use node weights instead.", true)]
     protected override void CalculateCyclePositions()
     {
-        var totalDistance = 0f;
-        var distances = new List<float>(nodes.Count);
-        foreach (CRotationNode node in nodes)
-        {
-            var previous = node.previous as CRotationNode;
-            var previousEuler = previous.rotation.eulerAngles;
-            var nextEuler = node.rotation.eulerAngles;
-            OffsetNextAngle(previousEuler, ref nextEuler, node.rotateClockwise);
-            var distance = Vector3.Distance(previousEuler, nextEuler);
-            totalDistance += distance;
-            distances.Add(totalDistance);
-        }
-
-        for (int i = 0; i < nodes.Count; ++i)
-        {
-            (nodes[i] as CRotationNode).targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
-        }
+        throw new System.NotImplementedException();
     }
 }
