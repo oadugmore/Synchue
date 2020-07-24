@@ -10,7 +10,6 @@ public class CLinearMovementObject : CCyclePathingObject
 
     protected override void Start()
     {
-        automaticCycleTime = false; // reminder to remove automaticCycleTime
         base.Start();
         movementObject = GetComponentInChildren<Rigidbody>();
 
@@ -46,24 +45,5 @@ public class CLinearMovementObject : CCyclePathingObject
         var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
         var newPosition = Vector3.Lerp(previous.transform.position, next.transform.position, fraction);
         movementObject.MovePosition(newPosition);
-    }
-
-    [System.Obsolete]
-    protected override void CalculateCyclePositions()
-    {
-        var totalDistance = 0f;
-        var distances = new List<float>(nodes.Count);
-        foreach (var node in nodes)
-        {
-            var previous = node.previous;
-            var distance = Vector3.Distance(node.transform.position, previous.transform.position);
-            totalDistance += distance;
-            distances.Add(totalDistance);
-        }
-
-        for (int i = 0; i < nodes.Count; ++i)
-        {
-            nodes[i].targetCyclePosition = (distances[i] - distances[0]) / totalDistance;
-        }
     }
 }

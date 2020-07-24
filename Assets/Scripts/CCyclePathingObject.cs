@@ -6,8 +6,6 @@ using UnityEngine;
 public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
     [SerializeField]
-    protected bool automaticCycleTime;
-    [SerializeField]
     protected List<CCycleNode> nodes = new List<CCycleNode>();
 
     [SerializeField]
@@ -51,18 +49,9 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
             nodes[i].targetCyclePosition = currentWeight;
         }
         nodes[0].targetCyclePosition = 0;
-
-        // legacy
-        if (automaticCycleTime)
-        {
-            CalculateCyclePositions();
-        }
     }
 
     public abstract void UpdateCyclePosition(float cyclePos);
-
-    [System.Obsolete("Use node weights instead.")]
-    protected abstract void CalculateCyclePositions();
 
     protected CCycleNode NextNode(float cyclePos)
     {
