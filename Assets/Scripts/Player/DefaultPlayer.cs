@@ -12,6 +12,7 @@ public class DefaultPlayer : Player
     public override void Start()
     {
         base.Start();
+        // Default player has multiple colliders, all at the same height
         collider = GetComponentInChildren<Collider>();
         carryPlayerMask = LayerMask.GetMask("CarryPlayer");
     }

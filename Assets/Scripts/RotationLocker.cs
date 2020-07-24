@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[System.Obsolete]
 public class RotationLocker : MonoBehaviour
 {
     private Quaternion originalRotation;

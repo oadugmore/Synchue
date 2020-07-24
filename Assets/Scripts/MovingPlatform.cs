@@ -26,7 +26,7 @@ public class MovingPlatform : MonoBehaviour
         }
         else
         {
-            velocity = (r.position - previousPosition) / Time.fixedDeltaTime;
+            velocity = (r.position - previousPosition) / Time.deltaTime;
             previousPosition = r.position;
         }
     }

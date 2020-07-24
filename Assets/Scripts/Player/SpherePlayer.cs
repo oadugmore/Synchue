@@ -1,11 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SpherePlayer : Player
 {
+    [SerializeField]
+    private float stoppingSpeed = 1;
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
     private float lastControl = 0f;
-    private MovementMode movementMode = MovementMode.Stopped;
+    private MovementMode movementMode = MovementMode.Inactive;
 
     public override void Start()
     {
@@ -21,47 +24,39 @@ public class SpherePlayer : Player
 
     public override void Move()
     {
-        //var slowDown = 1f;
         var control = Controller.GetAxis(playerColor);
         if (control < lastControl)
         {
-            if (control == 0f)
-            {
-                movementMode = MovementMode.Stopping;
-                //Debug.Log("Stopping");
-            }
-            else
-            {
-                movementMode = MovementMode.Slowing;
-            }
-            //slowDown *= -1 * rigidbody.velocity.x;
+            movementMode = MovementMode.PassiveBraking;
         }
         else if (control > lastControl)
         {
-            movementMode = MovementMode.Accelerating;
-            //Debug.Log("Accelerating");
+            movementMode = MovementMode.Active;
         }
 
-        float forceX;
+        float forceX = 0;
         switch (movementMode)
         {
-            case MovementMode.Stopped:
-            case MovementMode.Accelerating:
-                forceX = speed * control;
-                break;
-            case MovementMode.Slowing:
-                forceX = -speed * control * rigidbody.velocity.x;
-                break;
-            case MovementMode.Stopping:
-                if (rigidbody.velocity.x < 0.1f)
+            case MovementMode.Inactive:
+                if (rigidbody.velocity.x > 0.01f)
                 {
-                    movementMode = MovementMode.Stopped;
-                    //Debug.Log("Stopped.");
+                    movementMode = MovementMode.PassiveBraking;
+                    break;
                 }
-                forceX = -rigidbody.velocity.x;
+                break;
+            case MovementMode.Active:
+                forceX = speed;
+                break;
+            case MovementMode.PassiveBraking:
+                if (rigidbody.velocity.x < 0.01f)
+                {
+                    movementMode = MovementMode.Inactive;
+                    break;
+                }
+                forceX = -rigidbody.velocity.x * stoppingSpeed;
                 break;
             default:
-                throw new System.NotImplementedException("Movement mode " + movementMode + " not supported.");
+                throw new NotImplementedException("Movement mode " + movementMode + " not supported.");
         }
 
         rigidbody.AddForce(forceX, 0f, 0f);
@@ -84,5 +79,5 @@ public class SpherePlayer : Player
 
 enum MovementMode
 {
-    Accelerating, Slowing, Stopping, Stopped
+    Active, PassiveBraking, Inactive
 }
