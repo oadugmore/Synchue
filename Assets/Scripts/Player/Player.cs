@@ -10,12 +10,16 @@ public abstract class Player : MonoBehaviour
     protected Goal goal;
 
     public InteractColor playerColor { get; set; }
+    public Vector3 testPosition;
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
         playerColor = InteractColor.Blue;
+#if UNITY_EDITOR
+        transform.localPosition = testPosition;
+#endif
     }
 
     private void OnCollisionEnter(Collision other)
