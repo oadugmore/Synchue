@@ -10,16 +10,30 @@ public abstract class Player : MonoBehaviour
     protected Goal goal;
 
     public InteractColor playerColor { get; set; }
-    public Vector3 testPosition;
+    [SerializeField]
+    private Vector3 testPosition;
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
         playerColor = InteractColor.Blue;
-#if UNITY_EDITOR
-        transform.localPosition = testPosition;
-#endif
+        if (Application.isEditor)
+        {
+            transform.position = testPosition;
+        }
+    }
+
+    public void SetTestPosition(Vector3 testPosition)
+    {
+        this.testPosition = testPosition;
+        Debug.Log("Updated test position to " + testPosition);
+    }
+
+    public Vector3 GetTestPosition()
+    {
+        Debug.Log("Accessed test position");
+        return testPosition;
     }
 
     private void OnCollisionEnter(Collision other)
