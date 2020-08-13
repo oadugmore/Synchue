@@ -4,11 +4,10 @@ using UnityEditor;
 [CustomEditor(typeof(Player), true)]
 public class PlayerEditor : Editor
 {
-    // SerializedProperty testPosition;
+    private Player t;
     private bool editingTestPosition = false;
     private GUIStyle toggleButtonStyle;
     private SerializedProperty testPosition;
-    
 
     public override void OnInspectorGUI()
     {
@@ -24,30 +23,26 @@ public class PlayerEditor : Editor
 
     private void OnEnable()
     {
-        // testPosition = serializedObject.FindProperty("testPosition");
+        t = target as Player;
         testPosition = serializedObject.FindProperty("testPosition");
-    }
-
-    private void OnDisable()
-    {
     }
 
     private void OnSceneGUI()
     {
-        var t = target as Player;
         if (editingTestPosition && !Application.isPlaying)
         {
             Tools.hidden = true;
-            var newPos = Handles.PositionHandle(t.GetTestPosition(), Quaternion.identity);
-            if (Vector3.Distance(t.transform.position, newPos) < 1)
+            var newPos = Handles.PositionHandle(t.testPosition, Quaternion.identity);
+            if (newPos != t.testPosition)
             {
-                newPos += Vector3.right;
+                Undo.RecordObject(target, "Update Player test position");
+                t.testPosition = newPos;
             }
-            t.SetTestPosition(newPos);
         }
         else
         {
             Tools.hidden = false;
         }
+
     }
 }

@@ -10,8 +10,7 @@ public abstract class Player : MonoBehaviour
     protected Goal goal;
 
     public InteractColor playerColor { get; set; }
-    [SerializeField]
-    private Vector3 testPosition;
+    public Vector3 testPosition;
 
     public virtual void Start()
     {
@@ -22,18 +21,6 @@ public abstract class Player : MonoBehaviour
         {
             transform.position = testPosition;
         }
-    }
-
-    public void SetTestPosition(Vector3 testPosition)
-    {
-        this.testPosition = testPosition;
-        Debug.Log("Updated test position to " + testPosition);
-    }
-
-    public Vector3 GetTestPosition()
-    {
-        Debug.Log("Accessed test position");
-        return testPosition;
     }
 
     private void OnCollisionEnter(Collision other)
@@ -52,7 +39,7 @@ public abstract class Player : MonoBehaviour
         }
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         if (!goal.finished)
         {
@@ -62,12 +49,8 @@ public abstract class Player : MonoBehaviour
 
     public abstract void Move();
 
-    /// <summary>
-    /// Changes the player's InteractColor.
-    /// </summary>
-    public void ChangeColor(InteractColor newColor)
+    public void ChangeInteractColor(InteractColor newColor)
     {
         playerColor = newColor;
     }
-
 }
