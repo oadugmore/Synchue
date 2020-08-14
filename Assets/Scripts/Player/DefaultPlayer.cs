@@ -61,6 +61,7 @@ public class DefaultPlayer : Player
     /// Causes the player to ignore the forces of drag for a specified duration.
     /// </summary>
     /// <param name="seconds">The duration in seconds to ignore drag.</param>
+    [System.Obsolete("This causes pretty strange behavior so usage should be avoided if possible.")]
     private IEnumerator IgnoreDrag(float seconds)
     {
         var originalDrag = horizontalDragFactor;
