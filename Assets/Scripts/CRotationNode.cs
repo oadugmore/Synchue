@@ -2,5 +2,10 @@
 
 public class CRotationNode : CCycleNode
 {
-    public Quaternion rotation => transform.rotation;
+    public Vector3 localRotationHint;
+
+    private void OnValidate()
+    {
+        transform.localRotation = Quaternion.Euler(localRotationHint);
+    }
 }

@@ -50,13 +50,8 @@ public class CRotationObject : CCyclePathingObject
         Debug.Assert(cyclePos <= nextCyclePos);
         Debug.Assert(cyclePos >= previousCyclePos);
 
-        // TODO: Cache nextEuler and previousEuler and only update
-        // when nextIndex = NextNode() is different from last UpdateCyclePosition()
-
-        // do calculations in euler angles because I spent a few hours watching videos on quaternions
-        // and decided it would be easier to use euler angles
         var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
-        var newRotation = Quaternion.Lerp(previous.rotation, next.rotation, fraction);
+        var newRotation = Quaternion.Lerp(previous.transform.rotation, next.transform.rotation, fraction);
         rotationObject.MoveRotation(newRotation);
     }
 }

@@ -5,15 +5,16 @@ using System.Collections.Generic;
 [CustomEditor(typeof(CRotationObject))]
 public class CRotationObjectEditor : Editor
 {
-    SerializedProperty offset;
-    CRotationObject t;
-    CRotationNode[] nodes;
-    List<SerializedObject> nodesSerialized = new List<SerializedObject>();
-    List<SerializedObject> nodeTransforms = new List<SerializedObject>();
-    List<SerializedProperty> nodeRotations = new List<SerializedProperty>();
-    List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
+    private SerializedProperty offset;
+    private CRotationObject t;
+    private CRotationNode[] nodes;
+    private List<SerializedObject> nodesSerialized = new List<SerializedObject>();
+    private List<SerializedObject> nodeTransforms = new List<SerializedObject>();
+    private List<SerializedProperty> nodeRotations = new List<SerializedProperty>();
+    private List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
     private GUIStyle editNodesButtonStyle;
+    private Quaternion currentRotationOfNodeHandle;
 
     void OnEnable()
     {
@@ -42,18 +43,13 @@ public class CRotationObjectEditor : Editor
             var transformSO = new SerializedObject(node.transform);
             nodesSerialized.Add(nodeSO);
             nodeTransforms.Add(transformSO);
-            nodeRotations.Add(nodeSO.FindProperty("m_localRotationHint"));
+            nodeRotations.Add(nodeSO.FindProperty("localRotationHint"));
             nodeWeights.Add(nodeSO.FindProperty("m_weight"));
         }
         if (t.nodeSelectedForEditing >= nodes.Length)
         {
             t.nodeSelectedForEditing = -1;
         }
-    }
-
-    void CreateDefaultNodes()
-    {
-
     }
 
     private bool ApproximatelyEqualToClosestInt(float f)
@@ -110,6 +106,7 @@ public class CRotationObjectEditor : Editor
                 if (GUILayout.Toggle(editing, "Edit", editNodesButtonStyle))
                 {
                     t.nodeSelectedForEditing = i;
+                    currentRotationOfNodeHandle = nodes[i].transform.localRotation;
                 }
                 else if (editing)
                 {
@@ -143,11 +140,12 @@ public class CRotationObjectEditor : Editor
         {
             var node = nodes[t.nodeSelectedForEditing];
             EditorGUI.BeginChangeCheck();
-            var newRot = Handles.RotationHandle(node.transform.localRotation, node.transform.position);
+            currentRotationOfNodeHandle = Handles.RotationHandle(currentRotationOfNodeHandle, node.transform.position);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(node.transform, "Move node");
-                node.transform.localRotation = newRot;
+                Undo.RecordObject(node, "Rotating node");
+                node.localRotationHint = currentRotationOfNodeHandle.eulerAngles;
+                node.transform.localRotation = currentRotationOfNodeHandle;
             }
         }
         if (!Application.isPlaying)

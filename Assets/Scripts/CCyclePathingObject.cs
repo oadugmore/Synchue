@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿/// TODO: Consider separating this from the (currently) implementing types.
+/// "CentralizedNodeManager"?
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

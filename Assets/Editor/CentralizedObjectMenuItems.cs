@@ -4,10 +4,10 @@ using System.Collections.Generic;
 
 public class CentralizedObjectMenuItems : ScriptableObject
 {
-    private const string centralizeMenuName = "Centralize-ize";
+    private const string centralizeMenuName = "Add Centralized Control";
 
     [MenuItem(centralizeMenuName + "/Linear Movement")]
-    public static void CreateCLinearMovementObject()
+    public static void AddCLinearMovement()
     {
         var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
         foreach (var obj in selectedObjects)
@@ -22,12 +22,12 @@ public class CentralizedObjectMenuItems : ScriptableObject
                 node.AddComponent<CLinearMovementNode>();
                 node.transform.SetParent(containerObject.transform);
             }
-            Undo.RegisterCreatedObjectUndo(containerObject, "Create CLinearMovementObject");
+            Undo.RegisterCreatedObjectUndo(containerObject, "Add CLinearMovement");
         }
     }
 
-    [MenuItem(centralizeMenuName + "/Rotation Object")]
-    public static void CreateCRotationObject()
+    [MenuItem(centralizeMenuName + "/Rotation")]
+    public static void AddCRotation()
     {
         var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
         foreach (var obj in selectedObjects)
@@ -42,21 +42,22 @@ public class CentralizedObjectMenuItems : ScriptableObject
                 node.AddComponent<CRotationNode>();
                 node.transform.SetParent(containerObject.transform, false);
             }
-            Undo.RegisterCreatedObjectUndo(containerObject, "Create CRotationObject");
+            Undo.RegisterCreatedObjectUndo(containerObject, "Add CRotation");
         }
     }
 
-    [MenuItem(centralizeMenuName + "/Elliptical Movement Object")]
-    public static void CreateCEllipticalMovementObject()
+    [MenuItem(centralizeMenuName + "/Elliptical Movement")]
+    public static void AddCEllipticalMovement()
     {
         var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
             containerObject.name = "C Elliptical Movement Object";
-            containerObject.AddComponent<CEllipticalMovementObject>();
+            var emo = containerObject.AddComponent<CEllipticalMovementObject>();
+            emo.verticalAxis = emo.horizontalAxis = 1f;
             AddCustomRigidbody(obj);
-            Undo.RegisterCreatedObjectUndo(containerObject, "Create CEllipticalMovementObject");
+            Undo.RegisterCreatedObjectUndo(containerObject, "Add CEllipticalMovement" + obj.name);
         }
     }
 
@@ -75,9 +76,10 @@ public class CentralizedObjectMenuItems : ScriptableObject
     }
 
     /// <summary>
-    /// 
+    /// Manually sets Rigidbody stats that are normally only changed while the game is playing.
+    /// Use this if an ExecuteInEditMode script misbehaves.
     /// </summary>
-    [MenuItem(centralizeMenuName + "/Reset Rigidbody Kinematics")]
+    [MenuItem(centralizeMenuName + "/Debug/Reset Rigidbody Kinematics")]
     public static void ResetRigidbodyKinematics()
     {
         var selectedObjects = SelectedGameObjectsInScene();
@@ -115,7 +117,6 @@ public class CentralizedObjectMenuItems : ScriptableObject
     /// Gets a non-null list of currently selected GameObjects that are not
     /// part of any prefab.
     /// </summary>
-    /// <returns>A non-null list of GameObjects that are currently selected and not part of any prefab.</returns>
     private static List<GameObject> SelectedGameObjectsNotPartOfAnyPrefab()
     {
         var objs = new List<GameObject>();
@@ -129,6 +130,10 @@ public class CentralizedObjectMenuItems : ScriptableObject
         return objs;
     }
 
+    /// <summary>
+    /// Gets a non-null list of currently selected GameObjects that are
+    /// in the scene, including prefab instances.
+    /// </summary>
     private static List<GameObject> SelectedGameObjectsInScene()
     {
         var objs = new List<GameObject>();
