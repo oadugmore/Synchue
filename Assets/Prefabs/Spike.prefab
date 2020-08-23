@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1367985465299272}
-  m_LocalRotation: {x: 0.16195391, y: -0.053188257, z: 0.25660887, w: 0.9513642}
-  m_LocalPosition: {x: -0.16, y: 0, z: -0.4}
+  m_LocalRotation: {x: 0.26990417, y: 0.4377641, z: 0.13866834, w: 0.84633654}
+  m_LocalPosition: {x: -0.36, y: 0, z: 0}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 4234006100787308}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 19.6, y: -1.1, z: 30}
+  m_LocalEulerAnglesHint: {x: 19.6, y: 60, z: 30}
 --- !u!33 &33353259583334138
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -54,6 +54,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
@@ -88,6 +89,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4234006100787308}
   - component: {fileID: 65718927440106866}
+  - component: {fileID: 803130231845259690}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Spike
@@ -121,5 +123,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.18, z: 0}
+  m_Size: {x: 1, y: 0.5, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &803130231845259690
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384231148612058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.31
+  m_Center: {x: 0, y: 0.46, z: 0}

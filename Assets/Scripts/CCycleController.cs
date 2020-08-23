@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 public class CCycleController : MonoBehaviour
 {
     [SerializeField][Tooltip("The time in seconds it takes to complete one cycle.")]
-    private float cycleTime;
+    private float cycleTime = 1f;
     [SerializeField][Tooltip("The color of cycle object to control.")]
     private InteractColor color;
     [SerializeField][Tooltip("Ignore controller input outside of this range.")]
@@ -21,9 +21,13 @@ public class CCycleController : MonoBehaviour
 
     private void Start()
     {
+        if (cycleTime == 0f)
+        {
+            Debug.LogError("Cycle Time should be greater than zero.");
+            return;
+        }
         playerTransform = GameObject.FindWithTag("Player").transform;
         cycleObjects = new List<ICCycleObject>(GetComponentsInChildren<ICCycleObject>());
-        Assert.AreNotEqual(cycleTime, 0f);
         UpdateObjectPositions();
     }
 

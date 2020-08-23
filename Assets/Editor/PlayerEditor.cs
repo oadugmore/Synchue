@@ -18,6 +18,7 @@ public class PlayerEditor : Editor
         }
         EditorGUILayout.PropertyField(testPosition);
         editingTestPosition = GUILayout.Toggle(editingTestPosition, "Edit Test Position", toggleButtonStyle);
+        DrawPropertiesExcluding(serializedObject, testPosition.name, "m_Script");
         serializedObject.ApplyModifiedProperties();
     }
 

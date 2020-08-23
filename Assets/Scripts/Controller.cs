@@ -34,17 +34,18 @@ public class Controller : MonoBehaviour
 
         purpleButtons = FindObjectsOfType<WorldColorButton>();
 
-#if UNITY_EDITOR
-        if (!useTouchInputInEditor)
+        if (Application.isEditor)
         {
-            keyboardInput = true;
-            Debug.Log("Running in the Unity Editor. Enabling keyboard input.");
+            if (!useTouchInputInEditor)
+            {
+                keyboardInput = true;
+                Debug.Log("Running in the Unity Editor. Enabling keyboard input.");
+            }
+            else
+            {
+                Debug.Log("Running in the Unity Editor with touch input enabled.");
+            }
         }
-        else
-        {
-            Debug.Log("Running in the Unity Editor with touch input enabled.");
-        }
-#endif
     }
 
     private void Update()

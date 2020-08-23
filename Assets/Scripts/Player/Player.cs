@@ -10,7 +10,7 @@ public abstract class Player : MonoBehaviour
     protected Goal goal;
 
     public InteractColor playerColor { get; set; }
-    public Vector3 testPosition;
+    public Vector3 testPosition = Vector3.up;
 
     public virtual void Start()
     {
