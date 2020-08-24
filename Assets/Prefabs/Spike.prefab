@@ -88,8 +88,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4234006100787308}
-  - component: {fileID: 65718927440106866}
   - component: {fileID: 803130231845259690}
+  - component: {fileID: 5333802320059826132}
+  - component: {fileID: 4240544939051170814}
+  - component: {fileID: 6490334290471543640}
   m_Layer: 0
   m_Name: Spike
   m_TagString: Spike
@@ -112,19 +114,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 26.786001, y: -0.024, z: 32.253002}
---- !u!65 &65718927440106866
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384231148612058}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.5, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &803130231845259690
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -136,5 +125,44 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.31
-  m_Center: {x: 0, y: 0.46, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.58, z: 0}
+--- !u!135 &5333802320059826132
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384231148612058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: -0.37, y: -0.14, z: 0.22}
+--- !u!135 &4240544939051170814
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384231148612058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0.37, y: -0.14, z: 0.22}
+--- !u!135 &6490334290471543640
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1384231148612058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.2
+  m_Center: {x: 0, y: -0.14, z: -0.5}
