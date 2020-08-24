@@ -28,6 +28,11 @@ public class PlayerEditor : Editor
         testPosition = serializedObject.FindProperty("testPosition");
     }
 
+    private void OnDisable()
+    {
+        Tools.hidden = false;
+    }
+
     private void OnSceneGUI()
     {
         if (editingTestPosition && !Application.isPlaying)

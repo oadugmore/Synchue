@@ -2,8 +2,7 @@
 
 public class StayCentered : MonoBehaviour
 {
-    [SerializeField]
-    private float effort = 3;
+    public float effort = 3;
 
     private new Rigidbody rigidbody;
     private float centerZ;
@@ -16,7 +15,7 @@ public class StayCentered : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var zPos = Mathf.MoveTowards(rigidbody.position.z, centerZ, effort * Time.fixedDeltaTime);
+        var zPos = Mathf.MoveTowards(rigidbody.position.z, centerZ, effort * Time.deltaTime);
         rigidbody.MovePosition(new Vector3(rigidbody.position.x, rigidbody.position.y, zPos));
     }
 }
