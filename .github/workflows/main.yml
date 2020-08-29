@@ -28,7 +28,7 @@ jobs:
       env:
         UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
       with:
-        unityVersion: 2019.3.15f1
+        unityVersion: 2019.3.7f1
         targetPlatform: Android
         androidAppBundle: true
         buildsPath: Builds
