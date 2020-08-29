@@ -1,0 +1,46 @@
+name: Sync,hue Workflow
+
+on:
+  push:
+    branches: [ release-internal ]
+  pull_request:
+    branches: [ release-internal ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repo
+      uses: actions/checkout@v2.3.2
+      with:
+        lfs: true
+
+    - name: Cache library
+      uses: actions/cache@v2.1.1
+      with:
+        path: Library
+        key: Library
+
+    - name: Build for Android
+      uses: webbertakken/unity-builder@v1.2
+      env:
+        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      with:
+        unityVersion: 2019.4.9f1
+        targetPlatform: Android
+        androidAppBundle: true
+        buildsPath: Builds
+        androidKeystoreName: keystore.jks
+        androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+        androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
+        androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
+        customParameters: '-nographics'
+
+    - name: Store build artifact
+      uses: actions/upload-artifact@v2.1.4
+      with:
+        name: Build
+        path: Builds
