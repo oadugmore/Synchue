@@ -1,11 +1,11 @@
 name: Sync,hue Workflow
 
 on:
-  push:
-    branches: [ release-internal ]
-  pull_request:
-    branches: [ release-internal ]
   workflow_dispatch:
+  # push:
+  #   branches: [ release-internal ]
+  # pull_request:
+  #   branches: [ release-internal ]
 
 jobs:
   build:
