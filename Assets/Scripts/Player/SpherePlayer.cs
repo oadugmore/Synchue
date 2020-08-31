@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class SpherePlayer : Player
 {
-    [SerializeField]
-    private float stoppingSpeed = 1;
+    public float stoppingSpeed = 1;
+    public float maxForwardSpeed = 20;
+
     private SphereCollider sphereCollider;
     private bool onPlatform = false;
     private float lastControl = 0f;
@@ -45,7 +46,10 @@ public class SpherePlayer : Player
                 }
                 break;
             case MovementMode.Active:
-                forceX = speed;
+                if (rigidbody.velocity.x < maxForwardSpeed)
+                {
+                    forceX = speed;
+                }
                 break;
             case MovementMode.PassiveBraking:
                 if (rigidbody.velocity.x < 0.01f)

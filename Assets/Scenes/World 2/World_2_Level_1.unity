@@ -22804,7 +22804,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536294415}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6087614, w: 0.7933533}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -23092,7 +23092,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 546682398}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6087614, w: 0.7933533}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -40607,7 +40607,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-92682
+  m_Name: pb_Mesh-65858
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -80445,7 +80445,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1776498034}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.6087614, w: 0.7933533}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -99363,13 +99363,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2830819918051954761, guid: 81106feb63a307e4b88f79cc1e5eba13,
         type: 3}
-      propertyPath: testPosition.y
-      value: -28
+      propertyPath: speed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2830819918051954761, guid: 81106feb63a307e4b88f79cc1e5eba13,
         type: 3}
-      propertyPath: testPosition.x
-      value: 32.5
+      propertyPath: maxForwardSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2830819918051954762, guid: 81106feb63a307e4b88f79cc1e5eba13,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2830819918051954763, guid: 81106feb63a307e4b88f79cc1e5eba13,
         type: 3}
