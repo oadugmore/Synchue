@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 135045376956211834}
   - component: {fileID: 23680454788243646}
   - component: {fileID: 33261575710162984}
+  - component: {fileID: 8413868105102638190}
   m_Layer: 0
   m_Name: SpherePlayer
   m_TagString: Player
@@ -127,3 +128,16 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1703031361872156}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8413868105102638190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1703031361872156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07572a767ce02e04a8dfba459c8b83b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effort: 3
