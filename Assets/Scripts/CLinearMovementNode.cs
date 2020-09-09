@@ -1,7 +1,5 @@
-﻿using UnityEngine;
-
-[System.Obsolete("When are we removing this...?")]
-public class CLinearMovementNode : CCycleNode
-{
-    // public Vector3 position { get => transform.position; set => transform.position = value; }
-}
+﻿/// <summary>
+/// After much deliberation and wasted time debugging serialization errors,
+/// this empty class will be left in as-is to avoid a huge rework.
+/// </summary>
+public class CLinearMovementNode : CCycleNode {}

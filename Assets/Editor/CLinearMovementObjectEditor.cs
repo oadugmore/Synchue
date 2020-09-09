@@ -5,13 +5,12 @@ using System.Collections.Generic;
 [CustomEditor(typeof(CLinearMovementObject))]
 public class CLinearMovementObjectEditor : Editor
 {
-    // SerializedProperty nodes;
     SerializedProperty offset;
     CLinearMovementObject t;
     CLinearMovementNode[] nodes;
     List<SerializedObject> nodesSerialized = new List<SerializedObject>();
     List<SerializedObject> nodeTransforms = new List<SerializedObject>();
-    List<SerializedProperty> nodePositions = new List<SerializedProperty>();
+    List<SerializedProperty> nodeLocalPositions = new List<SerializedProperty>();
     List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
 
@@ -34,7 +33,7 @@ public class CLinearMovementObjectEditor : Editor
         nodes = t.GetComponentsInChildren<CLinearMovementNode>();
         nodesSerialized.Clear();
         nodeTransforms.Clear();
-        nodePositions.Clear();
+        nodeLocalPositions.Clear();
         nodeWeights.Clear();
         foreach (var node in nodes)
         {
@@ -43,7 +42,7 @@ public class CLinearMovementObjectEditor : Editor
             nodesSerialized.Add(so);
             nodeTransforms.Add(transform);
             nodeWeights.Add(so.FindProperty("m_weight"));
-            nodePositions.Add(transform.FindProperty("m_LocalPosition"));
+            nodeLocalPositions.Add(transform.FindProperty("m_LocalPosition"));
         }
     }
 
@@ -85,7 +84,7 @@ public class CLinearMovementObjectEditor : Editor
                 nodeTransforms[i].Update();
                 EditorGUILayout.BeginHorizontal();
                 EditorGUIUtility.labelWidth = 30;
-                EditorGUILayout.PropertyField(nodePositions[i], new GUIContent("Pos"));
+                EditorGUILayout.PropertyField(nodeLocalPositions[i], new GUIContent("Pos"));
                 EditorGUIUtility.labelWidth = 50;
                 EditorGUILayout.PropertyField(nodeWeights[i], GUILayout.ExpandWidth(false));
                 EditorGUILayout.EndHorizontal();

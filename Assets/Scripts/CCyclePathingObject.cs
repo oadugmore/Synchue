@@ -1,7 +1,4 @@
-﻿/// TODO: Consider separating this from the (currently) implementing types.
-/// "CentralizedNodeManager"?
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,5 +67,4 @@ public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
         }
         return nodes[nextNode];
     }
-
 }
