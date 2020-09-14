@@ -5,8 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
-    [SerializeField]
-    private WinScreen winScreen;
+    public WinScreen winScreen;
 
     private RectTransform uiRoot;
     private float startTime;
@@ -35,6 +34,8 @@ public class Goal : MonoBehaviour
             var ws = Instantiate(winScreen, uiRoot);
             ws.SetCompletionTime(endTime - startTime);
             ws.SetLevelNames(levelName, nextSceneName);
+            var deaths = DeathCounter.GetDeathCount();
+            ws.SetDeathCount(deaths);
             _finished = true;
         }
     }

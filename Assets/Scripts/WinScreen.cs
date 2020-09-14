@@ -7,12 +7,10 @@ using UnityEngine.UI;
 
 public class WinScreen : MonoBehaviour
 {
-    [SerializeField]
-    private Button nextLevelButton;
-    [SerializeField]
-    private Text timeText;
-    [SerializeField]
-    private Text levelText;
+    public Button nextLevelButton;
+    public Text timeText;
+    public Text levelText;
+    public Text deathCountText;
 
     private string nextLevelName;
 
@@ -41,12 +39,18 @@ public class WinScreen : MonoBehaviour
         }
     }
 
+    public void SetDeathCount(int deaths)
+    {
+        deathCountText.text = deaths.ToString();
+    }
+
     /// <summary>
     /// Loads the next level.
     /// </summary>
     public void NextLevel()
     {
         SceneManager.LoadScene(nextLevelName);
+        DeathCounter.ResetDeathCount();
     }
 
     /// <summary>

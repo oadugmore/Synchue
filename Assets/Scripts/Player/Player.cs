@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 
 public abstract class Player : MonoBehaviour
 {
-    [SerializeField]
-    protected float speed = 10f;
+    public float speed = 10f;
+    public Vector3 testPosition = Vector3.up;
+    
     protected new Rigidbody rigidbody;
     protected Goal goal;
+    protected bool dead;
 
     public InteractColor playerColor { get; set; }
-    public Vector3 testPosition = Vector3.up;
 
     public virtual void Start()
     {
@@ -41,8 +42,11 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void Die()
     {
-        if (!goal.finished)
+        if (!goal.finished && !dead)
         {
+            dead = true;
+            DeathCounter.IncrementDeathCount();
+            Debug.Log("Deaths: " + DeathCounter.GetDeathCount());
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }

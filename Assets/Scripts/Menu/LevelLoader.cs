@@ -55,6 +55,7 @@ public class LevelLoader : MonoBehaviour
     /// </summary>
     public void LoadScene()
     {
+        DeathCounter.ResetDeathCount();
         SceneManager.LoadScene(sceneText.text);
     }
 
