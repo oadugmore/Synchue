@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-public class PauseMenu : MonoBehaviour
+public class HUD : MonoBehaviour
 {
+    public Text deathCountText;
+
     private bool paused = false;
     private Animator menuAnim;
     private const string menuSceneName = "Menu";
 
-    // Use this for initialization
     private void Start()
     {
         menuAnim = GetComponentInChildren<Animator>();
+        var currentDeaths = DeathCounter.GetDeathCount();
+        deathCountText.text = currentDeaths.ToString();
     }
 
     private void Update()

@@ -41,7 +41,7 @@ public class WinScreen : MonoBehaviour
 
     public void SetDeathCount(int deaths)
     {
-        deathCountText.text = deaths.ToString();
+        deathCountText.text = "Deaths: " + deaths;
     }
 
     /// <summary>
