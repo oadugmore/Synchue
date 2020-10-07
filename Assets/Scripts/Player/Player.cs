@@ -6,7 +6,8 @@ public abstract class Player : MonoBehaviour
 {
     public float speed = 10f;
     public Vector3 testPosition = Vector3.up;
-    
+    public GameObject deathParticleSystem;
+
     protected new Rigidbody rigidbody;
     protected Goal goal;
     protected bool dead;
@@ -47,8 +48,14 @@ public abstract class Player : MonoBehaviour
             dead = true;
             DeathCounter.IncrementDeathCount();
             Debug.Log("Deaths: " + DeathCounter.GetDeathCount());
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+            Instantiate(deathParticleSystem, this.transform);
         }
+    }
+
+    public void ParticleSystemStopped()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public abstract void Move();
