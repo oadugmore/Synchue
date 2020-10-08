@@ -9,7 +9,7 @@ public class CentralizedObjectMenuItems : ScriptableObject
     [MenuItem(centralizeMenuName + "/Linear Movement")]
     public static void AddCLinearMovement()
     {
-        var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
+        var selectedObjects = SelectedGameObjectsNotPrefabChild();
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
@@ -29,7 +29,7 @@ public class CentralizedObjectMenuItems : ScriptableObject
     [MenuItem(centralizeMenuName + "/Rotation")]
     public static void AddCRotation()
     {
-        var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
+        var selectedObjects = SelectedGameObjectsNotPrefabChild();
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
@@ -49,7 +49,7 @@ public class CentralizedObjectMenuItems : ScriptableObject
     [MenuItem(centralizeMenuName + "/Elliptical Movement")]
     public static void AddCEllipticalMovement()
     {
-        var selectedObjects = SelectedGameObjectsNotPartOfAnyPrefab();
+        var selectedObjects = SelectedGameObjectsNotPrefabChild();
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
@@ -117,12 +117,12 @@ public class CentralizedObjectMenuItems : ScriptableObject
     /// Gets a non-null list of currently selected GameObjects that are not
     /// part of any prefab.
     /// </summary>
-    private static List<GameObject> SelectedGameObjectsNotPartOfAnyPrefab()
+    private static List<GameObject> SelectedGameObjectsNotPrefabChild()
     {
         var objs = new List<GameObject>();
         foreach (var obj in Selection.gameObjects)
         {
-            if (!PrefabUtility.IsPartOfAnyPrefab(obj))
+            if (!PrefabUtility.IsPartOfAnyPrefab(obj) || PrefabUtility.IsOutermostPrefabInstanceRoot(obj))
             {
                 objs.Add(obj);
             }
