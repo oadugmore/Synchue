@@ -50,11 +50,6 @@ public class DefaultPlayer : Player
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
-        DragKiller drag;
-        if (drag = other.gameObject.GetComponent<DragKiller>())
-        {
-            StartCoroutine(IgnoreDrag(drag.dragIgnoreTime));
-        }
     }
 
     /// <summary>
