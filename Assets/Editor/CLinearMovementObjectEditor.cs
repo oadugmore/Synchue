@@ -120,7 +120,8 @@ public class CLinearMovementObjectEditor : Editor
         if (!Application.isPlaying)
         {
             t.UpdateCyclePosition(previewCyclePos);
-            EditorHelper.ManualPhysicsStep();
+            EditorHelper.ManualPhysicsStepGlobal();
+            // EditorHelper.ManualPhysicsStepFor(t.gameObject);
         }
     }
 }

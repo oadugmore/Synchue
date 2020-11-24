@@ -151,7 +151,7 @@ public class CRotationObjectEditor : Editor
         if (!Application.isPlaying)
         {
             t.UpdateCyclePosition(previewCyclePos);
-            EditorHelper.ManualPhysicsStep();
+            EditorHelper.ManualPhysicsStepGlobal();
         }
     }
 }

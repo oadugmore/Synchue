@@ -82,7 +82,7 @@ public class CEllipticalMovementObjectEditor : Editor
         if (!Application.isPlaying)
         {
             t.UpdateCyclePosition(previewCyclePos);
-            EditorHelper.ManualPhysicsStep();
+            EditorHelper.ManualPhysicsStepGlobal();
         }
         // if (EditorGUI.EndChangeCheck())
         // {
