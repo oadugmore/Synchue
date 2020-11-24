@@ -8,8 +8,8 @@ public class EditorHelper
     private static CreateSceneParameters csp = new CreateSceneParameters(LocalPhysicsMode.Physics3D);
     private static NewSceneSetup setup = NewSceneSetup.EmptyScene;
     private static NewSceneMode mode = NewSceneMode.Additive;
-    static Scene scene;
-    static PhysicsScene physicsScene;
+    static Scene previewScene;
+    static PhysicsScene previewPhysicsScene;
 
     public static void ManualPhysicsStepGlobal()
     {
@@ -21,20 +21,29 @@ public class EditorHelper
     public static void ManualPhysicsStepFor(GameObject obj)
     {
         Physics.autoSimulation = false;
-        if (!scene.IsValid())
+        if (!previewScene.IsValid())
         {
-            scene = EditorSceneManager.NewScene(setup, mode);
+            previewScene = EditorSceneManager.NewScene(setup, mode);
         }
-        if (!physicsScene.IsValid())
+        if (!previewPhysicsScene.IsValid())
         {
-            physicsScene = scene.GetPhysicsScene();
+            previewPhysicsScene = previewScene.GetPhysicsScene();
         }
 
-        GameObject rootObj = obj.transform.root.gameObject;
-        Scene currentScene = EditorSceneManager.GetActiveScene();
-        EditorSceneManager.MoveGameObjectToScene(rootObj, scene);
-        physicsScene.Simulate(Time.fixedDeltaTime);
-        EditorSceneManager.MoveGameObjectToScene(rootObj, currentScene);
+        // GameObject rootObj = obj.transform.root.gameObject;
+        // Scene currentScene = EditorSceneManager.GetActiveScene();
+        ClearScene(previewScene);
+        GameObject cloneObj = GameObject.Instantiate(obj);
+        EditorSceneManager.MoveGameObjectToScene(cloneObj, previewScene);
+        previewPhysicsScene.Simulate(Time.fixedDeltaTime);
         Physics.autoSimulation = true;
+    }
+
+    public static void ClearScene(Scene scene)
+    {
+        foreach (var obj in scene.GetRootGameObjects())
+        {
+            GameObject.DestroyImmediate(obj);
+        }
     }
 }
