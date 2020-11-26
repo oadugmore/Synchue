@@ -26,6 +26,12 @@ public class CLinearMovementObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        var newPosition = CalculatePosition(cyclePos);
+        movementObject.MovePosition(newPosition);
+    }
+
+    public Vector3 CalculatePosition(float cyclePos)
+    {
         cyclePos = Mathf.Repeat(cyclePos + offset, 1);
         var next = NextNode(cyclePos);
         var previous = next.previous;
@@ -44,6 +50,6 @@ public class CLinearMovementObject : CCyclePathingObject
 
         var fraction = Mathf.Abs(cyclePos - previousCyclePos) / (nextCyclePos - previousCyclePos);
         var newPosition = Vector3.Lerp(previous.transform.position, next.transform.position, fraction);
-        movementObject.MovePosition(newPosition);
+        return newPosition;
     }
 }

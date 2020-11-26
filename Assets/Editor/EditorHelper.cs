@@ -11,6 +11,7 @@ public class EditorHelper
     static Scene previewScene;
     static PhysicsScene previewPhysicsScene;
 
+    [System.Obsolete("Try to avoid manual physics simulation.")]
     public static void ManualPhysicsStepGlobal()
     {
         Physics.autoSimulation = false;
@@ -18,6 +19,7 @@ public class EditorHelper
         Physics.autoSimulation = true;
     }
 
+    [System.Obsolete("Try to avoid manual physics simulation.")]
     public static void ManualPhysicsStepFor(GameObject obj)
     {
         Physics.autoSimulation = false;
@@ -29,9 +31,6 @@ public class EditorHelper
         {
             previewPhysicsScene = previewScene.GetPhysicsScene();
         }
-
-        // GameObject rootObj = obj.transform.root.gameObject;
-        // Scene currentScene = EditorSceneManager.GetActiveScene();
         ClearScene(previewScene);
         GameObject cloneObj = GameObject.Instantiate(obj);
         EditorSceneManager.MoveGameObjectToScene(cloneObj, previewScene);

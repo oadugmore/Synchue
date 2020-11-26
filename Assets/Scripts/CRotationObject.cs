@@ -31,6 +31,12 @@ public class CRotationObject : CCyclePathingObject
 
     public override void UpdateCyclePosition(float cyclePos)
     {
+        var newRotation = CalculateRotation(cyclePos);
+        rotationObject.MoveRotation(newRotation);
+    }
+
+    public Quaternion CalculateRotation(float cyclePos)
+    {
         cyclePos = Mathf.Repeat(cyclePos + offset, 1);
         var next = (CRotationNode)NextNode(cyclePos);
         var previous = (CRotationNode)next.previous;
@@ -52,6 +58,6 @@ public class CRotationObject : CCyclePathingObject
 
         var fraction = (cyclePos - previousCyclePos) / Mathf.Abs(previousCyclePos - nextCyclePos);
         var newRotation = Quaternion.Lerp(previous.transform.rotation, next.transform.rotation, fraction);
-        rotationObject.MoveRotation(newRotation);
+        return newRotation;
     }
 }

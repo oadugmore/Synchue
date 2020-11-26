@@ -8,17 +8,18 @@ public class CRotationObjectEditor : Editor
     private SerializedProperty offset;
     private CRotationObject t;
     private CRotationNode[] nodes;
+    private Transform rotationObject;
     private List<SerializedObject> nodesSerialized = new List<SerializedObject>();
     private List<SerializedObject> nodeTransforms = new List<SerializedObject>();
     private List<SerializedProperty> nodeRotations = new List<SerializedProperty>();
     private List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
-    private GUIStyle editNodesButtonStyle;
     private Quaternion currentRotationOfNodeHandle;
 
     void OnEnable()
     {
         t = target as CRotationObject;
+        rotationObject = t.GetComponentInChildren<Rigidbody>().transform;
         offset = serializedObject.FindProperty("m_offset");
         FindNodes();
         Undo.undoRedoPerformed += FindNodes;
@@ -59,12 +60,6 @@ public class CRotationObjectEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        // Styles
-        if (editNodesButtonStyle == null)
-        {
-            editNodesButtonStyle = "IN EditColliderButton";
-        }
-
         serializedObject.Update();
         EditorGUIUtility.wideMode = true;
         EditorGUILayout.PropertyField(offset);
@@ -103,7 +98,7 @@ public class CRotationObjectEditor : Editor
 
                 EditorGUILayout.BeginHorizontal();
                 var editing = (t.nodeSelectedForEditing == i);
-                if (GUILayout.Toggle(editing, "Edit", editNodesButtonStyle))
+                if (GUILayout.Toggle(editing, "Edit", EditorStyles.miniButton))
                 {
                     t.nodeSelectedForEditing = i;
                     currentRotationOfNodeHandle = nodes[i].transform.localRotation;
@@ -150,8 +145,7 @@ public class CRotationObjectEditor : Editor
         }
         if (!Application.isPlaying)
         {
-            t.UpdateCyclePosition(previewCyclePos);
-            EditorHelper.ManualPhysicsStepGlobal();
+            rotationObject.rotation = t.CalculateRotation(previewCyclePos);
         }
     }
 }

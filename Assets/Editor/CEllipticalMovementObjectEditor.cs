@@ -14,11 +14,15 @@ public class CEllipticalMovementObjectEditor : Editor
     Vector3[] ellipsePoints;
     bool ellipseDirty = false;
     Vector3 previousPosition;
+    CEllipticalMovementObject t;
+    Transform movementObject;
 
     void OnEnable()
     {
         CalculateEllipsePoints();
-        previousPosition = (target as CEllipticalMovementObject).transform.position;
+        t = target as CEllipticalMovementObject;
+        movementObject = t.GetComponentInChildren<Rigidbody>().transform;
+        previousPosition = t.transform.position;
         Undo.undoRedoPerformed += CalculateEllipsePoints;
         horizontalAxis = serializedObject.FindProperty("horizontalAxis");
         verticalAxis = serializedObject.FindProperty("verticalAxis");
@@ -34,12 +38,9 @@ public class CEllipticalMovementObjectEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        var t = (target as CEllipticalMovementObject);
         EditorGUILayout.PropertyField(horizontalAxis);
         EditorGUILayout.PropertyField(verticalAxis);
         EditorGUILayout.PropertyField(offsetAngle, new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."));
-        //offsetAngle.floatValue = EditorGUILayout.FloatField(new GUIContent("Offset Angle", "Enter an angle in degrees. It will be converted to radians internally."),
-        //    offsetAngle.floatValue);
         EditorGUILayout.PropertyField(rotateClockwise);
 
         previewCyclePos = EditorGUILayout.Slider("Preview Cycle Pos", previewCyclePos, 0f, 1f);
@@ -49,31 +50,11 @@ public class CEllipticalMovementObjectEditor : Editor
             previousPosition = t.transform.position;
         }
 
-
-        // if (lookAtPoint.vector3Value.y > (target as LookAtPoint).transform.position.y)
-        // {
-        //     EditorGUILayout.LabelField("(Above this object)");
-        // }
-        // if (lookAtPoint.vector3Value.y < (target as LookAtPoint).transform.position.y)
-        // {
-        //     EditorGUILayout.LabelField("(Below this object)");
-        // }
-
-
         serializedObject.ApplyModifiedProperties();
     }
 
     public void OnSceneGUI()
     {
-
-        var t = (target as CEllipticalMovementObject);
-
-        //EditorGUI.BeginChangeCheck();
-        //Vector3 pos = Handles.PositionHandle(t.lookAtPoint, Quaternion.identity);
-        //Handles.DrawSolidDisc(t.transform.position + Vector3.right * t.horizontalAxis, Vector3.back, 0.25f);
-        //Handles.DrawSolidDisc(t.transform.position + Vector3.left * t.horizontalAxis, Vector3.back, 0.25f);
-        //Handles.DrawSolidDisc(t.transform.position + Vector3.up * t.verticalAxis, Vector3.back, 0.25f);
-        //Handles.DrawSolidDisc(t.transform.position + Vector3.down * t.verticalAxis, Vector3.back, 0.25f);
         if (ellipseDirty)
         {
             CalculateEllipsePoints();
@@ -81,17 +62,8 @@ public class CEllipticalMovementObjectEditor : Editor
         Handles.DrawPolyLine(ellipsePoints);
         if (!Application.isPlaying)
         {
-            t.UpdateCyclePosition(previewCyclePos);
-            EditorHelper.ManualPhysicsStepGlobal();
+            movementObject.position = t.CalculatePosition(previewCyclePos);
         }
-        // if (EditorGUI.EndChangeCheck())
-        // {
-        //     Undo.RecordObject(target, "Move point");
-        //     Debug.Log("Moved point.");
-        //     t.lookAtPoint = pos;
-        //     t.Update();
-        // }
-
     }
 
     void CalculateEllipsePoints()

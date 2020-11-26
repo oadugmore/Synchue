@@ -13,10 +13,12 @@ public class CLinearMovementObjectEditor : Editor
     List<SerializedProperty> nodeLocalPositions = new List<SerializedProperty>();
     List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
+    private Transform movementObject;
 
     void OnEnable()
     {
         t = target as CLinearMovementObject;
+        movementObject = t.GetComponentInChildren<Rigidbody>().transform;
         offset = serializedObject.FindProperty("m_offset");
         FindNodes();
         Undo.undoRedoPerformed += FindNodes;
@@ -119,9 +121,7 @@ public class CLinearMovementObjectEditor : Editor
         }
         if (!Application.isPlaying)
         {
-            t.UpdateCyclePosition(previewCyclePos);
-            // EditorHelper.ManualPhysicsStepGlobal();
-            // EditorHelper.ManualPhysicsStepFor(t.gameObject);
+            movementObject.position = t.CalculatePosition(previewCyclePos);
         }
     }
 }
