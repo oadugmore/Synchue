@@ -6,19 +6,21 @@ public class PlayerEditor : Editor
 {
     private Player t;
     private bool editingTestPosition = false;
-    private GUIStyle toggleButtonStyle;
     private SerializedProperty testPosition;
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        if (toggleButtonStyle == null)
-        {
-            toggleButtonStyle = "IN EditColliderButton";
-        }
         EditorGUILayout.PropertyField(testPosition);
-        editingTestPosition = GUILayout.Toggle(editingTestPosition, "Edit Test Position", toggleButtonStyle);
-        /// TODO: Add "reset test position" button
+        EditorGUILayout.BeginHorizontal();
+        editingTestPosition = GUILayout.Toggle(editingTestPosition, "Edit Test Position", EditorStyles.miniButton);
+        if (GUILayout.Button("Reset"))
+        {
+            editingTestPosition = false;
+            Undo.RecordObject(target, "Reset Player test position");
+            t.testPosition = t.transform.position;
+        }
+        EditorGUILayout.EndHorizontal();
         DrawPropertiesExcluding(serializedObject, testPosition.name, "m_Script");
         serializedObject.ApplyModifiedProperties();
     }
@@ -26,7 +28,7 @@ public class PlayerEditor : Editor
     private void OnEnable()
     {
         t = target as Player;
-        testPosition = serializedObject.FindProperty("testPosition");
+        testPosition = serializedObject.FindProperty(nameof(testPosition));
     }
 
     private void OnDisable()
@@ -50,6 +52,5 @@ public class PlayerEditor : Editor
         {
             Tools.hidden = false;
         }
-
     }
 }
