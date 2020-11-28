@@ -51,17 +51,4 @@ public class DefaultPlayer : Player
     {
         base.OnTriggerEnter(other);
     }
-
-    /// <summary>
-    /// Causes the player to ignore the forces of drag for a specified duration.
-    /// </summary>
-    /// <param name="seconds">The duration in seconds to ignore drag.</param>
-    [System.Obsolete("This causes pretty strange behavior so usage should be avoided if possible.")]
-    private IEnumerator IgnoreDrag(float seconds)
-    {
-        var originalDrag = horizontalDragFactor;
-        horizontalDragFactor = 0f;
-        yield return new WaitForSeconds(seconds);
-        horizontalDragFactor = originalDrag;
-    }
 }
