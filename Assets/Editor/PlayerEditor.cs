@@ -18,7 +18,7 @@ public class PlayerEditor : Editor
         {
             editingTestPosition = false;
             Undo.RecordObject(target, "Reset Player test position");
-            t.testPosition = t.transform.position;
+            testPosition.vector3Value = t.transform.position;
         }
         EditorGUILayout.EndHorizontal();
         DrawPropertiesExcluding(serializedObject, testPosition.name, "m_Script");
