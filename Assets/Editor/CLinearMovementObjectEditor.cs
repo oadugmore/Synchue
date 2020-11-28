@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [CustomEditor(typeof(CLinearMovementObject))]
 public class CLinearMovementObjectEditor : Editor
 {
+    public Texture2D editButtonIcon;
+
     SerializedProperty offset;
     CLinearMovementObject t;
     CLinearMovementNode[] nodes;
@@ -14,6 +16,8 @@ public class CLinearMovementObjectEditor : Editor
     List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
     private Transform movementObject;
+    int nodeSelectedForEditing = -1;
+    Vector3 currentPositionOfNodeHandle;
 
     void OnEnable()
     {
@@ -27,6 +31,7 @@ public class CLinearMovementObjectEditor : Editor
     void OnDisable()
     {
         Undo.undoRedoPerformed -= FindNodes;
+        Tools.hidden = false;
     }
 
     void FindNodes()
@@ -85,6 +90,16 @@ public class CLinearMovementObjectEditor : Editor
                 nodesSerialized[i].Update();
                 nodeTransforms[i].Update();
                 EditorGUILayout.BeginHorizontal();
+                var editing = (nodeSelectedForEditing == i);
+                if (GUILayout.Toggle(editing, editButtonIcon, EditorStyles.miniButton, GUILayout.MaxWidth(30)))
+                {
+                    nodeSelectedForEditing = i;
+                    currentPositionOfNodeHandle = nodes[i].transform.position;
+                }
+                else if (editing)
+                {
+                    nodeSelectedForEditing = -1;
+                }
                 EditorGUIUtility.labelWidth = 30;
                 EditorGUILayout.PropertyField(nodeLocalPositions[i], new GUIContent("Pos"));
                 EditorGUIUtility.labelWidth = 50;
@@ -106,18 +121,21 @@ public class CLinearMovementObjectEditor : Editor
 
     void OnSceneGUI()
     {
-        if (t.showNodesInInspector)
+        if (t.showNodesInInspector && nodeSelectedForEditing != -1)
         {
-            foreach (var node in nodes)
+            Tools.hidden = true;
+            var node = nodes[nodeSelectedForEditing];
+            EditorGUI.BeginChangeCheck();
+            currentPositionOfNodeHandle = Handles.PositionHandle(currentPositionOfNodeHandle, Quaternion.identity);
+            if (EditorGUI.EndChangeCheck())
             {
-                EditorGUI.BeginChangeCheck();
-                var newPos = Handles.PositionHandle(node.transform.position, Quaternion.identity);
-                if (EditorGUI.EndChangeCheck())
-                {
-                    Undo.RecordObject(node.transform, "Move node");
-                    node.transform.position = newPos;
-                }
+                Undo.RecordObject(node.transform, "Move node");
+                node.transform.position = currentPositionOfNodeHandle;
             }
+        }
+        else
+        {
+            Tools.hidden = false;
         }
         if (!Application.isPlaying)
         {

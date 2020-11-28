@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [CustomEditor(typeof(CRotationObject))]
 public class CRotationObjectEditor : Editor
 {
+    public Texture2D editButtonIcon;
+
     private SerializedProperty offset;
     private CRotationObject t;
     private CRotationNode[] nodes;
@@ -28,6 +30,7 @@ public class CRotationObjectEditor : Editor
     void OnDisable()
     {
         Undo.undoRedoPerformed -= FindNodes;
+        Tools.hidden = false;
     }
 
     void FindNodes()
@@ -98,7 +101,7 @@ public class CRotationObjectEditor : Editor
 
                 EditorGUILayout.BeginHorizontal();
                 var editing = (t.nodeSelectedForEditing == i);
-                if (GUILayout.Toggle(editing, "Edit", EditorStyles.miniButton))
+                if (GUILayout.Toggle(editing, editButtonIcon, EditorStyles.miniButton, GUILayout.MaxWidth(30)))
                 {
                     t.nodeSelectedForEditing = i;
                     currentRotationOfNodeHandle = nodes[i].transform.localRotation;
@@ -108,13 +111,13 @@ public class CRotationObjectEditor : Editor
                     t.nodeSelectedForEditing = -1;
                 }
                 EditorGUIUtility.labelWidth = 30;
-                EditorGUILayout.PropertyField(nodeRotations[i]);
+                EditorGUILayout.PropertyField(nodeRotations[i], new GUIContent("Rot"));
+                // EditorGUILayout.EndHorizontal();
+                EditorGUIUtility.labelWidth = 50;
+                // EditorGUILayout.BeginHorizontal();
+                EditorGUILayout.PropertyField(nodeWeights[i], GUILayout.ExpandWidth(false));
                 EditorGUILayout.EndHorizontal();
-                EditorGUIUtility.labelWidth = 0;
-                EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PropertyField(nodeWeights[i]);
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.Space();
+                // EditorGUILayout.Space();
                 if (nodesSerialized[i].hasModifiedProperties)
                 {
                     nodesSerialized[i].ApplyModifiedProperties();
@@ -133,6 +136,7 @@ public class CRotationObjectEditor : Editor
     {
         if (t.showNodesInInspector && t.nodeSelectedForEditing != -1)
         {
+            Tools.hidden = true;
             var node = nodes[t.nodeSelectedForEditing];
             EditorGUI.BeginChangeCheck();
             currentRotationOfNodeHandle = Handles.RotationHandle(currentRotationOfNodeHandle, node.transform.position);
@@ -142,6 +146,10 @@ public class CRotationObjectEditor : Editor
                 node.localRotationHint = currentRotationOfNodeHandle.eulerAngles;
                 node.transform.localRotation = currentRotationOfNodeHandle;
             }
+        }
+        else
+        {
+            Tools.hidden = false;
         }
         if (!Application.isPlaying)
         {

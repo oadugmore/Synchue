@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode, SelectionBase]
+[ExecuteInEditMode, SelectionBase, AddComponentMenu(Constants.centralizedControlMenuName + "/Elliptical Movement")]
 public class CEllipticalMovementObject : MonoBehaviour, ICCycleObject
 {
     [Min(0.001f)]

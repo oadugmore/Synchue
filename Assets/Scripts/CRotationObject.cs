@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[SelectionBase, ExecuteInEditMode]
+[SelectionBase, ExecuteInEditMode, AddComponentMenu(Constants.centralizedControlMenuName + "/Rotation")]
 public class CRotationObject : CCyclePathingObject
 {
     public bool showNodesInInspector;

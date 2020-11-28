@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[SelectionBase, ExecuteInEditMode]
+[SelectionBase, ExecuteInEditMode, AddComponentMenu(Constants.centralizedControlMenuName + "/Linear Movement")]
 public class CLinearMovementObject : CCyclePathingObject
 {
     public bool showNodesInInspector;
