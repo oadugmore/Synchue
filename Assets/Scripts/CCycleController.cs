@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.Assertions;
 
+[AddComponentMenu(Constants.centralizedControlMenuName + "/Cycle Controller")]
 public class CCycleController : MonoBehaviour
 {
     [SerializeField][Tooltip("The time in seconds it takes to complete one cycle.")]
