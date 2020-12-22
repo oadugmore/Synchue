@@ -13,7 +13,8 @@ public class CentralizedObjectMenuItems : ScriptableObject
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
-            containerObject.name = "C Linear Movement Object";
+            containerObject.name = obj.name;
+            obj.name = "Movement Object";
             containerObject.AddComponent<CLinearMovementObject>();
             AddCustomRigidbody(obj);
             for (int i = 0; i < 2; i++)
@@ -33,7 +34,8 @@ public class CentralizedObjectMenuItems : ScriptableObject
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
-            containerObject.name = "C Rotation Object";
+            containerObject.name = obj.name;
+            obj.name = "Rotation Object";
             containerObject.AddComponent<CRotationObject>();
             AddCustomRigidbody(obj);
             for (int i = 0; i < 2; i++)
@@ -53,7 +55,8 @@ public class CentralizedObjectMenuItems : ScriptableObject
         foreach (var obj in selectedObjects)
         {
             var containerObject = AddContainerObject(obj);
-            containerObject.name = "C Elliptical Movement Object";
+            containerObject.name = obj.name;
+            obj.name = "Movement Object";
             var emo = containerObject.AddComponent<CEllipticalMovementObject>();
             emo.verticalAxis = emo.horizontalAxis = 1f;
             AddCustomRigidbody(obj);
