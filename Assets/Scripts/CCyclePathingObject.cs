@@ -5,8 +5,7 @@ using UnityEngine;
 [SelectionBase]
 public abstract class CCyclePathingObject : MonoBehaviour, ICCycleObject
 {
-    [SerializeField]
-    protected List<CCycleNode> nodes = new List<CCycleNode>();
+    public List<CCycleNode> nodes = new List<CCycleNode>();
 
     [SerializeField]
     private float m_offset;

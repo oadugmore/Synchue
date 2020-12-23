@@ -1,28 +1,33 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 
-[CustomEditor(typeof(CLinearMovementObject))]
+[CustomEditor(typeof(CLinearMovementObject)), CanEditMultipleObjects]
 public class CLinearMovementObjectEditor : Editor
 {
     public Texture2D editButtonIcon;
 
-    SerializedProperty offset;
-    CLinearMovementObject t;
-    CLinearMovementNode[] nodes;
-    List<SerializedObject> nodesSerialized = new List<SerializedObject>();
-    List<SerializedObject> nodeTransforms = new List<SerializedObject>();
-    List<SerializedProperty> nodeLocalPositions = new List<SerializedProperty>();
-    List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
+    private SerializedProperty offset;
+    private List<CLinearMovementObject> ts = new List<CLinearMovementObject>();
+    private List<SerializedObject> nodesSerialized = new List<SerializedObject>();
+    private List<SerializedObject> nodeTransforms = new List<SerializedObject>();
+    private List<SerializedProperty> nodeLocalPositions = new List<SerializedProperty>();
+    private List<SerializedProperty> nodeWeights = new List<SerializedProperty>();
     private float previewCyclePos;
-    private Transform movementObject;
-    int nodeSelectedForEditing = -1;
-    Vector3 currentPositionOfNodeHandle;
+    private List<Transform> movementObjects = new List<Transform>();
+    private int nodeSelectedForEditing = -1;
+    private bool uniformNodeCount = true;
+    private Vector3 currentPositionOfNodeHandle;
 
     void OnEnable()
     {
-        t = target as CLinearMovementObject;
-        movementObject = t.GetComponentInChildren<Rigidbody>().transform;
+        foreach (var target in targets)
+        {
+            var obj = target as CLinearMovementObject;
+            ts.Add(obj);
+            movementObjects.Add(obj.GetComponentInChildren<Rigidbody>().transform);
+        }
         offset = serializedObject.FindProperty("m_offset");
         FindNodes();
         Undo.undoRedoPerformed += FindNodes;
@@ -36,16 +41,31 @@ public class CLinearMovementObjectEditor : Editor
 
     void FindNodes()
     {
-        t.UpdateNodes();
-        nodes = t.GetComponentsInChildren<CLinearMovementNode>();
+        // nodes.Clear();
         nodesSerialized.Clear();
         nodeTransforms.Clear();
         nodeLocalPositions.Clear();
         nodeWeights.Clear();
-        foreach (var node in nodes)
+        var minNodes = ts[0].nodes.Count;
+        foreach (var obj in ts)
         {
-            var so = new SerializedObject(node);
-            var transform = new SerializedObject(node.transform);
+            obj.UpdateNodes();
+
+            if (obj.nodes.Count != minNodes)
+            {
+                uniformNodeCount = false;
+            }
+            minNodes = obj.nodes.Count < minNodes ? obj.nodes.Count : minNodes;
+        }
+        for (var i = 0; i < minNodes; ++i)
+        {
+            var nodesSpan = new CLinearMovementNode[targets.Length];
+            for (var j = 0; j < nodesSpan.Length; ++j)
+            {
+                nodesSpan[j] = ts[j].nodes[i] as CLinearMovementNode;
+            }
+            var so = new SerializedObject(nodesSpan);
+            var transform = new SerializedObject(nodesSpan.Select(node => node.transform).ToArray());
             nodesSerialized.Add(so);
             nodeTransforms.Add(transform);
             nodeWeights.Add(so.FindProperty("m_weight"));
@@ -55,6 +75,7 @@ public class CLinearMovementObjectEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        var t = target as CLinearMovementObject;
         serializedObject.Update();
         EditorGUIUtility.wideMode = true;
         EditorGUILayout.PropertyField(offset);
@@ -68,20 +89,33 @@ public class CLinearMovementObjectEditor : Editor
         if (t.showNodesInInspector)
         {
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("+"))
+            if (uniformNodeCount && GUILayout.Button("+"))
             {
-                var newNode = new GameObject("Node");
-                Undo.RegisterCreatedObjectUndo(newNode, "Add node");
-                newNode.AddComponent<CLinearMovementNode>();
-                newNode.transform.SetParent(t.transform, false);
+                Undo.IncrementCurrentGroup();
+                Undo.SetCurrentGroupName("Add node");
+                var undoGroupIndex = Undo.GetCurrentGroup();
+                foreach (var obj in ts)
+                {
+                    var newNode = new GameObject("Node", typeof(CLinearMovementNode));
+                    Undo.RegisterCreatedObjectUndo(newNode, "node");
+                    newNode.transform.SetParent(obj.transform, false);
+                }
+                Undo.CollapseUndoOperations(undoGroupIndex);
                 FindNodes();
             }
-            if (GUILayout.Button("-"))
+            if (uniformNodeCount && GUILayout.Button("-"))
             {
-                if (nodes.Length > 0)
+                Undo.IncrementCurrentGroup();
+                Undo.SetCurrentGroupName("Delete node");
+                var undoGroupIndex = Undo.GetCurrentGroup();
+                if (nodesSerialized.Count > 1)
                 {
-                    Undo.DestroyObjectImmediate(nodes[nodes.Length - 1].gameObject);
+                    foreach (var obj in ts)
+                    {
+                        Undo.DestroyObjectImmediate(obj.nodes[obj.nodes.Count - 1].gameObject);
+                    }
                 }
+                Undo.CollapseUndoOperations(undoGroupIndex);
                 FindNodes();
             }
             EditorGUILayout.EndHorizontal();
@@ -94,7 +128,7 @@ public class CLinearMovementObjectEditor : Editor
                 if (GUILayout.Toggle(editing, editButtonIcon, EditorStyles.miniButton, GUILayout.MaxWidth(30)))
                 {
                     nodeSelectedForEditing = i;
-                    currentPositionOfNodeHandle = nodes[i].transform.position;
+                    currentPositionOfNodeHandle = t.nodes[i].transform.position;
                 }
                 else if (editing)
                 {
@@ -107,7 +141,10 @@ public class CLinearMovementObjectEditor : Editor
                 EditorGUILayout.EndHorizontal();
                 if (nodesSerialized[i].hasModifiedProperties)
                 {
-                    t.UpdateNodes();
+                    foreach (var obj in ts)
+                    {
+                        obj.UpdateNodes();
+                    }
                 }
                 nodesSerialized[i].ApplyModifiedProperties();
                 nodeTransforms[i].ApplyModifiedProperties();
@@ -121,17 +158,25 @@ public class CLinearMovementObjectEditor : Editor
 
     void OnSceneGUI()
     {
+        var t = target as CLinearMovementObject;
         if (t.showNodesInInspector && nodeSelectedForEditing != -1)
         {
             Tools.hidden = true;
-            var node = nodes[nodeSelectedForEditing];
+            Undo.IncrementCurrentGroup();
+            Undo.SetCurrentGroupName("Move node");
+            var undoGroupIndex = Undo.GetCurrentGroup();
             EditorGUI.BeginChangeCheck();
             currentPositionOfNodeHandle = Handles.PositionHandle(currentPositionOfNodeHandle, Quaternion.identity);
             if (EditorGUI.EndChangeCheck())
             {
-                Undo.RecordObject(node.transform, "Move node");
-                node.transform.position = currentPositionOfNodeHandle;
+                foreach (var obj in ts)
+                {
+                    var node = obj.nodes[nodeSelectedForEditing];
+                    Undo.RecordObject(node.transform, "Move node");
+                    node.transform.position = currentPositionOfNodeHandle;
+                }
             }
+            Undo.CollapseUndoOperations(undoGroupIndex);
         }
         else
         {
@@ -139,7 +184,10 @@ public class CLinearMovementObjectEditor : Editor
         }
         if (!Application.isPlaying)
         {
-            movementObject.position = t.CalculatePosition(previewCyclePos);
+            for (var i = 0; i < ts.Count; ++i)
+            {
+                movementObjects[i].position = ts[i].CalculatePosition(previewCyclePos);
+            }
         }
     }
 }
