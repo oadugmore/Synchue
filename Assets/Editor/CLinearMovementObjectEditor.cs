@@ -41,21 +41,22 @@ public class CLinearMovementObjectEditor : Editor
 
     void FindNodes()
     {
-        // nodes.Clear();
         nodesSerialized.Clear();
         nodeTransforms.Clear();
         nodeLocalPositions.Clear();
         nodeWeights.Clear();
-        var minNodes = ts[0].nodes.Count;
-        foreach (var obj in ts)
-        {
-            obj.UpdateNodes();
 
-            if (obj.nodes.Count != minNodes)
+        ts[0].UpdateNodes();
+        var minNodes = ts[0].nodes.Count;
+        for (int i = 1; i < ts.Count; ++i)
+        {
+            ts[i].UpdateNodes();
+
+            if (ts[i].nodes.Count != minNodes)
             {
                 uniformNodeCount = false;
             }
-            minNodes = obj.nodes.Count < minNodes ? obj.nodes.Count : minNodes;
+            minNodes = ts[i].nodes.Count < minNodes ? ts[i].nodes.Count : minNodes;
         }
         for (var i = 0; i < minNodes; ++i)
         {
