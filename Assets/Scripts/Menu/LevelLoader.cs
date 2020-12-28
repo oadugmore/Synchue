@@ -33,6 +33,7 @@ public class LevelLoader : MonoBehaviour
         }
         mainCamera.transform.position = cameraLocations[currentWorldIndex].position;
         CheckLevels();
+        MobileUtils.InitializeVibrator();
     }
 
     private void CheckLevels()

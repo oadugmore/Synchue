@@ -36,6 +36,7 @@ public class Goal : MonoBehaviour
             ws.SetLevelNames(levelName, nextSceneName);
             var deaths = DeathCounter.GetDeathCount();
             ws.SetDeathCount(deaths);
+            MobileUtils.Vibrate(0.5f, 0.5f);
             _finished = true;
         }
     }
