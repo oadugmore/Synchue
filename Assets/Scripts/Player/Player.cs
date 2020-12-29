@@ -47,9 +47,9 @@ public abstract class Player : MonoBehaviour
         {
             dead = true;
             DeathCounter.IncrementDeathCount();
-            Debug.Log("Deaths: " + DeathCounter.GetDeathCount());
             GetComponentInChildren<MeshRenderer>().enabled = false;
             Instantiate(deathParticleSystem, this.transform);
+            MobileUtils.Vibrate(0.5f, 0.5f, 0.3f);
         }
     }
 

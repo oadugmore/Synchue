@@ -60,10 +60,6 @@ public class MobileUtils
                 UnityCoreHapticsProxy.OnEngineError += () => { Debug.LogError("UnityCoreHaptics Engine had an error."); };
                 UnityCoreHapticsProxy.CreateEngine();
             }
-            else
-            {
-                Debug.Log("This device does not support Core Haptics.");
-            }
         }
         vibratorInitialized = true;
     }
@@ -105,12 +101,10 @@ public class MobileUtils
             if (duration > 0)
             {
                 UnityCoreHapticsProxy.PlayContinuousHaptics(intensity, sharpness, duration);
-                Debug.Log("played continuous haptics");
             }
             else
             {
                 UnityCoreHapticsProxy.PlayTransientHaptics(intensity, sharpness);
-                Debug.Log("played transient haptics");
             }
         }
         else

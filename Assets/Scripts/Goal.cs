@@ -17,7 +17,6 @@ public class Goal : MonoBehaviour
 
     void Start()
     {
-        // SceneManager.GetActiveScene().GetRootGameObjects();
         startTime = Time.time;
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         var worldNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
@@ -36,8 +35,15 @@ public class Goal : MonoBehaviour
             ws.SetLevelNames(levelName, nextSceneName);
             var deaths = DeathCounter.GetDeathCount();
             ws.SetDeathCount(deaths);
-            MobileUtils.Vibrate(0.5f, 0.5f);
+            StartCoroutine(VictoryHaptics());
             _finished = true;
         }
+    }
+
+    private IEnumerator VictoryHaptics()
+    {
+        MobileUtils.Vibrate(0.05f, 1f, 1f);
+        yield return new WaitForSeconds(0.2f);
+        MobileUtils.Vibrate(0.05f, 0.8f, 1f);
     }
 }
