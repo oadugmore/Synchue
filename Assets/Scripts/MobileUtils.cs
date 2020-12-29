@@ -48,27 +48,33 @@ public class MobileUtils
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
         {
+            // Leave as true in case a future iPad supports vibration,
+            // for now the Core Haptics check is sufficient.
+            // "Not checking" appears to be the iConvention anyway
+            hasVibrator = true;
+
             if (UnityCoreHapticsProxy.SupportsCoreHaptics())
             {
                 iPhoneSupportsCoreHaptics = true;
-                UnityCoreHapticsProxy.CreateEngine();
                 UnityCoreHapticsProxy.OnEngineCreated += () => { Debug.Log("Created engine"); };
                 UnityCoreHapticsProxy.OnEngineError += () => { Debug.LogError("UnityCoreHaptics Engine had an error."); };
+                UnityCoreHapticsProxy.CreateEngine();
             }
             else
             {
-                Debug.Log("This iPhone does not support Core Haptics.");
+                Debug.Log("This device does not support Core Haptics.");
             }
         }
         vibratorInitialized = true;
     }
 
     /// <summary>
-    /// Vibrates the device, if vibration is supported. Vibration intensity is ignored on Android API < 26.
+    /// Vibrates the device, if vibration is supported. Vibration intensity is ignored on Android API < 26
+    /// and on iOS devices without Core Haptics.
     /// </summary>
-    /// <param name="duration">The duration in seconds.</param>
+    /// <param name="duration">The duration in seconds. Setting to 0 results in a transient haptic on devices with Core Haptics.</param>
     /// <param name="intensity">The intensity as a percent.</param>
-    /// <param name="sharpness">The sharpness as a percent. Only affects iPhone with Core Haptics.</param>
+    /// <param name="sharpness">The sharpness as a percent. Only affects devices with Core Haptics.</param>
     public static void Vibrate(float duration, float intensity, float sharpness)
     {
         if (!hasVibrator) return;
