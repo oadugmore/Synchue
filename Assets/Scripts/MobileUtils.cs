@@ -3,6 +3,8 @@ using UnityCoreHaptics;
 
 public class MobileUtils
 {
+    public const float MIN_CONTINUOUS_CORE_HAPTICS_DURATION = 0.1f;
+
     private static AndroidJavaObject androidVibrator = null;
     private static AndroidJavaClass vibrationEffectClass = null;
     private static bool vibratorInitialized = false;
@@ -10,6 +12,10 @@ public class MobileUtils
     private static bool iPhoneSupportsCoreHaptics = false;
     private static bool hasVibrator = false;
 
+    /// <summary>
+    /// Determines the Android API version of the device.
+    /// </summary>
+    /// <returns>The current API version if running on Android, or -1 otherwise.</returns>
     public static int GetAndroidApiVersion()
     {
         var version = -1;
@@ -23,6 +29,9 @@ public class MobileUtils
         return version;
     }
 
+    /// <summary>
+    /// Initializes the device vibrator. Call this before attempting to call <see cref="Vibrate"/> to avoid delays.
+    /// </summary>
     public static void InitializeVibrator()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -65,12 +74,13 @@ public class MobileUtils
     }
 
     /// <summary>
-    /// Vibrates the device, if vibration is supported. Vibration intensity is ignored on Android API < 26
-    /// and on iOS devices without Core Haptics.
+    /// Vibrates the device, if vibration is supported. Intensity is ignored on Android API before 26,
+    /// and all parameters are ignored on iOS devices without Core Haptics. Sharpness only affects devices with Core Haptics.
     /// </summary>
-    /// <param name="duration">The duration in seconds. Setting to 0 results in a transient haptic on devices with Core Haptics.</param>
+    /// <param name="duration">The duration in seconds. Values less than <see cref="MIN_CONTINUOUS_CORE_HAPTICS_DURATION"/>
+    /// result in a transient haptic on devices with Core Haptics.</param>
     /// <param name="intensity">The intensity as a percent.</param>
-    /// <param name="sharpness">The sharpness as a percent. Only affects devices with Core Haptics.</param>
+    /// <param name="sharpness">The sharpness as a percent. </param>
     public static void Vibrate(float duration, float intensity, float sharpness)
     {
         if (!hasVibrator) return;
@@ -98,7 +108,7 @@ public class MobileUtils
     {
         if (iPhoneSupportsCoreHaptics)
         {
-            if (duration > 0.1f)
+            if (duration > MIN_CONTINUOUS_CORE_HAPTICS_DURATION)
             {
                 UnityCoreHapticsProxy.PlayContinuousHaptics(intensity, sharpness, duration);
             }
