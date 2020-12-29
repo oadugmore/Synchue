@@ -98,7 +98,7 @@ public class MobileUtils
     {
         if (iPhoneSupportsCoreHaptics)
         {
-            if (duration > 0)
+            if (duration > 0.1f)
             {
                 UnityCoreHapticsProxy.PlayContinuousHaptics(intensity, sharpness, duration);
             }

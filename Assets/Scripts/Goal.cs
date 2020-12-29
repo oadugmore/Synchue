@@ -7,6 +7,7 @@ public class Goal : MonoBehaviour
 {
     public WinScreen winScreen;
 
+    private AudioSource victorySound;
     private RectTransform uiRoot;
     private float startTime;
     private float endTime;
@@ -19,6 +20,7 @@ public class Goal : MonoBehaviour
     {
         startTime = Time.time;
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+        victorySound = GetComponent<AudioSource>();
         var worldNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
         var levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[3]);
         levelName = string.Format("Phase {0}: Level {1}", worldNumber, levelNumber);
@@ -36,6 +38,7 @@ public class Goal : MonoBehaviour
             var deaths = DeathCounter.GetDeathCount();
             ws.SetDeathCount(deaths);
             StartCoroutine(VictoryHaptics());
+            victorySound.Play();
             _finished = true;
         }
     }

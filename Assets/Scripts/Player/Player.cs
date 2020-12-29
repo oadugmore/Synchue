@@ -27,6 +27,7 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        // TODO: Use different haptic patterns for spikes/falling
         if (other.collider.CompareTag("Spike"))
         {
             Die();
