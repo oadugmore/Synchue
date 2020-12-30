@@ -6,7 +6,6 @@ public class HUD : MonoBehaviour
 {
     public Text deathCountText;
 
-    private bool paused = false;
     private Animator menuAnim;
     private const string menuSceneName = "Menu";
 
@@ -31,9 +30,9 @@ public class HUD : MonoBehaviour
 
     public void PauseButtonPressed()
     {
-        paused = !paused;
-        menuAnim.SetBool("Paused", paused);
-        if (paused)
+        var pausing = Time.timeScale > 0f;
+        menuAnim.SetBool("Paused", pausing);
+        if (pausing)
         {
             Time.timeScale = 0f;
         }

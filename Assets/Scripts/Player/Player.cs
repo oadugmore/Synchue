@@ -49,8 +49,15 @@ public abstract class Player : MonoBehaviour
             dead = true;
             DeathCounter.IncrementDeathCount();
             GetComponentInChildren<MeshRenderer>().enabled = false;
-            Instantiate(deathParticleSystem, this.transform);
-            MobileUtils.Vibrate(0.5f, 0.5f, 0.3f);
+            var particleSystem = Instantiate(deathParticleSystem, this.transform);
+            if (Settings.deathSoundEnabled)
+            {
+                particleSystem.GetComponent<AudioSource>().Play();
+            }
+            if (Settings.hapticsEnabled)
+            {
+                MobileUtils.Vibrate(0.5f, 0.5f, 0.3f);
+            }
         }
     }
 

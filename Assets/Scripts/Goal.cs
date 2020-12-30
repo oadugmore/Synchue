@@ -37,8 +37,14 @@ public class Goal : MonoBehaviour
             ws.SetLevelNames(levelName, nextSceneName);
             var deaths = DeathCounter.GetDeathCount();
             ws.SetDeathCount(deaths);
-            StartCoroutine(VictoryHaptics());
-            victorySound.Play();
+            if (Settings.hapticsEnabled)
+            {
+                StartCoroutine(VictoryHaptics());
+            }
+            if (Settings.goalSoundEnabled)
+            {
+                victorySound.Play();
+            }
             _finished = true;
         }
     }
