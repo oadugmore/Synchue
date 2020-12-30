@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2040380990}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587272, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2143,7 +2143,7 @@ RectTransform:
   - {fileID: 1670183331}
   - {fileID: 164982803}
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2392,7 +2392,7 @@ RectTransform:
   m_Children:
   - {fileID: 1587562598}
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -13970,8 +13970,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 284563739}
   m_HandleRect: {fileID: 284563738}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -16556,7 +16556,7 @@ GameObject:
   - component: {fileID: 851739255}
   - component: {fileID: 851739254}
   m_Layer: 5
-  m_Name: SFX Label
+  m_Name: Sounds Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16574,7 +16574,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16612,7 +16612,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Sound Effects
+  m_Text: Sounds
 --- !u!222 &851739255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18617,7 +18617,7 @@ RectTransform:
   - {fileID: 676894515}
   - {fileID: 1196605289}
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -21111,7 +21111,7 @@ RectTransform:
   - {fileID: 1851085461}
   - {fileID: 172257855}
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -23004,7 +23004,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1093165113}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.7160776
+  m_Size: 0.5878184
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -28404,7 +28404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1492880458
 RectTransform:
   m_ObjectHideFlags: 0
@@ -28419,7 +28419,7 @@ RectTransform:
   - {fileID: 1040831093}
   - {fileID: 249300331}
   m_Father: {fileID: 1745702280}
-  m_RootOrder: 0
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -33786,12 +33786,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1492880458}
   - {fileID: 851739253}
   - {fileID: 80993018}
   - {fileID: 989428337}
   - {fileID: 1108893878}
   - {fileID: 92711275}
+  - {fileID: 1492880458}
   m_Father: {fileID: 1607296836}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
