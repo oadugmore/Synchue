@@ -16,6 +16,7 @@ public abstract class Player : MonoBehaviour
 
     public virtual void Start()
     {
+        SFX.Initialize();
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
         playerColor = InteractColor.Blue;
@@ -52,7 +53,7 @@ public abstract class Player : MonoBehaviour
             var particleSystem = Instantiate(deathParticleSystem, this.transform);
             if (Settings.deathSoundEnabled)
             {
-                particleSystem.GetComponent<AudioSource>().Play();
+                SFX.Play(particleSystem.GetComponent<AudioSource>(), SFX.deathFileID);
             }
             if (Settings.hapticsEnabled)
             {
