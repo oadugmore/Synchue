@@ -9,6 +9,9 @@ public class SFX
     const string GOAL_FILE_NAME = "Goal.wav";
     static bool firstTimeInitializationComplete = false;
 
+    /// <summary>
+    /// Initializes the native audio plugin and registers a callback to assist with memory management.
+    /// </summary>
     public static void Initialize()
     {
         if (firstTimeInitializationComplete) return;
@@ -58,7 +61,7 @@ public class SFX
     {
         if (!firstTimeInitializationComplete)
         {
-            Debug.LogWarning("Tried playing a sound effect before initializing.");
+            Debug.LogWarning("Tried playing a sound effect before initializing native audio");
             Initialize();
         }
         if (Application.platform == RuntimePlatform.Android)

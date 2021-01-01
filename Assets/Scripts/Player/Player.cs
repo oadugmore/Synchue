@@ -54,7 +54,7 @@ public abstract class Player : MonoBehaviour
             {
                 SFX.Play(particleSystem.GetComponent<AudioSource>(), SFX.deathFileID);
             }
-            if (Settings.hapticsEnabled)
+            if (Settings.deathHapticsEnabled)
             {
                 MobileUtils.Vibrate(0.5f, 0.5f, 0.3f);
             }

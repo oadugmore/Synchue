@@ -2,19 +2,32 @@ using UnityEngine;
 
 public class Settings
 {
-    private const string HAPTICS_ENABLED_SETTING_NAME = "HapticsEnabled";
+    private const string DEATH_HAPTICS_ENABLED_SETTING_NAME = "DeathHapticsEnabled";
+    private const string GOAL_HAPTICS_ENABLED_SETTING_NAME = "GoalHapticsEnabled";
     private const string DEATH_SOUND_ENABLED_SETTING_NAME = "DeathSoundEnabled";
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
 
-    public static bool hapticsEnabled
+    public static bool deathHapticsEnabled
     {
         get
         {
-            return Get(HAPTICS_ENABLED_SETTING_NAME, true);
+            return Get(DEATH_HAPTICS_ENABLED_SETTING_NAME, true);
         }
         set
         {
-            Set(HAPTICS_ENABLED_SETTING_NAME, value);
+            Set(DEATH_HAPTICS_ENABLED_SETTING_NAME, value);
+        }
+    }
+
+    public static bool goalHapticsEnabled
+    {
+        get
+        {
+            return Get(GOAL_HAPTICS_ENABLED_SETTING_NAME, true);
+        }
+        set
+        {
+            Set(GOAL_HAPTICS_ENABLED_SETTING_NAME, value);
         }
     }
 
