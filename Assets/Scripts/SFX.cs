@@ -3,8 +3,10 @@ using UnityEngine;
 public class SFX
 {
     public static int deathFileID;
+    public static int goalFileID;
 
     const string DEATH_FILE_NAME = "Slash Down.wav";
+    const string GOAL_FILE_NAME = "Goal.wav";
     static bool firstTimeInitializationComplete = false;
 
     public static void Initialize()
@@ -22,11 +24,13 @@ public class SFX
     {
         AndroidNativeAudio.makePool();
         deathFileID = AndroidNativeAudio.load(DEATH_FILE_NAME);
+        goalFileID = AndroidNativeAudio.load(GOAL_FILE_NAME);
     }
 
     static void UnloadNativeAudio()
     {
         AndroidNativeAudio.unload(deathFileID);
+        AndroidNativeAudio.unload(goalFileID);
         AndroidNativeAudio.releasePool();
     }
 

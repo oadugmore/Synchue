@@ -16,7 +16,6 @@ public abstract class Player : MonoBehaviour
 
     public virtual void Start()
     {
-        SFX.Initialize();
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
         playerColor = InteractColor.Blue;

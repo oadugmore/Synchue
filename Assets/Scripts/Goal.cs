@@ -43,7 +43,7 @@ public class Goal : MonoBehaviour
             }
             if (Settings.goalSoundEnabled)
             {
-                victorySound.Play();
+                SFX.Play(victorySound, SFX.goalFileID);
             }
             _finished = true;
         }

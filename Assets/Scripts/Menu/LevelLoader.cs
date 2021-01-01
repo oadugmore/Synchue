@@ -34,6 +34,7 @@ public class LevelLoader : MonoBehaviour
         mainCamera.transform.position = cameraLocations[currentWorldIndex].position;
         CheckLevels();
         MobileUtils.InitializeVibrator();
+        SFX.Initialize();
     }
 
     private void CheckLevels()
