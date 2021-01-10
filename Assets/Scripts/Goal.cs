@@ -27,9 +27,26 @@ public class Goal : MonoBehaviour
         nextSceneName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
     }
 
+    // Backwards compatibility
     void OnCollisionEnter(Collision other)
     {
-        if (!_finished && other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerReachedGoal();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            PlayerReachedGoal();
+        }
+    }
+
+    private void PlayerReachedGoal()
+    {
+        if (!_finished)
         {
             endTime = Time.time;
             var ws = Instantiate(winScreen, uiRoot);
