@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 2206778528298965987}
   m_Layer: 0
   m_Name: Colliders
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,6 +165,7 @@ MonoBehaviour:
   testPosition: {x: 0, y: 0.9, z: 0}
   deathParticleSystem: {fileID: 7779457175504579973, guid: 4097c164f82b1b44aabc26540ccd6973,
     type: 3}
+  playerColor: 0
   horizontalDragFactor: 15
 --- !u!54 &2206778528384928657
 Rigidbody:
@@ -261,6 +262,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Nut
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 5ec3bacaae8497442b67f5c024dd7ae3,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ec3bacaae8497442b67f5c024dd7ae3, type: 3}

@@ -7,18 +7,17 @@ public abstract class Player : MonoBehaviour
     public float speed = 10f;
     public Vector3 testPosition = Vector3.up;
     public GameObject deathParticleSystem;
+    public InteractColor playerColor = InteractColor.Blue;
 
     protected new Rigidbody rigidbody;
     protected Goal goal;
     protected bool dead;
 
-    public InteractColor playerColor { get; set; }
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
-        playerColor = InteractColor.Blue;
         if (Application.isEditor)
         {
             transform.position = testPosition;
