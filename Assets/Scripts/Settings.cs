@@ -2,10 +2,23 @@ using UnityEngine;
 
 public class Settings
 {
+    private const string MUSIC_ENABLED_SETTING_NAME = "MusicEnabled";
     private const string DEATH_HAPTICS_ENABLED_SETTING_NAME = "DeathHapticsEnabled";
     private const string GOAL_HAPTICS_ENABLED_SETTING_NAME = "GoalHapticsEnabled";
     private const string DEATH_SOUND_ENABLED_SETTING_NAME = "DeathSoundEnabled";
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
+
+    public static bool musicEnabled
+    {
+        get
+        {
+            return Get(MUSIC_ENABLED_SETTING_NAME, true);
+        }
+        set
+        {
+            Set(MUSIC_ENABLED_SETTING_NAME, value);
+        }
+    }
 
     public static bool deathHapticsEnabled
     {

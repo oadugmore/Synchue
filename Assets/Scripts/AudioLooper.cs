@@ -18,13 +18,11 @@ public class AudioLooper : MonoBehaviour
     {
         if (instance)
         {
-            Debug.Log("found instance");
             DestroyImmediate(gameObject);
         }
         else
         {
             instance = this;
-            Debug.Log("set instance as this");
         }
     }
 
@@ -52,7 +50,7 @@ public class AudioLooper : MonoBehaviour
         audioSource1.clip = clip;
         audioSource2 = gameObject.AddComponent<AudioSource>();
         audioSource2.clip = clip;
-        if (playOnAwake)
+        if (playOnAwake && Settings.musicEnabled)
         {
             PlayLooping(defaultWarmUp);
         }

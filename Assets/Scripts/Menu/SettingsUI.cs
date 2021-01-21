@@ -5,6 +5,7 @@ public class SettingsUI : MonoBehaviour
 {
     public float transitionTime = 0.5f;
     public LeanTweenType transitionType = LeanTweenType.linear;
+    public Toggle musicToggle;
     public Toggle deathHapticsToggle;
     public Toggle goalHapticsToggle;
     public Toggle deathSoundToggle;
@@ -21,10 +22,12 @@ public class SettingsUI : MonoBehaviour
         originalSize = settingsPanel.localScale;
         settingsPanel.localScale /= 2;
         canvasGroup.alpha = 0f;
+        musicToggle.isOn = Settings.musicEnabled;
         deathHapticsToggle.isOn = Settings.deathHapticsEnabled;
         goalHapticsToggle.isOn = Settings.goalHapticsEnabled;
         deathSoundToggle.isOn = Settings.deathSoundEnabled;
         goalSoundToggle.isOn = Settings.goalSoundEnabled;
+        musicToggle.onValueChanged.AddListener(enabled => Settings.musicEnabled = enabled);
         deathHapticsToggle.onValueChanged.AddListener(enabled => Settings.deathHapticsEnabled = enabled);
         goalHapticsToggle.onValueChanged.AddListener(enabled => Settings.goalHapticsEnabled = enabled);
         deathSoundToggle.onValueChanged.AddListener(enabled => Settings.deathSoundEnabled = enabled);
