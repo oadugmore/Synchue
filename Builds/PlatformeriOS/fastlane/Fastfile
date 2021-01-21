@@ -17,10 +17,16 @@ default_platform(:ios)
 
 platform :ios do
   desc "Push a new beta build to TestFlight"
+  lane :internal do
+    build
+  end
   lane :beta do
+    build(external: true)
+  end
+  lane :build do |options|
     build_app(scheme: "Unity-iPhone")
     upload_to_testflight(
-      distribute_external: true,
+      distribute_external: options[:external],
       groups: "Testers",
       demo_account_required: false,
       beta_app_review_info: {
