@@ -6,14 +6,48 @@ public class AudioLooper : MonoBehaviour
     public float loopOffset;
     public bool playOnAwake;
     public float defaultWarmUp = 1f;
+
     private double nextPlayTime;
     private AudioSource audioSource1;
     private AudioSource audioSource2;
     private bool isPlaying;
     private bool flip;
+    private static AudioLooper instance;
+
+    private void Awake()
+    {
+        if (instance)
+        {
+            Debug.Log("found instance");
+            DestroyImmediate(gameObject);
+        }
+        else
+        {
+            instance = this;
+            Debug.Log("set instance as this");
+        }
+    }
+
+    public static void Shutdown()
+    {
+        instance.ShutdownInternal();
+        instance = null;
+    }
+
+    private void ShutdownInternal()
+    {
+        LeanTween.value(gameObject, audioSource1.volume, 0f, 0.5f)
+            .setOnUpdate((float volume) =>
+            {
+                audioSource1.volume = volume;
+                audioSource2.volume = volume;
+            })
+            .setDestroyOnComplete(true);
+    }
 
     void Start()
     {
+        DontDestroyOnLoad(gameObject);
         audioSource1 = gameObject.AddComponent<AudioSource>();
         audioSource1.clip = clip;
         audioSource2 = gameObject.AddComponent<AudioSource>();

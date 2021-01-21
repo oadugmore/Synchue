@@ -51,7 +51,7 @@ public class HUD : MonoBehaviour
     public void MenuButtonPressed()
     {
         Time.timeScale = 1f;
+        AudioLooper.Shutdown();
         SceneManager.LoadScene(menuSceneName);
     }
-
 }
