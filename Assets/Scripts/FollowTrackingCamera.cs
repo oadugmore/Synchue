@@ -89,10 +89,10 @@ public class FollowTrackingCamera : MonoBehaviour
 
         // Set the camera position reference.
         targetAdjustedPosition = rotationResult * zoomResult;
-        transform.position = targetAdjustedPosition + new Vector3(
-            lockHorizontalMovement ? 0 : target.position.x,
-            lockVerticalMovement ? 0 : target.position.y,
-            target.position.z);
+        transform.position = new Vector3(
+            lockHorizontalMovement ? transform.position.x : targetAdjustedPosition.x + target.position.x,
+            lockVerticalMovement ? transform.position.y : targetAdjustedPosition.y + target.position.y,
+            targetAdjustedPosition.z + target.position.z);
 
         // Face the desired position.
         //transform.LookAt(target);

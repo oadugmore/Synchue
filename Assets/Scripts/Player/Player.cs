@@ -8,16 +8,18 @@ public abstract class Player : MonoBehaviour
     public Vector3 testPosition = Vector3.up;
     public GameObject deathParticleSystem;
     public InteractColor playerColor = InteractColor.Blue;
+    public AudioSource fallingSound;
 
     protected new Rigidbody rigidbody;
     protected Goal goal;
     protected bool dead;
-
+    protected FollowTrackingCamera cameraController;
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
         goal = FindObjectOfType<Goal>();
+        cameraController = FindObjectOfType<FollowTrackingCamera>();
         if (Application.isEditor)
         {
             transform.position = testPosition;
@@ -26,27 +28,8 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        // TODO: Use different haptic patterns for spikes/falling
-        if (other.collider.CompareTag("Spike"))
+        if (other.collider.CompareTag("Spike") && !goal.finished && !dead)
         {
-            Die();
-        }
-    }
-
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Crusher"))
-        {
-            Die();
-        }
-    }
-
-    protected virtual void Die()
-    {
-        if (!goal.finished && !dead)
-        {
-            dead = true;
-            DeathCounter.IncrementDeathCount();
             GetComponentInChildren<MeshRenderer>().enabled = false;
             var particleSystem = Instantiate(deathParticleSystem, this.transform);
             if (Settings.deathSoundEnabled)
@@ -57,10 +40,44 @@ public abstract class Player : MonoBehaviour
             {
                 MobileUtils.Vibrate(0.5f, 0.5f, 0.3f);
             }
+            Die();
         }
     }
 
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Death Barrier") && !goal.finished && !dead)
+        {
+            cameraController.lockVerticalMovement = true;
+            if (Settings.deathSoundEnabled)
+            {
+                SFX.Play(fallingSound, SFX.fallingFileID);
+            }
+            if (Settings.deathHapticsEnabled)
+            {
+                MobileUtils.Vibrate(0.5f, 0.3f, 0.2f);
+            }
+            Die();
+            Invoke(nameof(ReloadScene), 0.5f);
+        }
+        else if (other.gameObject.CompareTag("Crusher"))
+        {
+            throw new System.NotImplementedException("Interaction with Crusher objects is not implemented");
+        }
+    }
+
+    protected virtual void Die()
+    {
+        dead = true;
+        DeathCounter.IncrementDeathCount();
+    }
+
     public void ParticleSystemStopped()
+    {
+        ReloadScene();
+    }
+
+    protected void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
