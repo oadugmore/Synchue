@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CloudOnce;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -13,35 +14,51 @@ public class WinScreen : MonoBehaviour
     public Text deathCountText;
 
     private string nextLevelName;
+    private int worldNumber;
+    private int levelNumber;
+    private string leaderboardId;
+
+    private void Start()
+    {
+        var sceneNameParts = SceneManager.GetActiveScene().name.Split('_');
+        worldNumber = int.Parse(sceneNameParts[1]);
+        levelNumber = int.Parse(sceneNameParts[3]);
+        var levelName = $"Level {worldNumber}-{levelNumber}";
+        levelText.text = levelName;
+        nextLevelName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
+        if (nextLevelName == null)
+        {
+            nextLevelButton.interactable = false;
+        }
+        deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
+    }
 
     /// <summary>
-    /// Initializes the win screen with the level completion time.
+    /// Initializes the win screen with the level completion time,
+    /// and attempts to submit the score.
     /// </summary>
     /// <param name="seconds">How long it took to complete the level, in seconds.</param>
     public void SetCompletionTime(float seconds)
     {
         var completionTime = TimeSpan.FromSeconds(seconds);
-        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'fff");
+        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
+
+        leaderboardId = Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");
+        Cloud.Leaderboards.SubmitScore(leaderboardId, (long)(seconds * 1000), result =>
+        {
+            if (result.HasError)
+            {
+                Debug.LogError("Failed to submit leaderboard score: " + result.Error);
+            }
+        });
     }
 
     /// <summary>
-    /// Initializes the win screen with the current level name and next level, if it exists.
+    /// Shows the native leaderboard UI for the current level.
     /// </summary>
-    /// <param name="name">The friendly name of the current level.</param>
-    /// <param name="nextSceneName">The name of the next scene. Leave this null if there is no proceeding level.</param>
-    public void SetLevelNames(string name, string nextSceneName)
+    public void OpenLeaderboard()
     {
-        levelText.text = name;
-        nextLevelName = nextSceneName;
-        if (nextSceneName == null)
-        {
-            nextLevelButton.interactable = false;
-        }
-    }
-
-    public void SetDeathCount(int deaths)
-    {
-        deathCountText.text = "Deaths: " + deaths;
+        Cloud.Leaderboards.ShowOverlay(leaderboardId);
     }
 
     /// <summary>

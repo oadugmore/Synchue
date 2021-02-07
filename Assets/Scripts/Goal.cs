@@ -6,13 +6,13 @@ using UnityEngine.SceneManagement;
 public class Goal : MonoBehaviour
 {
     public WinScreen winScreen;
+    [HideInInspector]
+    public bool finished;
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
     private float startTime;
     private float endTime;
-    public bool finished => _finished;
-    private bool _finished;
     private string levelName;
     private string nextSceneName;
 
@@ -21,10 +21,6 @@ public class Goal : MonoBehaviour
         startTime = Time.time;
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
-        var worldNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[1]);
-        var levelNumber = int.Parse(SceneManager.GetActiveScene().name.Split('_')[3]);
-        levelName = string.Format("Phase {0}: Level {1}", worldNumber, levelNumber);
-        nextSceneName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
     }
 
     // Backwards compatibility
@@ -46,14 +42,9 @@ public class Goal : MonoBehaviour
 
     private void PlayerReachedGoal()
     {
-        if (!_finished)
+        if (!finished)
         {
             endTime = Time.time;
-            var ws = Instantiate(winScreen, uiRoot);
-            ws.SetCompletionTime(endTime - startTime);
-            ws.SetLevelNames(levelName, nextSceneName);
-            var deaths = DeathCounter.GetDeathCount();
-            ws.SetDeathCount(deaths);
             if (Settings.goalHapticsEnabled)
             {
                 StartCoroutine(VictoryHaptics());
@@ -62,7 +53,9 @@ public class Goal : MonoBehaviour
             {
                 SFX.Play(victorySound, SFX.goalFileID);
             }
-            _finished = true;
+            var ws = Instantiate(winScreen, uiRoot);
+            ws.SetCompletionTime(endTime - startTime);
+            finished = true;
         }
     }
 
