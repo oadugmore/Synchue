@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using CloudOnce;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -18,14 +16,18 @@ public class WinScreen : MonoBehaviour
     private int levelNumber;
     private string leaderboardId;
 
-    private void Start()
+    private void Awake()
     {
         var sceneNameParts = SceneManager.GetActiveScene().name.Split('_');
         worldNumber = int.Parse(sceneNameParts[1]);
         levelNumber = int.Parse(sceneNameParts[3]);
+        nextLevelName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
+    }
+
+    private void Start()
+    {
         var levelName = $"Level {worldNumber}-{levelNumber}";
         levelText.text = levelName;
-        nextLevelName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
         if (nextLevelName == null)
         {
             nextLevelButton.interactable = false;
@@ -43,8 +45,10 @@ public class WinScreen : MonoBehaviour
         var completionTime = TimeSpan.FromSeconds(seconds);
         timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
 
-        leaderboardId = Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");
-        Cloud.Leaderboards.SubmitScore(leaderboardId, (long)(seconds * 1000), result =>
+        var internalId = $"Level{worldNumber}_{levelNumber}";
+        leaderboardId = Leaderboards.GetPlatformID(internalId);
+        var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 100 : 1000;
+        Cloud.Leaderboards.SubmitScore(leaderboardId, (long)(seconds * leaderboardTimeScale), result =>
         {
             if (result.HasError)
             {
