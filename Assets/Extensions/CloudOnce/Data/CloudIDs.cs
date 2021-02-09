@@ -46,6 +46,306 @@ namespace CloudOnce
 #endif
                 }
             }
+
+            public static string Level1_2
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQAw";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_2";
+#elif UNITY_EDITOR
+                    return "Level1_2";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_3
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQBA";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_3";
+#elif UNITY_EDITOR
+                    return "Level1_3";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_4
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQBQ";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_4";
+#elif UNITY_EDITOR
+                    return "Level1_4";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_5
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQBg";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_5";
+#elif UNITY_EDITOR
+                    return "Level1_5";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_6
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQBw";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_6";
+#elif UNITY_EDITOR
+                    return "Level1_6";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_7
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQCA";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_7";
+#elif UNITY_EDITOR
+                    return "Level1_7";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level1_8
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQCQ";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level1_8";
+#elif UNITY_EDITOR
+                    return "Level1_8";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_1
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQCg";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_1";
+#elif UNITY_EDITOR
+                    return "Level2_1";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_2
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQCw";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_2";
+#elif UNITY_EDITOR
+                    return "Level2_2";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_3
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQDA";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_3";
+#elif UNITY_EDITOR
+                    return "Level2_3";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_4
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQDQ";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_4";
+#elif UNITY_EDITOR
+                    return "Level2_4";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_5
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQDg";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_5";
+#elif UNITY_EDITOR
+                    return "Level2_5";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_6
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQDw";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_6";
+#elif UNITY_EDITOR
+                    return "Level2_6";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_7
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQEA";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_7";
+#elif UNITY_EDITOR
+                    return "Level2_7";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
+
+            public static string Level2_8
+            {
+                get
+                {
+#if UNITY_ANDROID && !UNITY_EDITOR
+#if CLOUDONCE_GOOGLE
+                    return "CgkI2sDRstkUEAIQEQ";
+#else
+                    return string.Empty;
+#endif
+#elif (UNITY_IOS || UNITY_TVOS) && !UNITY_EDITOR
+                    return "Level2_8";
+#elif UNITY_EDITOR
+                    return "Level2_8";
+#else
+                    return string.Empty;
+#endif
+                }
+            }
         }
     }
 }
