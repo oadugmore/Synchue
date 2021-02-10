@@ -39,16 +39,16 @@ public class WinScreen : MonoBehaviour
     /// Initializes the win screen with the level completion time,
     /// and attempts to submit the score.
     /// </summary>
-    /// <param name="seconds">How long it took to complete the level, in seconds.</param>
-    public void SetCompletionTime(float seconds)
+    /// <param name="time">How long it took to complete the level.</param>
+    public void SetCompletionTime(TimeSpan time)
     {
-        var completionTime = TimeSpan.FromSeconds(seconds);
-        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
-
+        timeText.text = "Time: " + time.ToString("mm':'ss'.'ff");
+        var completionTimeCentiSeconds = (long)time.TotalMilliseconds / 10;
+        var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 1 : 10;
+        var submittedTime = completionTimeCentiSeconds * leaderboardTimeScale;
         var internalId = $"Level{worldNumber}_{levelNumber}";
         leaderboardId = Leaderboards.GetPlatformID(internalId);
-        var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 100 : 1000;
-        Cloud.Leaderboards.SubmitScore(leaderboardId, (long)(seconds * leaderboardTimeScale), result =>
+        Cloud.Leaderboards.SubmitScore(leaderboardId, submittedTime, result =>
         {
             if (result.HasError)
             {

@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -11,14 +10,14 @@ public class Goal : MonoBehaviour
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
-    private float startTime;
-    private float endTime;
+    private DateTime startTime;
+    private DateTime endTime;
     private string levelName;
     private string nextSceneName;
 
     void Start()
     {
-        startTime = Time.time;
+        startTime = DateTime.Now;
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
     }
@@ -44,7 +43,7 @@ public class Goal : MonoBehaviour
     {
         if (!finished)
         {
-            endTime = Time.time;
+            endTime = DateTime.Now;
             if (Settings.goalHapticsEnabled)
             {
                 StartCoroutine(VictoryHaptics());
