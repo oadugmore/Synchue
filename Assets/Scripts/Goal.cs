@@ -10,14 +10,13 @@ public class Goal : MonoBehaviour
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
-    private DateTime startTime;
-    private DateTime endTime;
+    private TimeSpan startTime;
     private string levelName;
     private string nextSceneName;
 
     void Start()
     {
-        startTime = DateTime.Now;
+        startTime = TimeSpan.FromSeconds(Time.time);
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
     }
@@ -43,7 +42,7 @@ public class Goal : MonoBehaviour
     {
         if (!finished)
         {
-            endTime = DateTime.Now;
+            var endTime = TimeSpan.FromSeconds(Time.time);
             if (Settings.goalHapticsEnabled)
             {
                 StartCoroutine(VictoryHaptics());
