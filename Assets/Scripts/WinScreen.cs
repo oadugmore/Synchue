@@ -15,6 +15,7 @@ public class WinScreen : MonoBehaviour
     private int worldNumber;
     private int levelNumber;
     private string leaderboardId;
+    private const string menuSceneName = "Menu";
 
     private void Awake()
     {
@@ -79,7 +80,8 @@ public class WinScreen : MonoBehaviour
     /// </summary>
     public void Menu()
     {
-        SceneManager.LoadScene("Menu");
+        AudioLooper.Shutdown();
+        SceneManager.LoadScene(menuSceneName);
     }
 
     /// <summary>
