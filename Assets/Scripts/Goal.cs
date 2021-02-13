@@ -90,6 +90,7 @@ public class Goal : MonoBehaviour
             }
             var ws = Instantiate(winScreen, uiRoot);
             ws.SetCompletionTime(endTime - startTime);
+            player.Freeze(0.5f);
             wasReached = true;
         }
     }

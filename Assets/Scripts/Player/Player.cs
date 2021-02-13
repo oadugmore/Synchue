@@ -71,6 +71,25 @@ public abstract class Player : MonoBehaviour
         DeathCounter.IncrementDeathCount();
     }
 
+    /// <summary>
+    /// Brings the player to a stop.
+    /// </summary>
+    /// <param name="time">The time in seconds to slow the player down before reaching a complete stop.</param>
+    public void Freeze(float time)
+    {
+        rigidbody.useGravity = false;
+        LeanTween.value(gameObject, rigidbody.velocity, Vector3.zero, time)
+        .setEaseInExpo()
+        .setOnUpdate((Vector3 velocity) => rigidbody.velocity = velocity)
+        .setOnComplete(() =>
+        {
+            rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            rigidbody.collisionDetectionMode = CollisionDetectionMode.Discrete;
+            rigidbody.isKinematic = true;
+        }
+        );
+    }
+
     public void ParticleSystemStopped()
     {
         ReloadScene();
