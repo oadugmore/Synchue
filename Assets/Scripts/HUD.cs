@@ -8,12 +8,14 @@ public class HUD : MonoBehaviour
 
     private Animator menuAnim;
     private const string menuSceneName = "Menu";
+    private Player player;
 
     private void Start()
     {
         menuAnim = GetComponentInChildren<Animator>();
         var currentDeaths = DeathCounter.GetDeathCount();
         deathCountText.text = currentDeaths.ToString();
+        player = FindObjectOfType<Player>();
     }
 
     private void Update()
@@ -30,15 +32,18 @@ public class HUD : MonoBehaviour
 
     public void PauseButtonPressed()
     {
-        var pausing = Time.timeScale > 0f;
-        menuAnim.SetBool("Paused", pausing);
-        if (pausing)
+        if (!player.dead && !Goal.instance.wasReached)
         {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
+            var pausing = Time.timeScale > 0f;
+            menuAnim.SetBool("Paused", pausing);
+            if (pausing)
+            {
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 

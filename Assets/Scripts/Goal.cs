@@ -6,19 +6,56 @@ public class Goal : MonoBehaviour
 {
     public WinScreen winScreen;
     [HideInInspector]
-    public bool finished;
+    public bool wasReached;
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
     private TimeSpan startTime;
     private string levelName;
     private string nextSceneName;
+    private Player player;
+
+    private static Goal _instance;
+
+    public static Goal instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                throw new NullReferenceException("This level does not have a goal, or it has not been initialized yet!");
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_instance)
+        {
+            Debug.LogWarning("This level has multiple goals; destroying all but the first one");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+    }
 
     void Start()
     {
         startTime = TimeSpan.FromSeconds(Time.time);
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
+        player = FindObjectOfType<Player>();
     }
 
     // Backwards compatibility
@@ -40,7 +77,7 @@ public class Goal : MonoBehaviour
 
     private void PlayerReachedGoal()
     {
-        if (!finished)
+        if (!wasReached && !player.dead)
         {
             var endTime = TimeSpan.FromSeconds(Time.time);
             if (Settings.goalHapticsEnabled)
@@ -53,7 +90,7 @@ public class Goal : MonoBehaviour
             }
             var ws = Instantiate(winScreen, uiRoot);
             ws.SetCompletionTime(endTime - startTime);
-            finished = true;
+            wasReached = true;
         }
     }
 

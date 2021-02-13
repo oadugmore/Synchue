@@ -9,16 +9,15 @@ public abstract class Player : MonoBehaviour
     public GameObject deathParticleSystem;
     public InteractColor playerColor = InteractColor.Blue;
     public AudioSource fallingSound;
+    [HideInInspector]
+    public bool dead;
 
     protected new Rigidbody rigidbody;
-    protected Goal goal;
-    protected bool dead;
     protected FollowTrackingCamera cameraController;
 
     public virtual void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        goal = FindObjectOfType<Goal>();
         cameraController = FindObjectOfType<FollowTrackingCamera>();
         if (Application.isEditor)
         {
@@ -28,7 +27,7 @@ public abstract class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("Spike") && !goal.finished && !dead)
+        if (other.collider.CompareTag("Spike") && !Goal.instance.wasReached && !dead)
         {
             GetComponentInChildren<MeshRenderer>().enabled = false;
             var particleSystem = Instantiate(deathParticleSystem, this.transform);
@@ -46,7 +45,7 @@ public abstract class Player : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Death Barrier") && !goal.finished && !dead)
+        if (other.gameObject.CompareTag("Death Barrier") && !Goal.instance.wasReached && !dead)
         {
             cameraController.lockVerticalMovement = true;
             if (Settings.deathSoundEnabled)
