@@ -3,7 +3,6 @@ using UnityEngine.EventSystems;
 
 public class ColorButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-
     public bool isPressed { get; private set; }
     private int pointerId = -1;
 
@@ -25,5 +24,4 @@ public class ColorButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             isPressed = false;
         }
     }
-
 }

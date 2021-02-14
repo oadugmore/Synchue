@@ -7,16 +7,17 @@ public class Goal : MonoBehaviour
     public WinScreen winScreen;
     [HideInInspector]
     public bool wasReached;
+    public bool timerStarted;
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
-    private TimeSpan startTime;
     private string levelName;
     private string nextSceneName;
     private Player player;
 
-    private static Goal _instance;
+    public TimeSpan startTime { get; private set; }
 
+    private static Goal _instance;
     public static Goal instance
     {
         get
@@ -52,10 +53,18 @@ public class Goal : MonoBehaviour
 
     void Start()
     {
-        startTime = TimeSpan.FromSeconds(Time.time);
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
+    }
+
+    private void Update()
+    {
+        if (!timerStarted && (Controller.GetAxis(InteractColor.Blue) > 0 || Controller.GetAxis(InteractColor.Orange) > 0))
+        {
+            timerStarted = true;
+            startTime = TimeSpan.FromSeconds(Time.time);
+        }
     }
 
     // Backwards compatibility
@@ -89,7 +98,9 @@ public class Goal : MonoBehaviour
                 SFX.Play(victorySound, SFX.goalFileID);
             }
             var ws = Instantiate(winScreen, uiRoot);
-            ws.SetCompletionTime(endTime - startTime);
+            var totalElapsedTime = endTime - startTime;
+            ws.SetCompletionTime(totalElapsedTime);
+            HUD.instance.UpdateElapsedTime(totalElapsedTime);
             player.Freeze(0.5f);
             wasReached = true;
         }

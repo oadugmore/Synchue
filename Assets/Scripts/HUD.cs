@@ -1,14 +1,50 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
     public Text deathCountText;
+    public Text timerText;
 
     private Animator menuAnim;
     private const string menuSceneName = "Menu";
     private Player player;
+
+    private static HUD _instance;
+    public static HUD instance
+    {
+        get
+        {
+            if (!_instance)
+            {
+                throw new NullReferenceException("This level does not have a HUD, or it has not been initialized yet!");
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_instance)
+        {
+            Debug.LogWarning("This level has multiple HUDs; destroying all but the first one");
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_instance == this)
+        {
+            _instance = null;
+        }
+    }
 
     private void Start()
     {
@@ -16,6 +52,7 @@ public class HUD : MonoBehaviour
         var currentDeaths = DeathCounter.GetDeathCount();
         deathCountText.text = currentDeaths.ToString();
         player = FindObjectOfType<Player>();
+        timerText.transform.parent.gameObject.SetActive(Settings.hudTimerEnabled);
     }
 
     private void Update()
@@ -28,6 +65,15 @@ public class HUD : MonoBehaviour
         {
             PauseButtonPressed();
         }
+        if (Goal.instance.timerStarted && !Goal.instance.wasReached && !player.dead)
+        {
+            UpdateElapsedTime(TimeSpan.FromSeconds(Time.time) - Goal.instance.startTime);
+        }
+    }
+
+    public void UpdateElapsedTime(TimeSpan elapsedTime)
+    {
+        timerText.text = elapsedTime.ToString("mm':'ss'.'ff");
     }
 
     public void PauseButtonPressed()

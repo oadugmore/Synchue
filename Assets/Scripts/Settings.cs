@@ -7,6 +7,7 @@ public class Settings
     private const string GOAL_HAPTICS_ENABLED_SETTING_NAME = "GoalHapticsEnabled";
     private const string DEATH_SOUND_ENABLED_SETTING_NAME = "DeathSoundEnabled";
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
+    private const string HUD_TIMER_ENABLED_SETTING_NAME = "HudTimerEnabled";
 
     public static bool musicEnabled
     {
@@ -65,6 +66,18 @@ public class Settings
         set
         {
             Set(GOAL_SOUND_ENABLED_SETTING_NAME, value);
+        }
+    }
+
+    public static bool hudTimerEnabled
+    {
+        get
+        {
+            return Get(HUD_TIMER_ENABLED_SETTING_NAME, true);
+        }
+        set
+        {
+            Set(HUD_TIMER_ENABLED_SETTING_NAME, value);
         }
     }
 
