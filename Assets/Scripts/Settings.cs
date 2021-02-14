@@ -73,7 +73,7 @@ public class Settings
     {
         get
         {
-            return Get(HUD_TIMER_ENABLED_SETTING_NAME, true);
+            return Get(HUD_TIMER_ENABLED_SETTING_NAME, false);
         }
         set
         {
