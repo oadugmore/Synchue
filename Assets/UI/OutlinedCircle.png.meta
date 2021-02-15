@@ -1,9 +1,9 @@
 fileFormatVersion: 2
 guid: c2b7c8b8a2dc9394cb8c8829c9c6be2b
 TextureImporter:
-  fileIDToRecycleName: {}
+  internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -46,11 +46,11 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 45, y: 45, z: 45, w: 45}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -58,7 +58,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -69,17 +69,136 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites: []
-    outline: []
+    outline:
+    - - {x: 19, y: -46}
+      - {x: 22, y: -44}
+      - {x: 26, y: -44}
+      - {x: 28, y: -42}
+      - {x: 28, y: -41}
+      - {x: 32, y: -37}
+      - {x: 33, y: -37}
+      - {x: 37, y: -33}
+      - {x: 37, y: -32}
+      - {x: 42, y: -28}
+      - {x: 44, y: -27}
+      - {x: 44, y: -22}
+      - {x: 46, y: -19}
+      - {x: 46, y: -17}
+      - {x: 48, y: -14}
+      - {x: 48, y: -11}
+      - {x: 49, y: -10}
+      - {x: 49, y: 10}
+      - {x: 48, y: 11}
+      - {x: 46, y: 19}
+      - {x: 43, y: 26}
+      - {x: 41, y: 27}
+      - {x: 41, y: 28}
+      - {x: 37, y: 32}
+      - {x: 37, y: 33}
+      - {x: 33, y: 37}
+      - {x: 32, y: 37}
+      - {x: 28, y: 41}
+      - {x: 27, y: 41}
+      - {x: 26, y: 43}
+      - {x: 19, y: 46}
+      - {x: 17, y: 46}
+      - {x: 14, y: 48}
+      - {x: 11, y: 48}
+      - {x: 10, y: 49}
+      - {x: -10, y: 49}
+      - {x: -11, y: 48}
+      - {x: -14, y: 48}
+      - {x: -17, y: 46}
+      - {x: -19, y: 46}
+      - {x: -26, y: 43}
+      - {x: -27, y: 41}
+      - {x: -28, y: 41}
+      - {x: -32, y: 37}
+      - {x: -33, y: 37}
+      - {x: -37, y: 33}
+      - {x: -37, y: 32}
+      - {x: -40, y: 31}
+      - {x: -41, y: 28}
+      - {x: -43, y: 26}
+      - {x: -46, y: 19}
+      - {x: -46, y: 17}
+      - {x: -48, y: 14}
+      - {x: -48, y: 11}
+      - {x: -49, y: 10}
+      - {x: -49, y: -10}
+      - {x: -48, y: -11}
+      - {x: -48, y: -14}
+      - {x: -46, y: -17}
+      - {x: -46, y: -19}
+      - {x: -44, y: -22}
+      - {x: -44, y: -26}
+      - {x: -42, y: -28}
+      - {x: -41, y: -28}
+      - {x: -38, y: -32}
+      - {x: -37, y: -34}
+      - {x: -33, y: -37}
+      - {x: -32, y: -37}
+      - {x: -28, y: -42}
+      - {x: -27, y: -44}
+      - {x: -22, y: -44}
+      - {x: -19, y: -46}
+      - {x: -17, y: -46}
+      - {x: -14, y: -48}
+      - {x: -11, y: -48}
+      - {x: -10, y: -49}
+      - {x: 10, y: -49}
+      - {x: 11, y: -48}
+      - {x: 14, y: -48}
+      - {x: 17, y: -46}
     physicsShape: []
     bones: []
     spriteID: e2f77b4b68442954fbceb761f1ede2ee
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
