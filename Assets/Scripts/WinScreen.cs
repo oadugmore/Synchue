@@ -34,6 +34,13 @@ public class WinScreen : MonoBehaviour
             nextLevelButton.interactable = false;
         }
         deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
+        var leaderboardId = Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");
+        Cloud.Leaderboards.LoadScores(leaderboardId, scores => {
+            foreach (var score in scores)
+            {
+                Debug.Log($"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})");
+            }
+        });
     }
 
     /// <summary>
