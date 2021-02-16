@@ -7,55 +7,53 @@ using UnityEngine.UI;
 public class WinScreen : MonoBehaviour
 {
     public Button nextLevelButton;
+    public Button wrButton;
     public Text timeText;
     public Text levelText;
     public Text deathCountText;
 
+    private string levelName;
     private string nextLevelName;
-    private int worldNumber;
-    private int levelNumber;
     private string leaderboardId;
     private const string menuSceneName = "Menu";
 
     private void Awake()
     {
-        var sceneNameParts = SceneManager.GetActiveScene().name.Split('_');
-        worldNumber = int.Parse(sceneNameParts[1]);
-        levelNumber = int.Parse(sceneNameParts[3]);
+        var sceneName = SceneManager.GetActiveScene().name;
+        var sceneNameParts = sceneName.Split('_');
+        var worldNumber = int.Parse(sceneNameParts[1]);
+        var levelNumber = int.Parse(sceneNameParts[3]);
+        levelName = $"Level {worldNumber}-{levelNumber}";
         nextLevelName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
+        leaderboardId = MobileUtils.GetNativeLeaderboardId(sceneName);
     }
 
     private void Start()
     {
-        var levelName = $"Level {worldNumber}-{levelNumber}";
         levelText.text = levelName;
         if (nextLevelName == null)
         {
             nextLevelButton.interactable = false;
         }
         deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
-        var leaderboardId = Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");
-        Cloud.Leaderboards.LoadScores(leaderboardId, scores => {
-            foreach (var score in scores)
-            {
-                Debug.Log($"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})");
-            }
-        });
     }
 
     /// <summary>
     /// Initializes the win screen with the level completion time,
     /// and attempts to submit the score.
     /// </summary>
-    /// <param name="time">How long it took to complete the level.</param>
-    public void SetCompletionTime(TimeSpan time)
+    /// <param name="completionTime">How long it took to complete the level.</param>
+    public void SetTimeInfo(TimeSpan completionTime, long currentPb, long currentWr)
     {
-        timeText.text = "Time: " + time.ToString("mm':'ss'.'ff");
-        var completionTimeCentiSeconds = (long)time.TotalMilliseconds / 10;
+        timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
+        var completionTimeCentiSeconds = (long)completionTime.TotalMilliseconds / 10;
         var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 1 : 10;
         var submittedTime = completionTimeCentiSeconds * leaderboardTimeScale;
-        var internalId = $"Level{worldNumber}_{levelNumber}";
-        leaderboardId = Leaderboards.GetPlatformID(internalId);
+
+        wrButton.GetComponentInChildren<Text>().text = completionTimeCentiSeconds < currentWr ? "New WR" : "New PB";
+        wrButton.gameObject.SetActive(completionTimeCentiSeconds < currentPb);
+
+        // Submit new score
         Cloud.Leaderboards.SubmitScore(leaderboardId, submittedTime, result =>
         {
             if (result.HasError)

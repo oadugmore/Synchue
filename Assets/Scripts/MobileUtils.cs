@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityCoreHaptics;
+using CloudOnce;
 
 public class MobileUtils
 {
@@ -136,5 +137,13 @@ public class MobileUtils
                 androidVibrator.Call("vibrate", vibrationEffect);
             }
         }
+    }
+
+    public static string GetNativeLeaderboardId(string sceneName)
+    {
+        var sceneNameParts = sceneName.Split('_');
+        var worldNumber = int.Parse(sceneNameParts[1]);
+        var levelNumber = int.Parse(sceneNameParts[3]);
+        return Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");
     }
 }

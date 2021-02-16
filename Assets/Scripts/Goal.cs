@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Goal : MonoBehaviour
 {
@@ -11,9 +12,9 @@ public class Goal : MonoBehaviour
 
     private AudioSource victorySound;
     private RectTransform uiRoot;
-    private string levelName;
-    private string nextSceneName;
     private Player player;
+    private long currentWr;
+    private long currentPb;
 
     public TimeSpan startTime { get; private set; }
 
@@ -56,6 +57,26 @@ public class Goal : MonoBehaviour
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
+
+        // Load current scores
+        var leaderboard = Social.CreateLeaderboard();
+        var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
+        leaderboard.id = leaderboardId;
+        leaderboard.timeScope = UnityEngine.SocialPlatforms.TimeScope.AllTime;
+        leaderboard.LoadScores(success =>
+        {
+            if (success && leaderboard.scores.Length > 0)
+            {
+                currentWr = leaderboard.scores[0].value;
+                currentPb = leaderboard.localUserScore.value;
+                var scoreMessage = "Scores:\n";
+                foreach (var score in leaderboard.scores)
+                {
+                    scoreMessage += $"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})\n";
+                }
+                Debug.Log(scoreMessage);
+            }
+        });
     }
 
     private void Update()
@@ -99,7 +120,7 @@ public class Goal : MonoBehaviour
             }
             var ws = Instantiate(winScreen, uiRoot);
             var totalElapsedTime = endTime - startTime;
-            ws.SetCompletionTime(totalElapsedTime);
+            ws.SetTimeInfo(totalElapsedTime, currentPb, currentWr);
             HUD.instance.UpdateElapsedTime(totalElapsedTime);
             player.Freeze(0.5f);
             wasReached = true;
