@@ -8,8 +8,9 @@ public class WinScreen : MonoBehaviour
 {
     public Button nextLevelButton;
     public Button wrButton;
-    public Text timeText;
     public Text levelText;
+    public Text timeText;
+    public Text wrText;
     public Text deathCountText;
 
     private string levelName;
@@ -43,15 +44,20 @@ public class WinScreen : MonoBehaviour
     /// and attempts to submit the score.
     /// </summary>
     /// <param name="completionTime">How long it took to complete the level.</param>
-    public void SetTimeInfo(TimeSpan completionTime, long currentPb, long currentWr)
+    public void SetTimeInfo(TimeSpan completionTime, TimeSpan currentPb, TimeSpan currentWr)
     {
         timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
         var completionTimeCentiSeconds = (long)completionTime.TotalMilliseconds / 10;
         var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 1 : 10;
         var submittedTime = completionTimeCentiSeconds * leaderboardTimeScale;
 
-        wrButton.GetComponentInChildren<Text>().text = completionTimeCentiSeconds < currentWr ? "New WR" : "New PB";
-        wrButton.gameObject.SetActive(completionTimeCentiSeconds < currentPb);
+        wrButton.GetComponentInChildren<Text>().text = completionTime < currentWr ? "New WR" : "New PB";
+        wrButton.gameObject.SetActive(completionTime < currentPb);
+        var wrTextPrefix = completionTime < currentWr ? "Previous WR: " : "Current WR: ";
+        if (currentWr > TimeSpan.Zero)
+        {
+            wrText.text = wrTextPrefix + currentWr.ToString("mm':'ss'.'ff");
+        }
 
         // Submit new score
         Cloud.Leaderboards.SubmitScore(leaderboardId, submittedTime, result =>

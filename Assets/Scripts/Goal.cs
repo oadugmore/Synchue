@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using CloudOnce;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,8 +14,8 @@ public class Goal : MonoBehaviour
     private AudioSource victorySound;
     private RectTransform uiRoot;
     private Player player;
-    private long currentWr;
-    private long currentPb;
+    private TimeSpan currentWr;
+    private TimeSpan currentPb;
 
     public TimeSpan startTime { get; private set; }
 
@@ -59,24 +60,28 @@ public class Goal : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         // Load current scores
-        var leaderboard = Social.CreateLeaderboard();
-        var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
-        leaderboard.id = leaderboardId;
-        leaderboard.timeScope = UnityEngine.SocialPlatforms.TimeScope.AllTime;
-        leaderboard.LoadScores(success =>
+        if (Cloud.IsSignedIn)
         {
-            if (success && leaderboard.scores.Length > 0)
+            var leaderboard = Social.CreateLeaderboard();
+            var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
+            leaderboard.id = leaderboardId;
+            leaderboard.timeScope = UnityEngine.SocialPlatforms.TimeScope.AllTime;
+            leaderboard.LoadScores(success =>
             {
-                currentWr = leaderboard.scores[0].value;
-                currentPb = leaderboard.localUserScore.value;
-                var scoreMessage = "Scores:\n";
-                foreach (var score in leaderboard.scores)
+                if (success && leaderboard.scores.Length > 0)
                 {
-                    scoreMessage += $"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})\n";
+                    var millisecondsMultiplier = Application.platform == RuntimePlatform.Android ? 1 : 10;
+                    currentWr = TimeSpan.FromMilliseconds(leaderboard.scores[0].value * millisecondsMultiplier); 
+                    currentPb = TimeSpan.FromMilliseconds(leaderboard.localUserScore.value * millisecondsMultiplier);
+                    var scoreMessage = "Scores:\n";
+                    foreach (var score in leaderboard.scores)
+                    {
+                        scoreMessage += $"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})\n";
+                    }
+                    Debug.Log(scoreMessage);
                 }
-                Debug.Log(scoreMessage);
-            }
-        });
+            });
+        }
     }
 
     private void Update()

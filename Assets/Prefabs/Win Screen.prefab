@@ -985,7 +985,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Current WR: 00:00.00'
+  m_Text: 'Current WR: --:--.--'
 --- !u!1 &4290886759499285098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,8 +1348,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelButton: {fileID: 6505721370326036866}
-  timeText: {fileID: 1027440171340402594}
+  wrButton: {fileID: 5133044892747716521}
   levelText: {fileID: 752823292380257023}
+  timeText: {fileID: 1027440171340402594}
+  wrText: {fileID: 3945096587379953440}
   deathCountText: {fileID: 4228211101686277596}
 --- !u!222 &6505721370220265387
 CanvasRenderer:
