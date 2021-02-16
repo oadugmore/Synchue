@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class WinScreen : MonoBehaviour
 {
     public Button nextLevelButton;
+    public Button leaderboardButton;
     public Button wrButton;
     public Text levelText;
     public Text timeText;
@@ -37,6 +38,8 @@ public class WinScreen : MonoBehaviour
             nextLevelButton.interactable = false;
         }
         deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
+        leaderboardButton.onClick.AddListener(OpenLeaderboard);
+        wrButton.onClick.AddListener(OpenLeaderboard);
     }
 
     /// <summary>
@@ -53,6 +56,7 @@ public class WinScreen : MonoBehaviour
 
         wrButton.GetComponentInChildren<Text>().text = completionTime < currentWr ? "New WR" : "New PB";
         wrButton.gameObject.SetActive(completionTime < currentPb);
+        leaderboardButton.gameObject.SetActive(!wrButton.gameObject.activeInHierarchy);
         var wrTextPrefix = completionTime < currentWr ? "Previous WR: " : "Current WR: ";
         if (currentWr > TimeSpan.Zero)
         {
