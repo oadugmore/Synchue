@@ -13,6 +13,9 @@ public class WinScreen : MonoBehaviour
     public Text timeText;
     public Text wrText;
     public Text deathCountText;
+    public TimeSpan completionTime;
+    public TimeSpan currentPb;
+    public TimeSpan currentWr;
 
     private string levelName;
     private string nextLevelName;
@@ -32,6 +35,11 @@ public class WinScreen : MonoBehaviour
 
     private void Start()
     {
+        if (completionTime == TimeSpan.Zero)
+        {
+            Debug.LogError("WinScreen was created without setting a valid completionTime!");
+            return;
+        }
         levelText.text = levelName;
         if (nextLevelName == null)
         {
@@ -40,15 +48,7 @@ public class WinScreen : MonoBehaviour
         deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
         leaderboardButton.onClick.AddListener(OpenLeaderboard);
         wrButton.onClick.AddListener(OpenLeaderboard);
-    }
 
-    /// <summary>
-    /// Initializes the win screen with the level completion time,
-    /// and attempts to submit the score.
-    /// </summary>
-    /// <param name="completionTime">How long it took to complete the level.</param>
-    public void SetTimeInfo(TimeSpan completionTime, TimeSpan currentPb, TimeSpan currentWr)
-    {
         timeText.text = "Time: " + completionTime.ToString("mm':'ss'.'ff");
         var completionTimeCentiSeconds = (long)completionTime.TotalMilliseconds / 10;
         var leaderboardTimeScale = Application.platform == RuntimePlatform.IPhonePlayer ? 1 : 10;
@@ -57,9 +57,9 @@ public class WinScreen : MonoBehaviour
         wrButton.GetComponentInChildren<Text>().text = completionTime < currentWr ? "New WR" : "New PB";
         wrButton.gameObject.SetActive(completionTime < currentPb);
         leaderboardButton.gameObject.SetActive(!wrButton.gameObject.activeInHierarchy);
-        var wrTextPrefix = completionTime < currentWr ? "Previous WR: " : "Current WR: ";
         if (currentWr > TimeSpan.Zero)
         {
+            var wrTextPrefix = completionTime < currentWr ? "Previous WR: " : "Current WR: ";
             wrText.text = wrTextPrefix + currentWr.ToString("mm':'ss'.'ff");
         }
 
