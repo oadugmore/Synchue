@@ -124,9 +124,11 @@ public class Goal : MonoBehaviour
                 SFX.Play(victorySound, SFX.goalFileID);
             }
             var ws = Instantiate(winScreen, uiRoot);
-            var totalElapsedTime = endTime - startTime;
-            ws.SetTimeInfo(totalElapsedTime, currentPb, currentWr);
-            HUD.instance.UpdateElapsedTime(totalElapsedTime);
+            var completionTime = endTime - startTime;
+            ws.completionTime = completionTime;
+            ws.currentPb = currentPb;
+            ws.currentWr = currentWr;
+            HUD.instance.UpdateElapsedTime(completionTime);
             player.Freeze(0.5f);
             wasReached = true;
         }

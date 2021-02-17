@@ -7,8 +7,12 @@ public class HUD : MonoBehaviour
 {
     public Text deathCountText;
     public Text timerText;
+    public RectTransform pauseMenu;
+    public float startEndScale = 0.75f;
+    public float animDuration = 0.5f;
+    public LeanTweenType scaleEaseType = LeanTweenType.linear;
+    public LeanTweenType alphaEaseType = LeanTweenType.linear;
 
-    private Animator menuAnim;
     private const string menuSceneName = "Menu";
     private Player player;
 
@@ -48,7 +52,6 @@ public class HUD : MonoBehaviour
 
     private void Start()
     {
-        menuAnim = GetComponentInChildren<Animator>();
         var currentDeaths = DeathCounter.GetDeathCount();
         deathCountText.text = currentDeaths.ToString();
         player = FindObjectOfType<Player>();
@@ -81,15 +84,22 @@ public class HUD : MonoBehaviour
         if (!player.dead && !Goal.instance.wasReached)
         {
             var pausing = Time.timeScale > 0f;
-            menuAnim.SetBool("Paused", pausing);
+            var scaleTo = Vector3.one;
+            var alphaTo = 1f;
             if (pausing)
             {
+                pauseMenu.localScale *= startEndScale;
                 Time.timeScale = 0f;
             }
             else
             {
+                scaleTo *= startEndScale;
+                alphaTo = 0f;
                 Time.timeScale = 1f;
             }
+            LeanTween.scale(pauseMenu, scaleTo, animDuration).setEase(scaleEaseType).setIgnoreTimeScale(true);
+            LeanTween.alphaCanvas(pauseMenu.GetComponent<CanvasGroup>(), alphaTo, animDuration).setEase(alphaEaseType).setIgnoreTimeScale(true);
+            pauseMenu.GetComponent<CanvasGroup>().blocksRaycasts = pausing;
         }
     }
 
