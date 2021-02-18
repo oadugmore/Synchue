@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class BounceButton : Button
 {
-    public LeanTweenType downEase = LeanTweenType.linear;
-    public LeanTweenType upEase = LeanTweenType.linear;
+    public LeanTweenType downEase = LeanTweenType.easeInExpo;
+    public LeanTweenType upEase = LeanTweenType.easeInExpo;
     public float pressedScale = 0.8f;
-    public float transitionTime = 0.5f;
+    public float transitionTime = 0.05f;
 
     protected override void DoStateTransition(SelectionState state, bool instant)
     {
@@ -34,6 +33,6 @@ public class BounceButton : Button
             default:
                 break;
         }
-        LeanTween.scale(GetComponent<RectTransform>(), scale, transitionTime).setEase(ease).setIgnoreTimeScale(false);
+        LeanTween.scale(GetComponentsInChildren<RectTransform>()[1], scale, transitionTime).setEase(ease).setIgnoreTimeScale(false);
     }
 }

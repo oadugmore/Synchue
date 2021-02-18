@@ -60,7 +60,7 @@ public class Goal : MonoBehaviour
         player = FindObjectOfType<Player>();
 
         // Load current scores
-        if (Cloud.IsSignedIn)
+        if (Social.localUser.authenticated)
         {
             var leaderboard = Social.CreateLeaderboard();
             var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);

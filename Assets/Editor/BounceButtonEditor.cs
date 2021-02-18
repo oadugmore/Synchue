@@ -5,7 +5,8 @@ public class BounceButtonEditor : Editor
 {
     string[] hideProperties = {
         "m_SpriteState",
-        "m_AnimationTriggers"
+        "m_AnimationTriggers",
+        "m_Script"
     };
 
     public override void OnInspectorGUI()

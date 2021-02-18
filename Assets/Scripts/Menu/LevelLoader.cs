@@ -31,6 +31,8 @@ public class LevelLoader : MonoBehaviour
         {
             nextWorldButton.interactable = false;
         }
+        nextWorldButton.onClick.AddListener(NextWorld);
+        previousWorldButton.onClick.AddListener(PreviousWorld);
         mainCamera.transform.position = cameraLocations[currentWorldIndex].position;
         CheckLevels();
         MobileUtils.InitializeVibrator();
