@@ -139,9 +139,18 @@ public class MobileUtils
         }
     }
 
+    /// <summary>
+    /// Returns the native leaderboard ID if sceneName is a valid level, null otherwise.
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <returns></returns>
     public static string GetNativeLeaderboardId(string sceneName)
     {
         var sceneNameParts = sceneName.Split('_');
+        if (sceneNameParts.Length != 4)
+        {
+            return null;
+        }
         var worldNumber = int.Parse(sceneNameParts[1]);
         var levelNumber = int.Parse(sceneNameParts[3]);
         return Leaderboards.GetPlatformID($"Level{worldNumber}_{levelNumber}");

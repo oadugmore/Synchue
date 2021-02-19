@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using CloudOnce;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,6 +53,12 @@ public class LevelLoader : MonoBehaviour
                 levelButtons[i].interactable = true;
             }
         }
+    }
+
+    public void ShowLeaderboard()
+    {
+        var leaderboardId = MobileUtils.GetNativeLeaderboardId(sceneText.text);
+        Cloud.Leaderboards.ShowOverlay(leaderboardId);
     }
 
     /// <summary>
