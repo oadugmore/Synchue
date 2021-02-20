@@ -33,6 +33,6 @@ public class BounceButton : Button
             default:
                 break;
         }
-        LeanTween.scale(GetComponentsInChildren<RectTransform>()[1], scale, transitionTime).setEase(ease).setIgnoreTimeScale(false);
+        LeanTween.scale(GetComponentsInChildren<RectTransform>()[1], scale, transitionTime).setEase(ease).setIgnoreTimeScale(true);
     }
 }

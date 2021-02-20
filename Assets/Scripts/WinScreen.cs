@@ -25,11 +25,9 @@ public class WinScreen : MonoBehaviour
     private void Awake()
     {
         var sceneName = SceneManager.GetActiveScene().name;
-        var sceneNameParts = sceneName.Split('_');
-        var worldNumber = int.Parse(sceneNameParts[1]);
-        var levelNumber = int.Parse(sceneNameParts[3]);
-        levelName = $"Level {worldNumber}-{levelNumber}";
-        nextLevelName = LevelLoader.GetSceneNameFromLevel(worldNumber, levelNumber + 1);
+        var worldAndLevel = LevelLoader.ParseWorldAndLevel(sceneName);
+        levelName = $"Level {worldAndLevel[0]}-{worldAndLevel[1]}";
+        nextLevelName = LevelLoader.GetSceneNameFromLevel(worldAndLevel[0], worldAndLevel[1] + 1);
         leaderboardId = MobileUtils.GetNativeLeaderboardId(sceneName);
     }
 
@@ -45,7 +43,7 @@ public class WinScreen : MonoBehaviour
         {
             nextLevelButton.interactable = false;
         }
-        deathCountText.text = "Deaths: " + DeathCounter.GetDeathCount();
+        deathCountText.text = $"Attempts: {DeathCounter.GetDeathCount() + 1}";
         leaderboardButton.onClick.AddListener(OpenLeaderboard);
         wrButton.onClick.AddListener(OpenLeaderboard);
 

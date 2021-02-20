@@ -145,4 +145,12 @@ public class LevelLoader : MonoBehaviour
     {
         return Application.CanStreamedLevelBeLoaded(sceneName);
     }
+
+    public static int[] ParseWorldAndLevel(string sceneName)
+    {
+        var sceneNameParts = sceneName.Split('_');
+        var worldNumber = int.Parse(sceneNameParts[1]);
+        var levelNumber = int.Parse(sceneNameParts[3]);
+        return new int[] { worldNumber, levelNumber };
+    }
 }

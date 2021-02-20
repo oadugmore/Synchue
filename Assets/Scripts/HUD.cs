@@ -5,13 +5,17 @@ using UnityEngine.UI;
 
 public class HUD : MonoBehaviour
 {
-    public Text deathCountText;
     public Text timerText;
+    public Text deathCountText;
+    public Text levelText;
+    public GameObject inGameUi;
     public RectTransform pauseMenu;
     public float startEndScale = 0.75f;
     public float animDuration = 0.5f;
-    public LeanTweenType scaleEaseType = LeanTweenType.linear;
-    public LeanTweenType alphaEaseType = LeanTweenType.linear;
+    public LeanTweenType openScaleEaseType = LeanTweenType.linear;
+    public LeanTweenType closeScaleEaseType = LeanTweenType.linear;
+    public LeanTweenType openAlphaEaseType = LeanTweenType.linear;
+    public LeanTweenType closeAlphaEaseType = LeanTweenType.linear;
 
     private const string menuSceneName = "Menu";
     private Player player;
@@ -53,9 +57,12 @@ public class HUD : MonoBehaviour
     private void Start()
     {
         var currentDeaths = DeathCounter.GetDeathCount();
-        deathCountText.text = currentDeaths.ToString();
         player = FindObjectOfType<Player>();
         timerText.transform.parent.gameObject.SetActive(Settings.hudTimerEnabled);
+        deathCountText.text = currentDeaths.ToString();
+        var sceneName = SceneManager.GetActiveScene().name;
+        var worldAndLevel = LevelLoader.ParseWorldAndLevel(sceneName);
+        levelText.text = $"Level {worldAndLevel[0]}-{worldAndLevel[1]}";
     }
 
     private void Update()
@@ -85,6 +92,8 @@ public class HUD : MonoBehaviour
         {
             var pausing = Time.timeScale > 0f;
             var scaleTo = Vector3.one;
+            var scaleEaseType = openScaleEaseType;
+            var alphaEaseType = openAlphaEaseType;
             var alphaTo = 1f;
             if (pausing)
             {
@@ -94,6 +103,8 @@ public class HUD : MonoBehaviour
             else
             {
                 scaleTo *= startEndScale;
+                scaleEaseType = closeScaleEaseType;
+                alphaEaseType = closeAlphaEaseType;
                 alphaTo = 0f;
                 Time.timeScale = 1f;
             }

@@ -129,6 +129,7 @@ public class Goal : MonoBehaviour
             ws.currentPb = currentPb;
             ws.currentWr = currentWr;
             HUD.instance.UpdateElapsedTime(completionTime);
+            HUD.instance.inGameUi.SetActive(false);
             player.Freeze(0.5f);
             wasReached = true;
         }
