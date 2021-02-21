@@ -5,7 +5,6 @@
 
 namespace CloudOnce.QuickStart
 {
-    using GooglePlayGames;
     using UnityEngine;
 
     /// <summary>
@@ -26,9 +25,6 @@ namespace CloudOnce.QuickStart
         private void Start()
         {
             Cloud.Initialize(cloudSaveEnabled, autoSignIn, autoCloudLoad);
-#if UNITY_ANDROID
-            PlayGamesPlatform.Activate();
-#endif
         }
     }
 }

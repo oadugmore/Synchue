@@ -61,7 +61,6 @@ public class WinScreen : MonoBehaviour
             wrText.text = wrTextPrefix + currentWr.ToString("mm':'ss'.'ff");
         }
 
-        // Submit new score
         Cloud.Leaderboards.SubmitScore(leaderboardId, submittedTime, result =>
         {
             if (result.HasError)

@@ -198,6 +198,7 @@ namespace CloudOnce.Internal.Providers
                 cloudOnceEvents.RaiseOnInitializeComplete();
                 initializing = false;
             }
+            PlayGamesPlatform.Activate();
         }
 
         /// <summary>
