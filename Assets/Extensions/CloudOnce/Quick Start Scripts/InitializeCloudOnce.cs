@@ -26,10 +26,9 @@ namespace CloudOnce.QuickStart
         private void Start()
         {
             Cloud.Initialize(cloudSaveEnabled, autoSignIn, autoCloudLoad);
-            if (Application.platform == RuntimePlatform.Android)
-            {
-                PlayGamesPlatform.Activate();
-            }
+#if UNITY_ANDROID
+            PlayGamesPlatform.Activate();
+#endif
         }
     }
 }
