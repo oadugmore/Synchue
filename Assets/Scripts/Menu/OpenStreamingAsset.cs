@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,6 @@ public class OpenStreamingAsset : MonoBehaviour
 
     void OpenAsset()
     {
-        Application.OpenURL("file:///" + Application.streamingAssetsPath + "/" + streamingAssetName);
+        Application.OpenURL(Path.Combine(Application.streamingAssetsPath, streamingAssetName));
     }
 }
