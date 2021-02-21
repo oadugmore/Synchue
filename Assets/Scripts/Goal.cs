@@ -3,6 +3,7 @@ using System.Collections;
 using CloudOnce;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms;
 
 public class Goal : MonoBehaviour
 {
@@ -58,30 +59,47 @@ public class Goal : MonoBehaviour
         uiRoot = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         victorySound = GetComponent<AudioSource>();
         player = FindObjectOfType<Player>();
-
-        // Load current scores
-        if (Social.localUser.authenticated)
+        if (Cloud.IsSignedIn)
         {
-            var leaderboard = Social.CreateLeaderboard();
-            var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
-            leaderboard.id = leaderboardId;
-            leaderboard.timeScope = UnityEngine.SocialPlatforms.TimeScope.AllTime;
-            leaderboard.LoadScores(success =>
+            LoadScores();
+        }
+        else
+        {
+            Cloud.SignIn(true, success =>
             {
-                if (success && leaderboard.scores.Length > 0)
+                if (success)
                 {
-                    var millisecondsMultiplier = Application.platform == RuntimePlatform.Android ? 1 : 10;
-                    currentWr = TimeSpan.FromMilliseconds(leaderboard.scores[0].value * millisecondsMultiplier); 
-                    currentPb = TimeSpan.FromMilliseconds(leaderboard.localUserScore.value * millisecondsMultiplier);
-                    var scoreMessage = "Scores:\n";
-                    foreach (var score in leaderboard.scores)
-                    {
-                        scoreMessage += $"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})\n";
-                    }
-                    Debug.Log(scoreMessage);
+                    LoadScores();
+                }
+                else
+                {
+                    Debug.LogError("Failed to sign in!");
                 }
             });
         }
+    }
+
+    private void LoadScores()
+    {
+        var leaderboard = Social.CreateLeaderboard();
+        var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
+        leaderboard.id = leaderboardId;
+        leaderboard.timeScope = TimeScope.AllTime;
+        leaderboard.LoadScores(success =>
+        {
+            if (success && leaderboard.scores.Length > 0)
+            {
+                var millisecondsMultiplier = Application.platform == RuntimePlatform.Android ? 1 : 10;
+                currentWr = TimeSpan.FromMilliseconds(leaderboard.scores[0].value * millisecondsMultiplier);
+                currentPb = TimeSpan.FromMilliseconds(leaderboard.localUserScore.value * millisecondsMultiplier);
+                var scoreMessage = "Scores:\n";
+                foreach (var score in leaderboard.scores)
+                {
+                    scoreMessage += $"Score for player {score.userID}: {score.formattedValue} ({score.value}, rank {score.rank})\n";
+                }
+                Debug.Log(scoreMessage);
+            }
+        });
     }
 
     private void Update()

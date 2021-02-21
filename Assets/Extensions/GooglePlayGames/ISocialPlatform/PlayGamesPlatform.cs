@@ -1381,7 +1381,7 @@ namespace GooglePlayGames
                                               " callback is " + callback);
             mClient.LoadScores(
                 board.id,
-                LeaderboardStart.PlayerCentered,
+                LeaderboardStart.TopScores,
                 board.range.count > 0 ? board.range.count : mClient.LeaderboardMaxResults(),
                 board.userScope == UserScope.FriendsOnly ? LeaderboardCollection.Social : LeaderboardCollection.Public,
                 timeSpan,
