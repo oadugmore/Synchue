@@ -1,7 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CloseCredits : MonoBehaviour
+/// <summary>
+/// Attach this component to the button that closes the window.
+/// </summary>
+public class PopDownWindow : MonoBehaviour
 {
     public LeanTweenType openAnimation = LeanTweenType.linear;
     public float openTime;
