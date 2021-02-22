@@ -65,17 +65,13 @@ public class Goal : MonoBehaviour
         }
         else
         {
-            Cloud.SignIn(true, success =>
+            Cloud.OnSignedInChanged += (signedIn) =>
             {
-                if (success)
+                if (signedIn)
                 {
                     LoadScores();
                 }
-                else
-                {
-                    Debug.LogError("Failed to sign in!");
-                }
-            });
+            };
         }
     }
 

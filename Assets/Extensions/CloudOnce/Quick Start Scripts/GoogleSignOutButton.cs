@@ -31,6 +31,12 @@ namespace CloudOnce.QuickStart
 
         #region Private methods
 
+        private void UpdateSignedInStatus(bool isSignedIn)
+        {
+            Settings.googlePlaySignedIn = isSignedIn;
+            UpdateButtonText(isSignedIn);
+        }
+
         private void UpdateButtonText(bool isSignedIn)
         {
             TextComponent.text = isSignedIn ? "Sign out" : "Sign in";
@@ -38,7 +44,7 @@ namespace CloudOnce.QuickStart
 
         private void Awake()
         {
-            Cloud.OnSignedInChanged += UpdateButtonText;
+            Cloud.OnSignedInChanged += UpdateSignedInStatus;
             if (CachedButton != null)
             {
                 CachedButton.onClick.AddListener(OnButtonClicked);
@@ -79,7 +85,7 @@ namespace CloudOnce.QuickStart
                 CachedButton.onClick.RemoveListener(OnButtonClicked);
             }
 
-            Cloud.OnSignedInChanged -= UpdateButtonText;
+            Cloud.OnSignedInChanged -= UpdateSignedInStatus;
         }
 
 #endregion /Private methods

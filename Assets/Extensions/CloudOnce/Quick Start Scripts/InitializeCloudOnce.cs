@@ -24,7 +24,8 @@ namespace CloudOnce.QuickStart
 
         private void Start()
         {
-            Cloud.Initialize(cloudSaveEnabled, autoSignIn, autoCloudLoad);
+            var signIn = autoSignIn && (Settings.googlePlaySignedIn || Application.platform == RuntimePlatform.IPhonePlayer);
+            Cloud.Initialize(cloudSaveEnabled, signIn, autoCloudLoad);
         }
     }
 }

@@ -8,6 +8,7 @@ public class Settings
     private const string DEATH_SOUND_ENABLED_SETTING_NAME = "DeathSoundEnabled";
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
     private const string HUD_TIMER_ENABLED_SETTING_NAME = "HudTimerEnabled";
+    private const string GOOGLE_PLAY_SIGNED_IN_SETTING_NAME = "GooglePlaySignedIn";
 
     public static bool musicEnabled
     {
@@ -78,6 +79,18 @@ public class Settings
         set
         {
             Set(HUD_TIMER_ENABLED_SETTING_NAME, value);
+        }
+    }
+
+    public static bool googlePlaySignedIn
+    {
+        get
+        {
+            return Get(GOOGLE_PLAY_SIGNED_IN_SETTING_NAME, true);
+        }
+        set
+        {
+            Set(GOOGLE_PLAY_SIGNED_IN_SETTING_NAME, value);
         }
     }
 
