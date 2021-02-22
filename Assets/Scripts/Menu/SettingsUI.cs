@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class SettingsUI : MonoBehaviour
 {
+    public GameObject creditsPrefab;
     public float transitionTime = 0.5f;
     public LeanTweenType transitionType = LeanTweenType.linear;
     public Toggle hudTimerToggle;
@@ -12,16 +13,18 @@ public class SettingsUI : MonoBehaviour
     public Toggle deathSoundToggle;
     public Toggle goalSoundToggle;
 
+    private RectTransform settingsBackground;
     private RectTransform settingsPanel;
     private Vector3 originalSize;
     private CanvasGroup canvasGroup;
 
     private void Start()
     {
-        settingsPanel = GetComponent<RectTransform>();
+        settingsBackground = GetComponent<RectTransform>();
+        settingsPanel = GetComponentsInChildren<RectTransform>()[1];
         canvasGroup = GetComponent<CanvasGroup>();
-        originalSize = settingsPanel.localScale;
-        settingsPanel.localScale /= 2;
+        originalSize = settingsBackground.localScale;
+        settingsBackground.localScale /= 2;
         canvasGroup.alpha = 0f;
         hudTimerToggle.isOn = Settings.hudTimerEnabled;
         musicToggle.isOn = Settings.musicEnabled;
@@ -41,21 +44,27 @@ public class SettingsUI : MonoBehaviour
     public void OpenSettings()
     {
         gameObject.SetActive(true);
-        LeanTween.scale(settingsPanel, originalSize, transitionTime).setEase(transitionType);
+        LeanTween.scale(settingsBackground, originalSize, transitionTime).setEase(transitionType);
         LeanTween.alphaCanvas(canvasGroup, 1f, transitionTime).setEase(transitionType);
     }
 
     public void CloseSettings()
     {
-        LeanTween.scale(settingsPanel, originalSize / 2, transitionTime).setOnComplete(() => gameObject.SetActive(false)).setEase(transitionType);
+        LeanTween.scale(settingsBackground, originalSize / 2, transitionTime).setOnComplete(() => gameObject.SetActive(false)).setEase(transitionType);
         LeanTween.alphaCanvas(canvasGroup, 0f, transitionTime).setEase(transitionType);
     }
 
-    private void Update()
+    public void ShowCredits()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && gameObject.activeInHierarchy)
-        {
-            CloseSettings();
-        }
+        Instantiate(creditsPrefab, settingsPanel);
     }
+
+    // TODO: Find a better way to handle multiple levels of "dismissable" views
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.Escape) && gameObject.activeInHierarchy)
+    //     {
+    //         CloseSettings();
+    //     }
+    // }
 }
