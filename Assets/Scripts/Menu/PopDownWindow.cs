@@ -11,23 +11,23 @@ public class PopDownWindow : MonoBehaviour
     public LeanTweenType closeAnimation = LeanTweenType.linear;
     public float closeTime;
 
-    private RectTransform creditsPanel;
+    private RectTransform backgroundPanel;
 
     private void Awake()
     {
-        creditsPanel = transform.parent as RectTransform;
+        backgroundPanel = transform.parent.parent as RectTransform;
     }
 
     private void Start()
     {
         GetComponent<Button>().onClick.AddListener(CloseButtonClicked);
-        creditsPanel.anchoredPosition = new Vector2(0, Screen.height);
-        LeanTween.move(creditsPanel, Vector3.zero, openTime).setEase(openAnimation);
+        backgroundPanel.anchoredPosition = new Vector2(0, Screen.height);
+        LeanTween.move(backgroundPanel, Vector3.zero, openTime).setEase(openAnimation);
     }
 
     void CloseButtonClicked()
     {
-        LeanTween.move(creditsPanel, new Vector2(0, Screen.height), closeTime)
+        LeanTween.move(backgroundPanel, new Vector2(0, Screen.height), closeTime)
             .setEase(closeAnimation)
             .setDestroyOnComplete(true);
     }

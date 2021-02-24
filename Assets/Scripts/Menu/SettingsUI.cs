@@ -56,7 +56,7 @@ public class SettingsUI : MonoBehaviour
 
     public void ShowCredits()
     {
-        Instantiate(creditsPrefab, settingsPanel);
+        Instantiate(creditsPrefab, settingsBackground);
     }
 
     // TODO: Find a better way to handle multiple levels of "dismissable" views

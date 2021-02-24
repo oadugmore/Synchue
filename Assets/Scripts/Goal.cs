@@ -61,7 +61,7 @@ public class Goal : MonoBehaviour
         player = FindObjectOfType<Player>();
         if (Cloud.IsSignedIn)
         {
-            LoadScores();
+            LoadRecords();
         }
         else
         {
@@ -69,13 +69,13 @@ public class Goal : MonoBehaviour
             {
                 if (signedIn)
                 {
-                    LoadScores();
+                    LoadRecords();
                 }
             };
         }
     }
 
-    private void LoadScores()
+    private void LoadRecords()
     {
         var leaderboard = Social.CreateLeaderboard();
         var leaderboardId = MobileUtils.GetNativeLeaderboardId(SceneManager.GetActiveScene().name);
@@ -145,6 +145,7 @@ public class Goal : MonoBehaviour
             HUD.instance.UpdateElapsedTime(completionTime);
             HUD.instance.inGameUi.SetActive(false);
             player.Freeze(0.5f);
+            Settings.ClearLevel(SceneManager.GetActiveScene().name);
             wasReached = true;
         }
     }

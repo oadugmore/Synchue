@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
-    public const string currentWorldIndexPrefsName = "CurrentWorldIndex";
-
     public float cameraTransitionTime = 1;
     public LeanTweenType cameraTransitionType;
     public List<Transform> cameraLocations;
@@ -23,7 +21,7 @@ public class LevelLoader : MonoBehaviour
     {
         mainCamera = Camera.main;
         levelButtons = GetComponentsInChildren<Button>();
-        currentWorldIndex = PlayerPrefs.GetInt(currentWorldIndexPrefsName, 0);
+        currentWorldIndex = Settings.currentWorldIndex;
         if (currentWorldIndex == 0)
         {
             previousWorldButton.interactable = false;
@@ -44,13 +42,23 @@ public class LevelLoader : MonoBehaviour
     {
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            if (GetSceneNameFromLevel(currentWorldIndex + 1, i + 1) == null)
+            var sceneName = GetSceneNameFromLevel(currentWorldIndex + 1, i + 1);
+            if (sceneName == null)
             {
                 levelButtons[i].interactable = false;
             }
             else
             {
                 levelButtons[i].interactable = true;
+            }
+            var checkMark = levelButtons[i].GetComponentsInChildren<Image>(true)[1].gameObject;
+            if (Settings.LevelIsCleared(sceneName))
+            {
+                checkMark.SetActive(true);
+            }
+            else
+            {
+                checkMark.SetActive(false);
             }
         }
     }
@@ -85,7 +93,7 @@ public class LevelLoader : MonoBehaviour
     public void NextWorld()
     {
         currentWorldIndex++;
-        PlayerPrefs.SetInt(currentWorldIndexPrefsName, currentWorldIndex);
+        Settings.currentWorldIndex = currentWorldIndex;
         CheckLevels();
         MoveToNextCameraLocation();
         previousWorldButton.interactable = true;
@@ -105,7 +113,7 @@ public class LevelLoader : MonoBehaviour
     public void PreviousWorld()
     {
         currentWorldIndex--;
-        PlayerPrefs.SetInt(currentWorldIndexPrefsName, currentWorldIndex);
+        Settings.currentWorldIndex = currentWorldIndex;
         CheckLevels();
         MoveToNextCameraLocation();
         nextWorldButton.interactable = true;

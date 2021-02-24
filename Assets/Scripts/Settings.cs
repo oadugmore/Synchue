@@ -9,6 +9,30 @@ public class Settings
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
     private const string HUD_TIMER_ENABLED_SETTING_NAME = "HudTimerEnabled";
     private const string GOOGLE_PLAY_SIGNED_IN_SETTING_NAME = "GooglePlaySignedIn";
+    private const string CURRENT_WORLD_INDEX_NAME = "CurrentWorldIndex";
+    private const string LEVEL_CLEARED_PREFIX = "LevelCleared:";
+
+    public static bool LevelIsCleared(string sceneName)
+    {
+        return Get(LEVEL_CLEARED_PREFIX + sceneName, false);
+    }
+
+    public static void ClearLevel(string sceneName)
+    {
+        Set(LEVEL_CLEARED_PREFIX + sceneName, true);
+    }
+
+    public static int currentWorldIndex
+    {
+        get
+        {
+            return Get(CURRENT_WORLD_INDEX_NAME, 0);
+        }
+        set
+        {
+            Set(CURRENT_WORLD_INDEX_NAME, value);
+        }
+    }
 
     public static bool musicEnabled
     {
@@ -99,8 +123,18 @@ public class Settings
         PlayerPrefs.SetInt(settingName, value ? 1 : 0);
     }
 
+    private static void Set(string settingName, int value)
+    {
+        PlayerPrefs.SetInt(settingName, value);
+    }
+
     private static bool Get(string settingName, bool defaultValue)
     {
         return PlayerPrefs.GetInt(settingName, defaultValue ? 1 : 0) == 1;
+    }
+
+    private static int Get(string settingName, int defaultValue)
+    {
+        return PlayerPrefs.GetInt(settingName, defaultValue);
     }
 }
