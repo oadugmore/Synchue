@@ -7,12 +7,20 @@ public class SplashScreen : MonoBehaviour
     public CanvasGroup textCanvasGroup;
     public CanvasGroup backgroundCanvasGroup;
 
+    static bool gameLoading = true;
+
     void Start()
     {
+        if (!gameLoading)
+        {
+            Destroy(gameObject);
+            return;
+        }
         backgroundCanvasGroup.alpha = 1f;
         textCanvasGroup.alpha = 0f;
         LeanTween.alphaCanvas(textCanvasGroup, 1, fadeTime)
             .setOnComplete(() => Invoke(nameof(FadeOut), waitTime));
+        gameLoading = false;
     }
 
     void FadeOut()

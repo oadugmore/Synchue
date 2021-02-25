@@ -17,12 +17,14 @@ public class SettingsUI : MonoBehaviour
     private RectTransform settingsPanel;
     private Vector3 originalSize;
     private CanvasGroup canvasGroup;
+    private LevelLoader levelLoader;
 
     private void Start()
     {
         settingsBackground = GetComponent<RectTransform>();
         settingsPanel = GetComponentsInChildren<RectTransform>()[1];
         canvasGroup = GetComponent<CanvasGroup>();
+        levelLoader = FindObjectOfType<LevelLoader>();
         originalSize = settingsBackground.localScale;
         settingsBackground.localScale /= 2;
         canvasGroup.alpha = 0f;
@@ -46,6 +48,7 @@ public class SettingsUI : MonoBehaviour
         gameObject.SetActive(true);
         LeanTween.scale(settingsBackground, originalSize, transitionTime).setEase(transitionType);
         LeanTween.alphaCanvas(canvasGroup, 1f, transitionTime).setEase(transitionType);
+        levelLoader.playButton.interactable = false;
     }
 
     public void CloseSettings()

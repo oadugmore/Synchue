@@ -12,6 +12,7 @@ public class LevelLoader : MonoBehaviour
     public InputField sceneText;
     public Button nextWorldButton;
     public Button previousWorldButton;
+    public Button playButton;
 
     int currentWorldIndex;
     Button[] levelButtons;
@@ -40,6 +41,7 @@ public class LevelLoader : MonoBehaviour
 
     private void CheckLevels()
     {
+        playButton.interactable = false;
         for (int i = 0; i < levelButtons.Length; i++)
         {
             var sceneName = GetSceneNameFromLevel(currentWorldIndex + 1, i + 1);
@@ -67,6 +69,7 @@ public class LevelLoader : MonoBehaviour
     {
         var leaderboardId = MobileUtils.GetNativeLeaderboardId(sceneText.text);
         Cloud.Leaderboards.ShowOverlay(leaderboardId);
+        playButton.interactable = false;
     }
 
     /// <summary>
@@ -85,6 +88,7 @@ public class LevelLoader : MonoBehaviour
     {
         var scene = "World_" + (currentWorldIndex + 1) + "_Level_" + levelNumber;
         sceneText.text = scene;
+        playButton.interactable = true;
     }
 
     /// <summary>
