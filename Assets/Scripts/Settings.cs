@@ -8,6 +8,7 @@ public class Settings
     private const string DEATH_SOUND_ENABLED_SETTING_NAME = "DeathSoundEnabled";
     private const string GOAL_SOUND_ENABLED_SETTING_NAME = "GoalSoundEnabled";
     private const string HUD_TIMER_ENABLED_SETTING_NAME = "HudTimerEnabled";
+    private const string RESTART_BUTTON_ENABLED_SETTING_NAME = "RestartButtonEnabled";
     private const string GOOGLE_PLAY_SIGNED_IN_SETTING_NAME = "GooglePlaySignedIn";
     private const string CURRENT_WORLD_INDEX_NAME = "CurrentWorldIndex";
     private const string LEVEL_CLEARED_PREFIX = "LevelCleared:";
@@ -103,6 +104,18 @@ public class Settings
         set
         {
             Set(HUD_TIMER_ENABLED_SETTING_NAME, value);
+        }
+    }
+
+    public static bool restartButtonEnabled
+    {
+        get
+        {
+            return Get(RESTART_BUTTON_ENABLED_SETTING_NAME, false);
+        }
+        set
+        {
+            Set(RESTART_BUTTON_ENABLED_SETTING_NAME, value);
         }
     }
 

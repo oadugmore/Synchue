@@ -9,6 +9,8 @@ public class HUD : MonoBehaviour
     public Text deathCountText;
     public Text levelText;
     public GameObject inGameUi;
+    public Button pauseButton;
+    public Button restartButton;
     public RectTransform pauseMenu;
     public float startEndScale = 0.75f;
     public float animDuration = 0.5f;
@@ -63,6 +65,7 @@ public class HUD : MonoBehaviour
         var sceneName = SceneManager.GetActiveScene().name;
         var worldAndLevel = LevelLoader.ParseWorldAndLevel(sceneName);
         levelText.text = $"Level {worldAndLevel[0]}-{worldAndLevel[1]}";
+        restartButton.gameObject.SetActive(Settings.restartButtonEnabled);
     }
 
     private void Update()
@@ -117,6 +120,7 @@ public class HUD : MonoBehaviour
     public void RestartButtonPressed()
     {
         Time.timeScale = 1f;
+        DeathCounter.IncrementDeathCount();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
