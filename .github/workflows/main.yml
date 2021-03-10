@@ -8,7 +8,7 @@ on:
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 jobs:
-  build:
+  build-android:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repo
@@ -37,6 +37,18 @@ jobs:
       with:
         name: Build
         path: Builds
+  build-ios:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2.3.2
+      with:
+        lfs: true
+    - name: Cache library
+      uses: actions/cache@v2.1.1
+      with:
+        path: Library
+        key: Library
     - name: Build for iOS
       uses: game-ci/unity-builder@v2
       with:
