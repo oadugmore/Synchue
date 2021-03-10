@@ -1,8 +1,6 @@
 name: Activate License
-
 on: 
   workflow_dispatch:
-
 jobs:
   activation:
     name: Request manual activation file 🔑
@@ -11,10 +9,7 @@ jobs:
       # Request manual activation file
       - name: Request manual activation file
         id: getManualLicenseFile
-        uses: webbertakken/unity-request-manual-activation-file@v1.1
-        with:
-          unityVersion: 2019.3.7f1
-      
+        uses: game-ci/unity-request-activation-file@v2
       # Upload artifact (Unity_v20XX.X.XXXX.alf)
       - name: Expose as artifact
         uses: actions/upload-artifact@v1
