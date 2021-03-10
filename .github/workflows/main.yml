@@ -5,6 +5,8 @@ on:
   #   branches: [ release-internal ]
   # pull_request:
   #   branches: [ release-internal ]
+env:
+  UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,11 +21,8 @@ jobs:
         path: Library
         key: Library
     - name: Build for Android
-      uses: game-ci/unity-builder@v2.0-alpha-6
-      env:
-        UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+      uses: game-ci/unity-builder@v2
       with:
-        unityVersion: 2019.3.7f1
         targetPlatform: Android
         androidAppBundle: true
         buildsPath: Builds
@@ -38,3 +37,8 @@ jobs:
       with:
         name: Build
         path: Builds
+    - name: Build for iOS
+      uses: game-ci/unity-builder@v2
+      with:
+        targetPlatform: iOS
+        buildsPath: Builds
