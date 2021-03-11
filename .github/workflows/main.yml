@@ -27,7 +27,6 @@ jobs:
         androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
         androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
         androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
-        #customParameters: '-nographics'
     - uses: actions/upload-artifact@v2.1.4
       with:
         name: build-Android
