@@ -46,6 +46,6 @@ jobs:
       with:
         targetPlatform: iOS
     - uses: actions/upload-artifact@v2.1.4
-        with:
-          name: build-iOS
-          path: build/iOS
+      with:
+        name: build-iOS
+        path: build/iOS
