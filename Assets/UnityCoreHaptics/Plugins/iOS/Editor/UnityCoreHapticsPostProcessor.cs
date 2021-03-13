@@ -24,8 +24,12 @@ public static class UnityCoreHapticsPostProcessor
       var pbxProjectPath = PBXProject.GetPBXProjectPath(buildPath);
       var proj = new PBXProject();
       proj.ReadFromFile(pbxProjectPath);
+      
+      var mainGUID = proj.GetUnityMainTargetGuid();
+      proj.AddBuildProperty(mainGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
 
-      string targetGUID = proj.GetUnityFrameworkTargetGuid();
+      var targetGUID = proj.GetUnityFrameworkTargetGuid();
+      proj.AddBuildProperty(targetGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
 
       // Get relative path of the plugin the from Assets folder
       // Should be something like "UnityCoreHaptics/Plugins/iOS/UnityCoreHaptics/Source"
