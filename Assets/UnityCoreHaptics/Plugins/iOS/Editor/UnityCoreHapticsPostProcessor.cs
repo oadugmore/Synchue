@@ -31,6 +31,12 @@ public static class UnityCoreHapticsPostProcessor
       var targetGUID = proj.GetUnityFrameworkTargetGuid();
       proj.AddBuildProperty(targetGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
       proj.AddBuildProperty(targetGUID, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/../../Frameworks");
+      proj.AddShellScriptBuildPhase(targetGUID, "RemoveFaultyFrameworkFiles", "/bin/sh",
+        "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Frameworks/UnityFramework.framework/\"\n"
+        + "if [[ -d \"Frameworks\" ]]; then\n"
+        + "rm -rf Frameworks\n"
+        + "fi"
+      );
 
       // Get relative path of the plugin the from Assets folder
       // Should be something like "UnityCoreHaptics/Plugins/iOS/UnityCoreHaptics/Source"
