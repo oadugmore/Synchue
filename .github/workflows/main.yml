@@ -1,39 +1,72 @@
 name: Sync,hue Workflow
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ release-internal ]
-  # pull_request:
-  #   branches: [ release-internal ]
+  push:
+    branches: [ release-internal ]
 env:
   UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
 
 jobs:
 
-  # build-android:
-  #   name: Build the Unity project for Android
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #     with:
-  #       lfs: true
-  #   - uses: actions/cache@v2
-  #     with:
-  #       path: Library
-  #       key: Library-Android
-  #   - uses: game-ci/unity-builder@v2
-  #     with:
-  #       targetPlatform: Android
-  #       androidAppBundle: true
-  #       androidKeystoreName: user.keystore
-  #       androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-  #       androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
-  #       androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
-  #       androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
-  #   - uses: actions/upload-artifact@v2
-  #     with:
-  #       name: build-Android
-  #       path: build/Android
+  build-android:
+    name: Build the Unity project for Android
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        lfs: true
+    - uses: actions/cache@v2
+      with:
+        path: Library
+        key: Library-Android
+    - uses: game-ci/unity-builder@v2
+      with:
+        targetPlatform: Android
+        androidAppBundle: true
+        androidKeystoreName: user.keystore
+        androidKeystoreBase64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
+        androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
+        androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
+    - uses: actions/upload-artifact@v2
+      with:
+        name: build-Android
+        path: build/Android
+
+  publish-android:
+    name: Publish to the Google Play Store
+    runs-on: ubuntu-latest
+    needs: buildForAndroidPlatform
+    env:
+      GOOGLE_PLAY_KEY_FILE: ${{ secrets.FASTLANE_SERVICE_ACCOUNT }}
+      GOOGLE_PLAY_KEY_FILE_PATH: ${{ format('{0}/fastlane/google-fastlane.json', github.workspace) }}
+      ANDROID_BUILD_FILE_PATH: ${{ format('{0}/build/Android/Android.aab', github.workspace) }}
+      ANDROID_PACKAGE_NAME: ${{ secrets.ANDROID_PACKAGE_NAME }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Download Android Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-Android
+          path: build/Android
+      - name: Create keystore
+        run: echo "$GOOGLE_PLAY_KEY_FILE" > $GOOGLE_PLAY_KEY_FILE_PATH
+      - name: Cache Fastlane Dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
+      - name: Install Fastlane
+        run: bundle install
+      - name: Upload to Google Play beta
+        uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: 'android beta'
+      - name: Cleanup
+        uses: geekyeggo/delete-artifact@v1
+        with:
+          name: build-Android
 
   build-ios-unity:
     name: Build the Unity project for iOS
@@ -55,7 +88,7 @@ jobs:
         path: build/iOS
 
   publish-ios:
-    name: Build the Xcode project and upload to TestFlight
+    name: Publish for iOS
     runs-on: macos-latest
     needs: build-ios-unity
     env:
@@ -94,7 +127,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/Gemfile.lock') }}
       - name: Install Fastlane
         run: bundle install
-      - name: Upload to TestFlight
+      - name: Build the Xcode project and upload to TestFlight
         uses: maierj/fastlane-action@v2.0.1
         with:
           lane: 'ios beta'
