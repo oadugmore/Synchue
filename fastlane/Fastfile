@@ -34,7 +34,7 @@ platform :ios do
         contact_first_name: "Owen",
         contact_last_name: "Dugmore",
         contact_phone: "7605059615",
-        notes: "Thanks for trying Sync,hue! This build was automatically uploaded by Jenkins. You can review the most recent git commit messages below.\n\n" + changelog_from_git_commits(commits_count: 5)
+        notes: "Thanks for trying Sync,hue! This build was automatically uploaded by Jenkins. You can review the most recent git commit messages below.\n\n" + changelog_from_git_commits
       },
       uses_non_exempt_encryption: false,
     )
