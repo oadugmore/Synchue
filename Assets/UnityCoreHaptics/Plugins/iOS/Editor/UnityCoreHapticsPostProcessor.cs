@@ -25,13 +25,12 @@ public static class UnityCoreHapticsPostProcessor
       var proj = new PBXProject();
       proj.ReadFromFile(pbxProjectPath);
       
-      var mainGUID = proj.GetUnityMainTargetGuid();
-      proj.AddBuildProperty(mainGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
+      var iphoneTargetGUID = proj.GetUnityMainTargetGuid();
+      proj.AddBuildProperty(iphoneTargetGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
 
-      var targetGUID = proj.GetUnityFrameworkTargetGuid();
-      proj.AddBuildProperty(targetGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
-      proj.AddBuildProperty(targetGUID, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/../../Frameworks");
-      proj.AddShellScriptBuildPhase(targetGUID, "RemoveFaultyFrameworkFiles", "/bin/sh",
+      var frameworkGUID = proj.GetUnityFrameworkTargetGuid();
+      proj.AddBuildProperty(frameworkGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
+      proj.AddShellScriptBuildPhase(iphoneTargetGUID, "Remove Embedded Unity Framework", "/bin/sh",
         "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Frameworks/UnityFramework.framework/\"\n"
         + "if [[ -d \"Frameworks\" ]]; then\n"
         + "rm -rf Frameworks\n"
@@ -45,15 +44,15 @@ public static class UnityCoreHapticsPostProcessor
       // Get relative path of the plugin in XCode
       string pluginRelativePathInXCode = Path.Combine("Libraries", pluginRelativePathInUnity);
 
-      proj.AddFrameworkToProject(targetGUID, "CoreHaptics.framework", false);
-      proj.AddBuildProperty(targetGUID, "SWIFT_VERSION", "5.1");
-      proj.SetBuildProperty(targetGUID, "ENABLE_BITCODE", "NO");
+      proj.AddFrameworkToProject(frameworkGUID, "CoreHaptics.framework", false);
+      proj.AddBuildProperty(frameworkGUID, "SWIFT_VERSION", "5.1");
+      proj.SetBuildProperty(frameworkGUID, "ENABLE_BITCODE", "NO");
 
-      proj.AddBuildProperty(targetGUID, "CLANG_ENABLE_MODULES", "YES");
-      proj.AddBuildProperty(targetGUID, "SWIFT_INCLUDE_PATHS", pluginRelativePathInXCode);
-      proj.AddBuildProperty(targetGUID, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
+      proj.AddBuildProperty(frameworkGUID, "CLANG_ENABLE_MODULES", "YES");
+      proj.AddBuildProperty(frameworkGUID, "SWIFT_INCLUDE_PATHS", pluginRelativePathInXCode);
+      proj.AddBuildProperty(frameworkGUID, "LD_RUNPATH_SEARCH_PATHS", "@executable_path/Frameworks");
 
-      WriteModuleToFramework(proj, targetGUID, pbxProjectPath, pluginRelativePathInUnity, pluginRelativePathInXCode);
+      WriteModuleToFramework(proj, frameworkGUID, pbxProjectPath, pluginRelativePathInUnity, pluginRelativePathInXCode);
       FixAHAPAudioFilePaths(proj, pbxProjectPath);
     }
   }
