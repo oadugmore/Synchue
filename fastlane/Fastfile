@@ -36,25 +36,32 @@ platform :ios do
         contact_phone: "7605059615",
         notes: "Thanks for trying Sync,hue! This build was automatically uploaded by Jenkins. You can review the most recent git commit messages below.\n\n" + changelog_from_git_commits
       },
-      uses_non_exempt_encryption: false,
     )
   end
 
   desc "Create .ipa"
   lane :build do
-    update_code_signing_settings(use_automatic_signing: false, path: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj")
+    update_code_signing_settings(
+      use_automatic_signing: false,
+      path: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj"
+    )
     certificates
     update_project_provisioning(
-      xcodeproj: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj",
+      xcodeproj: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj",
       target_filter: "Unity-iPhone",
       profile: ENV["sigh_com.oadugmore.platformer_appstore_profile-path"],
       code_signing_identity: "Apple Distribution: #{ENV['APPLE_TEAM_NAME']} (#{ENV['APPLE_TEAM_ID']})"
     )
     increment_build_number(
-       xcodeproj: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj"
+       xcodeproj: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj"
     )
-    gym(
-      project: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj",
+    set_info_plist_value(
+      path: "#{ENV['IOS_BUILD_PATH']}/Info.plist",
+      key: "ITSAppUsesNonExemptEncryption",
+      value: false,
+    )
+    build_app(
+      project: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj",
       scheme: "Unity-iPhone",
       clean: true,
       skip_profile_detection: true,

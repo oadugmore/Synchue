@@ -62,11 +62,7 @@ jobs:
       - name: Upload to Google Play beta
         uses: maierj/fastlane-action@v2.0.1
         with:
-          lane: 'android beta'
-      - name: Cleanup
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: build-Android
+          lane: 'android internal'
 
   build-ios-unity:
     name: Build the Unity project for iOS
@@ -131,7 +127,3 @@ jobs:
         uses: maierj/fastlane-action@v2.0.1
         with:
           lane: 'ios beta'
-      - name: Cleanup
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: build-iOS
