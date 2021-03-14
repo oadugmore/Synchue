@@ -26,7 +26,18 @@ platform :ios do
       duration: 1200,
       in_house: false,
     )
-    upload_to_testflight(skip_waiting_for_build_processing: true, api_key: api_key)
+    upload_to_testflight(
+      api_key: api_key,
+      demo_account_required: false,
+      beta_app_review_info: {
+        contact_email: "oadugmore@outlook.com",
+        contact_first_name: "Owen",
+        contact_last_name: "Dugmore",
+        contact_phone: "7605059615",
+        notes: "Thanks for trying Sync,hue! This build was automatically uploaded by Jenkins. You can review the most recent git commit messages below.\n\n" + changelog_from_git_commits(commits_count: 5)
+      }
+      uses_non_exempt_encryption: false
+    )
   end
 
   desc "Create .ipa"
@@ -90,28 +101,3 @@ platform :ios do
   end
 
 end
-
-# platform :ios do
-#   desc "Push a new beta build to TestFlight"
-#   lane :internal do
-#     build
-#   end
-#   lane :beta do
-#     build(external: true)
-#   end
-#   lane :build do |options|
-#     build_app(scheme: "Unity-iPhone")
-#     upload_to_testflight(
-#       distribute_external: options[:external],
-#       groups: options[:external] ? "Testers" : nil,
-#       demo_account_required: false,
-#       beta_app_review_info: {
-#         contact_email: "oadugmore@outlook.com",
-#         contact_first_name: "Owen",
-#         contact_last_name: "Dugmore",
-#         contact_phone: "7605059615",
-#         notes: "Thanks for trying Sync,hue! This build was automatically uploaded by Jenkins. You can review the most recent git commit messages below.\n\n" + changelog_from_git_commits(commits_count: 5)
-#       }
-#     )
-#   end
-# end

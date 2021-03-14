@@ -24,18 +24,16 @@ public static class UnityCoreHapticsPostProcessor
       var pbxProjectPath = PBXProject.GetPBXProjectPath(buildPath);
       var proj = new PBXProject();
       proj.ReadFromFile(pbxProjectPath);
-      
-      var iphoneTargetGUID = proj.GetUnityMainTargetGuid();
-      proj.AddBuildProperty(iphoneTargetGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "YES");
 
-      var frameworkGUID = proj.GetUnityFrameworkTargetGuid();
-      proj.AddBuildProperty(frameworkGUID, "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES", "NO");
+      var iphoneTargetGUID = proj.GetUnityMainTargetGuid();
       proj.AddShellScriptBuildPhase(iphoneTargetGUID, "Remove Embedded Unity Framework", "/bin/sh",
         "cd \"${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Frameworks/UnityFramework.framework/\"\n"
         + "if [[ -d \"Frameworks\" ]]; then\n"
         + "rm -rf Frameworks\n"
         + "fi"
       );
+
+      var frameworkGUID = proj.GetUnityFrameworkTargetGuid();
 
       // Get relative path of the plugin the from Assets folder
       // Should be something like "UnityCoreHaptics/Plugins/iOS/UnityCoreHaptics/Source"
