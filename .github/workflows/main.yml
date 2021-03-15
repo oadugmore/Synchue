@@ -34,7 +34,7 @@ jobs:
         path: build/Android
 
   publish-android:
-    name: Publish to the Google Play Store
+    name: Publish for Android
     runs-on: ubuntu-latest
     needs: build-android
     env:
