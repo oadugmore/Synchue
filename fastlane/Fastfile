@@ -43,25 +43,25 @@ platform :ios do
   lane :build do
     update_code_signing_settings(
       use_automatic_signing: false,
-      path: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj"
+      path: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj"
     )
     certificates
     update_project_provisioning(
-      xcodeproj: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj",
+      xcodeproj: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj",
       target_filter: "Unity-iPhone",
       profile: ENV["sigh_com.oadugmore.platformer_appstore_profile-path"],
       code_signing_identity: "Apple Distribution: #{ENV['APPLE_TEAM_NAME']} (#{ENV['APPLE_TEAM_ID']})"
     )
     increment_build_number(
-       xcodeproj: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj"
+       xcodeproj: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj"
     )
     set_info_plist_value(
-      path: "#{ENV['IOS_BUILD_PATH']}/Info.plist",
+      path: "#{ENV['IOS_BUILD_PATH']}/iOS/Info.plist",
       key: "ITSAppUsesNonExemptEncryption",
       value: false,
     )
     build_app(
-      project: "#{ENV['IOS_BUILD_PATH']}/Unity-iPhone.xcodeproj",
+      project: "#{ENV['IOS_BUILD_PATH']}/iOS/Unity-iPhone.xcodeproj",
       scheme: "Unity-iPhone",
       clean: true,
       skip_profile_detection: true,
