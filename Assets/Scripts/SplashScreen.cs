@@ -8,6 +8,12 @@ public class SplashScreen : MonoBehaviour
     public CanvasGroup backgroundCanvasGroup;
 
     static bool gameLoading = true;
+    const int frameRate = 60;
+
+    private void Awake()
+    {
+        Application.targetFrameRate = frameRate;
+    }
 
     void Start()
     {
