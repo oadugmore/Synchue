@@ -28,6 +28,7 @@ jobs:
         androidKeystorePass: ${{ secrets.ANDROID_KEYSTORE_PASS }}
         androidKeyaliasName: ${{ secrets.ANDROID_KEYALIAS_NAME }}
         androidKeyaliasPass: ${{ secrets.ANDROID_KEYALIAS_PASS }}
+        customParameters: -CompressWithLz4HC
     - uses: actions/upload-artifact@v2
       with:
         name: build-Android
@@ -78,6 +79,7 @@ jobs:
     - uses: game-ci/unity-builder@v2
       with:
         targetPlatform: iOS
+        customParameters: -CompressWithLz4HC
     - uses: actions/upload-artifact@v2
       with:
         name: build-iOS
